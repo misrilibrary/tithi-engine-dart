@@ -5,8 +5,7 @@ const washingtondcAmavasyaCorrections = <int, int>{
   52564: 52563,
   68334: 68333,
 };
-const washingtondcPurnimaCorrections = <int, int>{
-};
+const washingtondcPurnimaCorrections = <int, int>{};
 const washingtondcSankrantiCorrections = <int, int>{
   8293: 8294,
   19460: 19461,

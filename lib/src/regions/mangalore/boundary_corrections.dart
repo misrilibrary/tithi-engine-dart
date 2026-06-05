@@ -3,8 +3,7 @@
 const mangaloreAmavasyaCorrections = <int, int>{
   7589: 7588,
 };
-const mangalorePurnimaCorrections = <int, int>{
-};
+const mangalorePurnimaCorrections = <int, int>{};
 const mangaloreSankrantiCorrections = <int, int>{
   9114: 9115,
   13407: 13408,

@@ -37,7 +37,8 @@ void main() {
     });
 
     // Kshaya Amavasya — month transition without T30
-    test('Feb 19, 2015: Phalguna Shukla Pratipada (kshaya Amavasya, T29→T1)', () {
+    test('Feb 19, 2015: Phalguna Shukla Pratipada (kshaya Amavasya, T29→T1)',
+        () {
       final t = calc.getTithi(DateTime(2015, 2, 19));
       expect(t.month, LunarMonth.phalguna); // still same month (Shukla phase)
       expect(t.tithiNumber, 1);

@@ -11,13 +11,13 @@ export 'tithi.dart' show Paksha;
 
 /// Complete tithi information for a date.
 class TithiInfo {
-  final int tithiNumber;       // 1-30
-  final String tithiName;      // e.g. "Chaturdashi"
+  final int tithiNumber; // 1-30
+  final String tithiName; // e.g. "Chaturdashi"
   final tithi_core.Paksha paksha;
-  final int tithiInPaksha;     // 1-15
+  final int tithiInPaksha; // 1-15
   final LunarMonth month;
-  final bool isAdhika;         // true = adhika (leap) month
-  final String displayName;    // e.g. "Phalguna Krishna Chaturdashi"
+  final bool isAdhika; // true = adhika (leap) month
+  final String displayName; // e.g. "Phalguna Krishna Chaturdashi"
 
   const TithiInfo({
     required this.tithiNumber,
@@ -59,13 +59,16 @@ class TithiCalculator {
     // Compute tithi number: check corrections first, Meeus fallback
     final int tithiNum;
     if (!hasTime) {
-      tithiNum = tithiCorr[dayIndex] ?? _meeusCalcTithi(date, null, false, city);
+      tithiNum =
+          tithiCorr[dayIndex] ?? _meeusCalcTithi(date, null, false, city);
     } else {
       final transMinute = transCorr[dayIndex];
       if (transMinute != null) {
         final userIstMinutes = _toLocalMinutes(date, utcOffset, city);
         final sunriseTithi = tithiCorr[dayIndex]!;
-        tithiNum = userIstMinutes >= transMinute ? sunriseTithi : (sunriseTithi - 1 == 0 ? 30 : sunriseTithi - 1);
+        tithiNum = userIstMinutes >= transMinute
+            ? sunriseTithi
+            : (sunriseTithi - 1 == 0 ? 30 : sunriseTithi - 1);
       } else {
         tithiNum = _meeusCalcTithi(date, utcOffset, true, city);
       }
@@ -73,12 +76,15 @@ class TithiCalculator {
     final paksha = tithi_core.getPaksha(tithiNum);
     final name = tithi_core.getTithiName(tithiNum);
     final inPaksha = tithi_core.tithiInPaksha(tithiNum);
-    final resolver = city == defaultCity ? _monthResolver : LunarMonthResolver(system: monthSystem, city: city);
+    final resolver = city == defaultCity
+        ? _monthResolver
+        : LunarMonthResolver(system: monthSystem, city: city);
     final monthInfo = resolver.getMonthInfo(date);
 
     final pakshaStr = paksha == tithi_core.Paksha.shukla ? 'Shukla' : 'Krishna';
     final adhikaPrefix = monthInfo.isAdhika ? 'Adhika ' : '';
-    final display = '$adhikaPrefix${monthInfo.month.displayName} $pakshaStr $name';
+    final display =
+        '$adhikaPrefix${monthInfo.month.displayName} $pakshaStr $name';
 
     return TithiInfo(
       tithiNumber: tithiNum,
@@ -93,9 +99,12 @@ class TithiCalculator {
 
   /// Find when a tithi falls in a given year. Returns all occurrences (usually 1, sometimes 2).
   /// Find when a tithi falls in a given year for a celebration city.
-  List<DateTime> findInYear(TithiInfo info, int year, {String? celebrationCity}) {
+  List<DateTime> findInYear(TithiInfo info, int year,
+      {String? celebrationCity}) {
     final city = celebrationCity ?? defaultCity;
-    final resolver = city == defaultCity ? _monthResolver : LunarMonthResolver(system: monthSystem, city: city);
+    final resolver = city == defaultCity
+        ? _monthResolver
+        : LunarMonthResolver(system: monthSystem, city: city);
     return findTithiInYear(
       month: info.month,
       paksha: info.paksha,
@@ -109,9 +118,12 @@ class TithiCalculator {
   }
 
   /// Find the next occurrence of a tithi from today (or a given date).
-  DateTime? findNext(TithiInfo info, {DateTime? from, String? celebrationCity}) {
+  DateTime? findNext(TithiInfo info,
+      {DateTime? from, String? celebrationCity}) {
     final city = celebrationCity ?? defaultCity;
-    final resolver = city == defaultCity ? _monthResolver : LunarMonthResolver(system: monthSystem, city: city);
+    final resolver = city == defaultCity
+        ? _monthResolver
+        : LunarMonthResolver(system: monthSystem, city: city);
     return findNextOccurrence(
       month: info.month,
       paksha: info.paksha,
@@ -168,22 +180,27 @@ class TithiCalculator {
     final cityOffset = getLocationForCity(city).utcOffset;
     final cityOffsetMinutes = (cityOffset * 60).round();
     // Convert user's time to UTC minutes, then to city local minutes
-    final utcMinutes = date.hour * 60 + date.minute - (utcOffset?.inMinutes ?? cityOffsetMinutes);
+    final utcMinutes = date.hour * 60 +
+        date.minute -
+        (utcOffset?.inMinutes ?? cityOffsetMinutes);
     final localMinutes = utcMinutes + cityOffsetMinutes;
     return localMinutes % 1440;
   }
 
-  static int _meeusCalcTithi(DateTime date, Duration? utcOffset, bool hasTime, [String? timezone]) {
+  static int _meeusCalcTithi(DateTime date, Duration? utcOffset, bool hasTime,
+      [String? timezone]) {
     DateTime calcTime;
     if (hasTime && utcOffset != null) {
-      calcTime = DateTime.utc(date.year, date.month, date.day, date.hour, date.minute)
-          .subtract(utcOffset);
+      calcTime =
+          DateTime.utc(date.year, date.month, date.day, date.hour, date.minute)
+              .subtract(utcOffset);
     } else if (hasTime) {
       // Time provided, use timezone offset or default IST
       final loc = getLocationForCity(timezone ?? "Delhi");
       final offset = Duration(minutes: (loc.utcOffset * 60).round());
-      calcTime = DateTime.utc(date.year, date.month, date.day, date.hour, date.minute)
-          .subtract(offset);
+      calcTime =
+          DateTime.utc(date.year, date.month, date.day, date.hour, date.minute)
+              .subtract(offset);
     } else {
       // Date-only: use sunrise for the timezone
       final loc = getLocationForCity(timezone ?? "Delhi");

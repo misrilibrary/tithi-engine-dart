@@ -5,8 +5,7 @@ const philadelphiaAmavasyaCorrections = <int, int>{
   46215: 46214,
   57732: 57731,
 };
-const philadelphiaPurnimaCorrections = <int, int>{
-};
+const philadelphiaPurnimaCorrections = <int, int>{};
 const philadelphiaSankrantiCorrections = <int, int>{
   6802: 6801,
   21046: 21047,

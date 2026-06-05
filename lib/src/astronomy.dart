@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'cities.dart';
-export 'cities.dart' show supportedCities, pinnedCities, orderedCityList, defaultCity;
+export 'cities.dart'
+    show supportedCities, pinnedCities, orderedCityList, defaultCity;
 
 /// Meeus astronomical algorithms for Sun and Moon ecliptic longitude.
 /// Reference: Jean Meeus, "Astronomical Algorithms", 2nd Edition.
@@ -14,11 +15,19 @@ double julianDay(DateTime dt) {
   final utc = dt.toUtc();
   int y = utc.year;
   int m = utc.month;
-  final d = utc.day + utc.hour / 24.0 + utc.minute / 1440.0 + utc.second / 86400.0;
-  if (m <= 2) { y--; m += 12; }
+  final d =
+      utc.day + utc.hour / 24.0 + utc.minute / 1440.0 + utc.second / 86400.0;
+  if (m <= 2) {
+    y--;
+    m += 12;
+  }
   final a = (y / 100).floor();
   final b = 2 - a + (a / 4).floor();
-  return (365.25 * (y + 4716)).floor() + (30.6001 * (m + 1)).floor() + d + b - 1524.5;
+  return (365.25 * (y + 4716)).floor() +
+      (30.6001 * (m + 1)).floor() +
+      d +
+      b -
+      1524.5;
 }
 
 /// Julian centuries from J2000.0
@@ -61,15 +70,32 @@ double moonLongitude(DateTime dt) {
   final t4 = t3 * t;
 
   // Moon's mean longitude
-  final lp = _norm360(218.3164477 + 481267.88123421 * t - 0.0015786 * t2 + t3 / 538841 - t4 / 65194000);
+  final lp = _norm360(218.3164477 +
+      481267.88123421 * t -
+      0.0015786 * t2 +
+      t3 / 538841 -
+      t4 / 65194000);
   // Mean elongation
-  final d = _norm360(297.8501921 + 445267.1114034 * t - 0.0018819 * t2 + t3 / 545868 - t4 / 113065000);
+  final d = _norm360(297.8501921 +
+      445267.1114034 * t -
+      0.0018819 * t2 +
+      t3 / 545868 -
+      t4 / 113065000);
   // Sun's mean anomaly
-  final m = _norm360(357.5291092 + 35999.0502909 * t - 0.0001536 * t2 + t3 / 24490000);
+  final m = _norm360(
+      357.5291092 + 35999.0502909 * t - 0.0001536 * t2 + t3 / 24490000);
   // Moon's mean anomaly
-  final mp = _norm360(134.9633964 + 477198.8675055 * t + 0.0087414 * t2 + t3 / 69699 - t4 / 14712000);
+  final mp = _norm360(134.9633964 +
+      477198.8675055 * t +
+      0.0087414 * t2 +
+      t3 / 69699 -
+      t4 / 14712000);
   // Moon's argument of latitude
-  final f = _norm360(93.2720950 + 483202.0175233 * t - 0.0036539 * t2 - t3 / 3526000 + t4 / 863310000);
+  final f = _norm360(93.2720950 +
+      483202.0175233 * t -
+      0.0036539 * t2 -
+      t3 / 3526000 +
+      t4 / 863310000);
 
   final dR = d * _deg2rad;
   final mR = m * _deg2rad;
@@ -155,9 +181,9 @@ typedef SunriseFn = DateTime Function(DateTime date);
 
 /// City location for sunrise calculation.
 class CityLocation {
-  final double latitude;   // degrees (positive = North)
-  final double longitude;  // degrees (positive = East)
-  final double utcOffset;  // standard time offset in hours
+  final double latitude; // degrees (positive = North)
+  final double longitude; // degrees (positive = East)
+  final double utcOffset; // standard time offset in hours
   const CityLocation(this.latitude, this.longitude, this.utcOffset);
 }
 
@@ -167,7 +193,8 @@ DateTime computeSunrise(DateTime date, CityLocation loc) {
   // Sun's declination from its ecliptic longitude
   final jd = julianDay(DateTime.utc(date.year, date.month, date.day, 12));
   final t = (jd - 2451545.0) / 36525.0;
-  final sunLon = sunLongitude(DateTime.utc(date.year, date.month, date.day, 12));
+  final sunLon =
+      sunLongitude(DateTime.utc(date.year, date.month, date.day, 12));
   final obliquity = (23.4393 - 0.0130 * t) * _deg2rad;
   final sunLonRad = sunLon * _deg2rad;
   final declination = asin(sin(obliquity) * sin(sunLonRad));
@@ -183,7 +210,8 @@ DateTime computeSunrise(DateTime date, CityLocation loc) {
   // Equation of time: true solar noon differs from mean noon by E = L0 - RA.
   // (Without this the sunrise is off by up to ~±16 min seasonally.)
   final rightAsc = atan2(cos(obliquity) * sin(sunLonRad), cos(sunLonRad));
-  final meanLon = _norm360(280.46646 + 36000.76983 * t + 0.0003032 * t * t) * _deg2rad;
+  final meanLon =
+      _norm360(280.46646 + 36000.76983 * t + 0.0003032 * t * t) * _deg2rad;
   var eot = meanLon - rightAsc;
   eot = atan2(sin(eot), cos(eot)); // wrap to (-pi, pi]
   final eotHours = eot * _rad2deg / 15.0;
@@ -206,7 +234,8 @@ DateTime computeSunrise(DateTime date, CityLocation loc) {
 DateTime computeSunset(DateTime date, CityLocation loc) {
   final jd = julianDay(DateTime.utc(date.year, date.month, date.day, 12));
   final t = (jd - 2451545.0) / 36525.0;
-  final sunLon = sunLongitude(DateTime.utc(date.year, date.month, date.day, 12));
+  final sunLon =
+      sunLongitude(DateTime.utc(date.year, date.month, date.day, 12));
   final obliquity = (23.4393 - 0.0130 * t) * _deg2rad;
   final sunLonRad = sunLon * _deg2rad;
   final declination = asin(sin(obliquity) * sin(sunLonRad));
@@ -217,7 +246,8 @@ DateTime computeSunset(DateTime date, CityLocation loc) {
   final hourAngle = cosH.abs() > 1.0 ? pi : acos(cosH.clamp(-1.0, 1.0));
 
   final rightAsc = atan2(cos(obliquity) * sin(sunLonRad), cos(sunLonRad));
-  final meanLon = _norm360(280.46646 + 36000.76983 * t + 0.0003032 * t * t) * _deg2rad;
+  final meanLon =
+      _norm360(280.46646 + 36000.76983 * t + 0.0003032 * t * t) * _deg2rad;
   var eot = meanLon - rightAsc;
   eot = atan2(sin(eot), cos(eot));
   final eotHours = eot * _rad2deg / 15.0;
@@ -235,7 +265,8 @@ CityLocation getLocationForCity(String city) {
 }
 
 /// Sunrise at the default reference city (used when no city is specified).
-DateTime defaultSunrise(DateTime date) => computeSunrise(date, getLocationForCity(defaultCity));
+DateTime defaultSunrise(DateTime date) =>
+    computeSunrise(date, getLocationForCity(defaultCity));
 
 /// Get sunrise function for a city.
 SunriseFn getSunriseFnForCity(String city) {

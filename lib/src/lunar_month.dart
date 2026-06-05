@@ -16,18 +16,30 @@ enum LunarMonth {
 
   String get displayName {
     switch (this) {
-      case chaitra: return 'Chaitra';
-      case vaishakha: return 'Vaishakha';
-      case jyeshtha: return 'Jyeshtha';
-      case ashadha: return 'Ashadha';
-      case shravana: return 'Shravana';
-      case bhadrapada: return 'Bhadrapada';
-      case ashvina: return 'Ashvina';
-      case kartika: return 'Kartika';
-      case margashirsha: return 'Margashirsha';
-      case pausha: return 'Pausha';
-      case magha: return 'Magha';
-      case phalguna: return 'Phalguna';
+      case chaitra:
+        return 'Chaitra';
+      case vaishakha:
+        return 'Vaishakha';
+      case jyeshtha:
+        return 'Jyeshtha';
+      case ashadha:
+        return 'Ashadha';
+      case shravana:
+        return 'Shravana';
+      case bhadrapada:
+        return 'Bhadrapada';
+      case ashvina:
+        return 'Ashvina';
+      case kartika:
+        return 'Kartika';
+      case margashirsha:
+        return 'Margashirsha';
+      case pausha:
+        return 'Pausha';
+      case magha:
+        return 'Magha';
+      case phalguna:
+        return 'Phalguna';
     }
   }
 }
@@ -39,22 +51,24 @@ enum MonthSystem { purnimant, amant }
 ///
 /// In Purnimant system: Krishna Paksha belongs to the NEXT month.
 /// e.g., Krishna Paksha after Jyeshtha Purnima = Ashadha Krishna.
-LunarMonth getLunarMonth(double siderealSunLongitude, {MonthSystem system = MonthSystem.purnimant, bool isKrishnaPaksha = false}) {
+LunarMonth getLunarMonth(double siderealSunLongitude,
+    {MonthSystem system = MonthSystem.purnimant,
+    bool isKrishnaPaksha = false}) {
   final sign = (siderealSunLongitude / 30).floor() % 12;
 
   const monthOrder = [
-    LunarMonth.vaishakha,     // Sun in Mesha (Aries)
-    LunarMonth.jyeshtha,      // Sun in Vrishabha (Taurus)
-    LunarMonth.ashadha,       // Sun in Mithuna (Gemini)
-    LunarMonth.shravana,      // Sun in Karka (Cancer)
-    LunarMonth.bhadrapada,    // Sun in Simha (Leo)
-    LunarMonth.ashvina,       // Sun in Kanya (Virgo)
-    LunarMonth.kartika,       // Sun in Tula (Libra)
-    LunarMonth.margashirsha,  // Sun in Vrischika (Scorpio)
-    LunarMonth.pausha,        // Sun in Dhanu (Sagittarius)
-    LunarMonth.magha,         // Sun in Makara (Capricorn)
-    LunarMonth.phalguna,      // Sun in Kumbha (Aquarius)
-    LunarMonth.chaitra,       // Sun in Meena (Pisces)
+    LunarMonth.vaishakha, // Sun in Mesha (Aries)
+    LunarMonth.jyeshtha, // Sun in Vrishabha (Taurus)
+    LunarMonth.ashadha, // Sun in Mithuna (Gemini)
+    LunarMonth.shravana, // Sun in Karka (Cancer)
+    LunarMonth.bhadrapada, // Sun in Simha (Leo)
+    LunarMonth.ashvina, // Sun in Kanya (Virgo)
+    LunarMonth.kartika, // Sun in Tula (Libra)
+    LunarMonth.margashirsha, // Sun in Vrischika (Scorpio)
+    LunarMonth.pausha, // Sun in Dhanu (Sagittarius)
+    LunarMonth.magha, // Sun in Makara (Capricorn)
+    LunarMonth.phalguna, // Sun in Kumbha (Aquarius)
+    LunarMonth.chaitra, // Sun in Meena (Pisces)
   ];
 
   if (system == MonthSystem.purnimant) {

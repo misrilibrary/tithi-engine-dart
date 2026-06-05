@@ -1,7 +1,6 @@
 /// Boundary corrections for allahabad (25.4°N, 81.8°E).
 
-const allahabadAmavasyaCorrections = <int, int>{
-};
+const allahabadAmavasyaCorrections = <int, int>{};
 const allahabadPurnimaCorrections = <int, int>{
   34152: 34151,
   55769: 55768,

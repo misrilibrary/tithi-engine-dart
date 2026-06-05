@@ -4,21 +4,21 @@ enum Paksha { shukla, krishna }
 
 /// Tithi names within a paksha (1-15).
 const tithiNames = [
-  'Pratipada',    // 1
-  'Dwitiya',      // 2
-  'Tritiya',      // 3
-  'Chaturthi',    // 4
-  'Panchami',     // 5
-  'Shashthi',     // 6
-  'Saptami',      // 7
-  'Ashtami',      // 8
-  'Navami',       // 9
-  'Dashami',      // 10
-  'Ekadashi',     // 11
-  'Dwadashi',     // 12
-  'Trayodashi',   // 13
-  'Chaturdashi',  // 14
-  'Purnima',      // 15 (Shukla) / Amavasya (Krishna)
+  'Pratipada', // 1
+  'Dwitiya', // 2
+  'Tritiya', // 3
+  'Chaturthi', // 4
+  'Panchami', // 5
+  'Shashthi', // 6
+  'Saptami', // 7
+  'Ashtami', // 8
+  'Navami', // 9
+  'Dashami', // 10
+  'Ekadashi', // 11
+  'Dwadashi', // 12
+  'Trayodashi', // 13
+  'Chaturdashi', // 14
+  'Purnima', // 15 (Shukla) / Amavasya (Krishna)
 ];
 
 /// Calculate tithi number (1-30) from Moon and Sun sidereal longitudes.

@@ -9,9 +9,10 @@ class FestivalDate {
   final FestivalDef festival;
   final DateTime date;
   final DateTime tithiStart; // UTC moment tithi begins
-  final DateTime tithiEnd;   // UTC moment tithi ends
-  final DateTime? muhurtaStart; // UTC start of muhurta window (null for sunrise rule)
-  final DateTime? muhurtaEnd;   // UTC end of muhurta window
+  final DateTime tithiEnd; // UTC moment tithi ends
+  final DateTime?
+      muhurtaStart; // UTC start of muhurta window (null for sunrise rule)
+  final DateTime? muhurtaEnd; // UTC end of muhurta window
 
   FestivalDate({
     required this.festival,
@@ -25,7 +26,8 @@ class FestivalDate {
 
 /// Find the correct festival date for a given year and city, applying muhurta rules.
 /// Festival definitions use Purnimant month names, so finding always uses Purnimant internally.
-FestivalDate? findFestivalDate(FestivalDef fest, int year, String city, TithiCalculator calc) {
+FestivalDate? findFestivalDate(
+    FestivalDef fest, int year, String city, TithiCalculator calc) {
   // Always use Purnimant for finding — festival defs are in Purnimant convention
   final findCalc = calc.monthSystem == MonthSystem.purnimant
       ? calc
@@ -83,11 +85,14 @@ DateTime _muhurtaUtc(DateTime date, CityLocation loc, MuhurtaRule rule) {
   switch (rule) {
     case MuhurtaRule.nishita:
       // Midnight ≈ midpoint between sunset and next sunrise
-      final nextSunrise = computeSunrise(date.add(const Duration(days: 1)), loc);
-      return sunset.add(Duration(minutes: nextSunrise.difference(sunset).inMinutes ~/ 2));
+      final nextSunrise =
+          computeSunrise(date.add(const Duration(days: 1)), loc);
+      return sunset.add(
+          Duration(minutes: nextSunrise.difference(sunset).inMinutes ~/ 2));
     case MuhurtaRule.madhyahna:
       // Midday ≈ midpoint between sunrise and sunset
-      return sunrise.add(Duration(minutes: sunset.difference(sunrise).inMinutes ~/ 2));
+      return sunrise
+          .add(Duration(minutes: sunset.difference(sunrise).inMinutes ~/ 2));
     case MuhurtaRule.pradosh:
       // Pradosh ≈ sunset + 1 hour
       return sunset.add(const Duration(hours: 1));
@@ -97,21 +102,29 @@ DateTime _muhurtaUtc(DateTime date, CityLocation loc, MuhurtaRule rule) {
 }
 
 /// Compute the muhurta window (start, end) as UTC DateTimes.
-(DateTime, DateTime) _muhurtaWindow(DateTime date, CityLocation loc, MuhurtaRule rule) {
+(DateTime, DateTime) _muhurtaWindow(
+    DateTime date, CityLocation loc, MuhurtaRule rule) {
   final sunrise = computeSunrise(date, loc);
   final sunset = computeSunset(date, loc);
   switch (rule) {
     case MuhurtaRule.nishita:
       // Nishita kaal = 3rd quarter of the night (night divided into 4 prahars)
-      final nextSunrise = computeSunrise(date.add(const Duration(days: 1)), loc);
+      final nextSunrise =
+          computeSunrise(date.add(const Duration(days: 1)), loc);
       final nightMinutes = nextSunrise.difference(sunset).inMinutes;
       final prahar = nightMinutes ~/ 4;
-      return (sunset.add(Duration(minutes: prahar * 2)), sunset.add(Duration(minutes: prahar * 3)));
+      return (
+        sunset.add(Duration(minutes: prahar * 2)),
+        sunset.add(Duration(minutes: prahar * 3))
+      );
     case MuhurtaRule.madhyahna:
       // Madhyahna = 3rd of 5 parts of the day
       final dayMinutes = sunset.difference(sunrise).inMinutes;
       final part = dayMinutes ~/ 5;
-      return (sunrise.add(Duration(minutes: part * 2)), sunrise.add(Duration(minutes: part * 3)));
+      return (
+        sunrise.add(Duration(minutes: part * 2)),
+        sunrise.add(Duration(minutes: part * 3))
+      );
     case MuhurtaRule.pradosh:
       // Pradosh kaal = sunset to sunset + 2h 24min
       return (sunset, sunset.add(const Duration(hours: 2, minutes: 24)));
@@ -122,7 +135,8 @@ DateTime _muhurtaUtc(DateTime date, CityLocation loc, MuhurtaRule rule) {
 
 /// Binary search for when the target tithi starts (searchStart=true) or ends (searchStart=false).
 /// Searches a 48-hour window around the festival date.
-DateTime _findTithiTransition(DateTime date, CityLocation loc, int targetTithi, bool searchStart) {
+DateTime _findTithiTransition(
+    DateTime date, CityLocation loc, int targetTithi, bool searchStart) {
   // Search window: 24h before to 24h after the date's sunrise
   final sunrise = computeSunrise(date, loc);
   var lo = sunrise.subtract(const Duration(hours: 36));
@@ -131,14 +145,16 @@ DateTime _findTithiTransition(DateTime date, CityLocation loc, int targetTithi, 
   if (searchStart) {
     // Find the moment the target tithi begins (transition from prev to target)
     // Narrow: find a point before the tithi and a point during it
-    while (_tithiAt(lo) == targetTithi && lo.isAfter(sunrise.subtract(const Duration(hours: 48)))) {
+    while (_tithiAt(lo) == targetTithi &&
+        lo.isAfter(sunrise.subtract(const Duration(hours: 48)))) {
       lo = lo.subtract(const Duration(hours: 6));
     }
     // lo should now be before the tithi starts; find the boundary
     if (_tithiAt(lo) == targetTithi) return lo; // tithi spans entire window
     // Ensure hi is within the tithi
     hi = sunrise;
-    if (_tithiAt(hi) != targetTithi) hi = sunrise.add(const Duration(hours: 12));
+    if (_tithiAt(hi) != targetTithi)
+      hi = sunrise.add(const Duration(hours: 12));
     if (_tithiAt(hi) != targetTithi) return sunrise; // fallback
     // Binary search
     while (hi.difference(lo).inMinutes > 1) {
@@ -153,10 +169,12 @@ DateTime _findTithiTransition(DateTime date, CityLocation loc, int targetTithi, 
   } else {
     // Find the moment the target tithi ends
     lo = sunrise;
-    if (_tithiAt(lo) != targetTithi) lo = sunrise.subtract(const Duration(hours: 12));
+    if (_tithiAt(lo) != targetTithi)
+      lo = sunrise.subtract(const Duration(hours: 12));
     hi = sunrise.add(const Duration(hours: 36));
     // Ensure lo is within the tithi
-    if (_tithiAt(lo) != targetTithi) return sunrise.add(const Duration(hours: 24)); // fallback
+    if (_tithiAt(lo) != targetTithi)
+      return sunrise.add(const Duration(hours: 24)); // fallback
     // Binary search
     while (hi.difference(lo).inMinutes > 1) {
       final mid = lo.add(Duration(minutes: hi.difference(lo).inMinutes ~/ 2));
@@ -177,7 +195,8 @@ int _tithiAt(DateTime utcTime) {
 }
 
 /// Find all occurrences of a recurring tithi in a year.
-List<FestivalDate> findRecurringDates(FestivalDef fest, int year, String city, TithiCalculator calc) {
+List<FestivalDate> findRecurringDates(
+    FestivalDef fest, int year, String city, TithiCalculator calc) {
   final loc = getLocationForCity(city);
   final results = <FestivalDate>[];
   final target = fest.tithiNumber;
@@ -186,7 +205,9 @@ List<FestivalDate> findRecurringDates(FestivalDef fest, int year, String city, T
   final sunriseFn = getSunriseFnForCity(city);
   DateTime? lastSeen;
 
-  for (var d = DateTime.utc(year, 1, 1); d.year == year || (d.year == year + 1 && d.month == 1 && d.day == 1); d = d.add(const Duration(days: 1))) {
+  for (var d = DateTime.utc(year, 1, 1);
+      d.year == year || (d.year == year + 1 && d.month == 1 && d.day == 1);
+      d = d.add(const Duration(days: 1))) {
     final sr = sunriseFn(d);
     final t = _tithiAt(sr);
     if (t == target) {
@@ -195,7 +216,11 @@ List<FestivalDate> findRecurringDates(FestivalDef fest, int year, String city, T
       // Tithi ended — lastSeen is the festival date
       final tithiStart = _findTithiTransition(lastSeen, loc, target, true);
       final tithiEnd = _findTithiTransition(lastSeen, loc, target, false);
-      results.add(FestivalDate(festival: fest, date: lastSeen, tithiStart: tithiStart, tithiEnd: tithiEnd));
+      results.add(FestivalDate(
+          festival: fest,
+          date: lastSeen,
+          tithiStart: tithiStart,
+          tithiEnd: tithiEnd));
       lastSeen = null;
     }
   }
@@ -203,7 +228,11 @@ List<FestivalDate> findRecurringDates(FestivalDef fest, int year, String city, T
   if (lastSeen != null) {
     final tithiStart = _findTithiTransition(lastSeen, loc, target, true);
     final tithiEnd = _findTithiTransition(lastSeen, loc, target, false);
-    results.add(FestivalDate(festival: fest, date: lastSeen, tithiStart: tithiStart, tithiEnd: tithiEnd));
+    results.add(FestivalDate(
+        festival: fest,
+        date: lastSeen,
+        tithiStart: tithiStart,
+        tithiEnd: tithiEnd));
   }
   return results;
 }

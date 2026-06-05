@@ -6,7 +6,5 @@ const lisbonAmavasyaCorrections = <int, int>{
   69456: 69455,
   70844: 70843,
 };
-const lisbonPurnimaCorrections = <int, int>{
-};
-const lisbonSankrantiCorrections = <int, int>{
-};
+const lisbonPurnimaCorrections = <int, int>{};
+const lisbonSankrantiCorrections = <int, int>{};

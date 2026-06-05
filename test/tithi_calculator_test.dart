@@ -146,7 +146,8 @@ void main() {
       expect(found.first.year, 2025);
       // The tithi on that date should be within ±1 (boundary tolerance)
       final verify = calc.getTithi(found.first);
-      expect((verify.tithiNumber - info.tithiNumber).abs(), lessThanOrEqualTo(1));
+      expect(
+          (verify.tithiNumber - info.tithiNumber).abs(), lessThanOrEqualTo(1));
     });
 
     test('returns a date within reasonable range', () {

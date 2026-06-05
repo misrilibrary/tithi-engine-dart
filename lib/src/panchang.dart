@@ -35,7 +35,8 @@ class Panchang {
     String city, {
     bool isAdhika = false,
   }) {
-    final dates = getDates(month, paksha, tithiInPaksha, year, city, isAdhika: isAdhika);
+    final dates =
+        getDates(month, paksha, tithiInPaksha, year, city, isAdhika: isAdhika);
     return dates.isEmpty ? null : dates.first;
   }
 
@@ -49,8 +50,12 @@ class Panchang {
     bool isAdhika = false,
   }) {
     final info = TithiInfo(
-      tithiNumber: paksha == tithi_core.Paksha.shukla ? tithiInPaksha : tithiInPaksha + 15,
-      tithiName: tithi_core.getTithiName(paksha == tithi_core.Paksha.shukla ? tithiInPaksha : tithiInPaksha + 15),
+      tithiNumber: paksha == tithi_core.Paksha.shukla
+          ? tithiInPaksha
+          : tithiInPaksha + 15,
+      tithiName: tithi_core.getTithiName(paksha == tithi_core.Paksha.shukla
+          ? tithiInPaksha
+          : tithiInPaksha + 15),
       paksha: paksha,
       tithiInPaksha: tithiInPaksha,
       month: month,
@@ -75,8 +80,12 @@ class Panchang {
     DateTime? from,
   }) {
     final info = TithiInfo(
-      tithiNumber: paksha == tithi_core.Paksha.shukla ? tithiInPaksha : tithiInPaksha + 15,
-      tithiName: tithi_core.getTithiName(paksha == tithi_core.Paksha.shukla ? tithiInPaksha : tithiInPaksha + 15),
+      tithiNumber: paksha == tithi_core.Paksha.shukla
+          ? tithiInPaksha
+          : tithiInPaksha + 15,
+      tithiName: tithi_core.getTithiName(paksha == tithi_core.Paksha.shukla
+          ? tithiInPaksha
+          : tithiInPaksha + 15),
       paksha: paksha,
       tithiInPaksha: tithiInPaksha,
       month: month,

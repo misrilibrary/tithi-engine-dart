@@ -22,7 +22,8 @@ List<TithiMatch> findTithiRaw({
   bool isAdhika = false,
   SunriseFn? sunriseFn,
 }) {
-  final targetTithi = paksha == Paksha.shukla ? tithiInPakshaNum : tithiInPakshaNum + 15;
+  final targetTithi =
+      paksha == Paksha.shukla ? tithiInPakshaNum : tithiInPakshaNum + 15;
   final sunrise = sunriseFn ?? _defaultSunrise;
   final spans = resolver.getSpansForYear(year);
   // Also include previous year's spans (for months straddling year boundary)
@@ -33,7 +34,8 @@ List<TithiMatch> findTithiRaw({
   ];
   // Deduplicate by start date
   final seen = <String>{};
-  final matchingSpans = allMatchingSpans.where((s) => seen.add(s.start.toString())).toList();
+  final matchingSpans =
+      allMatchingSpans.where((s) => seen.add(s.start.toString())).toList();
 
   final results = <TithiMatch>[];
   for (final span in matchingSpans) {
@@ -42,7 +44,9 @@ List<TithiMatch> findTithiRaw({
     // - If target tithi is skipped (kshaya): pick the day before the higher tithi
     DateTime? lastSeen;
     int? prevTithi;
-    for (var dt = span.start; dt.isBefore(span.end); dt = dt.add(const Duration(days: 1))) {
+    for (var dt = span.start;
+        dt.isBefore(span.end);
+        dt = dt.add(const Duration(days: 1))) {
       final sr = sunrise(dt);
       final sunLong = toSidereal(sunLongitude(sr), sr);
       final moonLong = toSidereal(moonLongitude(sr), sr);
@@ -53,7 +57,9 @@ List<TithiMatch> findTithiRaw({
       } else if (lastSeen != null) {
         // Target tithi ended on lastSeen
         break;
-      } else if (prevTithi != null && prevTithi < targetTithi && currentTithi > targetTithi) {
+      } else if (prevTithi != null &&
+          prevTithi < targetTithi &&
+          currentTithi > targetTithi) {
         // Kshaya: tithi was skipped, it ended on previous day
         lastSeen = dt.subtract(const Duration(days: 1));
         break;
@@ -78,7 +84,9 @@ List<TithiMatch> filterDiscardFarSpan(List<TithiMatch> matches, int year) {
   // Keep matches whose date falls in the target year (Dec prev → Dec current)
   final earliest = DateTime.utc(year - 1, 12, 1);
   final latest = DateTime.utc(year + 1, 1, 1);
-  final inYear = matches.where((m) => !m.date.isBefore(earliest) && m.date.isBefore(latest)).toList();
+  final inYear = matches
+      .where((m) => !m.date.isBefore(earliest) && m.date.isBefore(latest))
+      .toList();
 
   // If we have both in-year and out-of-year matches, prefer in-year
   if (inYear.isNotEmpty && inYear.length < matches.length) {
@@ -90,8 +98,11 @@ List<TithiMatch> filterDiscardFarSpan(List<TithiMatch> matches, int year) {
   if (inYear.isEmpty) {
     final month = matches.first.span.month;
     final expectedCenter = DateTime.utc(year, _expectedMonth(month), 15);
-    final sorted = [...matches]..sort((a, b) =>
-      a.date.difference(expectedCenter).inDays.abs().compareTo(b.date.difference(expectedCenter).inDays.abs()));
+    final sorted = [...matches]..sort((a, b) => a.date
+        .difference(expectedCenter)
+        .inDays
+        .abs()
+        .compareTo(b.date.difference(expectedCenter).inDays.abs()));
     return [sorted.first];
   }
 
@@ -102,18 +113,30 @@ List<TithiMatch> filterDiscardFarSpan(List<TithiMatch> matches, int year) {
 /// Returns month number (1-12) representing when this lunar month typically falls.
 int _expectedMonth(LunarMonth month) {
   switch (month) {
-    case LunarMonth.chaitra: return 4;       // Mar-Apr → center Apr
-    case LunarMonth.vaishakha: return 5;     // Apr-May → center May
-    case LunarMonth.jyeshtha: return 6;      // May-Jun → center Jun
-    case LunarMonth.ashadha: return 7;       // Jun-Jul → center Jul
-    case LunarMonth.shravana: return 8;      // Jul-Aug → center Aug
-    case LunarMonth.bhadrapada: return 9;    // Aug-Sep → center Sep
-    case LunarMonth.ashvina: return 10;      // Sep-Oct → center Oct
-    case LunarMonth.kartika: return 11;      // Oct-Nov → center Nov
-    case LunarMonth.margashirsha: return 12; // Nov-Dec → center Dec
-    case LunarMonth.pausha: return 1;        // Dec-Jan → center Jan
-    case LunarMonth.magha: return 2;         // Jan-Feb → center Feb
-    case LunarMonth.phalguna: return 3;      // Feb-Mar → center Mar
+    case LunarMonth.chaitra:
+      return 4; // Mar-Apr → center Apr
+    case LunarMonth.vaishakha:
+      return 5; // Apr-May → center May
+    case LunarMonth.jyeshtha:
+      return 6; // May-Jun → center Jun
+    case LunarMonth.ashadha:
+      return 7; // Jun-Jul → center Jul
+    case LunarMonth.shravana:
+      return 8; // Jul-Aug → center Aug
+    case LunarMonth.bhadrapada:
+      return 9; // Aug-Sep → center Sep
+    case LunarMonth.ashvina:
+      return 10; // Sep-Oct → center Oct
+    case LunarMonth.kartika:
+      return 11; // Oct-Nov → center Nov
+    case LunarMonth.margashirsha:
+      return 12; // Nov-Dec → center Dec
+    case LunarMonth.pausha:
+      return 1; // Dec-Jan → center Jan
+    case LunarMonth.magha:
+      return 2; // Jan-Feb → center Feb
+    case LunarMonth.phalguna:
+      return 3; // Feb-Mar → center Mar
   }
 }
 
@@ -144,8 +167,13 @@ List<DateTime> findTithiInYear({
   SunriseFn? sunriseFn,
 }) {
   var matches = findTithiRaw(
-    month: month, paksha: paksha, tithiInPakshaNum: tithiInPakshaNum,
-    year: year, resolver: resolver, isAdhika: isAdhika, sunriseFn: sunriseFn,
+    month: month,
+    paksha: paksha,
+    tithiInPakshaNum: tithiInPakshaNum,
+    year: year,
+    resolver: resolver,
+    isAdhika: isAdhika,
+    sunriseFn: sunriseFn,
   );
 
   // Apply filters in order
@@ -173,7 +201,8 @@ DateTime? findNextOccurrence({
   SunriseFn? sunriseFn,
 }) {
   final start = from ?? DateTime.now();
-  final targetTithi = paksha == Paksha.shukla ? tithiInPakshaNum : tithiInPakshaNum + 15;
+  final targetTithi =
+      paksha == Paksha.shukla ? tithiInPakshaNum : tithiInPakshaNum + 15;
   final sunrise = sunriseFn ?? _defaultSunrise;
 
   for (var i = 0; i < 400; i++) {

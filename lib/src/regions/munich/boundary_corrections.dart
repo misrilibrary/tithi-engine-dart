@@ -1,7 +1,6 @@
 /// Boundary corrections for munich (48.1°N, 11.6°E).
 
-const munichAmavasyaCorrections = <int, int>{
-};
+const munichAmavasyaCorrections = <int, int>{};
 const munichPurnimaCorrections = <int, int>{
   39763: 39762,
   58869: 58868,

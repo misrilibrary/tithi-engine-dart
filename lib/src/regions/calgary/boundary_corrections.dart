@@ -1,7 +1,6 @@
 /// Boundary corrections for calgary (51.0°N, -114.1°E).
 
-const calgaryAmavasyaCorrections = <int, int>{
-};
+const calgaryAmavasyaCorrections = <int, int>{};
 const calgaryPurnimaCorrections = <int, int>{
   36130: 36129,
 };

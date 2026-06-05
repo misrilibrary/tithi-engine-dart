@@ -5,8 +5,7 @@ const gurgaonAmavasyaCorrections = <int, int>{
   8800: 8799,
   54543: 54542,
 };
-const gurgaonPurnimaCorrections = <int, int>{
-};
+const gurgaonPurnimaCorrections = <int, int>{};
 const gurgaonSankrantiCorrections = <int, int>{
   10634: 10635,
   28414: 28413,

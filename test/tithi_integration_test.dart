@@ -6,7 +6,15 @@ import 'package:tithi_engine/src/astronomy.dart';
 
 /// Integration test matrix — exercises all workflows across cities × systems.
 void main() {
-  final cities = ['Ujjain', 'Delhi', 'Srinagar', 'Seattle', 'London', 'Sydney', 'Tokyo'];
+  final cities = [
+    'Ujjain',
+    'Delhi',
+    'Srinagar',
+    'Seattle',
+    'London',
+    'Sydney',
+    'Tokyo'
+  ];
   final calcP = TithiCalculator(monthSystem: MonthSystem.purnimant);
   final calcA = TithiCalculator(monthSystem: MonthSystem.amant);
 
@@ -31,19 +39,30 @@ void main() {
   });
 
   group('Round-trip getTithi → findInYear', () {
-    final dates = [DateTime.utc(2026, 1, 15), DateTime.utc(2026, 4, 20), DateTime.utc(2026, 5, 25),
-      DateTime.utc(2026, 8, 16), DateTime.utc(2026, 11, 8), DateTime.utc(2025, 10, 20)];
+    final dates = [
+      DateTime.utc(2026, 1, 15),
+      DateTime.utc(2026, 4, 20),
+      DateTime.utc(2026, 5, 25),
+      DateTime.utc(2026, 8, 16),
+      DateTime.utc(2026, 11, 8),
+      DateTime.utc(2025, 10, 20)
+    ];
     for (final city in cities) {
       for (final dt in dates) {
         for (final calc in [calcP, calcA]) {
-          test('${dt.day}/${dt.month}/${dt.year} $city ${calc.monthSystem}', () {
+          test('${dt.day}/${dt.month}/${dt.year} $city ${calc.monthSystem}',
+              () {
             final info = calc.getTithi(dt, timezone: city);
             final found = calc.findInYear(info, dt.year, celebrationCity: city);
             final match = found.any((fd) {
               final fi = calc.getTithi(fd, timezone: city);
-              return fi.tithiNumber == info.tithiNumber && fi.month == info.month && fi.isAdhika == info.isAdhika;
+              return fi.tithiNumber == info.tithiNumber &&
+                  fi.month == info.month &&
+                  fi.isAdhika == info.isAdhika;
             });
-            expect(match, true, reason: 'found=${found.map((d) => '${d.day}/${d.month}').join(",")}');
+            expect(match, true,
+                reason:
+                    'found=${found.map((d) => '${d.day}/${d.month}').join(",")}');
           });
         }
       }
@@ -51,8 +70,14 @@ void main() {
   });
 
   group('Purnimant/Amant same tithi number', () {
-    final dates = [DateTime.utc(2026, 3, 20), DateTime.utc(2026, 5, 20), DateTime.utc(2026, 7, 1),
-      DateTime.utc(2026, 9, 4), DateTime.utc(2026, 11, 9), DateTime.utc(2026, 12, 25)];
+    final dates = [
+      DateTime.utc(2026, 3, 20),
+      DateTime.utc(2026, 5, 20),
+      DateTime.utc(2026, 7, 1),
+      DateTime.utc(2026, 9, 4),
+      DateTime.utc(2026, 11, 9),
+      DateTime.utc(2026, 12, 25)
+    ];
     for (final city in cities) {
       for (final dt in dates) {
         test('${dt.day}/${dt.month} $city', () {
@@ -68,27 +93,33 @@ void main() {
   group('Month boundaries 2026', () {
     for (final city in cities) {
       test('Purnimant $city', () {
-        for (var d = DateTime.utc(2026, 1, 1); d.year == 2026; d = d.add(const Duration(days: 1))) {
+        for (var d = DateTime.utc(2026, 1, 1);
+            d.year == 2026;
+            d = d.add(const Duration(days: 1))) {
           final info = calcP.getTithi(d, timezone: city);
           if (info.tithiNumber == 15 && !info.isAdhika) {
             final next = d.add(const Duration(days: 1));
             final nextInfo = calcP.getTithi(next, timezone: city);
             if (nextInfo.paksha == Paksha.krishna) {
               final expected = LunarMonth.values[(info.month.index + 1) % 12];
-              expect(nextInfo.month, expected, reason: '$city ${d.day}/${d.month}');
+              expect(nextInfo.month, expected,
+                  reason: '$city ${d.day}/${d.month}');
             }
           }
         }
       });
       test('Amant $city', () {
-        for (var d = DateTime.utc(2026, 1, 1); d.year == 2026; d = d.add(const Duration(days: 1))) {
+        for (var d = DateTime.utc(2026, 1, 1);
+            d.year == 2026;
+            d = d.add(const Duration(days: 1))) {
           final info = calcA.getTithi(d, timezone: city);
           if (info.tithiNumber == 30 && !info.isAdhika) {
             final next = d.add(const Duration(days: 1));
             final nextInfo = calcA.getTithi(next, timezone: city);
             if (nextInfo.paksha == Paksha.shukla) {
               final expected = LunarMonth.values[(info.month.index + 1) % 12];
-              expect(nextInfo.month == expected || nextInfo.isAdhika, true, reason: '$city ${d.day}/${d.month}');
+              expect(nextInfo.month == expected || nextInfo.isAdhika, true,
+                  reason: '$city ${d.day}/${d.month}');
             }
           }
         }
@@ -115,10 +146,12 @@ void main() {
   });
 
   group('Festival dates (muhurta-aware, both systems)', () {
-    final truth = {'maha_shivaratri': {2025: '2025-02-26', 2026: '2026-02-15'},
+    final truth = {
+      'maha_shivaratri': {2025: '2025-02-26', 2026: '2026-02-15'},
       'ram_navami': {2025: '2025-04-06', 2026: '2026-03-26'},
       'janmashtami_smarta': {2025: '2025-08-15', 2026: '2026-09-04'},
-      'diwali': {2025: '2025-10-20', 2026: '2026-11-08'}};
+      'diwali': {2025: '2025-10-20', 2026: '2026-11-08'}
+    };
     for (final fest in festivals.where((f) => truth.containsKey(f.id))) {
       for (final year in [2025, 2026]) {
         test('${fest.name} $year', () {
@@ -134,8 +167,14 @@ void main() {
 
   group('Adhika entry findInYear', () {
     test('Adhika Jyeshtha S4 2026 Srinagar', () {
-      final info = TithiInfo(tithiNumber: 4, tithiName: 'Chaturthi', paksha: Paksha.shukla,
-          tithiInPaksha: 4, month: LunarMonth.jyeshtha, isAdhika: true, displayName: '');
+      final info = TithiInfo(
+          tithiNumber: 4,
+          tithiName: 'Chaturthi',
+          paksha: Paksha.shukla,
+          tithiInPaksha: 4,
+          month: LunarMonth.jyeshtha,
+          isAdhika: true,
+          displayName: '');
       final dates = calcA.findInYear(info, 2026, celebrationCity: 'Srinagar');
       expect(dates.isNotEmpty, true);
       final verify = calcA.getTithi(dates.first, timezone: 'Srinagar');
@@ -145,14 +184,25 @@ void main() {
   });
 
   group('Adhik naming verified years', () {
-    final truth = {2010: 'Vaishakha', 2015: 'Ashadha', 2020: 'Ashvina',
-      2023: 'Shravana', 2026: 'Jyeshtha', 2029: 'Chaitra'};
+    final truth = {
+      2010: 'Vaishakha',
+      2015: 'Ashadha',
+      2020: 'Ashvina',
+      2023: 'Shravana',
+      2026: 'Jyeshtha',
+      2029: 'Chaitra'
+    };
     for (final e in truth.entries) {
       test('${e.key} => Adhik ${e.value}', () {
         String? found;
-        for (var d = DateTime.utc(e.key, 1, 1); d.year == e.key; d = d.add(const Duration(days: 1))) {
+        for (var d = DateTime.utc(e.key, 1, 1);
+            d.year == e.key;
+            d = d.add(const Duration(days: 1))) {
           final info = calcP.getTithi(d, timezone: 'Ujjain');
-          if (info.isAdhika) { found = info.month.displayName; break; }
+          if (info.isAdhika) {
+            found = info.month.displayName;
+            break;
+          }
         }
         expect(found, e.value);
       });
@@ -162,7 +212,9 @@ void main() {
   group('Kshaya year 1963', () {
     test('Amant Margashirsha absent', () {
       final months = <String>{};
-      for (var d = DateTime.utc(1963, 1, 1); d.year == 1963; d = d.add(const Duration(days: 1))) {
+      for (var d = DateTime.utc(1963, 1, 1);
+          d.year == 1963;
+          d = d.add(const Duration(days: 1))) {
         final info = calcA.getTithi(d, timezone: 'Ujjain');
         months.add('${info.isAdhika ? "A." : ""}${info.month.displayName}');
       }
@@ -174,27 +226,40 @@ void main() {
   group('Sunrise sanity', () {
     test('Ujjain equinox/solstice ranges', () {
       final loc = getLocationForCity('Ujjain');
-      final checks = [[DateTime.utc(2026, 3, 20), 385, 400],
-        [DateTime.utc(2026, 6, 21), 335, 350], [DateTime.utc(2026, 12, 21), 418, 432]];
+      final checks = [
+        [DateTime.utc(2026, 3, 20), 385, 400],
+        [DateTime.utc(2026, 6, 21), 335, 350],
+        [DateTime.utc(2026, 12, 21), 418, 432]
+      ];
       for (final c in checks) {
         final sr = computeSunrise(c[0] as DateTime, loc);
-        final localMin = sr.hour * 60 + sr.minute + (loc.utcOffset * 60).round();
+        final localMin =
+            sr.hour * 60 + sr.minute + (loc.utcOffset * 60).round();
         expect(localMin >= (c[1] as int) && localMin <= (c[2] as int), true,
-            reason: '${(c[0] as DateTime).day}/${(c[0] as DateTime).month}: $localMin min');
+            reason:
+                '${(c[0] as DateTime).day}/${(c[0] as DateTime).month}: $localMin min');
       }
     });
-    test('Tokyo sunrise day-carry (eastern city, UTC sunrise < 0 in winter)', () {
+    test('Tokyo sunrise day-carry (eastern city, UTC sunrise < 0 in winter)',
+        () {
       final loc = getLocationForCity('Tokyo');
       // Tokyo sunrise is on the PREVIOUS UTC day (e.g. Jun 21 04:26 JST = Jun 20 19:26 UTC).
       // The day-carry bug (h%24) would put it on the wrong local day.
-      for (final dt in [DateTime.utc(2026, 6, 21), DateTime.utc(2026, 12, 21), DateTime.utc(2026, 3, 20)]) {
+      for (final dt in [
+        DateTime.utc(2026, 6, 21),
+        DateTime.utc(2026, 12, 21),
+        DateTime.utc(2026, 3, 20)
+      ]) {
         final sr = computeSunrise(dt, loc);
         final srLocal = sr.add(Duration(minutes: (loc.utcOffset * 60).round()));
         // Sunrise local day must match the requested date
-        expect(srLocal.day, dt.day, reason: 'Tokyo ${dt.day}/${dt.month}: sunrise on day ${srLocal.day}');
+        expect(srLocal.day, dt.day,
+            reason:
+                'Tokyo ${dt.day}/${dt.month}: sunrise on day ${srLocal.day}');
         // Sunrise local hour should be 4-7 AM
         expect(srLocal.hour >= 4 && srLocal.hour <= 7, true,
-            reason: 'Tokyo ${dt.day}/${dt.month}: sunrise at ${srLocal.hour}:${srLocal.minute}');
+            reason:
+                'Tokyo ${dt.day}/${dt.month}: sunrise at ${srLocal.hour}:${srLocal.minute}');
       }
     });
   });

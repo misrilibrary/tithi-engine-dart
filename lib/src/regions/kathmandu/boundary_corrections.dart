@@ -1,7 +1,6 @@
 /// Boundary corrections for kathmandu (27.7°N, 85.3°E).
 
-const kathmanduAmavasyaCorrections = <int, int>{
-};
+const kathmanduAmavasyaCorrections = <int, int>{};
 const kathmanduPurnimaCorrections = <int, int>{
   16403: 16404,
   70002: 70001,

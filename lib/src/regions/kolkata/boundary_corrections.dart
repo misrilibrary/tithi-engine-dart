@@ -1,7 +1,6 @@
 /// Boundary corrections for kolkata (22.6°N, 88.4°E).
 
-const kolkataAmavasyaCorrections = <int, int>{
-};
+const kolkataAmavasyaCorrections = <int, int>{};
 const kolkataPurnimaCorrections = <int, int>{
   40472: 40471,
   44458: 44457,

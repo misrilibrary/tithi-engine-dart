@@ -9,7 +9,8 @@ class MonthSpan {
   final DateTime start;
   final DateTime end;
   final LunarMonth month;
-  final bool isAdhika; // true = adhika (extra/leap) month, false = nij (regular)
+  final bool
+      isAdhika; // true = adhika (extra/leap) month, false = nij (regular)
   MonthSpan(this.start, this.end, this.month, {this.isAdhika = false});
 }
 
@@ -27,7 +28,8 @@ class LunarMonthResolver {
   final String city;
   final Map<int, List<MonthSpan>> _cache = {};
 
-  LunarMonthResolver({this.system = MonthSystem.purnimant, this.city = defaultCity});
+  LunarMonthResolver(
+      {this.system = MonthSystem.purnimant, this.city = defaultCity});
 
   /// Get the lunar month for a given date.
   LunarMonth getMonth(DateTime date) => getMonthInfo(date).month;
@@ -62,7 +64,9 @@ class LunarMonthResolver {
     // Meeus scan for boundaries, with corrections applied
     final tithiCorr = getTithiCorrections(city);
     int? prevTithi;
-    for (var dt = scanStart; dt.isBefore(scanEnd); dt = dt.add(const Duration(days: 1))) {
+    for (var dt = scanStart;
+        dt.isBefore(scanEnd);
+        dt = dt.add(const Duration(days: 1))) {
       final sunrise = computeSunrise(dt, getLocationForCity(city));
       final sunLong = toSidereal(sunLongitude(sunrise), sunrise);
       final moonLong = toSidereal(moonLongitude(sunrise), sunrise);
@@ -85,7 +89,10 @@ class LunarMonthResolver {
         } else if (effTithi == 15 && prevTithi == 15) {
           // Double Purnima: use the last day directly (don't correct — it IS the boundary)
           if (purnimas.isNotEmpty) purnimas[purnimas.length - 1] = dt;
-        } else if (prevTithi >= 13 && prevTithi < 15 && effTithi > 15 && effTithi <= 17) {
+        } else if (prevTithi >= 13 &&
+            prevTithi < 15 &&
+            effTithi > 15 &&
+            effTithi <= 17) {
           purnimas.add(_correctPurnima(dt.subtract(const Duration(days: 1))));
         }
       }
@@ -112,11 +119,13 @@ class LunarMonthResolver {
 
       if (crossings == 0) {
         // No sankranti → adhika (name assigned below from next nij month).
-        amantSpans.add(MonthSpan(spanStart, spanEnd, LunarMonth.chaitra, isAdhika: true));
+        amantSpans.add(
+            MonthSpan(spanStart, spanEnd, LunarMonth.chaitra, isAdhika: true));
       } else {
         // 1 sankranti (nij) or 2 (kshaya) → named by the FIRST sankranti,
         // i.e. the next sign the Sun enters after the starting new moon.
-        amantSpans.add(MonthSpan(spanStart, spanEnd, _signToMonthAmant((signStart + 1) % 12)));
+        amantSpans.add(MonthSpan(
+            spanStart, spanEnd, _signToMonthAmant((signStart + 1) % 12)));
       }
     }
 
@@ -126,7 +135,9 @@ class LunarMonthResolver {
       if (!amantSpans[i].isAdhika) continue;
       for (var j = i + 1; j < amantSpans.length; j++) {
         if (!amantSpans[j].isAdhika) {
-          amantSpans[i] = MonthSpan(amantSpans[i].start, amantSpans[i].end, amantSpans[j].month, isAdhika: true);
+          amantSpans[i] = MonthSpan(
+              amantSpans[i].start, amantSpans[i].end, amantSpans[j].month,
+              isAdhika: true);
           break;
         }
       }
@@ -145,18 +156,23 @@ class LunarMonthResolver {
       for (final am in amantSpans) {
         DateTime? purnima;
         for (final p in purnimas) {
-          if (!p.isBefore(am.start) && p.isBefore(am.end)) { purnima = p; break; }
+          if (!p.isBefore(am.start) && p.isBefore(am.end)) {
+            purnima = p;
+            break;
+          }
         }
         if (purnima == null) {
           spans.add(am); // degrade gracefully at window edges
           continue;
         }
         final krishnaStart = purnima.add(const Duration(days: 1));
-        spans.add(MonthSpan(am.start, krishnaStart, am.month, isAdhika: am.isAdhika));
+        spans.add(
+            MonthSpan(am.start, krishnaStart, am.month, isAdhika: am.isAdhika));
         final krishnaMonth = am.isAdhika
             ? am.month
             : LunarMonth.values[(LunarMonth.values.indexOf(am.month) + 1) % 12];
-        spans.add(MonthSpan(krishnaStart, am.end, krishnaMonth, isAdhika: am.isAdhika));
+        spans.add(MonthSpan(krishnaStart, am.end, krishnaMonth,
+            isAdhika: am.isAdhika));
       }
     } else {
       // Amant: use the spans we already built
@@ -166,7 +182,9 @@ class LunarMonthResolver {
     // Filter to spans that overlap with the target year
     final yearStart = DateTime.utc(year, 1, 1);
     final yearEnd = DateTime.utc(year + 1, 1, 1);
-    final filtered = spans.where((s) => s.start.isBefore(yearEnd) && s.end.isAfter(yearStart)).toList();
+    final filtered = spans
+        .where((s) => s.start.isBefore(yearEnd) && s.end.isAfter(yearStart))
+        .toList();
 
     _cache[year] = filtered;
     return filtered;
@@ -175,18 +193,18 @@ class LunarMonthResolver {
   /// Amant: sankranti sign → month name
   static LunarMonth _signToMonthAmant(int sign) {
     const map = [
-      LunarMonth.chaitra,       // 0: Sun enters Mesha
-      LunarMonth.vaishakha,     // 1: Sun enters Vrishabha
-      LunarMonth.jyeshtha,      // 2: Sun enters Mithuna
-      LunarMonth.ashadha,       // 3: Sun enters Karka
-      LunarMonth.shravana,      // 4: Sun enters Simha
-      LunarMonth.bhadrapada,    // 5: Sun enters Kanya
-      LunarMonth.ashvina,       // 6: Sun enters Tula
-      LunarMonth.kartika,       // 7: Sun enters Vrischika
-      LunarMonth.margashirsha,  // 8: Sun enters Dhanu
-      LunarMonth.pausha,        // 9: Sun enters Makara
-      LunarMonth.magha,         // 10: Sun enters Kumbha
-      LunarMonth.phalguna,      // 11: Sun enters Meena
+      LunarMonth.chaitra, // 0: Sun enters Mesha
+      LunarMonth.vaishakha, // 1: Sun enters Vrishabha
+      LunarMonth.jyeshtha, // 2: Sun enters Mithuna
+      LunarMonth.ashadha, // 3: Sun enters Karka
+      LunarMonth.shravana, // 4: Sun enters Simha
+      LunarMonth.bhadrapada, // 5: Sun enters Kanya
+      LunarMonth.ashvina, // 6: Sun enters Tula
+      LunarMonth.kartika, // 7: Sun enters Vrischika
+      LunarMonth.margashirsha, // 8: Sun enters Dhanu
+      LunarMonth.pausha, // 9: Sun enters Makara
+      LunarMonth.magha, // 10: Sun enters Kumbha
+      LunarMonth.phalguna, // 11: Sun enters Meena
     ];
     return map[sign];
   }
@@ -230,7 +248,8 @@ DateTime _newMoonMoment(DateTime amavasyaDay) {
       .subtract(const Duration(days: 1));
   var hi = lo.add(const Duration(days: 3));
   for (var i = 0; i < 44; i++) {
-    final mid = lo.add(Duration(milliseconds: hi.difference(lo).inMilliseconds ~/ 2));
+    final mid =
+        lo.add(Duration(milliseconds: hi.difference(lo).inMilliseconds ~/ 2));
     if (_signedElongation(mid) < 0) {
       lo = mid;
     } else {

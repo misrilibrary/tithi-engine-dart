@@ -1,7 +1,6 @@
 /// Boundary corrections for austin (30.3°N, -97.7°E).
 
-const austinAmavasyaCorrections = <int, int>{
-};
+const austinAmavasyaCorrections = <int, int>{};
 const austinPurnimaCorrections = <int, int>{
   14514: 14513,
   34359: 34358,

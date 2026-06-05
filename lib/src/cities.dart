@@ -7,8 +7,20 @@ const defaultCity = 'Ujjain';
 
 /// Priority cities shown at the top of dropdowns (above all groups).
 const pinnedCities = [
-  'Amsterdam', 'Boston', 'Dallas', 'Delhi', 'Dubai', 'Jammu', 'London',
-  'Mumbai', 'Muscat', 'Noida', 'Pune', 'Seattle', 'Srinagar', 'Ujjain',
+  'Amsterdam',
+  'Boston',
+  'Dallas',
+  'Delhi',
+  'Dubai',
+  'Jammu',
+  'London',
+  'Mumbai',
+  'Muscat',
+  'Noida',
+  'Pune',
+  'Seattle',
+  'Srinagar',
+  'Ujjain',
 ];
 
 /// All supported cities for tithi calculation.
@@ -198,15 +210,18 @@ const supportedCities = <String, CityLocation>{
 const _indiaCities = {
   // Metros / tier-1
   'Delhi', 'Mumbai', 'Kolkata', 'Chennai', 'Srinagar', 'Bangalore', 'Hyderabad',
-  'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Chandigarh', 'Jammu', 'Indore', 'Ujjain',
+  'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Chandigarh', 'Jammu', 'Indore',
+  'Ujjain',
   'Bhopal', 'Nagpur', 'Patna', 'Kochi', 'Guwahati', 'Varanasi', 'Amritsar',
   'Dehradun', 'Thiruvananthapuram', 'Coimbatore', 'Visakhapatnam', 'Mangalore',
   'Mysore', 'Noida', 'Gurgaon',
   // Tier-2
   'Agra', 'Allahabad', 'Aurangabad', 'Bhubaneswar', 'Faridabad', 'Ghaziabad',
   'Gorakhpur', 'Gwalior', 'Hubli', 'Jabalpur', 'Jalandhar', 'Jodhpur', 'Kanpur',
-  'Kota', 'Ludhiana', 'Madurai', 'Meerut', 'Nashik', 'Raipur', 'Rajkot', 'Ranchi',
-  'Salem', 'Surat', 'Thane', 'Tiruchirappalli', 'Tirupati', 'Udaipur', 'Vadodara',
+  'Kota', 'Ludhiana', 'Madurai', 'Meerut', 'Nashik', 'Raipur', 'Rajkot',
+  'Ranchi',
+  'Salem', 'Surat', 'Thane', 'Tiruchirappalli', 'Tirupati', 'Udaipur',
+  'Vadodara',
   'Vijayawada', 'Warangal',
   // Pilgrimage
   'Mussoorie', 'Rishikesh', 'Haridwar', 'Mathura', 'Vrindavan', 'Ayodhya',
@@ -215,10 +230,30 @@ const _indiaCities = {
 
 /// US cities for grouping.
 const _usaCities = {
-  'Seattle', 'Kirkland', 'San Francisco', 'Fremont', 'San Jose', 'Los Angeles',
-  'Dallas', 'Austin', 'Houston', 'Boston', 'New York', 'Chicago', 'Atlanta',
-  'Orlando', 'Denver', 'Phoenix', 'Washington DC', 'Miami', 'Portland',
-  'Minneapolis', 'Detroit', 'Philadelphia', 'San Diego', 'Raleigh',
+  'Seattle',
+  'Kirkland',
+  'San Francisco',
+  'Fremont',
+  'San Jose',
+  'Los Angeles',
+  'Dallas',
+  'Austin',
+  'Houston',
+  'Boston',
+  'New York',
+  'Chicago',
+  'Atlanta',
+  'Orlando',
+  'Denver',
+  'Phoenix',
+  'Washington DC',
+  'Miami',
+  'Portland',
+  'Minneapolis',
+  'Detroit',
+  'Philadelphia',
+  'San Diego',
+  'Raleigh',
 };
 
 /// Returns ordered city names: priority → India → US → rest of world.
@@ -227,13 +262,19 @@ const _usaCities = {
 List<String?> get orderedCityList {
   final india = supportedCities.keys
       .where((c) => _indiaCities.contains(c) && !pinnedCities.contains(c))
-      .toList()..sort();
+      .toList()
+    ..sort();
   final usa = supportedCities.keys
       .where((c) => _usaCities.contains(c) && !pinnedCities.contains(c))
-      .toList()..sort();
+      .toList()
+    ..sort();
   final rest = supportedCities.keys
-      .where((c) => !_indiaCities.contains(c) && !_usaCities.contains(c) && !pinnedCities.contains(c))
-      .toList()..sort();
+      .where((c) =>
+          !_indiaCities.contains(c) &&
+          !_usaCities.contains(c) &&
+          !pinnedCities.contains(c))
+      .toList()
+    ..sort();
   return [
     ...pinnedCities,
     null, // divider

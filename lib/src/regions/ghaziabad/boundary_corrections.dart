@@ -1,7 +1,6 @@
 /// Boundary corrections for ghaziabad (28.7°N, 77.4°E).
 
-const ghaziabadAmavasyaCorrections = <int, int>{
-};
+const ghaziabadAmavasyaCorrections = <int, int>{};
 const ghaziabadPurnimaCorrections = <int, int>{
   49892: 49891,
 };

@@ -8,10 +8,14 @@ void main() {
   print(info.displayName); // "Phalguna Krishna Trayodashi"
 
   // Festival date
-  final shivaratri = panchang.dateFor(festivals.firstWhere((f) => f.name == 'Maha Shivaratri'), 2026, City.ujjain);
+  final shivaratri = panchang.dateFor(
+      festivals.firstWhere((f) => f.name == 'Maha Shivaratri'),
+      2026,
+      City.ujjain);
   print('Maha Shivaratri 2026: ${shivaratri?.date}');
 
   // Tithi → Date
-  final date = panchang.getDate(LunarMonth.bhadrapada, Paksha.krishna, 8, 2026, City.seattle);
+  final date = panchang.getDate(
+      LunarMonth.bhadrapada, Paksha.krishna, 8, 2026, City.seattle);
   print('Janmashtami 2026 Seattle: $date');
 }

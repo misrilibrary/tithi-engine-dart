@@ -1,7 +1,6 @@
 /// Boundary corrections for ujjain (23.2°N, 75.8°E).
 
-const ujjainAmavasyaCorrections = <int, int>{
-};
+const ujjainAmavasyaCorrections = <int, int>{};
 const ujjainPurnimaCorrections = <int, int>{
   66016: 66015,
 };
