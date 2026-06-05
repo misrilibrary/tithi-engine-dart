@@ -12,10 +12,11 @@ library;
 export 'src/panchang.dart' show Panchang;
 export 'src/tithi_calculator.dart' show TithiCalculator, TithiInfo;
 export 'src/lunar_month.dart' show LunarMonth, MonthSystem;
-export 'src/tithi.dart' show Paksha, getTithiName, tithiNames;
+export 'src/tithi.dart' show Paksha, getTithiName, getPaksha, tithiInPaksha, tithiNames, calculateTithi;
 export 'src/astronomy.dart'
     show CityLocation, supportedCities, defaultCity, getLocationForCity;
 export 'src/cities.dart' show City;
 export 'src/festival_def.dart' show FestivalDef, MuhurtaRule, festivals;
 export 'src/festival_finder.dart'
     show findFestivalDate, FestivalDate, findRecurringDates;
+export 'src/month_converter.dart' show convertMonth;

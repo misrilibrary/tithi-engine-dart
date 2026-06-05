@@ -9,3 +9,7 @@
 - Date finding: tithi → Gregorian date(s) in any year
 - 157 supported cities with per-city sunrise corrections
 - 200-year accuracy (1900–2100), validated against Swiss Ephemeris
+
+## 1.0.1
+
+- Export additional symbols: getPaksha, tithiInPaksha, calculateTithi, convertMonth
