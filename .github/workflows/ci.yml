@@ -14,6 +14,8 @@ jobs:
       - uses: dart-lang/setup-dart@v1
       - run: dart pub get
       - run: dart analyze
+      - run: dart analyze example/
       - run: dart format --set-exit-if-changed .
       - run: dart test
+      - run: dart doc --validate-links
       - run: dart pub publish --dry-run

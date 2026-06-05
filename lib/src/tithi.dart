@@ -1,5 +1,9 @@
 /// Core tithi calculation and naming.
 
+/// The two fortnights (pakshas) of a lunar month.
+///
+/// - [shukla]: bright fortnight (waxing moon, tithis 1–15)
+/// - [krishna]: dark fortnight (waning moon, tithis 16–30)
 enum Paksha { shukla, krishna }
 
 /// Tithi names within a paksha (1-15).

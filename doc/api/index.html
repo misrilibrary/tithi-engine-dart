@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="tithi_engine API docs, for the Dart programming language.">
+  <title>tithi_engine - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://github.com/misrilibrary/tithi-engine-dart">tithi_engine package</a></li>
+  </ol>
+  <div class="self-name">tithi_engine</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="tithi_engine">tithi_engine</h1>
+<p><a href="https://github.com/misrilibrary/tithi-engine-dart/actions/workflows/ci.yml"><img src="https://github.com/misrilibrary/tithi-engine-dart/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+<a href="https://pub.dev/packages/tithi_engine"><img src="https://img.shields.io/pub/v/tithi_engine.svg" alt="pub package"></a>
+<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a></p>
+<p>A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Computes accurate tithis, lunar months, and festival dates for any city worldwide.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Tithi calculation</strong> — date → tithi number, name, paksha, lunar month</li>
+<li><strong>Festival dates</strong> — muhurta-accurate (nishita, madhyahna, pradosh rules)</li>
+<li><strong>Month resolution</strong> — moment-based adhika/kshaya detection, Purnimant &amp; Amant systems</li>
+<li><strong>Date finding</strong> — tithi → Gregorian date in any year</li>
+<li><strong>157 cities</strong> — per-city correction tables verified against Swiss Ephemeris</li>
+<li><strong>Pure Dart</strong> — no dependencies, works in Flutter, server, CLI, and web (WASM)</li>
+<li><strong>200-year accuracy</strong> — validated 1900–2100 against Drik Panchang</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  tithi_engine: ^1.0.0
+</code></pre>
+<h2 id="quick-start">Quick Start</h2>
+<pre class="language-dart"><code class="language-dart">import 'package:tithi_engine/tithi_engine.dart';
+
+final panchang = Panchang(MonthSystem.purnimant);
+
+// Date → Tithi
+final info = panchang.forDate(DateTime(2026, 2, 15), City.ujjain);
+print(info.displayName); // "Phalguna Krishna Trayodashi"
+
+// Festival date
+final shivaratri = panchang.dateFor(
+  festivals.firstWhere((f) =&gt; f.name == 'Maha Shivaratri'), 2026, City.ujjain);
+print('Maha Shivaratri 2026: ${shivaratri?.date}');
+
+// Tithi → Date
+final date = panchang.getDate(
+  LunarMonth.bhadrapada, Paksha.krishna, 8, 2026, City.seattle);
+print('Janmashtami 2026 Seattle: $date');
+</code></pre>
+<h2 id="api">API</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>panchang.forDate(date, city)</code></td>
+<td>Gregorian date → full TithiInfo</td>
+</tr>
+<tr>
+<td><code>panchang.getDate(month, paksha, tithi, year, city)</code></td>
+<td>Tithi spec → Gregorian date</td>
+</tr>
+<tr>
+<td><code>panchang.getDates(month, paksha, tithi, year, city)</code></td>
+<td>Tithi spec → all dates (adhika-aware)</td>
+</tr>
+<tr>
+<td><code>panchang.dateFor(festival, year, city)</code></td>
+<td>Festival → date with muhurta rules</td>
+</tr>
+<tr>
+<td><code>panchang.findNext(month, paksha, tithi, city)</code></td>
+<td>Next occurrence from today</td>
+</tr>
+</tbody>
+</table>
+<h2 id="accuracy">Accuracy</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tithi vs Swiss Ephemeris</td>
+<td>0 mismatches / 73,049 days (1900–2100)</td>
+</tr>
+<tr>
+<td>Month boundaries (Purnimant)</td>
+<td>100% (200 years, verified cities)</td>
+</tr>
+<tr>
+<td>Festival dates vs Drik Panchang</td>
+<td>22/22 (2025–2026)</td>
+</tr>
+<tr>
+<td>Test coverage</td>
+<td>415 tests</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cross-platform">Cross-Platform</h2>
+<p>This is the Dart implementation of <a href="https://github.com/misrilibrary/tithi-engine">tithi-engine</a> (Java). Both libraries produce identical results and share the same correction tables.</p>
+<h2 id="license">License</h2>
+<p>Licensed under the <a href="LICENSE">Apache License 2.0</a>.</p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="tithi_engine">
+  <span class="name"><a href="tithi_engine/">tithi_engine</a></span> 
+
+</dt>
+<dd>Accurate Vedic tithi, lunar month, and festival date calculator.
+</dd>
+
+        </dl>
+      </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://github.com/misrilibrary/tithi-engine-dart">tithi_engine package</a></li>
+</ol>
+
+    <h5 class="hidden-xs"><span class="package-name">tithi_engine</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="tithi_engine/">tithi_engine</a></li>
+</ol>
+
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+</main>
+<footer>
+  <span class="no-break">
+    tithi_engine
+      1.0.1
+  </span>
+  
+</footer>
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the findFestivalDate function from the tithi_engine library, for the Dart programming language.">
+  <title>findFestivalDate function - tithi_engine library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">tithi_engine</a></li>
+    <li><a href="../tithi_engine/">tithi_engine.dart</a></li>
+    <li class="self-crumb">findFestivalDate function</li>
+  </ol>
+  <div class="self-name">findFestivalDate</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="tithi_engine&#47;tithi_engine-library-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-function">findFestivalDate</span> function 
+ 
+</h1></div>
+
+    <section class="multi-line-signature">
+        
+<span class="returntype"><a href="../tithi_engine/FestivalDate-class.html">FestivalDate</a>?</span>
+<span class="name ">findFestivalDate</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="findFestivalDate-param-fest"><span class="type-annotation"><a href="../tithi_engine/FestivalDef-class.html">FestivalDef</a></span> <span class="parameter-name">fest</span>, </span></li>
+<li><span class="parameter" id="findFestivalDate-param-year"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/int-class.html">int</a></span> <span class="parameter-name">year</span>, </span></li>
+<li><span class="parameter" id="findFestivalDate-param-city"><span class="type-annotation"><a href="https://api.flutter.dev/flutter/dart-core/String-class.html">String</a></span> <span class="parameter-name">city</span>, </span></li>
+<li><span class="parameter" id="findFestivalDate-param-calc"><span class="type-annotation"><a href="../tithi_engine/TithiCalculator-class.html">TithiCalculator</a></span> <span class="parameter-name">calc</span>, </span></li>
+</ol>)
+
+        
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Find the correct festival date for a given year and city, applying muhurta rules.
+Festival definitions use Purnimant month names, so finding always uses Purnimant internally.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">FestivalDate? findFestivalDate(
+    FestivalDef fest, int year, String city, TithiCalculator calc) {
+  &#47;&#47; Always use Purnimant for finding — festival defs are in Purnimant convention
+  final findCalc = calc.monthSystem == MonthSystem.purnimant
+      ? calc
+      : TithiCalculator(monthSystem: MonthSystem.purnimant);
+  final info = TithiInfo(
+    tithiNumber: fest.tithiNumber,
+    tithiName: &#39;&#39;,
+    paksha: fest.paksha,
+    tithiInPaksha: fest.tithiInPaksha,
+    month: fest.month,
+    displayName: fest.name,
+  );
+  final dates = findCalc.findInYear(info, year, celebrationCity: city);
+  if (dates.isEmpty) return null;
+
+  final loc = getLocationForCity(city);
+  var d = dates.first;
+
+  &#47;&#47; Apply muhurta rule: check if D-1 has the target tithi at muhurta time
+  if (fest.muhurta != MuhurtaRule.sunrise) {
+    final prev = d.subtract(const Duration(days: 1));
+    final muhurtaTime = _muhurtaUtc(prev, loc, fest.muhurta);
+    final tithiAtMuhurta = _tithiAt(muhurtaTime);
+    if (tithiAtMuhurta == fest.tithiNumber) {
+      d = prev;
+    }
+  }
+
+  &#47;&#47; Compute tithi start&#47;end times via binary search
+  final tithiStart = _findTithiTransition(d, loc, fest.tithiNumber, true);
+  final tithiEnd = _findTithiTransition(d, loc, fest.tithiNumber, false);
+
+  &#47;&#47; Compute muhurta window
+  DateTime? muhurtaStart, muhurtaEnd;
+  if (fest.muhurta != MuhurtaRule.sunrise) {
+    final mw = _muhurtaWindow(d, loc, fest.muhurta);
+    muhurtaStart = mw.$1;
+    muhurtaEnd = mw.$2;
+  }
+
+  return FestivalDate(
+    festival: fest,
+    date: d,
+    tithiStart: tithiStart,
+    tithiEnd: tithiEnd,
+    muhurtaStart: muhurtaStart,
+    muhurtaEnd: muhurtaEnd,
+  );
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">tithi_engine</a></li>
+    <li><a href="../tithi_engine/">tithi_engine</a></li>
+    <li class="self-crumb">findFestivalDate function</li>
+</ol>
+
+    <h5>tithi_engine library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    tithi_engine
+      1.0.1
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+
