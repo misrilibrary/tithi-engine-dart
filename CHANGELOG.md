@@ -10,6 +10,10 @@
 - 157 supported cities with per-city sunrise corrections
 - 200-year accuracy (1900–2100), validated against Swiss Ephemeris
 
+## 1.0.5
+
+- Fix LICENSE: use exact canonical Apache 2.0 text from apache.org
+
 ## 1.0.4
 
 - Fix LICENSE recognition (full Apache 2.0 text for pub.dev detection)
