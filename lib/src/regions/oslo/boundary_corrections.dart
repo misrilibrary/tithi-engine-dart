@@ -1,0 +1,27 @@
+/// Boundary corrections for oslo (59.9°N, 10.8°E).
+
+const osloAmavasyaCorrections = <int, int>{
+  11045: 11044,
+  11753: 11752,
+  18279: 18278,
+  34138: 34137,
+  40014: 40013,
+  54159: 54158,
+  69929: 69928,
+  72350: 72349,
+};
+const osloPurnimaCorrections = <int, int>{
+  3912: 3913,
+  36928: 36927,
+  49449: 49448,
+};
+const osloSankrantiCorrections = <int, int>{
+  7803: 7804,
+  13952: 13951,
+  14622: 14623,
+  18793: 18792,
+  36294: 36293,
+  50538: 50539,
+  64783: 64784,
+  66673: 66672,
+};

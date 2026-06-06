@@ -153,6 +153,83 @@ const supportedCities = <String, CityLocation>{
   'Bogotá': CityLocation(4.7, -74.1, -5.0),
   'Lima': CityLocation(-12.0, -77.0, -5.0),
   'Santiago': CityLocation(-33.4, -70.6, -4.0),
+
+  // ─── Pakistan ───
+  'Karachi': CityLocation(24.9, 67.0, 5.0),
+  'Lahore': CityLocation(31.5, 74.3, 5.0),
+  'Islamabad': CityLocation(33.7, 73.0, 5.0),
+
+  // ─── Caribbean & Central America ───
+  'Port of Spain': CityLocation(10.7, -61.5, -4.0),
+  'Georgetown': CityLocation(6.8, -58.2, -4.0),
+  'Paramaribo': CityLocation(5.9, -55.2, -3.0),
+  'Kingston': CityLocation(18.0, -76.8, -5.0),
+  'Panama City': CityLocation(9.0, -79.5, -5.0),
+
+  // ─── Africa (additional) ───
+  'Durban': CityLocation(-29.9, 31.0, 2.0),
+  'Port Louis': CityLocation(-20.2, 57.5, 4.0),
+  'Dar es Salaam': CityLocation(-6.8, 39.3, 3.0),
+  'Accra': CityLocation(5.6, -0.2, 0.0),
+  'Addis Ababa': CityLocation(9.0, 38.7, 3.0),
+  'Kampala': CityLocation(0.3, 32.6, 3.0),
+  'Mombasa': CityLocation(-4.1, 39.7, 3.0),
+
+  // ─── Pacific Islands ───
+  'Suva': CityLocation(-18.1, 178.4, 12.0),
+
+  // ─── Europe (additional) ───
+  'Leicester': CityLocation(52.6, -1.1, 0.0),
+  'Glasgow': CityLocation(55.9, -4.3, 0.0),
+  'Bucharest': CityLocation(44.4, 26.1, 2.0),
+  'Athens': CityLocation(37.9, 23.7, 2.0),
+  'Rome': CityLocation(41.9, 12.5, 1.0),
+  'Madrid': CityLocation(40.4, -3.7, 1.0),
+  'Budapest': CityLocation(47.5, 19.0, 1.0),
+  'Brussels': CityLocation(50.9, 4.4, 1.0),
+  'Sofia': CityLocation(42.7, 23.3, 2.0),
+  'Kyiv': CityLocation(50.4, 30.5, 2.0),
+  'Oslo': CityLocation(59.9, 10.8, 1.0),
+  'Copenhagen': CityLocation(55.7, 12.6, 1.0),
+
+  // ─── Canada (additional) ───
+  'Brampton': CityLocation(43.7, -79.8, -5.0),
+  'Edmonton': CityLocation(53.5, -113.5, -7.0),
+  'Winnipeg': CityLocation(49.9, -97.1, -6.0),
+  'Surrey': CityLocation(49.2, -122.8, -8.0),
+  'Mississauga': CityLocation(43.6, -79.7, -5.0),
+
+  // ─── USA (additional) ───
+  'Las Vegas': CityLocation(36.2, -115.2, -8.0),
+  'Salt Lake City': CityLocation(40.8, -111.9, -7.0),
+  'Nashville': CityLocation(36.2, -86.8, -6.0),
+  'Charlotte': CityLocation(35.2, -80.8, -5.0),
+
+  // ─── Middle East (additional) ───
+  'Abu Dhabi': CityLocation(24.5, 54.4, 4.0),
+  'Jeddah': CityLocation(21.5, 39.2, 3.0),
+  'Amman': CityLocation(31.9, 35.9, 2.0),
+
+  // ─── Central Asia ───
+  'Tashkent': CityLocation(41.3, 69.3, 5.0),
+  'Almaty': CityLocation(43.2, 76.9, 6.0),
+
+  // ─── SE Asia (additional) ───
+  'Hanoi': CityLocation(21.0, 105.9, 7.0),
+  'Yangon': CityLocation(16.9, 96.2, 6.5),
+  'Phnom Penh': CityLocation(11.6, 104.9, 7.0),
+  'Denpasar': CityLocation(-8.7, 115.2, 8.0),
+
+  // ─── Oceania (additional) ───
+  'Adelaide': CityLocation(-34.9, 138.6, 9.5),
+  'Canberra': CityLocation(-35.3, 149.1, 10.0),
+  'Wellington': CityLocation(-41.3, 174.8, 12.0),
+
+  // ─── South America (additional) ───
+  'Rio de Janeiro': CityLocation(-22.9, -43.2, -3.0),
+  'Medellín': CityLocation(6.2, -75.6, -5.0),
+  'Quito': CityLocation(-0.2, -78.5, -5.0),
+
   // India Tier 2
   'Agra': CityLocation(27.2, 78.0, 5.5),
   'Allahabad': CityLocation(25.4, 81.8, 5.5),

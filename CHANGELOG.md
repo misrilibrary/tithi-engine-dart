@@ -10,6 +10,12 @@
 - 157 supported cities with per-city sunrise corrections
 - 200-year accuracy (1900–2100), validated against Swiss Ephemeris
 
+## 1.0.2
+
+- Expand city coverage from 157 → 209 cities worldwide
+- New regions: Pakistan (3), Caribbean (5), Africa (7), Europe (12), Americas (12), Asia (4), Oceania (3)
+- All new cities verified 100% accurate against Swiss Ephemeris (1900–2100)
+
 ## 1.0.1
 
 - Export additional symbols: getPaksha, tithiInPaksha, calculateTithi, convertMonth
