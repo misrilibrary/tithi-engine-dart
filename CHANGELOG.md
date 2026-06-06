@@ -10,6 +10,11 @@
 - 157 supported cities with per-city sunrise corrections
 - 200-year accuracy (1900–2100), validated against Swiss Ephemeris
 
+## 1.0.6
+
+- Fix dart format for all generated files
+- CI green (actions/checkout@v5)
+
 ## 1.0.5
 
 - Fix LICENSE: use exact canonical Apache 2.0 text from apache.org
