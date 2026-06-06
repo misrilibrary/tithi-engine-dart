@@ -1,5 +1,3 @@
-/// Boundary corrections for rome (41.9°N, 12.5°E).
-
 const romeAmavasyaCorrections = <int, int>{
   34403: 34402,
   40870: 40869,

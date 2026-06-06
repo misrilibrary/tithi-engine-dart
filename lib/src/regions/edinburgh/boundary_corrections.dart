@@ -1,5 +1,3 @@
-/// Boundary corrections for edinburgh (55.9°N, -3.2°E).
-
 const edinburghAmavasyaCorrections = <int, int>{
   27050: 27049,
   52742: 52741,

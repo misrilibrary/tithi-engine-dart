@@ -153,8 +153,9 @@ DateTime _findTithiTransition(
     if (_tithiAt(lo) == targetTithi) return lo; // tithi spans entire window
     // Ensure hi is within the tithi
     hi = sunrise;
-    if (_tithiAt(hi) != targetTithi)
+    if (_tithiAt(hi) != targetTithi) {
       hi = sunrise.add(const Duration(hours: 12));
+    }
     if (_tithiAt(hi) != targetTithi) return sunrise; // fallback
     // Binary search
     while (hi.difference(lo).inMinutes > 1) {
@@ -169,12 +170,14 @@ DateTime _findTithiTransition(
   } else {
     // Find the moment the target tithi ends
     lo = sunrise;
-    if (_tithiAt(lo) != targetTithi)
+    if (_tithiAt(lo) != targetTithi) {
       lo = sunrise.subtract(const Duration(hours: 12));
+    }
     hi = sunrise.add(const Duration(hours: 36));
     // Ensure lo is within the tithi
-    if (_tithiAt(lo) != targetTithi)
+    if (_tithiAt(lo) != targetTithi) {
       return sunrise.add(const Duration(hours: 24)); // fallback
+    }
     // Binary search
     while (hi.difference(lo).inMinutes > 1) {
       final mid = lo.add(Duration(minutes: hi.difference(lo).inMinutes ~/ 2));

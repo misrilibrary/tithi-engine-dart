@@ -1,5 +1,3 @@
-/// Boundary corrections for thane (19.2°N, 73.0°E).
-
 const thaneAmavasyaCorrections = <int, int>{
   41993: 41992,
   53716: 53715,

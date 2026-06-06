@@ -1,5 +1,3 @@
-/// Boundary corrections for vadodara (22.3°N, 73.2°E).
-
 const vadodaraAmavasyaCorrections = <int, int>{
   6497: 6496,
   38567: 38566,

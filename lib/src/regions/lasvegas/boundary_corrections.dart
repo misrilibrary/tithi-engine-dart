@@ -1,5 +1,3 @@
-/// Boundary corrections for lasvegas (36.2°N, -115.2°E).
-
 const lasvegasAmavasyaCorrections = <int, int>{
   19903: 19902,
   30268: 30267,

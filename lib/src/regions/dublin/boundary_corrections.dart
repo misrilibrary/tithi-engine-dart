@@ -1,5 +1,3 @@
-/// Boundary corrections for dublin (53.3°N, -6.3°E).
-
 const dublinAmavasyaCorrections = <int, int>{
   19874: 19873,
   27050: 27049,

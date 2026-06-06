@@ -1,5 +1,3 @@
-/// Boundary corrections for raipur (21.3°N, 81.6°E).
-
 const raipurAmavasyaCorrections = <int, int>{
   61217: 61216,
   66946: 66945,

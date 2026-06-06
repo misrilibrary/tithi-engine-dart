@@ -1,5 +1,3 @@
-/// Boundary corrections for telaviv (32.1°N, 34.8°E).
-
 const telavivAmavasyaCorrections = <int, int>{
   38124: 38123,
   58914: 58913,

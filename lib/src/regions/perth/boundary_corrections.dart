@@ -1,5 +1,3 @@
-/// Boundary corrections for perth (-31.9°N, 115.9°E).
-
 const perthAmavasyaCorrections = <int, int>{
   9626: 9627,
   39040: 39039,

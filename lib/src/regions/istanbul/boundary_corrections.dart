@@ -1,5 +1,3 @@
-/// Boundary corrections for istanbul (41.0°N, 29.0°E).
-
 const istanbulAmavasyaCorrections = <int, int>{
   22974: 22975,
   40398: 40397,

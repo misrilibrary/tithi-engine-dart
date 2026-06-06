@@ -1,5 +1,3 @@
-/// Boundary corrections for riyadh (24.7°N, 46.7°E).
-
 const riyadhAmavasyaCorrections = <int, int>{
   52446: 52445,
   58028: 58027,

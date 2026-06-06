@@ -1,5 +1,3 @@
-/// Boundary corrections for minneapolis (44.9°N, -93.3°E).
-
 const minneapolisAmavasyaCorrections = <int, int>{
   49109: 49108,
   63284: 63283,

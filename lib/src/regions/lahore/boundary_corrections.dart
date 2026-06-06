@@ -1,5 +1,3 @@
-/// Boundary corrections for lahore (31.5°N, 74.3°E).
-
 const lahoreAmavasyaCorrections = <int, int>{
   28999: 28998,
   35230: 35229,

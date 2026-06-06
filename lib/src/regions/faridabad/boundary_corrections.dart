@@ -1,5 +1,3 @@
-/// Boundary corrections for faridabad (28.4°N, 77.3°E).
-
 const faridabadAmavasyaCorrections = <int, int>{
   54543: 54542,
 };

@@ -1,5 +1,3 @@
-/// Boundary corrections for stockholm (59.3°N, 18.1°E).
-
 const stockholmAmavasyaCorrections = <int, int>{
   59682: 59681,
   72704: 72703,

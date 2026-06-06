@@ -1,5 +1,3 @@
-/// Boundary corrections for visakhapatnam (17.7°N, 83.3°E).
-
 const visakhapatnamAmavasyaCorrections = <int, int>{
   23832: 23831,
   45714: 45713,

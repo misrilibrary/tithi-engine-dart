@@ -1,5 +1,3 @@
-/// Boundary corrections for georgetown (6.8°N, -58.2°E).
-
 const georgetownAmavasyaCorrections = <int, int>{
   37740: 37739,
   42937: 42936,

@@ -1,5 +1,3 @@
-/// Boundary corrections for phoenix (33.4°N, -112.1°E).
-
 const phoenixAmavasyaCorrections = <int, int>{
   52918: 52917,
 };

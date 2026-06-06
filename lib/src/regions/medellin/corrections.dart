@@ -1,5 +1,5 @@
-/// Tithi corrections for medellin (6.2°N, -75.6°E) using exact sunrise.
-/// 56 corrections for 1900-2100.
+// Tithi corrections for medellin (6.2°N, -75.6°E) using exact sunrise.
+// 56 corrections for 1900-2100.
 
 const medellinTithiCorrections = <int, int>{
   871: 16, // 1902-05-22

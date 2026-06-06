@@ -1,5 +1,3 @@
-/// Boundary corrections for budapest (47.5°N, 19.0°E).
-
 const budapestAmavasyaCorrections = <int, int>{
   13939: 13938,
   25278: 25277,

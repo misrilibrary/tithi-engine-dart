@@ -1,5 +1,3 @@
-/// Boundary corrections for santiago (-33.4°N, -70.6°E).
-
 const santiagoAmavasyaCorrections = <int, int>{
   15769: 15768,
   35141: 35140,

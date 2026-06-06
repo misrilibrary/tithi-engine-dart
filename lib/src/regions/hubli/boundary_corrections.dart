@@ -1,5 +1,3 @@
-/// Boundary corrections for hubli (15.4°N, 75.1°E).
-
 const hubliAmavasyaCorrections = <int, int>{
   7589: 7588,
   57703: 57702,

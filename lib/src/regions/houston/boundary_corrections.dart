@@ -1,5 +1,3 @@
-/// Boundary corrections for houston (29.8°N, -95.4°E).
-
 const houstonAmavasyaCorrections = <int, int>{
   46127: 46126,
 };

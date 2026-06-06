@@ -1,6 +1,5 @@
-/// Boundary corrections for paris (48.9°N, 2.3°E).
-
-const parisAmavasyaCorrections = <int, int>{};
+const parisAmavasyaCorrections = <int, int>{
+};
 const parisPurnimaCorrections = <int, int>{
   31199: 31198,
   40088: 40087,

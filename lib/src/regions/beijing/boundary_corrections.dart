@@ -1,5 +1,3 @@
-/// Boundary corrections for beijing (39.9°N, 116.4°E).
-
 const beijingAmavasyaCorrections = <int, int>{
   15799: 15798,
   46009: 46008,

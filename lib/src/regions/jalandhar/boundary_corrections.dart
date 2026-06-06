@@ -1,5 +1,3 @@
-/// Boundary corrections for jalandhar (31.3°N, 75.6°E).
-
 const jalandharAmavasyaCorrections = <int, int>{
   35496: 35495,
   44296: 44295,

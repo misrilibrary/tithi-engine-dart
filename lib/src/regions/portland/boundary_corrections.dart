@@ -1,5 +1,3 @@
-/// Boundary corrections for portland (45.5°N, -122.7°E).
-
 const portlandAmavasyaCorrections = <int, int>{
   6378: 6377,
   58647: 58646,

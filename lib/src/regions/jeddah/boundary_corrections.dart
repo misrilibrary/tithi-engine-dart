@@ -1,5 +1,3 @@
-/// Boundary corrections for jeddah (21.5°N, 39.2°E).
-
 const jeddahAmavasyaCorrections = <int, int>{
   34226: 34225,
   43292: 43291,

@@ -1,5 +1,3 @@
-/// Boundary corrections for madurai (9.9°N, 78.1°E).
-
 const maduraiAmavasyaCorrections = <int, int>{
   31391: 31390,
   41550: 41549,

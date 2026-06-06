@@ -1,5 +1,3 @@
-/// Boundary corrections for winnipeg (49.9°N, -97.1°E).
-
 const winnipegAmavasyaCorrections = <int, int>{
   21055: 21054,
   25839: 25838,

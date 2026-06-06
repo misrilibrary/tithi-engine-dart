@@ -1,4 +1,4 @@
-/// Boundary corrections for sopaulo (-23.5°N, -46.6°E).
+// Boundary corrections for sopaulo (-23.5°N, -46.6°E).
 
 const sopauloAmavasyaCorrections = <int, int>{};
 const sopauloPurnimaCorrections = <int, int>{

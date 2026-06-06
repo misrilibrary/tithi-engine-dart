@@ -1,5 +1,3 @@
-/// Boundary corrections for muscat (23.6°N, 58.5°E).
-
 const muscatAmavasyaCorrections = <int, int>{
   18900: 18899,
   48371: 48370,

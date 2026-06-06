@@ -1,5 +1,3 @@
-/// Boundary corrections for kota (25.2°N, 75.9°E).
-
 const kotaAmavasyaCorrections = <int, int>{
   8800: 8799,
 };

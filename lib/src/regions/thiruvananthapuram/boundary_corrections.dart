@@ -1,5 +1,3 @@
-/// Boundary corrections for thiruvananthapuram (8.5°N, 76.9°E).
-
 const thiruvananthapuramAmavasyaCorrections = <int, int>{
   6851: 6850,
   19402: 19401,

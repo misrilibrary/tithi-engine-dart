@@ -1,5 +1,3 @@
-/// Boundary corrections for barcelona (41.4°N, 2.2°E).
-
 const barcelonaAmavasyaCorrections = <int, int>{
   21498: 21497,
 };

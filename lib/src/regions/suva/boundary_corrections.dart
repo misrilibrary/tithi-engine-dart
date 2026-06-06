@@ -1,5 +1,3 @@
-/// Boundary corrections for suva (-18.1°N, 178.4°E).
-
 const suvaAmavasyaCorrections = <int, int>{
   71110: 71109,
 };

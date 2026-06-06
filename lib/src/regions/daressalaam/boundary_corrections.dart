@@ -1,5 +1,3 @@
-/// Boundary corrections for daressalaam (-6.8°N, 39.3°E).
-
 const daressalaamAmavasyaCorrections = <int, int>{
   26902: 26901,
   30948: 30947,

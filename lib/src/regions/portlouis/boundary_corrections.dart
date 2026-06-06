@@ -1,5 +1,3 @@
-/// Boundary corrections for portlouis (-20.2°N, 57.5°E).
-
 const portlouisAmavasyaCorrections = <int, int>{
   32395: 32394,
   70135: 70134,

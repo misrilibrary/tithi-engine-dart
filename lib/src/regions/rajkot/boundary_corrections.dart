@@ -1,6 +1,5 @@
-/// Boundary corrections for rajkot (22.3°N, 70.8°E).
-
-const rajkotAmavasyaCorrections = <int, int>{};
+const rajkotAmavasyaCorrections = <int, int>{
+};
 const rajkotPurnimaCorrections = <int, int>{
   30225: 30224,
   58515: 58514,

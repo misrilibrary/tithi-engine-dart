@@ -1,5 +1,3 @@
-/// Boundary corrections for yangon (16.9°N, 96.2°E).
-
 const yangonAmavasyaCorrections = <int, int>{
   67389: 67388,
 };

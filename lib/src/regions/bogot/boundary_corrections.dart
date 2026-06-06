@@ -1,4 +1,4 @@
-/// Boundary corrections for bogot (4.7°N, -74.1°E).
+// Boundary corrections for bogot (4.7°N, -74.1°E).
 
 const bogotAmavasyaCorrections = <int, int>{};
 const bogotPurnimaCorrections = <int, int>{

@@ -1,5 +1,3 @@
-/// Boundary corrections for ottawa (45.4°N, -75.7°E).
-
 const ottawaAmavasyaCorrections = <int, int>{
   32306: 32305,
   71759: 71758,

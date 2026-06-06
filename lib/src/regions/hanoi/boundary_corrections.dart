@@ -1,5 +1,3 @@
-/// Boundary corrections for hanoi (21.0°N, 105.9°E).
-
 const hanoiAmavasyaCorrections = <int, int>{
   49376: 49375,
   62871: 62870,

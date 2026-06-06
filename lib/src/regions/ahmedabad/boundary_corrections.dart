@@ -1,5 +1,3 @@
-/// Boundary corrections for ahmedabad (23.0°N, 72.6°E).
-
 const ahmedabadAmavasyaCorrections = <int, int>{
   33222: 33221,
   59386: 59385,

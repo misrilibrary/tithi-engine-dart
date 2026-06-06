@@ -1,5 +1,3 @@
-/// Boundary corrections for abudhabi (24.5°N, 54.4°E).
-
 const abudhabiAmavasyaCorrections = <int, int>{
   52505: 52504,
 };

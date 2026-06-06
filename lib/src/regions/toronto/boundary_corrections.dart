@@ -1,5 +1,3 @@
-/// Boundary corrections for toronto (43.7°N, -79.4°E).
-
 const torontoAmavasyaCorrections = <int, int>{
   21705: 21704,
   32365: 32364,

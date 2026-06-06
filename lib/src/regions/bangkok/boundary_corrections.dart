@@ -1,5 +1,3 @@
-/// Boundary corrections for bangkok (13.8°N, 100.5°E).
-
 const bangkokAmavasyaCorrections = <int, int>{
   45271: 45270,
   62517: 62516,

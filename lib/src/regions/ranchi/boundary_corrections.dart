@@ -1,5 +1,3 @@
-/// Boundary corrections for ranchi (23.3°N, 85.3°E).
-
 const ranchiAmavasyaCorrections = <int, int>{
   31450: 31449,
   66592: 66591,

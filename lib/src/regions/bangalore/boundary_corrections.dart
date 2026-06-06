@@ -1,5 +1,3 @@
-/// Boundary corrections for bangalore (12.9°N, 77.6°E).
-
 const bangaloreAmavasyaCorrections = <int, int>{
   65027: 65026,
 };

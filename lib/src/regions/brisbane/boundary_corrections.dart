@@ -1,5 +1,3 @@
-/// Boundary corrections for brisbane (-27.5°N, 153.0°E).
-
 const brisbaneAmavasyaCorrections = <int, int>{
   32779: 32778,
   51059: 51058,

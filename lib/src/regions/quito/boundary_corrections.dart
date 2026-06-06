@@ -1,5 +1,3 @@
-/// Boundary corrections for quito (-0.2°N, -78.5°E).
-
 const quitoAmavasyaCorrections = <int, int>{
   36440: 36439,
   52859: 52858,

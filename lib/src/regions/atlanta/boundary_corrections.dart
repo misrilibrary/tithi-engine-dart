@@ -1,5 +1,3 @@
-/// Boundary corrections for atlanta (33.7°N, -84.4°E).
-
 const atlantaAmavasyaCorrections = <int, int>{
   30652: 30651,
   49109: 49108,

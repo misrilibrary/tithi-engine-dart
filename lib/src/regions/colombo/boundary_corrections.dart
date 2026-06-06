@@ -1,5 +1,3 @@
-/// Boundary corrections for colombo (6.9°N, 79.9°E).
-
 const colomboAmavasyaCorrections = <int, int>{
   44296: 44295,
   54868: 54867,

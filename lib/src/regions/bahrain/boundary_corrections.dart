@@ -1,5 +1,3 @@
-/// Boundary corrections for bahrain (26.2°N, 50.6°E).
-
 const bahrainAmavasyaCorrections = <int, int>{
   1890: 1889,
   39158: 39157,

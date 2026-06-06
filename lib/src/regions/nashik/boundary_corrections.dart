@@ -1,5 +1,3 @@
-/// Boundary corrections for nashik (20.0°N, 73.8°E).
-
 const nashikAmavasyaCorrections = <int, int>{
   59386: 59385,
 };

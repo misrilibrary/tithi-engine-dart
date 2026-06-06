@@ -20,7 +20,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^1.0.2
+  tithi_engine: ^1.0.4
 ```
 
 ## Quick Start
@@ -59,7 +59,7 @@ print('Janmashtami 2026 Seattle: $date');
 
 | Metric | Value |
 |--------|-------|
-| Tithi vs Swiss Ephemeris | 0 mismatches / 73,049 days (1900–2100) |
+| Tithi vs Swiss Ephemeris | 0 mismatches (209 cities × 73,049 days, 1900–2100) |
 | Month boundaries (Purnimant) | 100% (200 years, verified cities) |
 | Festival dates vs Drik Panchang | 22/22 (2025–2026) |
 | Test coverage | 467 tests |

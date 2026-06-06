@@ -1,5 +1,3 @@
-/// Boundary corrections for ludhiana (30.9°N, 75.9°E).
-
 const ludhianaAmavasyaCorrections = <int, int>{
   54543: 54542,
   72202: 72201,

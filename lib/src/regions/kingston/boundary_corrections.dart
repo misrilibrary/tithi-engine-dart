@@ -1,5 +1,3 @@
-/// Boundary corrections for kingston (18.0°N, -76.8°E).
-
 const kingstonAmavasyaCorrections = <int, int>{
   3484: 3483,
   33546: 33545,

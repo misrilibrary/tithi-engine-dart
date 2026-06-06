@@ -1,5 +1,3 @@
-/// Boundary corrections for almaty (43.2°N, 76.9°E).
-
 const almatyAmavasyaCorrections = <int, int>{
   35496: 35495,
   59120: 59119,

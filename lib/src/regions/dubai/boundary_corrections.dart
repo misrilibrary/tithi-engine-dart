@@ -1,5 +1,3 @@
-/// Boundary corrections for dubai (25.2°N, 55.3°E).
-
 const dubaiAmavasyaCorrections = <int, int>{
   49552: 49551,
   55252: 55251,

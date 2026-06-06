@@ -1,5 +1,5 @@
-/// Tithi corrections for sopaulo (-23.5°N, -46.6°E) using exact sunrise.
-/// 52 corrections for 1900-2100.
+// Tithi corrections for sopaulo (-23.5°N, -46.6°E) using exact sunrise.
+// 52 corrections for 1900-2100.
 
 const sopauloTithiCorrections = <int, int>{
   7509: 10, // 1920-07-24

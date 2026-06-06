@@ -1,5 +1,3 @@
-/// Boundary corrections for amsterdam (52.4°N, 4.9°E).
-
 const amsterdamAmavasyaCorrections = <int, int>{
   15474: 15473,
   49464: 49463,

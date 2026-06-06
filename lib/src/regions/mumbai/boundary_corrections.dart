@@ -1,5 +1,3 @@
-/// Boundary corrections for mumbai (19.1°N, 72.9°E).
-
 const mumbaiAmavasyaCorrections = <int, int>{
   21735: 21734,
   53716: 53715,

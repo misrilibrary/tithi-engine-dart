@@ -1,5 +1,3 @@
-/// Boundary corrections for vienna (48.2°N, 16.4°E).
-
 const viennaAmavasyaCorrections = <int, int>{
   15238: 15237,
   54159: 54158,

@@ -1,5 +1,3 @@
-/// Boundary corrections for capetown (-33.9°N, 18.4°E).
-
 const capetownAmavasyaCorrections = <int, int>{
   8298: 8297,
   57496: 57495,

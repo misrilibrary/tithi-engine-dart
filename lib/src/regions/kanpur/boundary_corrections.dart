@@ -1,5 +1,3 @@
-/// Boundary corrections for kanpur (26.4°N, 80.3°E).
-
 const kanpurAmavasyaCorrections = <int, int>{
   31244: 31243,
   43942: 43941,

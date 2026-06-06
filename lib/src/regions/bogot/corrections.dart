@@ -1,5 +1,5 @@
-/// Tithi corrections for bogot (4.7°N, -74.1°E) using exact sunrise.
-/// 49 corrections for 1900-2100.
+// Tithi corrections for bogot (4.7°N, -74.1°E) using exact sunrise.
+// 49 corrections for 1900-2100.
 
 const bogotTithiCorrections = <int, int>{
   7397: 16, // 1920-04-03

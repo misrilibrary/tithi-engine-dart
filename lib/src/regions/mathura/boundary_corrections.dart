@@ -1,5 +1,3 @@
-/// Boundary corrections for mathura (27.5°N, 77.7°E).
-
 const mathuraAmavasyaCorrections = <int, int>{
   54543: 54542,
 };

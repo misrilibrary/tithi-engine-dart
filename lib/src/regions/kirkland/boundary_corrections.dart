@@ -1,5 +1,3 @@
-/// Boundary corrections for kirkland (47.7°N, -122.2°E).
-
 const kirklandAmavasyaCorrections = <int, int>{
   1683: 1682,
   24953: 24952,

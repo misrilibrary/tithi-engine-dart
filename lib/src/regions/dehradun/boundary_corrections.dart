@@ -1,5 +1,3 @@
-/// Boundary corrections for dehradun (30.3°N, 78.0°E).
-
 const dehradunAmavasyaCorrections = <int, int>{
   71021: 71020,
 };

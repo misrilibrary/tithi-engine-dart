@@ -1,5 +1,3 @@
-/// Boundary corrections for dallas (32.8°N, -96.8°E).
-
 const dallasAmavasyaCorrections = <int, int>{
   54011: 54010,
 };

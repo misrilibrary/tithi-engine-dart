@@ -1,5 +1,3 @@
-/// Boundary corrections for glasgow (55.9°N, -4.3°E).
-
 const glasgowAmavasyaCorrections = <int, int>{
   26430: 26429,
   40545: 40544,

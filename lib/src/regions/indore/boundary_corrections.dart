@@ -1,5 +1,3 @@
-/// Boundary corrections for indore (22.7°N, 75.9°E).
-
 const indoreAmavasyaCorrections = <int, int>{
   70135: 70134,
 };

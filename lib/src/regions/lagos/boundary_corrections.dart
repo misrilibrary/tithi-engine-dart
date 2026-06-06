@@ -1,5 +1,3 @@
-/// Boundary corrections for lagos (6.5°N, 3.4°E).
-
 const lagosAmavasyaCorrections = <int, int>{
   325: 324,
   25869: 25868,

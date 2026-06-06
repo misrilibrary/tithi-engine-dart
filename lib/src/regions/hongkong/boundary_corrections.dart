@@ -1,5 +1,3 @@
-/// Boundary corrections for hongkong (22.3°N, 114.2°E).
-
 const hongkongAmavasyaCorrections = <int, int>{
   11872: 11871,
   34079: 34078,

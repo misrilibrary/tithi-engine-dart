@@ -1,5 +1,3 @@
-/// Boundary corrections for dhaka (23.8°N, 90.4°E).
-
 const dhakaAmavasyaCorrections = <int, int>{
   36973: 36972,
   54100: 54099,

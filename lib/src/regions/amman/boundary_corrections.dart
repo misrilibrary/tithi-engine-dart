@@ -1,5 +1,3 @@
-/// Boundary corrections for amman (31.9°N, 35.9°E).
-
 const ammanAmavasyaCorrections = <int, int>{
   9744: 9745,
   42908: 42907,

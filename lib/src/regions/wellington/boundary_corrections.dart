@@ -1,5 +1,3 @@
-/// Boundary corrections for wellington (-41.3°N, 174.8°E).
-
 const wellingtonAmavasyaCorrections = <int, int>{
 };
 const wellingtonPurnimaCorrections = <int, int>{

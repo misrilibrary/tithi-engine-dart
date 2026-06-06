@@ -1,5 +1,3 @@
-/// Boundary corrections for milan (45.5°N, 9.2°E).
-
 const milanAmavasyaCorrections = <int, int>{
   28615: 28614,
   52742: 52741,

@@ -1,5 +1,3 @@
-/// Boundary corrections for denver (39.7°N, -105.0°E).
-
 const denverAmavasyaCorrections = <int, int>{
   61335: 61334,
 };

@@ -1,5 +1,3 @@
-/// Boundary corrections for coimbatore (11.0°N, 76.9°E).
-
 const coimbatoreAmavasyaCorrections = <int, int>{
   56108: 56107,
   59386: 59385,

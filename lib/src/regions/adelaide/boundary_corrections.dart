@@ -1,5 +1,3 @@
-/// Boundary corrections for adelaide (-34.9°N, 138.6°E).
-
 const adelaideAmavasyaCorrections = <int, int>{
   8653: 8652,
   14145: 14144,

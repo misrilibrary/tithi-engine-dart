@@ -1,5 +1,3 @@
-/// Boundary corrections for kualalumpur (3.1°N, 101.7°E).
-
 const kualalumpurAmavasyaCorrections = <int, int>{
   47722: 47721,
 };

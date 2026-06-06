@@ -1,5 +1,3 @@
-/// Boundary corrections for portofspain (10.7°N, -61.5°E).
-
 const portofspainAmavasyaCorrections = <int, int>{
   47751: 47750,
 };

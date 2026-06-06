@@ -1,5 +1,3 @@
-/// Boundary corrections for auckland (-36.8°N, 174.8°E).
-
 const aucklandAmavasyaCorrections = <int, int>{
   19136: 19135,
   34581: 34580,

@@ -1,5 +1,3 @@
-/// Boundary corrections for warsaw (52.2°N, 21.0°E).
-
 const warsawAmavasyaCorrections = <int, int>{
   61896: 61895,
   67743: 67742,

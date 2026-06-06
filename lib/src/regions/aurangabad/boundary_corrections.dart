@@ -1,5 +1,3 @@
-/// Boundary corrections for aurangabad (19.9°N, 75.3°E).
-
 const aurangabadAmavasyaCorrections = <int, int>{
   28261: 28260,
 };

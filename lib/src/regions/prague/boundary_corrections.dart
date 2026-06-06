@@ -1,5 +1,3 @@
-/// Boundary corrections for prague (50.1°N, 14.4°E).
-
 const pragueAmavasyaCorrections = <int, int>{
   59298: 59297,
   70283: 70282,

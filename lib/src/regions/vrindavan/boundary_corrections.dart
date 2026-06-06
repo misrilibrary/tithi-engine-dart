@@ -1,5 +1,3 @@
-/// Boundary corrections for vrindavan (27.6°N, 77.7°E).
-
 const vrindavanAmavasyaCorrections = <int, int>{
   54543: 54542,
 };
