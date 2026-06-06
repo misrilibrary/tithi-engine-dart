@@ -1,5 +1,4 @@
-const rajkotAmavasyaCorrections = <int, int>{
-};
+const rajkotAmavasyaCorrections = <int, int>{};
 const rajkotPurnimaCorrections = <int, int>{
   30225: 30224,
   58515: 58514,

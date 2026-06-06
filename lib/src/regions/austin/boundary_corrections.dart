@@ -1,5 +1,4 @@
-const austinAmavasyaCorrections = <int, int>{
-};
+const austinAmavasyaCorrections = <int, int>{};
 const austinPurnimaCorrections = <int, int>{
   14514: 14513,
   34359: 34358,

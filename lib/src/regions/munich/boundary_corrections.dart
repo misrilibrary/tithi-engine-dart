@@ -1,5 +1,4 @@
-const munichAmavasyaCorrections = <int, int>{
-};
+const munichAmavasyaCorrections = <int, int>{};
 const munichPurnimaCorrections = <int, int>{
   39763: 39762,
   58869: 58868,

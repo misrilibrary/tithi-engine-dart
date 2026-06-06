@@ -1,5 +1,4 @@
-const nairobiAmavasyaCorrections = <int, int>{
-};
+const nairobiAmavasyaCorrections = <int, int>{};
 const nairobiPurnimaCorrections = <int, int>{
   39940: 39939,
   68969: 68968,

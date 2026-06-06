@@ -1,5 +1,4 @@
-const kolkataAmavasyaCorrections = <int, int>{
-};
+const kolkataAmavasyaCorrections = <int, int>{};
 const kolkataPurnimaCorrections = <int, int>{
   40472: 40471,
   44458: 44457,

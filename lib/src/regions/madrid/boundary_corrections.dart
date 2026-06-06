@@ -1,5 +1,4 @@
-const madridAmavasyaCorrections = <int, int>{
-};
+const madridAmavasyaCorrections = <int, int>{};
 const madridPurnimaCorrections = <int, int>{
   18265: 18264,
   36219: 36218,

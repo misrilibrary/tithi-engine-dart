@@ -4,8 +4,7 @@ const singaporeAmavasyaCorrections = <int, int>{
   65411: 65410,
   66119: 66118,
 };
-const singaporePurnimaCorrections = <int, int>{
-};
+const singaporePurnimaCorrections = <int, int>{};
 const singaporeSankrantiCorrections = <int, int>{
   11487: 11488,
   37515: 37514,

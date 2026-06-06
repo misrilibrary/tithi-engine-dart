@@ -3,8 +3,7 @@ const shirdiAmavasyaCorrections = <int, int>{
   56108: 56107,
   70135: 70134,
 };
-const shirdiPurnimaCorrections = <int, int>{
-};
+const shirdiPurnimaCorrections = <int, int>{};
 const shirdiSankrantiCorrections = <int, int>{
   10634: 10635,
   13407: 13408,

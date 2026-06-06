@@ -1,5 +1,4 @@
-const ujjainAmavasyaCorrections = <int, int>{
-};
+const ujjainAmavasyaCorrections = <int, int>{};
 const ujjainPurnimaCorrections = <int, int>{
   66016: 66015,
 };

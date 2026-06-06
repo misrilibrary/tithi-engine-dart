@@ -3,8 +3,7 @@ const glasgowAmavasyaCorrections = <int, int>{
   40545: 40544,
   69456: 69455,
 };
-const glasgowPurnimaCorrections = <int, int>{
-};
+const glasgowPurnimaCorrections = <int, int>{};
 const glasgowSankrantiCorrections = <int, int>{
   25095: 25096,
   53734: 53735,

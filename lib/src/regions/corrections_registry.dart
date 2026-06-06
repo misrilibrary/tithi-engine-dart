@@ -821,7 +821,8 @@ final _trans = <String, Map<int, int>>{
   'Tashkent': tashkent.tashkentTransitionMinutesMap,
   'Tel Aviv': telaviv.telavivTransitionMinutesMap,
   'Thane': thane.thaneTransitionMinutesMap,
-  'Thiruvananthapuram': thiruvananthapuram.thiruvananthapuramTransitionMinutesMap,
+  'Thiruvananthapuram':
+      thiruvananthapuram.thiruvananthapuramTransitionMinutesMap,
   'Tiruchirappalli': tiruchirappalli.tiruchirappalliTransitionMinutesMap,
   'Tirupati': tirupati.tirupatiTransitionMinutesMap,
   'Tokyo': tokyo.tokyoTransitionMinutesMap,
@@ -1034,7 +1035,8 @@ final _amav = <String, Map<int, int>>{
   'Tashkent': tashkent_b.tashkentAmavasyaCorrections,
   'Tel Aviv': telaviv_b.telavivAmavasyaCorrections,
   'Thane': thane_b.thaneAmavasyaCorrections,
-  'Thiruvananthapuram': thiruvananthapuram_b.thiruvananthapuramAmavasyaCorrections,
+  'Thiruvananthapuram':
+      thiruvananthapuram_b.thiruvananthapuramAmavasyaCorrections,
   'Tiruchirappalli': tiruchirappalli_b.tiruchirappalliAmavasyaCorrections,
   'Tirupati': tirupati_b.tirupatiAmavasyaCorrections,
   'Tokyo': tokyo_b.tokyoAmavasyaCorrections,
@@ -1247,7 +1249,8 @@ final _purn = <String, Map<int, int>>{
   'Tashkent': tashkent_b.tashkentPurnimaCorrections,
   'Tel Aviv': telaviv_b.telavivPurnimaCorrections,
   'Thane': thane_b.thanePurnimaCorrections,
-  'Thiruvananthapuram': thiruvananthapuram_b.thiruvananthapuramPurnimaCorrections,
+  'Thiruvananthapuram':
+      thiruvananthapuram_b.thiruvananthapuramPurnimaCorrections,
   'Tiruchirappalli': tiruchirappalli_b.tiruchirappalliPurnimaCorrections,
   'Tirupati': tirupati_b.tirupatiPurnimaCorrections,
   'Tokyo': tokyo_b.tokyoPurnimaCorrections,
@@ -1460,7 +1463,8 @@ final _sank = <String, Map<int, int>>{
   'Tashkent': tashkent_b.tashkentSankrantiCorrections,
   'Tel Aviv': telaviv_b.telavivSankrantiCorrections,
   'Thane': thane_b.thaneSankrantiCorrections,
-  'Thiruvananthapuram': thiruvananthapuram_b.thiruvananthapuramSankrantiCorrections,
+  'Thiruvananthapuram':
+      thiruvananthapuram_b.thiruvananthapuramSankrantiCorrections,
   'Tiruchirappalli': tiruchirappalli_b.tiruchirappalliSankrantiCorrections,
   'Tirupati': tirupati_b.tirupatiSankrantiCorrections,
   'Tokyo': tokyo_b.tokyoSankrantiCorrections,

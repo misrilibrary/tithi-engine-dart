@@ -1,5 +1,4 @@
-const calgaryAmavasyaCorrections = <int, int>{
-};
+const calgaryAmavasyaCorrections = <int, int>{};
 const calgaryPurnimaCorrections = <int, int>{
   36130: 36129,
 };

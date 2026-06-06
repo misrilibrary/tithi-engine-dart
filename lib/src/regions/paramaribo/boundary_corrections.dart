@@ -1,5 +1,4 @@
-const paramariboAmavasyaCorrections = <int, int>{
-};
+const paramariboAmavasyaCorrections = <int, int>{};
 const paramariboPurnimaCorrections = <int, int>{
   26651: 26650,
   48474: 48473,

@@ -1,5 +1,4 @@
-const ghaziabadAmavasyaCorrections = <int, int>{
-};
+const ghaziabadAmavasyaCorrections = <int, int>{};
 const ghaziabadPurnimaCorrections = <int, int>{
   49892: 49891,
 };

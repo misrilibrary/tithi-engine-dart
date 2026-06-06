@@ -1,5 +1,4 @@
-const shanghaiAmavasyaCorrections = <int, int>{
-};
+const shanghaiAmavasyaCorrections = <int, int>{};
 const shanghaiPurnimaCorrections = <int, int>{
   3587: 3588,
   31938: 31937,
