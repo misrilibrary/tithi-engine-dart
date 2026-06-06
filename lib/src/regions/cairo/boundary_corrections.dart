@@ -1,5 +1,3 @@
-/// Boundary corrections for cairo (30.0°N, 31.2°E).
-
 const cairoAmavasyaCorrections = <int, int>{
   35378: 35377,
   70283: 70282,

@@ -1,5 +1,3 @@
-/// Boundary corrections for athens (37.9°N, 23.7°E).
-
 const athensAmavasyaCorrections = <int, int>{
   8505: 8504,
   49080: 49079,

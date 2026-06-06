@@ -1,5 +1,3 @@
-/// Boundary corrections for madrid (40.4°N, -3.7°E).
-
 const madridAmavasyaCorrections = <int, int>{
 };
 const madridPurnimaCorrections = <int, int>{

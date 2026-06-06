@@ -1,5 +1,3 @@
-/// Boundary corrections for tiruchirappalli (10.8°N, 78.7°E).
-
 const tiruchirappalliAmavasyaCorrections = <int, int>{
   72202: 72201,
 };

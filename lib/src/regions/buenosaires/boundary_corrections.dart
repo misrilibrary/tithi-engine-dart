@@ -1,5 +1,3 @@
-/// Boundary corrections for buenosaires (-34.6°N, -58.4°E).
-
 const buenosairesAmavasyaCorrections = <int, int>{
   25042: 25041,
   42553: 42552,

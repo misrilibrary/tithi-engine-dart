@@ -1,5 +1,3 @@
-/// Boundary corrections for orlando (28.5°N, -81.4°E).
-
 const orlandoAmavasyaCorrections = <int, int>{
   26371: 26370,
   46068: 46067,

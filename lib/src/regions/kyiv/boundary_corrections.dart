@@ -1,5 +1,3 @@
-/// Boundary corrections for kyiv (50.4°N, 30.5°E).
-
 const kyivAmavasyaCorrections = <int, int>{
   46274: 46273,
 };

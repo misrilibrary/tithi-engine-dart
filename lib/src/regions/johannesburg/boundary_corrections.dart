@@ -1,5 +1,3 @@
-/// Boundary corrections for johannesburg (-26.2°N, 28.0°E).
-
 const johannesburgAmavasyaCorrections = <int, int>{
   32749: 32748,
   32986: 32985,

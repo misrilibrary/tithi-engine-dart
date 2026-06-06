@@ -1,5 +1,3 @@
-/// Boundary corrections for manchester (53.5°N, -2.2°E).
-
 const manchesterAmavasyaCorrections = <int, int>{
   41018: 41017,
   47633: 47632,

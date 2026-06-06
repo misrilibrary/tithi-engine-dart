@@ -1,5 +1,3 @@
-/// Boundary corrections for accra (5.6°N, -0.2°E).
-
 const accraAmavasyaCorrections = <int, int>{
   47987: 47986,
 };

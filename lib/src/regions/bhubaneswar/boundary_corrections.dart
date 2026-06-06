@@ -1,5 +1,3 @@
-/// Boundary corrections for bhubaneswar (20.3°N, 85.8°E).
-
 const bhubaneswarAmavasyaCorrections = <int, int>{
   66592: 66591,
 };

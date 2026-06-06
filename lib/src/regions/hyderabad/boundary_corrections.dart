@@ -1,7 +1,7 @@
-/// Boundary corrections for hyderabad (17.4°N, 78.5°E).
-
-const hyderabadAmavasyaCorrections = <int, int>{};
-const hyderabadPurnimaCorrections = <int, int>{};
+const hyderabadAmavasyaCorrections = <int, int>{
+};
+const hyderabadPurnimaCorrections = <int, int>{
+};
 const hyderabadSankrantiCorrections = <int, int>{
   164: 165,
   2263: 2264,

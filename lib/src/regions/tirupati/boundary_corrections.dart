@@ -1,5 +1,3 @@
-/// Boundary corrections for tirupati (13.6°N, 79.4°E).
-
 const tirupatiAmavasyaCorrections = <int, int>{
   27729: 27728,
   50763: 50762,

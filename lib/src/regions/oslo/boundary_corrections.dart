@@ -1,5 +1,3 @@
-/// Boundary corrections for oslo (59.9°N, 10.8°E).
-
 const osloAmavasyaCorrections = <int, int>{
   11045: 11044,
   11753: 11752,

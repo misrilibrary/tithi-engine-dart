@@ -1,5 +1,3 @@
-/// Boundary corrections for sofia (42.7°N, 23.3°E).
-
 const sofiaAmavasyaCorrections = <int, int>{
   41904: 41903,
   47279: 47278,

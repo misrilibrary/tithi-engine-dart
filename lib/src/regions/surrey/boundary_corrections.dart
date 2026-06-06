@@ -1,5 +1,3 @@
-/// Boundary corrections for surrey (49.2°N, -122.8°E).
-
 const surreyAmavasyaCorrections = <int, int>{
   20199: 20198,
   42790: 42789,

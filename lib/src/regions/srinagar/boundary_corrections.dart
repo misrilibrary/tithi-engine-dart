@@ -1,5 +1,3 @@
-/// Boundary corrections for srinagar (34.1°N, 74.8°E).
-
 const srinagarAmavasyaCorrections = <int, int>{
   44296: 44295,
   54543: 54542,

@@ -1,5 +1,3 @@
-/// Boundary corrections for taipei (25.0°N, 121.5°E).
-
 const taipeiAmavasyaCorrections = <int, int>{
   40959: 40958,
   67980: 67979,

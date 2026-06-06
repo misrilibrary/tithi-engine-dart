@@ -1,5 +1,3 @@
-/// Boundary corrections for paramaribo (5.9°N, -55.2°E).
-
 const paramariboAmavasyaCorrections = <int, int>{
 };
 const paramariboPurnimaCorrections = <int, int>{

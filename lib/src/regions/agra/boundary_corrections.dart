@@ -1,5 +1,3 @@
-/// Boundary corrections for agra (27.2°N, 78.0°E).
-
 const agraAmavasyaCorrections = <int, int>{
   58677: 58676,
   60331: 60330,

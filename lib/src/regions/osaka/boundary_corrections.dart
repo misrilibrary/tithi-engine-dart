@@ -1,5 +1,3 @@
-/// Boundary corrections for osaka (34.7°N, 135.5°E).
-
 const osakaAmavasyaCorrections = <int, int>{
   43263: 43262,
   47574: 47573,

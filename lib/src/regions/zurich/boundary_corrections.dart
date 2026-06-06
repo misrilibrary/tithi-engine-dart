@@ -1,5 +1,3 @@
-/// Boundary corrections for zurich (47.4°N, 8.5°E).
-
 const zurichAmavasyaCorrections = <int, int>{
   3572: 3573,
   56020: 56019,

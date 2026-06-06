@@ -1,5 +1,3 @@
-/// Boundary corrections for chennai (13.1°N, 80.3°E).
-
 const chennaiAmavasyaCorrections = <int, int>{
   54868: 54867,
 };

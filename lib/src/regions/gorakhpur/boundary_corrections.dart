@@ -1,5 +1,3 @@
-/// Boundary corrections for gorakhpur (26.8°N, 83.4°E).
-
 const gorakhpurAmavasyaCorrections = <int, int>{
   17217: 17216,
 };

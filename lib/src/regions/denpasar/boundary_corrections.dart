@@ -1,5 +1,3 @@
-/// Boundary corrections for denpasar (-8.7°N, 115.2°E).
-
 const denpasarAmavasyaCorrections = <int, int>{
   40959: 40958,
 };

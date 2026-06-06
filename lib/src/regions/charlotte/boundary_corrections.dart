@@ -1,5 +1,3 @@
-/// Boundary corrections for charlotte (35.2°N, -80.8°E).
-
 const charlotteAmavasyaCorrections = <int, int>{
 };
 const charlottePurnimaCorrections = <int, int>{

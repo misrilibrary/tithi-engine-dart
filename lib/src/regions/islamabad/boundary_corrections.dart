@@ -1,5 +1,3 @@
-/// Boundary corrections for islamabad (33.7°N, 73.0°E).
-
 const islamabadAmavasyaCorrections = <int, int>{
   15681: 15680,
   28113: 28112,

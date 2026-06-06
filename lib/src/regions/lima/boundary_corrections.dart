@@ -1,5 +1,3 @@
-/// Boundary corrections for lima (-12.0°N, -77.0°E).
-
 const limaAmavasyaCorrections = <int, int>{
   40161: 40160,
   44089: 44088,

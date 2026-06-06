@@ -1,8 +1,8 @@
-/// Lunar month determination from Sun's sidereal position.
+// Lunar month determination from Sun's sidereal position.
 
-/// The twelve months of the Hindu lunar calendar.
+// The twelve months of the Hindu lunar calendar.
 ///
-/// Months begin at Chaitra (March–April) and end at Phalguna (February–March).
+// Months begin at Chaitra (March–April) and end at Phalguna (February–March).
 enum LunarMonth {
   chaitra,
   vaishakha,

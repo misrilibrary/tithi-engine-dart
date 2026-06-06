@@ -1,5 +1,3 @@
-/// Boundary corrections for lucknow (26.8°N, 81.0°E).
-
 const lucknowAmavasyaCorrections = <int, int>{
   66946: 66945,
 };

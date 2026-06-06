@@ -1,5 +1,3 @@
-/// Boundary corrections for sanfrancisco (37.8°N, -122.4°E).
-
 const sanfranciscoAmavasyaCorrections = <int, int>{
   33162: 33161,
   51383: 51382,

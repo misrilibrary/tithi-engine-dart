@@ -1,5 +1,3 @@
-/// Boundary corrections for warangal (18.0°N, 79.6°E).
-
 const warangalAmavasyaCorrections = <int, int>{
   54868: 54867,
   64849: 64848,

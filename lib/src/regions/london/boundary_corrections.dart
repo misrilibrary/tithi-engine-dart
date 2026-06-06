@@ -1,5 +1,3 @@
-/// Boundary corrections for london (51.5°N, -0.1°E).
-
 const londonAmavasyaCorrections = <int, int>{
   32838: 32837,
 };

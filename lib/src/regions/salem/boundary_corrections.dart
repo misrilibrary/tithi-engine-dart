@@ -1,9 +1,8 @@
-/// Boundary corrections for salem (11.7°N, 78.2°E).
-
 const salemAmavasyaCorrections = <int, int>{
   41550: 41549,
 };
-const salemPurnimaCorrections = <int, int>{};
+const salemPurnimaCorrections = <int, int>{
+};
 const salemSankrantiCorrections = <int, int>{
   1959: 1960,
   2263: 2264,

@@ -1,5 +1,3 @@
-/// Boundary corrections for brampton (43.7°N, -79.8°E).
-
 const bramptonAmavasyaCorrections = <int, int>{
   44089: 44088,
   50349: 50348,

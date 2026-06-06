@@ -1,5 +1,3 @@
-/// Boundary corrections for mombasa (-4.1°N, 39.7°E).
-
 const mombasaAmavasyaCorrections = <int, int>{
   37888: 37887,
   38921: 38920,

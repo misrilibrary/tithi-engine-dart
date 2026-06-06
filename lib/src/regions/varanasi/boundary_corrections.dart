@@ -1,5 +1,3 @@
-/// Boundary corrections for varanasi (25.3°N, 83.0°E).
-
 const varanasiAmavasyaCorrections = <int, int>{
   17217: 17216,
   65027: 65026,

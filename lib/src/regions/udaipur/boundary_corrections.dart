@@ -1,5 +1,3 @@
-/// Boundary corrections for udaipur (24.6°N, 73.7°E).
-
 const udaipurAmavasyaCorrections = <int, int>{
   6497: 6496,
   28261: 28260,

@@ -1,5 +1,3 @@
-/// Boundary corrections for kuwaitcity (29.4°N, 47.9°E).
-
 const kuwaitcityAmavasyaCorrections = <int, int>{
   38272: 38271,
   53805: 53804,

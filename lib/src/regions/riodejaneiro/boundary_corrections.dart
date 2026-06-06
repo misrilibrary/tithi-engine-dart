@@ -1,5 +1,3 @@
-/// Boundary corrections for riodejaneiro (-22.9°N, -43.2°E).
-
 const riodejaneiroAmavasyaCorrections = <int, int>{
   68481: 68480,
 };

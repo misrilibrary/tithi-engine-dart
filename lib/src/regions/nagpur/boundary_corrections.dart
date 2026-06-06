@@ -1,5 +1,3 @@
-/// Boundary corrections for nagpur (21.1°N, 79.1°E).
-
 const nagpurAmavasyaCorrections = <int, int>{
   27907: 27906,
   41550: 41549,

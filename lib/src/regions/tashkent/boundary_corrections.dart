@@ -1,5 +1,3 @@
-/// Boundary corrections for tashkent (41.3°N, 69.3°E).
-
 const tashkentAmavasyaCorrections = <int, int>{
   23064: 23063,
   57437: 57436,

@@ -1,5 +1,3 @@
-/// Boundary corrections for haridwar (29.9°N, 78.2°E).
-
 const haridwarAmavasyaCorrections = <int, int>{
   60331: 60330,
   71021: 71020,

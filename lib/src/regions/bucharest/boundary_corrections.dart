@@ -1,5 +1,3 @@
-/// Boundary corrections for bucharest (44.4°N, 26.1°E).
-
 const bucharestAmavasyaCorrections = <int, int>{
   13230: 13229,
   39837: 39836,

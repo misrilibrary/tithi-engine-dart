@@ -1,5 +1,3 @@
-/// Boundary corrections for sydney (-33.9°N, 151.2°E).
-
 const sydneyAmavasyaCorrections = <int, int>{
   6645: 6644,
   41343: 41342,

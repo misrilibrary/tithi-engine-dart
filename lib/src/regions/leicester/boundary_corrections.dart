@@ -1,5 +1,3 @@
-/// Boundary corrections for leicester (52.6°N, -1.1°E).
-
 const leicesterAmavasyaCorrections = <int, int>{
   19608: 19607,
   32543: 32542,

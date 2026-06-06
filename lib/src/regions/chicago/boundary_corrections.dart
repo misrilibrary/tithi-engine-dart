@@ -1,5 +1,3 @@
-/// Boundary corrections for chicago (41.9°N, -87.6°E).
-
 const chicagoAmavasyaCorrections = <int, int>{
   41195: 41194,
   54218: 54217,

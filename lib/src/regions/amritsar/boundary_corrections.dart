@@ -1,5 +1,3 @@
-/// Boundary corrections for amritsar (31.6°N, 74.9°E).
-
 const amritsarAmavasyaCorrections = <int, int>{
   6497: 6496,
 };

@@ -1,5 +1,3 @@
-/// Boundary corrections for fremont (37.5°N, -122.0°E).
-
 const fremontAmavasyaCorrections = <int, int>{
   5049: 5048,
 };

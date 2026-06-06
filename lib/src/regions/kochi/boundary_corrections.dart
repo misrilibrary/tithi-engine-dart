@@ -1,9 +1,8 @@
-/// Boundary corrections for kochi (10.0°N, 76.3°E).
-
 const kochiAmavasyaCorrections = <int, int>{
   60331: 60330,
 };
-const kochiPurnimaCorrections = <int, int>{};
+const kochiPurnimaCorrections = <int, int>{
+};
 const kochiSankrantiCorrections = <int, int>{
   12797: 12796,
   18093: 18094,

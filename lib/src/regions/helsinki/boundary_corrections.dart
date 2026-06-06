@@ -1,5 +1,3 @@
-/// Boundary corrections for helsinki (60.2°N, 24.9°E).
-
 const helsinkiAmavasyaCorrections = <int, int>{
   13230: 13229,
   32100: 32099,

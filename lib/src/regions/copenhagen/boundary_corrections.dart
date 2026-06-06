@@ -1,5 +1,3 @@
-/// Boundary corrections for copenhagen (55.7°N, 12.6°E).
-
 const copenhagenAmavasyaCorrections = <int, int>{
   55193: 55192,
   72704: 72703,

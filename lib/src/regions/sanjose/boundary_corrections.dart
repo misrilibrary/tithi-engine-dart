@@ -1,5 +1,3 @@
-/// Boundary corrections for sanjose (37.3°N, -121.9°E).
-
 const sanjoseAmavasyaCorrections = <int, int>{
   5049: 5048,
   15267: 15266,

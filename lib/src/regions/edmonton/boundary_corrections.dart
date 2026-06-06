@@ -1,5 +1,3 @@
-/// Boundary corrections for edmonton (53.5°N, -113.5°E).
-
 const edmontonAmavasyaCorrections = <int, int>{
   28083: 28082,
 };

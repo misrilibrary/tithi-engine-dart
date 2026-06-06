@@ -1,5 +1,3 @@
-/// Boundary corrections for phnompenh (11.6°N, 104.9°E).
-
 const phnompenhAmavasyaCorrections = <int, int>{
 };
 const phnompenhPurnimaCorrections = <int, int>{

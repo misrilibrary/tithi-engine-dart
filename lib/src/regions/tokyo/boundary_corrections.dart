@@ -1,5 +1,3 @@
-/// Boundary corrections for tokyo (35.7°N, 139.7°E).
-
 const tokyoAmavasyaCorrections = <int, int>{
   89: 88,
   8062: 8061,

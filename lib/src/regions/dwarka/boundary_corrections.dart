@@ -1,5 +1,3 @@
-/// Boundary corrections for dwarka (22.2°N, 69.0°E).
-
 const dwarkaAmavasyaCorrections = <int, int>{
   15562: 15563,
   69308: 69307,

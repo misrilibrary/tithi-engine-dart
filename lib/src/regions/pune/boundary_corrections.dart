@@ -1,5 +1,3 @@
-/// Boundary corrections for pune (18.5°N, 73.9°E).
-
 const puneAmavasyaCorrections = <int, int>{
   70135: 70134,
 };

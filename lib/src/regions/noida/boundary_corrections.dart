@@ -1,5 +1,3 @@
-/// Boundary corrections for noida (28.6°N, 77.3°E).
-
 const noidaAmavasyaCorrections = <int, int>{
   54543: 54542,
 };

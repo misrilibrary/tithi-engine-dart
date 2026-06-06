@@ -1,5 +1,3 @@
-/// Boundary corrections for karachi (24.9°N, 67.0°E).
-
 const karachiAmavasyaCorrections = <int, int>{
   62664: 62663,
 };

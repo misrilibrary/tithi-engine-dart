@@ -1,5 +1,3 @@
-/// Boundary corrections for patna (25.6°N, 85.1°E).
-
 const patnaAmavasyaCorrections = <int, int>{
   3455: 3454,
   12521: 12520,

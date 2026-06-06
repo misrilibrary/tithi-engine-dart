@@ -1,6 +1,5 @@
-/// Boundary corrections for surat (21.2°N, 72.8°E).
-
-const suratAmavasyaCorrections = <int, int>{};
+const suratAmavasyaCorrections = <int, int>{
+};
 const suratPurnimaCorrections = <int, int>{
   20125: 20124,
   27006: 27005,

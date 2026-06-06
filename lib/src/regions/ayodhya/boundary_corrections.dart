@@ -1,5 +1,3 @@
-/// Boundary corrections for ayodhya (26.8°N, 82.2°E).
-
 const ayodhyaAmavasyaCorrections = <int, int>{
   11310: 11309,
   18959: 18958,

@@ -1,5 +1,3 @@
-/// Boundary corrections for mysore (12.3°N, 76.7°E).
-
 const mysoreAmavasyaCorrections = <int, int>{
   38567: 38566,
   56108: 56107,

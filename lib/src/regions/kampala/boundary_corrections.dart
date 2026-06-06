@@ -1,5 +1,3 @@
-/// Boundary corrections for kampala (0.3°N, 32.6°E).
-
 const kampalaAmavasyaCorrections = <int, int>{
   5906: 5905,
   7324: 7323,

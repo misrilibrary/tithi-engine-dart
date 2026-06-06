@@ -1,5 +1,6 @@
 /// Lahiri Ayanamsha — the angular difference between tropical and sidereal zodiac.
 /// Used to convert tropical longitudes to sidereal (Hindu) longitudes.
+library;
 
 /// Returns Lahiri ayanamsha in degrees for a given date.
 /// Calibrated against Swiss Ephemeris (Chitrapaksha Lahiri).

@@ -1,5 +1,3 @@
-/// Boundary corrections for vijayawada (16.5°N, 80.6°E).
-
 const vijayawadaAmavasyaCorrections = <int, int>{
   27729: 27728,
   54543: 54542,

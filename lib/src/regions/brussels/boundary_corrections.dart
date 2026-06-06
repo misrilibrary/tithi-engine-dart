@@ -1,5 +1,3 @@
-/// Boundary corrections for brussels (50.9°N, 4.4°E).
-
 const brusselsAmavasyaCorrections = <int, int>{
   19254: 19253,
   32986: 32985,

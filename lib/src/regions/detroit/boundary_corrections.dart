@@ -1,5 +1,3 @@
-/// Boundary corrections for detroit (42.3°N, -83.0°E).
-
 const detroitAmavasyaCorrections = <int, int>{
   46983: 46982,
   49965: 49964,

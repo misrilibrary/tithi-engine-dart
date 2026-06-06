@@ -1,5 +1,3 @@
-/// Boundary corrections for bhopal (23.3°N, 77.4°E).
-
 const bhopalAmavasyaCorrections = <int, int>{
   60331: 60330,
   64849: 64848,

@@ -1,5 +1,3 @@
-/// Boundary corrections for montreal (45.5°N, -73.6°E).
-
 const montrealAmavasyaCorrections = <int, int>{
   27020: 27019,
   33665: 33664,

@@ -2,7 +2,7 @@ name: tithi_engine
 description: >-
   Accurate Vedic tithi, lunar month, and festival date calculator for any city
   worldwide. Pure Dart, no dependencies, 200-year accuracy (1900–2100).
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/misrilibrary/tithi-engine-dart
 repository: https://github.com/misrilibrary/tithi-engine-dart
 issue_tracker: https://github.com/misrilibrary/tithi-engine-dart/issues

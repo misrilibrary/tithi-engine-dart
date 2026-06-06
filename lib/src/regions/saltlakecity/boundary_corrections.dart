@@ -1,5 +1,3 @@
-/// Boundary corrections for saltlakecity (40.8°N, -111.9°E).
-
 const saltlakecityAmavasyaCorrections = <int, int>{
   18545: 18544,
   18929: 18928,

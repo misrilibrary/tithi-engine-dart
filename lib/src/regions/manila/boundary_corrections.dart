@@ -1,5 +1,3 @@
-/// Boundary corrections for manila (14.6°N, 121.0°E).
-
 const manilaAmavasyaCorrections = <int, int>{
   56729: 56728,
 };

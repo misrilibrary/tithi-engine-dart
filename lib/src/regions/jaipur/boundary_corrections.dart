@@ -1,5 +1,3 @@
-/// Boundary corrections for jaipur (26.9°N, 75.8°E).
-
 const jaipurAmavasyaCorrections = <int, int>{
   52978: 52977,
   53716: 53715,

@@ -1,5 +1,3 @@
-/// Boundary corrections for newyork (40.7°N, -74.0°E).
-
 const newyorkAmavasyaCorrections = <int, int>{
   11015: 11014,
   36765: 36764,

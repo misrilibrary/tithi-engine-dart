@@ -1,4 +1,4 @@
-/// Boundary corrections for medellin (6.2°N, -75.6°E).
+// Boundary corrections for medellin (6.2°N, -75.6°E).
 
 const medellinAmavasyaCorrections = <int, int>{
   22945: 22944,

@@ -1,5 +1,3 @@
-/// Boundary corrections for hochiminhcity (10.8°N, 106.6°E).
-
 const hochiminhcityAmavasyaCorrections = <int, int>{
   43588: 43587,
   65411: 65410,

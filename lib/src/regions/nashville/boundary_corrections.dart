@@ -1,5 +1,3 @@
-/// Boundary corrections for nashville (36.2°N, -86.8°E).
-
 const nashvilleAmavasyaCorrections = <int, int>{
   42465: 42464,
   51678: 51677,

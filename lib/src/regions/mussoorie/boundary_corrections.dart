@@ -1,10 +1,9 @@
-/// Boundary corrections for mussoorie (30.5°N, 78.1°E).
-
 const mussoorieAmavasyaCorrections = <int, int>{
   31244: 31243,
   60331: 60330,
 };
-const mussooriePurnimaCorrections = <int, int>{};
+const mussooriePurnimaCorrections = <int, int>{
+};
 const mussoorieSankrantiCorrections = <int, int>{
   2263: 2264,
   16508: 16509,

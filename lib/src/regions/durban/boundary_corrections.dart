@@ -1,5 +1,3 @@
-/// Boundary corrections for durban (-29.9°N, 31.0°E).
-
 const durbanAmavasyaCorrections = <int, int>{
   63314: 63313,
 };

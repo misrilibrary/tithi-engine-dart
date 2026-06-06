@@ -1,5 +1,3 @@
-/// Boundary corrections for panamacity (9.0°N, -79.5°E).
-
 const panamacityAmavasyaCorrections = <int, int>{
   33546: 33545,
   44473: 44472,

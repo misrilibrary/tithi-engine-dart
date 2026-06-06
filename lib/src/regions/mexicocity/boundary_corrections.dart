@@ -1,5 +1,3 @@
-/// Boundary corrections for mexicocity (19.4°N, -99.1°E).
-
 const mexicocityAmavasyaCorrections = <int, int>{
   29353: 29352,
   49316: 49315,

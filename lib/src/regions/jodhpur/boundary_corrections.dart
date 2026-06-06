@@ -1,5 +1,3 @@
-/// Boundary corrections for jodhpur (26.3°N, 73.0°E).
-
 const jodhpurAmavasyaCorrections = <int, int>{
   28261: 28260,
   62960: 62959,

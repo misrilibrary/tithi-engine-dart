@@ -1,5 +1,3 @@
-/// Boundary corrections for boston (42.4°N, -71.1°E).
-
 const bostonAmavasyaCorrections = <int, int>{
   72999: 72998,
 };

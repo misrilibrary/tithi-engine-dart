@@ -1,5 +1,3 @@
-/// Boundary corrections for addisababa (9.0°N, 38.7°E).
-
 const addisababaAmavasyaCorrections = <int, int>{
   53126: 53125,
   55399: 55398,

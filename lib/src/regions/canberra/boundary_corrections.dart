@@ -1,5 +1,3 @@
-/// Boundary corrections for canberra (-35.3°N, 149.1°E).
-
 const canberraAmavasyaCorrections = <int, int>{
   1624: 1625,
   51443: 51442,

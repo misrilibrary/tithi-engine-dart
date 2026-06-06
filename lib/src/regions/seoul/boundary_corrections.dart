@@ -1,5 +1,3 @@
-/// Boundary corrections for seoul (37.6°N, 127.0°E).
-
 const seoulAmavasyaCorrections = <int, int>{
   5168: 5167,
   38390: 38389,

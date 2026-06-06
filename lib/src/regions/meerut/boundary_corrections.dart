@@ -1,5 +1,3 @@
-/// Boundary corrections for meerut (29.0°N, 77.7°E).
-
 const meerutAmavasyaCorrections = <int, int>{
   18752: 18751,
   58677: 58676,

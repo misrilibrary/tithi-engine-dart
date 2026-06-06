@@ -1,5 +1,3 @@
-/// Boundary corrections for rishikesh (30.1°N, 78.3°E).
-
 const rishikeshAmavasyaCorrections = <int, int>{
   31244: 31243,
   60331: 60330,

@@ -1,5 +1,3 @@
-/// Boundary corrections for melbourne (-37.8°N, 145.0°E).
-
 const melbourneAmavasyaCorrections = <int, int>{
   28350: 28349,
   44119: 44118,

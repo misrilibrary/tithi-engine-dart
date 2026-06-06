@@ -1,5 +1,3 @@
-/// Boundary corrections for vancouver (49.3°N, -123.1°E).
-
 const vancouverAmavasyaCorrections = <int, int>{
   24953: 24952,
   33399: 33398,

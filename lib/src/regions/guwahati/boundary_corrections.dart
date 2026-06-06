@@ -1,5 +1,3 @@
-/// Boundary corrections for guwahati (26.1°N, 91.7°E).
-
 const guwahatiAmavasyaCorrections = <int, int>{
   26342: 26341,
   54484: 54483,

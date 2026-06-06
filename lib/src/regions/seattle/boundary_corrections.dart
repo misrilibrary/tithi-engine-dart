@@ -1,5 +1,3 @@
-/// Boundary corrections for seattle (47.6°N, -122.3°E).
-
 const seattleAmavasyaCorrections = <int, int>{
   36677: 36676,
   54838: 54837,

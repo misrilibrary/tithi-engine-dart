@@ -1,5 +1,3 @@
-/// Boundary corrections for chandigarh (30.7°N, 76.8°E).
-
 const chandigarhAmavasyaCorrections = <int, int>{
   33222: 33221,
 };
