@@ -24,13 +24,15 @@ void main() {
   group('Kshaya at 30→1 wraparound (Shukla Pratipada)', () {
     test('Chaitra S1 2026 kshaya → returns Mar 19 (Amavasya day)', () {
       final dates = calc.findInYear(_info(1, LunarMonth.chaitra), 2026);
-      expect(dates, isNotEmpty, reason: 'Kshaya tithi should still return a date');
+      expect(dates, isNotEmpty,
+          reason: 'Kshaya tithi should still return a date');
       expect(dates.first, DateTime.utc(2026, 3, 19));
     });
 
     test('Jyeshtha S1 2025 kshaya → returns May 27 (Amavasya day)', () {
       final dates = calc.findInYear(_info(1, LunarMonth.jyeshtha), 2025);
-      expect(dates, isNotEmpty, reason: 'Kshaya tithi should still return a date');
+      expect(dates, isNotEmpty,
+          reason: 'Kshaya tithi should still return a date');
       expect(dates.first, DateTime.utc(2025, 5, 27));
     });
   });
@@ -38,7 +40,8 @@ void main() {
   group('Kshaya at span start (K1 at Purnimant boundary)', () {
     test('Kartika K1 2025 kshaya → returns a date', () {
       final dates = calc.findInYear(_info(16, LunarMonth.kartika), 2025);
-      expect(dates, isNotEmpty, reason: 'Kshaya K1 at span start should return a date');
+      expect(dates, isNotEmpty,
+          reason: 'Kshaya K1 at span start should return a date');
     });
   });
 

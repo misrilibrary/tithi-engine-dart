@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.9
+
+- Fix kshaya tithi detection at 30→1 wraparound (Shukla Pratipada)
+- Fix kshaya detection at month span start (e.g. Krishna Pratipada in Purnimant)
+- Affected: findInYear now correctly returns the previous day for skipped tithis
+
 ## 1.0.8
 
 - Fix medellín directory encoding issue (CI)
