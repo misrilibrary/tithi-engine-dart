@@ -1,5 +1,5 @@
-/// Registry of city-specific correction data. GENERATED — do not edit by hand.
-/// Regenerate via: dart run tools/regen_registry.dart (from app repo)
+// Registry of city-specific correction data. GENERATED — do not edit by hand.
+// Regenerate via: dart run tools/regen_registry.dart (from app repo)
 import 'abudhabi/corrections.dart' as abudhabi;
 import 'abudhabi/boundary_corrections.dart' as abudhabi_b;
 import 'accra/corrections.dart' as accra;

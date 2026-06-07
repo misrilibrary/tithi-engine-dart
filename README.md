@@ -20,7 +20,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^1.0.6
+  tithi_engine: ^1.0.7
 ```
 
 ## Quick Start
