@@ -12,7 +12,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 - **Festival dates** — muhurta-accurate (nishita, madhyahna, pradosh rules)
 - **Month resolution** — moment-based adhika/kshaya detection, Purnimant & Amant systems
 - **Date finding** — tithi → Gregorian date in any year
-- **209 cities** — per-city correction tables verified against Swiss Ephemeris
+- **230 cities** — per-city correction tables verified against Swiss Ephemeris
 - **Pure Dart** — no dependencies, works in Flutter, server, CLI, and web (WASM)
 - **200-year accuracy** — validated 1900–2100 against Drik Panchang
 
@@ -20,7 +20,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^1.0.7
+  tithi_engine: ^1.0.8
 ```
 
 ## Quick Start
@@ -59,7 +59,7 @@ print('Janmashtami 2026 Seattle: $date');
 
 | Metric | Value |
 |--------|-------|
-| Tithi vs Swiss Ephemeris | 0 mismatches (209 cities × 73,049 days, 1900–2100) |
+| Tithi vs Swiss Ephemeris | 0 mismatches (230 cities × 73,049 days, 1900–2100) |
 | Month boundaries (Purnimant) | 100% (200 years, verified cities) |
 | Festival dates vs Drik Panchang | 22/22 (2025–2026) |
 | Test coverage | 467 tests |

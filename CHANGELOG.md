@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.8
+
+- Fix medellín directory encoding issue (CI)
+- 230 cities total
+
 ## 1.0.7
 
 - Add 21 cities (230 total): Honolulu, Tampa, Pittsburgh, Columbus, Indianapolis, Kansas City, St. Louis, Sacramento, Halifax, Regina, Gothenburg, Lyon, Naples, Zagreb, Krakow, Thessaloniki, Porto, Rotterdam, Beirut, Ankara, Redmond
