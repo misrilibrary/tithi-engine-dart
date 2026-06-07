@@ -44,7 +44,9 @@ List<TithiMatch> findTithiRaw({
     // - If target tithi is skipped (kshaya): pick the day before the higher tithi
     DateTime? lastSeen;
     int? prevTithi;
-    for (var dt = span.start;
+    // Start one day before span to detect kshaya at span start
+    final loopStart = span.start.subtract(const Duration(days: 1));
+    for (var dt = loopStart;
         dt.isBefore(span.end);
         dt = dt.add(const Duration(days: 1))) {
       final sr = sunrise(dt);
@@ -52,15 +54,20 @@ List<TithiMatch> findTithiRaw({
       final moonLong = toSidereal(moonLongitude(sr), sr);
       final currentTithi = calculateTithi(moonLong, sunLong);
 
+      if (dt.isBefore(span.start)) {
+        // Pre-span day: only capture prevTithi for kshaya detection
+        prevTithi = currentTithi;
+        continue;
+      }
+
       if (currentTithi == targetTithi) {
         lastSeen = dt; // keep updating — last one wins
       } else if (lastSeen != null) {
         // Target tithi ended on lastSeen
         break;
       } else if (prevTithi != null &&
-          prevTithi < targetTithi &&
-          currentTithi > targetTithi) {
-        // Kshaya: tithi was skipped, it ended on previous day
+          _isKshaya(prevTithi, targetTithi, currentTithi)) {
+        // Kshaya: tithi was skipped, observe on previous day
         lastSeen = dt.subtract(const Duration(days: 1));
         break;
       }
@@ -71,6 +78,15 @@ List<TithiMatch> findTithiRaw({
     }
   }
   return results;
+}
+
+/// Detect kshaya (skipped tithi), handling the 30→1 wraparound.
+bool _isKshaya(int prev, int target, int current) {
+  if (target == 1) {
+    // Wraparound: prev is 30 (or 29 if double-kshaya), current jumped to 2+
+    return prev >= 29 && current >= 2 && current <= 3;
+  }
+  return prev < target && current > target;
 }
 
 // ─── Filter functions (composable, applied in sequence) ───
