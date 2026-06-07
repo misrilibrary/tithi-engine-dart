@@ -281,6 +281,28 @@ const supportedCities = <String, CityLocation>{
   'Edinburgh': CityLocation(55.9, -3.2, 0.0),
   'Manchester': CityLocation(53.5, -2.2, 0.0),
   'Birmingham': CityLocation(52.5, -1.9, 0.0),
+  // ─── Phase 2: 99% coverage ───
+  'Honolulu': CityLocation(21.3, -157.8, -10.0),
+  'Tampa': CityLocation(27.9, -82.5, -5.0),
+  'Pittsburgh': CityLocation(40.4, -80.0, -5.0),
+  'Columbus': CityLocation(39.9, -83.0, -5.0),
+  'Indianapolis': CityLocation(39.8, -86.2, -5.0),
+  'Kansas City': CityLocation(39.1, -94.6, -6.0),
+  'St. Louis': CityLocation(38.6, -90.2, -6.0),
+  'Sacramento': CityLocation(38.6, -121.5, -8.0),
+  'Halifax': CityLocation(44.6, -63.6, -4.0),
+  'Regina': CityLocation(50.5, -104.6, -6.0),
+  'Gothenburg': CityLocation(57.7, 12.0, 1.0),
+  'Lyon': CityLocation(45.8, 4.8, 1.0),
+  'Naples': CityLocation(40.8, 14.3, 1.0),
+  'Zagreb': CityLocation(45.8, 16.0, 1.0),
+  'Krakow': CityLocation(50.1, 19.9, 1.0),
+  'Thessaloniki': CityLocation(40.6, 22.9, 2.0),
+  'Porto': CityLocation(41.2, -8.6, 0.0),
+  'Rotterdam': CityLocation(51.9, 4.5, 1.0),
+  'Beirut': CityLocation(33.9, 35.5, 2.0),
+  'Ankara': CityLocation(39.9, 32.9, 3.0),
+  'Redmond': CityLocation(47.7, -122.1, -8.0),
 };
 
 /// India cities (UTC +5.5) for grouping.

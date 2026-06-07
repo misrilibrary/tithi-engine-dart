@@ -1,5 +1,5 @@
-// Registry of city-specific correction data. GENERATED — do not edit by hand.
-// Regenerate via: dart run test/gen_registry.dart
+/// Registry of city-specific correction data. GENERATED — do not edit by hand.
+/// Regenerate via: dart run tools/regen_registry.dart (from app repo)
 import 'abudhabi/corrections.dart' as abudhabi;
 import 'abudhabi/boundary_corrections.dart' as abudhabi_b;
 import 'accra/corrections.dart' as accra;
@@ -22,6 +22,8 @@ import 'amritsar/corrections.dart' as amritsar;
 import 'amritsar/boundary_corrections.dart' as amritsar_b;
 import 'amsterdam/corrections.dart' as amsterdam;
 import 'amsterdam/boundary_corrections.dart' as amsterdam_b;
+import 'ankara/corrections.dart' as ankara;
+import 'ankara/boundary_corrections.dart' as ankara_b;
 import 'athens/corrections.dart' as athens;
 import 'athens/boundary_corrections.dart' as athens_b;
 import 'atlanta/corrections.dart' as atlanta;
@@ -44,6 +46,8 @@ import 'barcelona/corrections.dart' as barcelona;
 import 'barcelona/boundary_corrections.dart' as barcelona_b;
 import 'beijing/corrections.dart' as beijing;
 import 'beijing/boundary_corrections.dart' as beijing_b;
+import 'beirut/corrections.dart' as beirut;
+import 'beirut/boundary_corrections.dart' as beirut_b;
 import 'berlin/corrections.dart' as berlin;
 import 'berlin/boundary_corrections.dart' as berlin_b;
 import 'bhopal/corrections.dart' as bhopal;
@@ -88,6 +92,8 @@ import 'coimbatore/corrections.dart' as coimbatore;
 import 'coimbatore/boundary_corrections.dart' as coimbatore_b;
 import 'colombo/corrections.dart' as colombo;
 import 'colombo/boundary_corrections.dart' as colombo_b;
+import 'columbus/corrections.dart' as columbus;
+import 'columbus/boundary_corrections.dart' as columbus_b;
 import 'copenhagen/corrections.dart' as copenhagen;
 import 'copenhagen/boundary_corrections.dart' as copenhagen_b;
 import 'dallas/corrections.dart' as dallas;
@@ -132,12 +138,16 @@ import 'glasgow/corrections.dart' as glasgow;
 import 'glasgow/boundary_corrections.dart' as glasgow_b;
 import 'gorakhpur/corrections.dart' as gorakhpur;
 import 'gorakhpur/boundary_corrections.dart' as gorakhpur_b;
+import 'gothenburg/corrections.dart' as gothenburg;
+import 'gothenburg/boundary_corrections.dart' as gothenburg_b;
 import 'gurgaon/corrections.dart' as gurgaon;
 import 'gurgaon/boundary_corrections.dart' as gurgaon_b;
 import 'guwahati/corrections.dart' as guwahati;
 import 'guwahati/boundary_corrections.dart' as guwahati_b;
 import 'gwalior/corrections.dart' as gwalior;
 import 'gwalior/boundary_corrections.dart' as gwalior_b;
+import 'halifax/corrections.dart' as halifax;
+import 'halifax/boundary_corrections.dart' as halifax_b;
 import 'hanoi/corrections.dart' as hanoi;
 import 'hanoi/boundary_corrections.dart' as hanoi_b;
 import 'haridwar/corrections.dart' as haridwar;
@@ -148,12 +158,16 @@ import 'hochiminhcity/corrections.dart' as hochiminhcity;
 import 'hochiminhcity/boundary_corrections.dart' as hochiminhcity_b;
 import 'hongkong/corrections.dart' as hongkong;
 import 'hongkong/boundary_corrections.dart' as hongkong_b;
+import 'honolulu/corrections.dart' as honolulu;
+import 'honolulu/boundary_corrections.dart' as honolulu_b;
 import 'houston/corrections.dart' as houston;
 import 'houston/boundary_corrections.dart' as houston_b;
 import 'hubli/corrections.dart' as hubli;
 import 'hubli/boundary_corrections.dart' as hubli_b;
 import 'hyderabad/corrections.dart' as hyderabad;
 import 'hyderabad/boundary_corrections.dart' as hyderabad_b;
+import 'indianapolis/corrections.dart' as indianapolis;
+import 'indianapolis/boundary_corrections.dart' as indianapolis_b;
 import 'indore/corrections.dart' as indore;
 import 'indore/boundary_corrections.dart' as indore_b;
 import 'islamabad/corrections.dart' as islamabad;
@@ -180,6 +194,8 @@ import 'kampala/corrections.dart' as kampala;
 import 'kampala/boundary_corrections.dart' as kampala_b;
 import 'kanpur/corrections.dart' as kanpur;
 import 'kanpur/boundary_corrections.dart' as kanpur_b;
+import 'kansascity/corrections.dart' as kansascity;
+import 'kansascity/boundary_corrections.dart' as kansascity_b;
 import 'karachi/corrections.dart' as karachi;
 import 'karachi/boundary_corrections.dart' as karachi_b;
 import 'kathmandu/corrections.dart' as kathmandu;
@@ -194,6 +210,8 @@ import 'kolkata/corrections.dart' as kolkata;
 import 'kolkata/boundary_corrections.dart' as kolkata_b;
 import 'kota/corrections.dart' as kota;
 import 'kota/boundary_corrections.dart' as kota_b;
+import 'krakow/corrections.dart' as krakow;
+import 'krakow/boundary_corrections.dart' as krakow_b;
 import 'kualalumpur/corrections.dart' as kualalumpur;
 import 'kualalumpur/boundary_corrections.dart' as kualalumpur_b;
 import 'kuwaitcity/corrections.dart' as kuwaitcity;
@@ -220,6 +238,8 @@ import 'lucknow/corrections.dart' as lucknow;
 import 'lucknow/boundary_corrections.dart' as lucknow_b;
 import 'ludhiana/corrections.dart' as ludhiana;
 import 'ludhiana/boundary_corrections.dart' as ludhiana_b;
+import 'lyon/corrections.dart' as lyon;
+import 'lyon/boundary_corrections.dart' as lyon_b;
 import 'madrid/corrections.dart' as madrid;
 import 'madrid/boundary_corrections.dart' as madrid_b;
 import 'madurai/corrections.dart' as madurai;
@@ -268,6 +288,8 @@ import 'nagpur/corrections.dart' as nagpur;
 import 'nagpur/boundary_corrections.dart' as nagpur_b;
 import 'nairobi/corrections.dart' as nairobi;
 import 'nairobi/boundary_corrections.dart' as nairobi_b;
+import 'naples/corrections.dart' as naples;
+import 'naples/boundary_corrections.dart' as naples_b;
 import 'nashik/corrections.dart' as nashik;
 import 'nashik/boundary_corrections.dart' as nashik_b;
 import 'nashville/corrections.dart' as nashville;
@@ -300,10 +322,14 @@ import 'phnompenh/corrections.dart' as phnompenh;
 import 'phnompenh/boundary_corrections.dart' as phnompenh_b;
 import 'phoenix/corrections.dart' as phoenix;
 import 'phoenix/boundary_corrections.dart' as phoenix_b;
+import 'pittsburgh/corrections.dart' as pittsburgh;
+import 'pittsburgh/boundary_corrections.dart' as pittsburgh_b;
 import 'portland/corrections.dart' as portland;
 import 'portland/boundary_corrections.dart' as portland_b;
 import 'portlouis/corrections.dart' as portlouis;
 import 'portlouis/boundary_corrections.dart' as portlouis_b;
+import 'porto/corrections.dart' as porto;
+import 'porto/boundary_corrections.dart' as porto_b;
 import 'portofspain/corrections.dart' as portofspain;
 import 'portofspain/boundary_corrections.dart' as portofspain_b;
 import 'prague/corrections.dart' as prague;
@@ -322,6 +348,10 @@ import 'raleigh/corrections.dart' as raleigh;
 import 'raleigh/boundary_corrections.dart' as raleigh_b;
 import 'ranchi/corrections.dart' as ranchi;
 import 'ranchi/boundary_corrections.dart' as ranchi_b;
+import 'redmond/corrections.dart' as redmond;
+import 'redmond/boundary_corrections.dart' as redmond_b;
+import 'regina/corrections.dart' as regina;
+import 'regina/boundary_corrections.dart' as regina_b;
 import 'riodejaneiro/corrections.dart' as riodejaneiro;
 import 'riodejaneiro/boundary_corrections.dart' as riodejaneiro_b;
 import 'rishikesh/corrections.dart' as rishikesh;
@@ -330,6 +360,10 @@ import 'riyadh/corrections.dart' as riyadh;
 import 'riyadh/boundary_corrections.dart' as riyadh_b;
 import 'rome/corrections.dart' as rome;
 import 'rome/boundary_corrections.dart' as rome_b;
+import 'rotterdam/corrections.dart' as rotterdam;
+import 'rotterdam/boundary_corrections.dart' as rotterdam_b;
+import 'sacramento/corrections.dart' as sacramento;
+import 'sacramento/boundary_corrections.dart' as sacramento_b;
 import 'salem/corrections.dart' as salem;
 import 'salem/boundary_corrections.dart' as salem_b;
 import 'saltlakecity/corrections.dart' as saltlakecity;
@@ -358,6 +392,8 @@ import 'sopaulo/corrections.dart' as sopaulo;
 import 'sopaulo/boundary_corrections.dart' as sopaulo_b;
 import 'srinagar/corrections.dart' as srinagar;
 import 'srinagar/boundary_corrections.dart' as srinagar_b;
+import 'stlouis/corrections.dart' as stlouis;
+import 'stlouis/boundary_corrections.dart' as stlouis_b;
 import 'stockholm/corrections.dart' as stockholm;
 import 'stockholm/boundary_corrections.dart' as stockholm_b;
 import 'surat/corrections.dart' as surat;
@@ -370,12 +406,16 @@ import 'sydney/corrections.dart' as sydney;
 import 'sydney/boundary_corrections.dart' as sydney_b;
 import 'taipei/corrections.dart' as taipei;
 import 'taipei/boundary_corrections.dart' as taipei_b;
+import 'tampa/corrections.dart' as tampa;
+import 'tampa/boundary_corrections.dart' as tampa_b;
 import 'tashkent/corrections.dart' as tashkent;
 import 'tashkent/boundary_corrections.dart' as tashkent_b;
 import 'telaviv/corrections.dart' as telaviv;
 import 'telaviv/boundary_corrections.dart' as telaviv_b;
 import 'thane/corrections.dart' as thane;
 import 'thane/boundary_corrections.dart' as thane_b;
+import 'thessaloniki/corrections.dart' as thessaloniki;
+import 'thessaloniki/boundary_corrections.dart' as thessaloniki_b;
 import 'thiruvananthapuram/corrections.dart' as thiruvananthapuram;
 import 'thiruvananthapuram/boundary_corrections.dart' as thiruvananthapuram_b;
 import 'tiruchirappalli/corrections.dart' as tiruchirappalli;
@@ -416,6 +456,8 @@ import 'winnipeg/corrections.dart' as winnipeg;
 import 'winnipeg/boundary_corrections.dart' as winnipeg_b;
 import 'yangon/corrections.dart' as yangon;
 import 'yangon/boundary_corrections.dart' as yangon_b;
+import 'zagreb/corrections.dart' as zagreb;
+import 'zagreb/boundary_corrections.dart' as zagreb_b;
 import 'zurich/corrections.dart' as zurich;
 import 'zurich/boundary_corrections.dart' as zurich_b;
 
@@ -431,6 +473,7 @@ final _tithi = <String, Map<int, int>>{
   'Amman': amman.ammanTithiCorrections,
   'Amritsar': amritsar.amritsarTithiCorrections,
   'Amsterdam': amsterdam.amsterdamTithiCorrections,
+  'Ankara': ankara.ankaraTithiCorrections,
   'Athens': athens.athensTithiCorrections,
   'Atlanta': atlanta.atlantaTithiCorrections,
   'Auckland': auckland.aucklandTithiCorrections,
@@ -442,6 +485,7 @@ final _tithi = <String, Map<int, int>>{
   'Bangkok': bangkok.bangkokTithiCorrections,
   'Barcelona': barcelona.barcelonaTithiCorrections,
   'Beijing': beijing.beijingTithiCorrections,
+  'Beirut': beirut.beirutTithiCorrections,
   'Berlin': berlin.berlinTithiCorrections,
   'Bhopal': bhopal.bhopalTithiCorrections,
   'Bhubaneswar': bhubaneswar.bhubaneswarTithiCorrections,
@@ -464,6 +508,7 @@ final _tithi = <String, Map<int, int>>{
   'Chicago': chicago.chicagoTithiCorrections,
   'Coimbatore': coimbatore.coimbatoreTithiCorrections,
   'Colombo': colombo.colomboTithiCorrections,
+  'Columbus': columbus.columbusTithiCorrections,
   'Copenhagen': copenhagen.copenhagenTithiCorrections,
   'Dallas': dallas.dallasTithiCorrections,
   'Dar es Salaam': daressalaam.daressalaamTithiCorrections,
@@ -486,17 +531,21 @@ final _tithi = <String, Map<int, int>>{
   'Ghaziabad': ghaziabad.ghaziabadTithiCorrections,
   'Glasgow': glasgow.glasgowTithiCorrections,
   'Gorakhpur': gorakhpur.gorakhpurTithiCorrections,
+  'Gothenburg': gothenburg.gothenburgTithiCorrections,
   'Gurgaon': gurgaon.gurgaonTithiCorrections,
   'Guwahati': guwahati.guwahatiTithiCorrections,
   'Gwalior': gwalior.gwaliorTithiCorrections,
+  'Halifax': halifax.halifaxTithiCorrections,
   'Hanoi': hanoi.hanoiTithiCorrections,
   'Haridwar': haridwar.haridwarTithiCorrections,
   'Helsinki': helsinki.helsinkiTithiCorrections,
   'Ho Chi Minh City': hochiminhcity.hochiminhcityTithiCorrections,
   'Hong Kong': hongkong.hongkongTithiCorrections,
+  'Honolulu': honolulu.honoluluTithiCorrections,
   'Houston': houston.houstonTithiCorrections,
   'Hubli': hubli.hubliTithiCorrections,
   'Hyderabad': hyderabad.hyderabadTithiCorrections,
+  'Indianapolis': indianapolis.indianapolisTithiCorrections,
   'Indore': indore.indoreTithiCorrections,
   'Islamabad': islamabad.islamabadTithiCorrections,
   'Istanbul': istanbul.istanbulTithiCorrections,
@@ -510,6 +559,7 @@ final _tithi = <String, Map<int, int>>{
   'Johannesburg': johannesburg.johannesburgTithiCorrections,
   'Kampala': kampala.kampalaTithiCorrections,
   'Kanpur': kanpur.kanpurTithiCorrections,
+  'Kansas City': kansascity.kansascityTithiCorrections,
   'Karachi': karachi.karachiTithiCorrections,
   'Kathmandu': kathmandu.kathmanduTithiCorrections,
   'Kingston': kingston.kingstonTithiCorrections,
@@ -517,6 +567,7 @@ final _tithi = <String, Map<int, int>>{
   'Kochi': kochi.kochiTithiCorrections,
   'Kolkata': kolkata.kolkataTithiCorrections,
   'Kota': kota.kotaTithiCorrections,
+  'Krakow': krakow.krakowTithiCorrections,
   'Kuala Lumpur': kualalumpur.kualalumpurTithiCorrections,
   'Kuwait City': kuwaitcity.kuwaitcityTithiCorrections,
   'Kyiv': kyiv.kyivTithiCorrections,
@@ -530,6 +581,7 @@ final _tithi = <String, Map<int, int>>{
   'Los Angeles': losangeles.losangelesTithiCorrections,
   'Lucknow': lucknow.lucknowTithiCorrections,
   'Ludhiana': ludhiana.ludhianaTithiCorrections,
+  'Lyon': lyon.lyonTithiCorrections,
   'Madrid': madrid.madridTithiCorrections,
   'Madurai': madurai.maduraiTithiCorrections,
   'Manchester': manchester.manchesterTithiCorrections,
@@ -554,6 +606,7 @@ final _tithi = <String, Map<int, int>>{
   'Mysore': mysore.mysoreTithiCorrections,
   'Nagpur': nagpur.nagpurTithiCorrections,
   'Nairobi': nairobi.nairobiTithiCorrections,
+  'Naples': naples.naplesTithiCorrections,
   'Nashik': nashik.nashikTithiCorrections,
   'Nashville': nashville.nashvilleTithiCorrections,
   'New York': newyork.newyorkTithiCorrections,
@@ -570,8 +623,10 @@ final _tithi = <String, Map<int, int>>{
   'Philadelphia': philadelphia.philadelphiaTithiCorrections,
   'Phnom Penh': phnompenh.phnompenhTithiCorrections,
   'Phoenix': phoenix.phoenixTithiCorrections,
+  'Pittsburgh': pittsburgh.pittsburghTithiCorrections,
   'Portland': portland.portlandTithiCorrections,
   'Port Louis': portlouis.portlouisTithiCorrections,
+  'Porto': porto.portoTithiCorrections,
   'Port of Spain': portofspain.portofspainTithiCorrections,
   'Prague': prague.pragueTithiCorrections,
   'Prayagraj': prayagraj.prayagrajTithiCorrections,
@@ -581,10 +636,14 @@ final _tithi = <String, Map<int, int>>{
   'Rajkot': rajkot.rajkotTithiCorrections,
   'Raleigh': raleigh.raleighTithiCorrections,
   'Ranchi': ranchi.ranchiTithiCorrections,
+  'Redmond': redmond.redmondTithiCorrections,
+  'Regina': regina.reginaTithiCorrections,
   'Rio de Janeiro': riodejaneiro.riodejaneiroTithiCorrections,
   'Rishikesh': rishikesh.rishikeshTithiCorrections,
   'Riyadh': riyadh.riyadhTithiCorrections,
   'Rome': rome.romeTithiCorrections,
+  'Rotterdam': rotterdam.rotterdamTithiCorrections,
+  'Sacramento': sacramento.sacramentoTithiCorrections,
   'Salem': salem.salemTithiCorrections,
   'Salt Lake City': saltlakecity.saltlakecityTithiCorrections,
   'San Diego': sandiego.sandiegoTithiCorrections,
@@ -599,15 +658,18 @@ final _tithi = <String, Map<int, int>>{
   'Sofia': sofia.sofiaTithiCorrections,
   'São Paulo': sopaulo.sopauloTithiCorrections,
   'Srinagar': srinagar.srinagarTithiCorrections,
+  'St. Louis': stlouis.stlouisTithiCorrections,
   'Stockholm': stockholm.stockholmTithiCorrections,
   'Surat': surat.suratTithiCorrections,
   'Surrey': surrey.surreyTithiCorrections,
   'Suva': suva.suvaTithiCorrections,
   'Sydney': sydney.sydneyTithiCorrections,
   'Taipei': taipei.taipeiTithiCorrections,
+  'Tampa': tampa.tampaTithiCorrections,
   'Tashkent': tashkent.tashkentTithiCorrections,
   'Tel Aviv': telaviv.telavivTithiCorrections,
   'Thane': thane.thaneTithiCorrections,
+  'Thessaloniki': thessaloniki.thessalonikiTithiCorrections,
   'Thiruvananthapuram': thiruvananthapuram.thiruvananthapuramTithiCorrections,
   'Tiruchirappalli': tiruchirappalli.tiruchirappalliTithiCorrections,
   'Tirupati': tirupati.tirupatiTithiCorrections,
@@ -628,6 +690,7 @@ final _tithi = <String, Map<int, int>>{
   'Wellington': wellington.wellingtonTithiCorrections,
   'Winnipeg': winnipeg.winnipegTithiCorrections,
   'Yangon': yangon.yangonTithiCorrections,
+  'Zagreb': zagreb.zagrebTithiCorrections,
   'Zurich': zurich.zurichTithiCorrections,
 };
 Map<int, int> getTithiCorrections(String city) => _tithi[city] ?? const {};
@@ -644,6 +707,7 @@ final _trans = <String, Map<int, int>>{
   'Amman': amman.ammanTransitionMinutesMap,
   'Amritsar': amritsar.amritsarTransitionMinutesMap,
   'Amsterdam': amsterdam.amsterdamTransitionMinutesMap,
+  'Ankara': ankara.ankaraTransitionMinutesMap,
   'Athens': athens.athensTransitionMinutesMap,
   'Atlanta': atlanta.atlantaTransitionMinutesMap,
   'Auckland': auckland.aucklandTransitionMinutesMap,
@@ -655,6 +719,7 @@ final _trans = <String, Map<int, int>>{
   'Bangkok': bangkok.bangkokTransitionMinutesMap,
   'Barcelona': barcelona.barcelonaTransitionMinutesMap,
   'Beijing': beijing.beijingTransitionMinutesMap,
+  'Beirut': beirut.beirutTransitionMinutesMap,
   'Berlin': berlin.berlinTransitionMinutesMap,
   'Bhopal': bhopal.bhopalTransitionMinutesMap,
   'Bhubaneswar': bhubaneswar.bhubaneswarTransitionMinutesMap,
@@ -677,6 +742,7 @@ final _trans = <String, Map<int, int>>{
   'Chicago': chicago.chicagoTransitionMinutesMap,
   'Coimbatore': coimbatore.coimbatoreTransitionMinutesMap,
   'Colombo': colombo.colomboTransitionMinutesMap,
+  'Columbus': columbus.columbusTransitionMinutesMap,
   'Copenhagen': copenhagen.copenhagenTransitionMinutesMap,
   'Dallas': dallas.dallasTransitionMinutesMap,
   'Dar es Salaam': daressalaam.daressalaamTransitionMinutesMap,
@@ -699,17 +765,21 @@ final _trans = <String, Map<int, int>>{
   'Ghaziabad': ghaziabad.ghaziabadTransitionMinutesMap,
   'Glasgow': glasgow.glasgowTransitionMinutesMap,
   'Gorakhpur': gorakhpur.gorakhpurTransitionMinutesMap,
+  'Gothenburg': gothenburg.gothenburgTransitionMinutesMap,
   'Gurgaon': gurgaon.gurgaonTransitionMinutesMap,
   'Guwahati': guwahati.guwahatiTransitionMinutesMap,
   'Gwalior': gwalior.gwaliorTransitionMinutesMap,
+  'Halifax': halifax.halifaxTransitionMinutesMap,
   'Hanoi': hanoi.hanoiTransitionMinutesMap,
   'Haridwar': haridwar.haridwarTransitionMinutesMap,
   'Helsinki': helsinki.helsinkiTransitionMinutesMap,
   'Ho Chi Minh City': hochiminhcity.hochiminhcityTransitionMinutesMap,
   'Hong Kong': hongkong.hongkongTransitionMinutesMap,
+  'Honolulu': honolulu.honoluluTransitionMinutesMap,
   'Houston': houston.houstonTransitionMinutesMap,
   'Hubli': hubli.hubliTransitionMinutesMap,
   'Hyderabad': hyderabad.hyderabadTransitionMinutesMap,
+  'Indianapolis': indianapolis.indianapolisTransitionMinutesMap,
   'Indore': indore.indoreTransitionMinutesMap,
   'Islamabad': islamabad.islamabadTransitionMinutesMap,
   'Istanbul': istanbul.istanbulTransitionMinutesMap,
@@ -723,6 +793,7 @@ final _trans = <String, Map<int, int>>{
   'Johannesburg': johannesburg.johannesburgTransitionMinutesMap,
   'Kampala': kampala.kampalaTransitionMinutesMap,
   'Kanpur': kanpur.kanpurTransitionMinutesMap,
+  'Kansas City': kansascity.kansascityTransitionMinutesMap,
   'Karachi': karachi.karachiTransitionMinutesMap,
   'Kathmandu': kathmandu.kathmanduTransitionMinutesMap,
   'Kingston': kingston.kingstonTransitionMinutesMap,
@@ -730,6 +801,7 @@ final _trans = <String, Map<int, int>>{
   'Kochi': kochi.kochiTransitionMinutesMap,
   'Kolkata': kolkata.kolkataTransitionMinutesMap,
   'Kota': kota.kotaTransitionMinutesMap,
+  'Krakow': krakow.krakowTransitionMinutesMap,
   'Kuala Lumpur': kualalumpur.kualalumpurTransitionMinutesMap,
   'Kuwait City': kuwaitcity.kuwaitcityTransitionMinutesMap,
   'Kyiv': kyiv.kyivTransitionMinutesMap,
@@ -743,6 +815,7 @@ final _trans = <String, Map<int, int>>{
   'Los Angeles': losangeles.losangelesTransitionMinutesMap,
   'Lucknow': lucknow.lucknowTransitionMinutesMap,
   'Ludhiana': ludhiana.ludhianaTransitionMinutesMap,
+  'Lyon': lyon.lyonTransitionMinutesMap,
   'Madrid': madrid.madridTransitionMinutesMap,
   'Madurai': madurai.maduraiTransitionMinutesMap,
   'Manchester': manchester.manchesterTransitionMinutesMap,
@@ -767,6 +840,7 @@ final _trans = <String, Map<int, int>>{
   'Mysore': mysore.mysoreTransitionMinutesMap,
   'Nagpur': nagpur.nagpurTransitionMinutesMap,
   'Nairobi': nairobi.nairobiTransitionMinutesMap,
+  'Naples': naples.naplesTransitionMinutesMap,
   'Nashik': nashik.nashikTransitionMinutesMap,
   'Nashville': nashville.nashvilleTransitionMinutesMap,
   'New York': newyork.newyorkTransitionMinutesMap,
@@ -783,8 +857,10 @@ final _trans = <String, Map<int, int>>{
   'Philadelphia': philadelphia.philadelphiaTransitionMinutesMap,
   'Phnom Penh': phnompenh.phnompenhTransitionMinutesMap,
   'Phoenix': phoenix.phoenixTransitionMinutesMap,
+  'Pittsburgh': pittsburgh.pittsburghTransitionMinutesMap,
   'Portland': portland.portlandTransitionMinutesMap,
   'Port Louis': portlouis.portlouisTransitionMinutesMap,
+  'Porto': porto.portoTransitionMinutesMap,
   'Port of Spain': portofspain.portofspainTransitionMinutesMap,
   'Prague': prague.pragueTransitionMinutesMap,
   'Prayagraj': prayagraj.prayagrajTransitionMinutesMap,
@@ -794,10 +870,14 @@ final _trans = <String, Map<int, int>>{
   'Rajkot': rajkot.rajkotTransitionMinutesMap,
   'Raleigh': raleigh.raleighTransitionMinutesMap,
   'Ranchi': ranchi.ranchiTransitionMinutesMap,
+  'Redmond': redmond.redmondTransitionMinutesMap,
+  'Regina': regina.reginaTransitionMinutesMap,
   'Rio de Janeiro': riodejaneiro.riodejaneiroTransitionMinutesMap,
   'Rishikesh': rishikesh.rishikeshTransitionMinutesMap,
   'Riyadh': riyadh.riyadhTransitionMinutesMap,
   'Rome': rome.romeTransitionMinutesMap,
+  'Rotterdam': rotterdam.rotterdamTransitionMinutesMap,
+  'Sacramento': sacramento.sacramentoTransitionMinutesMap,
   'Salem': salem.salemTransitionMinutesMap,
   'Salt Lake City': saltlakecity.saltlakecityTransitionMinutesMap,
   'San Diego': sandiego.sandiegoTransitionMinutesMap,
@@ -812,15 +892,18 @@ final _trans = <String, Map<int, int>>{
   'Sofia': sofia.sofiaTransitionMinutesMap,
   'São Paulo': sopaulo.sopauloTransitionMinutesMap,
   'Srinagar': srinagar.srinagarTransitionMinutesMap,
+  'St. Louis': stlouis.stlouisTransitionMinutesMap,
   'Stockholm': stockholm.stockholmTransitionMinutesMap,
   'Surat': surat.suratTransitionMinutesMap,
   'Surrey': surrey.surreyTransitionMinutesMap,
   'Suva': suva.suvaTransitionMinutesMap,
   'Sydney': sydney.sydneyTransitionMinutesMap,
   'Taipei': taipei.taipeiTransitionMinutesMap,
+  'Tampa': tampa.tampaTransitionMinutesMap,
   'Tashkent': tashkent.tashkentTransitionMinutesMap,
   'Tel Aviv': telaviv.telavivTransitionMinutesMap,
   'Thane': thane.thaneTransitionMinutesMap,
+  'Thessaloniki': thessaloniki.thessalonikiTransitionMinutesMap,
   'Thiruvananthapuram':
       thiruvananthapuram.thiruvananthapuramTransitionMinutesMap,
   'Tiruchirappalli': tiruchirappalli.tiruchirappalliTransitionMinutesMap,
@@ -842,6 +925,7 @@ final _trans = <String, Map<int, int>>{
   'Wellington': wellington.wellingtonTransitionMinutesMap,
   'Winnipeg': winnipeg.winnipegTransitionMinutesMap,
   'Yangon': yangon.yangonTransitionMinutesMap,
+  'Zagreb': zagreb.zagrebTransitionMinutesMap,
   'Zurich': zurich.zurichTransitionMinutesMap,
 };
 Map<int, int> getTransitionMinutes(String city) => _trans[city] ?? const {};
@@ -858,6 +942,7 @@ final _amav = <String, Map<int, int>>{
   'Amman': amman_b.ammanAmavasyaCorrections,
   'Amritsar': amritsar_b.amritsarAmavasyaCorrections,
   'Amsterdam': amsterdam_b.amsterdamAmavasyaCorrections,
+  'Ankara': ankara_b.ankaraAmavasyaCorrections,
   'Athens': athens_b.athensAmavasyaCorrections,
   'Atlanta': atlanta_b.atlantaAmavasyaCorrections,
   'Auckland': auckland_b.aucklandAmavasyaCorrections,
@@ -869,6 +954,7 @@ final _amav = <String, Map<int, int>>{
   'Bangkok': bangkok_b.bangkokAmavasyaCorrections,
   'Barcelona': barcelona_b.barcelonaAmavasyaCorrections,
   'Beijing': beijing_b.beijingAmavasyaCorrections,
+  'Beirut': beirut_b.beirutAmavasyaCorrections,
   'Berlin': berlin_b.berlinAmavasyaCorrections,
   'Bhopal': bhopal_b.bhopalAmavasyaCorrections,
   'Bhubaneswar': bhubaneswar_b.bhubaneswarAmavasyaCorrections,
@@ -891,6 +977,7 @@ final _amav = <String, Map<int, int>>{
   'Chicago': chicago_b.chicagoAmavasyaCorrections,
   'Coimbatore': coimbatore_b.coimbatoreAmavasyaCorrections,
   'Colombo': colombo_b.colomboAmavasyaCorrections,
+  'Columbus': columbus_b.columbusAmavasyaCorrections,
   'Copenhagen': copenhagen_b.copenhagenAmavasyaCorrections,
   'Dallas': dallas_b.dallasAmavasyaCorrections,
   'Dar es Salaam': daressalaam_b.daressalaamAmavasyaCorrections,
@@ -913,17 +1000,21 @@ final _amav = <String, Map<int, int>>{
   'Ghaziabad': ghaziabad_b.ghaziabadAmavasyaCorrections,
   'Glasgow': glasgow_b.glasgowAmavasyaCorrections,
   'Gorakhpur': gorakhpur_b.gorakhpurAmavasyaCorrections,
+  'Gothenburg': gothenburg_b.gothenburgAmavasyaCorrections,
   'Gurgaon': gurgaon_b.gurgaonAmavasyaCorrections,
   'Guwahati': guwahati_b.guwahatiAmavasyaCorrections,
   'Gwalior': gwalior_b.gwaliorAmavasyaCorrections,
+  'Halifax': halifax_b.halifaxAmavasyaCorrections,
   'Hanoi': hanoi_b.hanoiAmavasyaCorrections,
   'Haridwar': haridwar_b.haridwarAmavasyaCorrections,
   'Helsinki': helsinki_b.helsinkiAmavasyaCorrections,
   'Ho Chi Minh City': hochiminhcity_b.hochiminhcityAmavasyaCorrections,
   'Hong Kong': hongkong_b.hongkongAmavasyaCorrections,
+  'Honolulu': honolulu_b.honoluluAmavasyaCorrections,
   'Houston': houston_b.houstonAmavasyaCorrections,
   'Hubli': hubli_b.hubliAmavasyaCorrections,
   'Hyderabad': hyderabad_b.hyderabadAmavasyaCorrections,
+  'Indianapolis': indianapolis_b.indianapolisAmavasyaCorrections,
   'Indore': indore_b.indoreAmavasyaCorrections,
   'Islamabad': islamabad_b.islamabadAmavasyaCorrections,
   'Istanbul': istanbul_b.istanbulAmavasyaCorrections,
@@ -937,6 +1028,7 @@ final _amav = <String, Map<int, int>>{
   'Johannesburg': johannesburg_b.johannesburgAmavasyaCorrections,
   'Kampala': kampala_b.kampalaAmavasyaCorrections,
   'Kanpur': kanpur_b.kanpurAmavasyaCorrections,
+  'Kansas City': kansascity_b.kansascityAmavasyaCorrections,
   'Karachi': karachi_b.karachiAmavasyaCorrections,
   'Kathmandu': kathmandu_b.kathmanduAmavasyaCorrections,
   'Kingston': kingston_b.kingstonAmavasyaCorrections,
@@ -944,6 +1036,7 @@ final _amav = <String, Map<int, int>>{
   'Kochi': kochi_b.kochiAmavasyaCorrections,
   'Kolkata': kolkata_b.kolkataAmavasyaCorrections,
   'Kota': kota_b.kotaAmavasyaCorrections,
+  'Krakow': krakow_b.krakowAmavasyaCorrections,
   'Kuala Lumpur': kualalumpur_b.kualalumpurAmavasyaCorrections,
   'Kuwait City': kuwaitcity_b.kuwaitcityAmavasyaCorrections,
   'Kyiv': kyiv_b.kyivAmavasyaCorrections,
@@ -957,6 +1050,7 @@ final _amav = <String, Map<int, int>>{
   'Los Angeles': losangeles_b.losangelesAmavasyaCorrections,
   'Lucknow': lucknow_b.lucknowAmavasyaCorrections,
   'Ludhiana': ludhiana_b.ludhianaAmavasyaCorrections,
+  'Lyon': lyon_b.lyonAmavasyaCorrections,
   'Madrid': madrid_b.madridAmavasyaCorrections,
   'Madurai': madurai_b.maduraiAmavasyaCorrections,
   'Manchester': manchester_b.manchesterAmavasyaCorrections,
@@ -981,6 +1075,7 @@ final _amav = <String, Map<int, int>>{
   'Mysore': mysore_b.mysoreAmavasyaCorrections,
   'Nagpur': nagpur_b.nagpurAmavasyaCorrections,
   'Nairobi': nairobi_b.nairobiAmavasyaCorrections,
+  'Naples': naples_b.naplesAmavasyaCorrections,
   'Nashik': nashik_b.nashikAmavasyaCorrections,
   'Nashville': nashville_b.nashvilleAmavasyaCorrections,
   'New York': newyork_b.newyorkAmavasyaCorrections,
@@ -997,8 +1092,10 @@ final _amav = <String, Map<int, int>>{
   'Philadelphia': philadelphia_b.philadelphiaAmavasyaCorrections,
   'Phnom Penh': phnompenh_b.phnompenhAmavasyaCorrections,
   'Phoenix': phoenix_b.phoenixAmavasyaCorrections,
+  'Pittsburgh': pittsburgh_b.pittsburghAmavasyaCorrections,
   'Portland': portland_b.portlandAmavasyaCorrections,
   'Port Louis': portlouis_b.portlouisAmavasyaCorrections,
+  'Porto': porto_b.portoAmavasyaCorrections,
   'Port of Spain': portofspain_b.portofspainAmavasyaCorrections,
   'Prague': prague_b.pragueAmavasyaCorrections,
   'Prayagraj': prayagraj_b.prayagrajAmavasyaCorrections,
@@ -1008,10 +1105,14 @@ final _amav = <String, Map<int, int>>{
   'Rajkot': rajkot_b.rajkotAmavasyaCorrections,
   'Raleigh': raleigh_b.raleighAmavasyaCorrections,
   'Ranchi': ranchi_b.ranchiAmavasyaCorrections,
+  'Redmond': redmond_b.redmondAmavasyaCorrections,
+  'Regina': regina_b.reginaAmavasyaCorrections,
   'Rio de Janeiro': riodejaneiro_b.riodejaneiroAmavasyaCorrections,
   'Rishikesh': rishikesh_b.rishikeshAmavasyaCorrections,
   'Riyadh': riyadh_b.riyadhAmavasyaCorrections,
   'Rome': rome_b.romeAmavasyaCorrections,
+  'Rotterdam': rotterdam_b.rotterdamAmavasyaCorrections,
+  'Sacramento': sacramento_b.sacramentoAmavasyaCorrections,
   'Salem': salem_b.salemAmavasyaCorrections,
   'Salt Lake City': saltlakecity_b.saltlakecityAmavasyaCorrections,
   'San Diego': sandiego_b.sandiegoAmavasyaCorrections,
@@ -1026,15 +1127,18 @@ final _amav = <String, Map<int, int>>{
   'Sofia': sofia_b.sofiaAmavasyaCorrections,
   'São Paulo': sopaulo_b.sopauloAmavasyaCorrections,
   'Srinagar': srinagar_b.srinagarAmavasyaCorrections,
+  'St. Louis': stlouis_b.stlouisAmavasyaCorrections,
   'Stockholm': stockholm_b.stockholmAmavasyaCorrections,
   'Surat': surat_b.suratAmavasyaCorrections,
   'Surrey': surrey_b.surreyAmavasyaCorrections,
   'Suva': suva_b.suvaAmavasyaCorrections,
   'Sydney': sydney_b.sydneyAmavasyaCorrections,
   'Taipei': taipei_b.taipeiAmavasyaCorrections,
+  'Tampa': tampa_b.tampaAmavasyaCorrections,
   'Tashkent': tashkent_b.tashkentAmavasyaCorrections,
   'Tel Aviv': telaviv_b.telavivAmavasyaCorrections,
   'Thane': thane_b.thaneAmavasyaCorrections,
+  'Thessaloniki': thessaloniki_b.thessalonikiAmavasyaCorrections,
   'Thiruvananthapuram':
       thiruvananthapuram_b.thiruvananthapuramAmavasyaCorrections,
   'Tiruchirappalli': tiruchirappalli_b.tiruchirappalliAmavasyaCorrections,
@@ -1056,6 +1160,7 @@ final _amav = <String, Map<int, int>>{
   'Wellington': wellington_b.wellingtonAmavasyaCorrections,
   'Winnipeg': winnipeg_b.winnipegAmavasyaCorrections,
   'Yangon': yangon_b.yangonAmavasyaCorrections,
+  'Zagreb': zagreb_b.zagrebAmavasyaCorrections,
   'Zurich': zurich_b.zurichAmavasyaCorrections,
 };
 Map<int, int> getAmavasyaCorrections(String city) => _amav[city] ?? const {};
@@ -1072,6 +1177,7 @@ final _purn = <String, Map<int, int>>{
   'Amman': amman_b.ammanPurnimaCorrections,
   'Amritsar': amritsar_b.amritsarPurnimaCorrections,
   'Amsterdam': amsterdam_b.amsterdamPurnimaCorrections,
+  'Ankara': ankara_b.ankaraPurnimaCorrections,
   'Athens': athens_b.athensPurnimaCorrections,
   'Atlanta': atlanta_b.atlantaPurnimaCorrections,
   'Auckland': auckland_b.aucklandPurnimaCorrections,
@@ -1083,6 +1189,7 @@ final _purn = <String, Map<int, int>>{
   'Bangkok': bangkok_b.bangkokPurnimaCorrections,
   'Barcelona': barcelona_b.barcelonaPurnimaCorrections,
   'Beijing': beijing_b.beijingPurnimaCorrections,
+  'Beirut': beirut_b.beirutPurnimaCorrections,
   'Berlin': berlin_b.berlinPurnimaCorrections,
   'Bhopal': bhopal_b.bhopalPurnimaCorrections,
   'Bhubaneswar': bhubaneswar_b.bhubaneswarPurnimaCorrections,
@@ -1105,6 +1212,7 @@ final _purn = <String, Map<int, int>>{
   'Chicago': chicago_b.chicagoPurnimaCorrections,
   'Coimbatore': coimbatore_b.coimbatorePurnimaCorrections,
   'Colombo': colombo_b.colomboPurnimaCorrections,
+  'Columbus': columbus_b.columbusPurnimaCorrections,
   'Copenhagen': copenhagen_b.copenhagenPurnimaCorrections,
   'Dallas': dallas_b.dallasPurnimaCorrections,
   'Dar es Salaam': daressalaam_b.daressalaamPurnimaCorrections,
@@ -1127,17 +1235,21 @@ final _purn = <String, Map<int, int>>{
   'Ghaziabad': ghaziabad_b.ghaziabadPurnimaCorrections,
   'Glasgow': glasgow_b.glasgowPurnimaCorrections,
   'Gorakhpur': gorakhpur_b.gorakhpurPurnimaCorrections,
+  'Gothenburg': gothenburg_b.gothenburgPurnimaCorrections,
   'Gurgaon': gurgaon_b.gurgaonPurnimaCorrections,
   'Guwahati': guwahati_b.guwahatiPurnimaCorrections,
   'Gwalior': gwalior_b.gwaliorPurnimaCorrections,
+  'Halifax': halifax_b.halifaxPurnimaCorrections,
   'Hanoi': hanoi_b.hanoiPurnimaCorrections,
   'Haridwar': haridwar_b.haridwarPurnimaCorrections,
   'Helsinki': helsinki_b.helsinkiPurnimaCorrections,
   'Ho Chi Minh City': hochiminhcity_b.hochiminhcityPurnimaCorrections,
   'Hong Kong': hongkong_b.hongkongPurnimaCorrections,
+  'Honolulu': honolulu_b.honoluluPurnimaCorrections,
   'Houston': houston_b.houstonPurnimaCorrections,
   'Hubli': hubli_b.hubliPurnimaCorrections,
   'Hyderabad': hyderabad_b.hyderabadPurnimaCorrections,
+  'Indianapolis': indianapolis_b.indianapolisPurnimaCorrections,
   'Indore': indore_b.indorePurnimaCorrections,
   'Islamabad': islamabad_b.islamabadPurnimaCorrections,
   'Istanbul': istanbul_b.istanbulPurnimaCorrections,
@@ -1151,6 +1263,7 @@ final _purn = <String, Map<int, int>>{
   'Johannesburg': johannesburg_b.johannesburgPurnimaCorrections,
   'Kampala': kampala_b.kampalaPurnimaCorrections,
   'Kanpur': kanpur_b.kanpurPurnimaCorrections,
+  'Kansas City': kansascity_b.kansascityPurnimaCorrections,
   'Karachi': karachi_b.karachiPurnimaCorrections,
   'Kathmandu': kathmandu_b.kathmanduPurnimaCorrections,
   'Kingston': kingston_b.kingstonPurnimaCorrections,
@@ -1158,6 +1271,7 @@ final _purn = <String, Map<int, int>>{
   'Kochi': kochi_b.kochiPurnimaCorrections,
   'Kolkata': kolkata_b.kolkataPurnimaCorrections,
   'Kota': kota_b.kotaPurnimaCorrections,
+  'Krakow': krakow_b.krakowPurnimaCorrections,
   'Kuala Lumpur': kualalumpur_b.kualalumpurPurnimaCorrections,
   'Kuwait City': kuwaitcity_b.kuwaitcityPurnimaCorrections,
   'Kyiv': kyiv_b.kyivPurnimaCorrections,
@@ -1171,6 +1285,7 @@ final _purn = <String, Map<int, int>>{
   'Los Angeles': losangeles_b.losangelesPurnimaCorrections,
   'Lucknow': lucknow_b.lucknowPurnimaCorrections,
   'Ludhiana': ludhiana_b.ludhianaPurnimaCorrections,
+  'Lyon': lyon_b.lyonPurnimaCorrections,
   'Madrid': madrid_b.madridPurnimaCorrections,
   'Madurai': madurai_b.maduraiPurnimaCorrections,
   'Manchester': manchester_b.manchesterPurnimaCorrections,
@@ -1195,6 +1310,7 @@ final _purn = <String, Map<int, int>>{
   'Mysore': mysore_b.mysorePurnimaCorrections,
   'Nagpur': nagpur_b.nagpurPurnimaCorrections,
   'Nairobi': nairobi_b.nairobiPurnimaCorrections,
+  'Naples': naples_b.naplesPurnimaCorrections,
   'Nashik': nashik_b.nashikPurnimaCorrections,
   'Nashville': nashville_b.nashvillePurnimaCorrections,
   'New York': newyork_b.newyorkPurnimaCorrections,
@@ -1211,8 +1327,10 @@ final _purn = <String, Map<int, int>>{
   'Philadelphia': philadelphia_b.philadelphiaPurnimaCorrections,
   'Phnom Penh': phnompenh_b.phnompenhPurnimaCorrections,
   'Phoenix': phoenix_b.phoenixPurnimaCorrections,
+  'Pittsburgh': pittsburgh_b.pittsburghPurnimaCorrections,
   'Portland': portland_b.portlandPurnimaCorrections,
   'Port Louis': portlouis_b.portlouisPurnimaCorrections,
+  'Porto': porto_b.portoPurnimaCorrections,
   'Port of Spain': portofspain_b.portofspainPurnimaCorrections,
   'Prague': prague_b.praguePurnimaCorrections,
   'Prayagraj': prayagraj_b.prayagrajPurnimaCorrections,
@@ -1222,10 +1340,14 @@ final _purn = <String, Map<int, int>>{
   'Rajkot': rajkot_b.rajkotPurnimaCorrections,
   'Raleigh': raleigh_b.raleighPurnimaCorrections,
   'Ranchi': ranchi_b.ranchiPurnimaCorrections,
+  'Redmond': redmond_b.redmondPurnimaCorrections,
+  'Regina': regina_b.reginaPurnimaCorrections,
   'Rio de Janeiro': riodejaneiro_b.riodejaneiroPurnimaCorrections,
   'Rishikesh': rishikesh_b.rishikeshPurnimaCorrections,
   'Riyadh': riyadh_b.riyadhPurnimaCorrections,
   'Rome': rome_b.romePurnimaCorrections,
+  'Rotterdam': rotterdam_b.rotterdamPurnimaCorrections,
+  'Sacramento': sacramento_b.sacramentoPurnimaCorrections,
   'Salem': salem_b.salemPurnimaCorrections,
   'Salt Lake City': saltlakecity_b.saltlakecityPurnimaCorrections,
   'San Diego': sandiego_b.sandiegoPurnimaCorrections,
@@ -1240,15 +1362,18 @@ final _purn = <String, Map<int, int>>{
   'Sofia': sofia_b.sofiaPurnimaCorrections,
   'São Paulo': sopaulo_b.sopauloPurnimaCorrections,
   'Srinagar': srinagar_b.srinagarPurnimaCorrections,
+  'St. Louis': stlouis_b.stlouisPurnimaCorrections,
   'Stockholm': stockholm_b.stockholmPurnimaCorrections,
   'Surat': surat_b.suratPurnimaCorrections,
   'Surrey': surrey_b.surreyPurnimaCorrections,
   'Suva': suva_b.suvaPurnimaCorrections,
   'Sydney': sydney_b.sydneyPurnimaCorrections,
   'Taipei': taipei_b.taipeiPurnimaCorrections,
+  'Tampa': tampa_b.tampaPurnimaCorrections,
   'Tashkent': tashkent_b.tashkentPurnimaCorrections,
   'Tel Aviv': telaviv_b.telavivPurnimaCorrections,
   'Thane': thane_b.thanePurnimaCorrections,
+  'Thessaloniki': thessaloniki_b.thessalonikiPurnimaCorrections,
   'Thiruvananthapuram':
       thiruvananthapuram_b.thiruvananthapuramPurnimaCorrections,
   'Tiruchirappalli': tiruchirappalli_b.tiruchirappalliPurnimaCorrections,
@@ -1270,6 +1395,7 @@ final _purn = <String, Map<int, int>>{
   'Wellington': wellington_b.wellingtonPurnimaCorrections,
   'Winnipeg': winnipeg_b.winnipegPurnimaCorrections,
   'Yangon': yangon_b.yangonPurnimaCorrections,
+  'Zagreb': zagreb_b.zagrebPurnimaCorrections,
   'Zurich': zurich_b.zurichPurnimaCorrections,
 };
 Map<int, int> getPurnimaCorrections(String city) => _purn[city] ?? const {};
@@ -1286,6 +1412,7 @@ final _sank = <String, Map<int, int>>{
   'Amman': amman_b.ammanSankrantiCorrections,
   'Amritsar': amritsar_b.amritsarSankrantiCorrections,
   'Amsterdam': amsterdam_b.amsterdamSankrantiCorrections,
+  'Ankara': ankara_b.ankaraSankrantiCorrections,
   'Athens': athens_b.athensSankrantiCorrections,
   'Atlanta': atlanta_b.atlantaSankrantiCorrections,
   'Auckland': auckland_b.aucklandSankrantiCorrections,
@@ -1297,6 +1424,7 @@ final _sank = <String, Map<int, int>>{
   'Bangkok': bangkok_b.bangkokSankrantiCorrections,
   'Barcelona': barcelona_b.barcelonaSankrantiCorrections,
   'Beijing': beijing_b.beijingSankrantiCorrections,
+  'Beirut': beirut_b.beirutSankrantiCorrections,
   'Berlin': berlin_b.berlinSankrantiCorrections,
   'Bhopal': bhopal_b.bhopalSankrantiCorrections,
   'Bhubaneswar': bhubaneswar_b.bhubaneswarSankrantiCorrections,
@@ -1319,6 +1447,7 @@ final _sank = <String, Map<int, int>>{
   'Chicago': chicago_b.chicagoSankrantiCorrections,
   'Coimbatore': coimbatore_b.coimbatoreSankrantiCorrections,
   'Colombo': colombo_b.colomboSankrantiCorrections,
+  'Columbus': columbus_b.columbusSankrantiCorrections,
   'Copenhagen': copenhagen_b.copenhagenSankrantiCorrections,
   'Dallas': dallas_b.dallasSankrantiCorrections,
   'Dar es Salaam': daressalaam_b.daressalaamSankrantiCorrections,
@@ -1341,17 +1470,21 @@ final _sank = <String, Map<int, int>>{
   'Ghaziabad': ghaziabad_b.ghaziabadSankrantiCorrections,
   'Glasgow': glasgow_b.glasgowSankrantiCorrections,
   'Gorakhpur': gorakhpur_b.gorakhpurSankrantiCorrections,
+  'Gothenburg': gothenburg_b.gothenburgSankrantiCorrections,
   'Gurgaon': gurgaon_b.gurgaonSankrantiCorrections,
   'Guwahati': guwahati_b.guwahatiSankrantiCorrections,
   'Gwalior': gwalior_b.gwaliorSankrantiCorrections,
+  'Halifax': halifax_b.halifaxSankrantiCorrections,
   'Hanoi': hanoi_b.hanoiSankrantiCorrections,
   'Haridwar': haridwar_b.haridwarSankrantiCorrections,
   'Helsinki': helsinki_b.helsinkiSankrantiCorrections,
   'Ho Chi Minh City': hochiminhcity_b.hochiminhcitySankrantiCorrections,
   'Hong Kong': hongkong_b.hongkongSankrantiCorrections,
+  'Honolulu': honolulu_b.honoluluSankrantiCorrections,
   'Houston': houston_b.houstonSankrantiCorrections,
   'Hubli': hubli_b.hubliSankrantiCorrections,
   'Hyderabad': hyderabad_b.hyderabadSankrantiCorrections,
+  'Indianapolis': indianapolis_b.indianapolisSankrantiCorrections,
   'Indore': indore_b.indoreSankrantiCorrections,
   'Islamabad': islamabad_b.islamabadSankrantiCorrections,
   'Istanbul': istanbul_b.istanbulSankrantiCorrections,
@@ -1365,6 +1498,7 @@ final _sank = <String, Map<int, int>>{
   'Johannesburg': johannesburg_b.johannesburgSankrantiCorrections,
   'Kampala': kampala_b.kampalaSankrantiCorrections,
   'Kanpur': kanpur_b.kanpurSankrantiCorrections,
+  'Kansas City': kansascity_b.kansascitySankrantiCorrections,
   'Karachi': karachi_b.karachiSankrantiCorrections,
   'Kathmandu': kathmandu_b.kathmanduSankrantiCorrections,
   'Kingston': kingston_b.kingstonSankrantiCorrections,
@@ -1372,6 +1506,7 @@ final _sank = <String, Map<int, int>>{
   'Kochi': kochi_b.kochiSankrantiCorrections,
   'Kolkata': kolkata_b.kolkataSankrantiCorrections,
   'Kota': kota_b.kotaSankrantiCorrections,
+  'Krakow': krakow_b.krakowSankrantiCorrections,
   'Kuala Lumpur': kualalumpur_b.kualalumpurSankrantiCorrections,
   'Kuwait City': kuwaitcity_b.kuwaitcitySankrantiCorrections,
   'Kyiv': kyiv_b.kyivSankrantiCorrections,
@@ -1385,6 +1520,7 @@ final _sank = <String, Map<int, int>>{
   'Los Angeles': losangeles_b.losangelesSankrantiCorrections,
   'Lucknow': lucknow_b.lucknowSankrantiCorrections,
   'Ludhiana': ludhiana_b.ludhianaSankrantiCorrections,
+  'Lyon': lyon_b.lyonSankrantiCorrections,
   'Madrid': madrid_b.madridSankrantiCorrections,
   'Madurai': madurai_b.maduraiSankrantiCorrections,
   'Manchester': manchester_b.manchesterSankrantiCorrections,
@@ -1409,6 +1545,7 @@ final _sank = <String, Map<int, int>>{
   'Mysore': mysore_b.mysoreSankrantiCorrections,
   'Nagpur': nagpur_b.nagpurSankrantiCorrections,
   'Nairobi': nairobi_b.nairobiSankrantiCorrections,
+  'Naples': naples_b.naplesSankrantiCorrections,
   'Nashik': nashik_b.nashikSankrantiCorrections,
   'Nashville': nashville_b.nashvilleSankrantiCorrections,
   'New York': newyork_b.newyorkSankrantiCorrections,
@@ -1425,8 +1562,10 @@ final _sank = <String, Map<int, int>>{
   'Philadelphia': philadelphia_b.philadelphiaSankrantiCorrections,
   'Phnom Penh': phnompenh_b.phnompenhSankrantiCorrections,
   'Phoenix': phoenix_b.phoenixSankrantiCorrections,
+  'Pittsburgh': pittsburgh_b.pittsburghSankrantiCorrections,
   'Portland': portland_b.portlandSankrantiCorrections,
   'Port Louis': portlouis_b.portlouisSankrantiCorrections,
+  'Porto': porto_b.portoSankrantiCorrections,
   'Port of Spain': portofspain_b.portofspainSankrantiCorrections,
   'Prague': prague_b.pragueSankrantiCorrections,
   'Prayagraj': prayagraj_b.prayagrajSankrantiCorrections,
@@ -1436,10 +1575,14 @@ final _sank = <String, Map<int, int>>{
   'Rajkot': rajkot_b.rajkotSankrantiCorrections,
   'Raleigh': raleigh_b.raleighSankrantiCorrections,
   'Ranchi': ranchi_b.ranchiSankrantiCorrections,
+  'Redmond': redmond_b.redmondSankrantiCorrections,
+  'Regina': regina_b.reginaSankrantiCorrections,
   'Rio de Janeiro': riodejaneiro_b.riodejaneiroSankrantiCorrections,
   'Rishikesh': rishikesh_b.rishikeshSankrantiCorrections,
   'Riyadh': riyadh_b.riyadhSankrantiCorrections,
   'Rome': rome_b.romeSankrantiCorrections,
+  'Rotterdam': rotterdam_b.rotterdamSankrantiCorrections,
+  'Sacramento': sacramento_b.sacramentoSankrantiCorrections,
   'Salem': salem_b.salemSankrantiCorrections,
   'Salt Lake City': saltlakecity_b.saltlakecitySankrantiCorrections,
   'San Diego': sandiego_b.sandiegoSankrantiCorrections,
@@ -1454,15 +1597,18 @@ final _sank = <String, Map<int, int>>{
   'Sofia': sofia_b.sofiaSankrantiCorrections,
   'São Paulo': sopaulo_b.sopauloSankrantiCorrections,
   'Srinagar': srinagar_b.srinagarSankrantiCorrections,
+  'St. Louis': stlouis_b.stlouisSankrantiCorrections,
   'Stockholm': stockholm_b.stockholmSankrantiCorrections,
   'Surat': surat_b.suratSankrantiCorrections,
   'Surrey': surrey_b.surreySankrantiCorrections,
   'Suva': suva_b.suvaSankrantiCorrections,
   'Sydney': sydney_b.sydneySankrantiCorrections,
   'Taipei': taipei_b.taipeiSankrantiCorrections,
+  'Tampa': tampa_b.tampaSankrantiCorrections,
   'Tashkent': tashkent_b.tashkentSankrantiCorrections,
   'Tel Aviv': telaviv_b.telavivSankrantiCorrections,
   'Thane': thane_b.thaneSankrantiCorrections,
+  'Thessaloniki': thessaloniki_b.thessalonikiSankrantiCorrections,
   'Thiruvananthapuram':
       thiruvananthapuram_b.thiruvananthapuramSankrantiCorrections,
   'Tiruchirappalli': tiruchirappalli_b.tiruchirappalliSankrantiCorrections,
@@ -1484,6 +1630,7 @@ final _sank = <String, Map<int, int>>{
   'Wellington': wellington_b.wellingtonSankrantiCorrections,
   'Winnipeg': winnipeg_b.winnipegSankrantiCorrections,
   'Yangon': yangon_b.yangonSankrantiCorrections,
+  'Zagreb': zagreb_b.zagrebSankrantiCorrections,
   'Zurich': zurich_b.zurichSankrantiCorrections,
 };
 Map<int, int> getSankrantiCorrections(String city) => _sank[city] ?? const {};
