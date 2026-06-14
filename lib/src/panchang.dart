@@ -95,7 +95,8 @@ class Panchang {
 
   /// Recurring festival (e.g. monthly Ekadashi/Purnima) → all occurrences in
   /// the given year and city, each with its tithi span.
-  List<FestivalDate> recurringDates(FestivalDef festival, int year, String city) {
+  List<FestivalDate> recurringDates(
+      FestivalDef festival, int year, String city) {
     return findRecurringDates(festival, year, city, _calc);
   }
 

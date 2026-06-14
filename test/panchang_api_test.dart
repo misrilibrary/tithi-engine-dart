@@ -26,7 +26,8 @@ void main() {
     });
 
     test('resolved getDate actually lands on the requested tithi', () {
-      final d = p.getDate(LunarMonth.kartika, Paksha.shukla, 15, 2026, 'Ujjain');
+      final d =
+          p.getDate(LunarMonth.kartika, Paksha.shukla, 15, 2026, 'Ujjain');
       expect(d, isNotNull);
       final info = p.forDate(d!, 'Ujjain');
       expect(info.tithiInPaksha, 15);
@@ -39,7 +40,8 @@ void main() {
 
     test('finds an occurrence on/after `from` matching the spec', () {
       final from = DateTime.utc(2026, 1, 1);
-      final next = p.findNext(LunarMonth.magha, Paksha.shukla, 5, 'Ujjain', from: from);
+      final next =
+          p.findNext(LunarMonth.magha, Paksha.shukla, 5, 'Ujjain', from: from);
       expect(next, isNotNull);
       expect(next!.isBefore(from), isFalse);
       final info = p.forDate(next, 'Ujjain');
@@ -51,9 +53,12 @@ void main() {
   group('Panchang.transitionTime', () {
     final p = Panchang([registerAllCities]);
 
-    test('most days have a tithi transition in the sunrise→next-sunrise window', () {
+    test('most days have a tithi transition in the sunrise→next-sunrise window',
+        () {
       var withTransition = 0;
-      for (var d = DateTime.utc(2026, 1, 1); d.month == 1; d = d.add(const Duration(days: 1))) {
+      for (var d = DateTime.utc(2026, 1, 1);
+          d.month == 1;
+          d = d.add(const Duration(days: 1))) {
         if (p.transitionTime(d) != null) withTransition++;
       }
       // A tithi lasts ~24h, so nearly every day has exactly one transition.
@@ -72,11 +77,14 @@ void main() {
 
   group('Panchang.forDate with time-of-day (utcOffset path)', () {
     final p = Panchang([registerAllCities]);
-    final offset = Duration(minutes: (getLocationForCity('Delhi').utcOffset * 60).round());
+    final offset =
+        Duration(minutes: (getLocationForCity('Delhi').utcOffset * 60).round());
 
     test('time-of-day query returns a valid tithi and full display', () {
-      final morning = p.forDate(DateTime(2026, 5, 11, 7), 'Delhi', utcOffset: offset);
-      final evening = p.forDate(DateTime(2026, 5, 11, 23), 'Delhi', utcOffset: offset);
+      final morning =
+          p.forDate(DateTime(2026, 5, 11, 7), 'Delhi', utcOffset: offset);
+      final evening =
+          p.forDate(DateTime(2026, 5, 11, 23), 'Delhi', utcOffset: offset);
       for (final info in [morning, evening]) {
         expect(info.tithiNumber, inInclusiveRange(1, 30));
         expect(info.displayName, isNotEmpty);
@@ -105,29 +113,39 @@ void main() {
   group('TithiInfo.fromStored', () {
     test('Purnima / Amavasya naming', () {
       final purnima = TithiInfo.fromStored(
-          tithiNumber: 15, month: LunarMonth.kartika, storedSystem: MonthSystem.purnimant);
+          tithiNumber: 15,
+          month: LunarMonth.kartika,
+          storedSystem: MonthSystem.purnimant);
       expect(purnima.tithiName, 'Purnima');
       expect(purnima.paksha, Paksha.shukla);
       expect(purnima.displayName, 'Kartika Shukla Purnima');
 
       final amavasya = TithiInfo.fromStored(
-          tithiNumber: 30, month: LunarMonth.kartika, storedSystem: MonthSystem.purnimant);
+          tithiNumber: 30,
+          month: LunarMonth.kartika,
+          storedSystem: MonthSystem.purnimant);
       expect(amavasya.tithiName, 'Amavasya');
       expect(amavasya.paksha, Paksha.krishna);
     });
 
     test('same display system → month unchanged', () {
       final t = TithiInfo.fromStored(
-          tithiNumber: 5, month: LunarMonth.magha, storedSystem: MonthSystem.purnimant,
+          tithiNumber: 5,
+          month: LunarMonth.magha,
+          storedSystem: MonthSystem.purnimant,
           displaySystem: MonthSystem.purnimant);
       expect(t.month, LunarMonth.magha);
       expect(t.tithiInPaksha, 5);
     });
 
-    test('cross-system Krishna paksha shifts the month name (Purnimant→Amant = −1)', () {
+    test(
+        'cross-system Krishna paksha shifts the month name (Purnimant→Amant = −1)',
+        () {
       // Krishna paksha (tithi 16–30): Purnimant assigns the NEXT month vs Amant.
       final t = TithiInfo.fromStored(
-          tithiNumber: 20, month: LunarMonth.pausha, storedSystem: MonthSystem.purnimant,
+          tithiNumber: 20,
+          month: LunarMonth.pausha,
+          storedSystem: MonthSystem.purnimant,
           displaySystem: MonthSystem.amant);
       expect(t.paksha, Paksha.krishna);
       expect(t.month, LunarMonth.margashirsha); // pausha − 1
@@ -135,14 +153,18 @@ void main() {
 
     test('Shukla paksha is unchanged across systems', () {
       final t = TithiInfo.fromStored(
-          tithiNumber: 5, month: LunarMonth.pausha, storedSystem: MonthSystem.purnimant,
+          tithiNumber: 5,
+          month: LunarMonth.pausha,
+          storedSystem: MonthSystem.purnimant,
           displaySystem: MonthSystem.amant);
       expect(t.month, LunarMonth.pausha);
     });
 
     test('adhika prefix in display name', () {
       final t = TithiInfo.fromStored(
-          tithiNumber: 3, month: LunarMonth.shravana, storedSystem: MonthSystem.purnimant,
+          tithiNumber: 3,
+          month: LunarMonth.shravana,
+          storedSystem: MonthSystem.purnimant,
           isAdhika: true);
       expect(t.isAdhika, isTrue);
       expect(t.displayName, startsWith('Adhika '));
@@ -185,8 +207,11 @@ void main() {
 
     test('getLunarMonth resolves in both systems', () {
       for (final sun in [15.0, 75.0, 200.0, 330.0]) {
-        expect(getLunarMonth(sun, system: MonthSystem.purnimant), isA<LunarMonth>());
-        expect(getLunarMonth(sun, system: MonthSystem.amant, isKrishnaPaksha: true),
+        expect(getLunarMonth(sun, system: MonthSystem.purnimant),
+            isA<LunarMonth>());
+        expect(
+            getLunarMonth(sun,
+                system: MonthSystem.amant, isKrishnaPaksha: true),
             isA<LunarMonth>());
       }
     });

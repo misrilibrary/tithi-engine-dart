@@ -24,10 +24,13 @@ void main() {
   int delta(int a, int b) => (b - a + 30) % 30; // sunrise-to-sunrise tithi step
 
   // Daily sunrise tithis for a year at one city, with parallel dates.
-  ({List<DateTime> dates, List<TithiInfo> info}) yearSeq(int year, String city) {
+  ({List<DateTime> dates, List<TithiInfo> info}) yearSeq(
+      int year, String city) {
     final dates = <DateTime>[];
     final info = <TithiInfo>[];
-    for (var d = DateTime.utc(year, 1, 1); d.year == year; d = d.add(const Duration(days: 1))) {
+    for (var d = DateTime.utc(year, 1, 1);
+        d.year == year;
+        d = d.add(const Duration(days: 1))) {
       dates.add(d);
       info.add(p.forDate(d, city));
     }
@@ -40,20 +43,28 @@ void main() {
     test('vriddhi happens: a tithi repeats on two consecutive sunrises', () {
       var n = 0;
       for (var i = 0; i + 1 < seq.info.length; i++) {
-        if (delta(seq.info[i].tithiNumber, seq.info[i + 1].tithiNumber) == 0) n++;
+        if (delta(seq.info[i].tithiNumber, seq.info[i + 1].tithiNumber) == 0) {
+          n++;
+        }
       }
-      expect(n, greaterThan(0), reason: 'expected repeated (vriddhi) tithis within a year');
+      expect(n, greaterThan(0),
+          reason: 'expected repeated (vriddhi) tithis within a year');
     });
 
     test('kshaya happens: a tithi is skipped between consecutive sunrises', () {
       var n = 0;
       for (var i = 0; i + 1 < seq.info.length; i++) {
-        if (delta(seq.info[i].tithiNumber, seq.info[i + 1].tithiNumber) == 2) n++;
+        if (delta(seq.info[i].tithiNumber, seq.info[i + 1].tithiNumber) == 2) {
+          n++;
+        }
       }
-      expect(n, greaterThan(0), reason: 'expected skipped (kshaya) tithis within a year');
+      expect(n, greaterThan(0),
+          reason: 'expected skipped (kshaya) tithis within a year');
     });
 
-    test('every sunrise-to-sunrise step is +1 (normal), 0 (vriddhi) or +2 (kshaya)', () {
+    test(
+        'every sunrise-to-sunrise step is +1 (normal), 0 (vriddhi) or +2 (kshaya)',
+        () {
       for (var i = 0; i + 1 < seq.info.length; i++) {
         expect(delta(seq.info[i].tithiNumber, seq.info[i + 1].tithiNumber),
             anyOf(0, 1, 2),
@@ -71,12 +82,14 @@ void main() {
         final seq = yearSeq(year, 'Ujjain');
         for (var i = 0; i + 1 < seq.info.length; i++) {
           final a = seq.info[i], b = seq.info[i + 1];
-          if (a.tithiNumber != b.tithiNumber) continue;     // not vriddhi
+          if (a.tithiNumber != b.tithiNumber) continue; // not vriddhi
           if (a.tithiNumber == 15 || a.tithiNumber == 30) continue; // boundary
-          if (a.month != b.month) continue;                 // same month
-          final dates = p.getDates(a.month, a.paksha, a.tithiInPaksha, year, 'Ujjain');
+          if (a.month != b.month) continue; // same month
+          final dates =
+              p.getDates(a.month, a.paksha, a.tithiInPaksha, year, 'Ujjain');
           expect(dates, contains(seq.dates[i + 1]),
-              reason: 'vriddhi ${a.displayName} ($year): finder should return the '
+              reason:
+                  'vriddhi ${a.displayName} ($year): finder should return the '
                   'second day ${seq.dates[i + 1]}; got $dates');
           return; // one clean case is enough
         }
@@ -92,21 +105,25 @@ void main() {
         for (var i = 0; i + 1 < seq.info.length; i++) {
           final before = seq.info[i].tithiNumber;
           final after = seq.info[i + 1].tithiNumber;
-          if (delta(before, after) != 2) continue;          // not kshaya
-          if (before == 15 || before == 30) continue;       // keep skip within a paksha
+          if (delta(before, after) != 2) continue; // not kshaya
+          if (before == 15 || before == 30) {
+            continue; // keep skip within a paksha
+          }
           if (seq.info[i].month != seq.info[i + 1].month) continue;
-          final skipped = before + 1;                        // the kshaya tithi
+          final skipped = before + 1; // the kshaya tithi
           final paksha = skipped <= 15 ? Paksha.shukla : Paksha.krishna;
           final inPaksha = skipped <= 15 ? skipped : skipped - 15;
           // The skipped tithi never appears at sunrise on the bounding days.
           expect(before, isNot(skipped));
           expect(after, isNot(skipped));
           // Finder maps it to the prior day (where `before` was at sunrise).
-          final dates = p.getDates(seq.info[i].month, paksha, inPaksha, year, 'Ujjain');
+          final dates =
+              p.getDates(seq.info[i].month, paksha, inPaksha, year, 'Ujjain');
           expect(dates, isNotEmpty,
               reason: 'kshaya tithi should still resolve to a date');
           expect(dates, contains(seq.dates[i]),
-              reason: 'kshaya skipped=$skipped ($year): finder should return the '
+              reason:
+                  'kshaya skipped=$skipped ($year): finder should return the '
                   'prior day ${seq.dates[i]}; got $dates');
           return; // one clean case is enough
         }

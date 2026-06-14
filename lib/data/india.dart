@@ -7,65 +7,103 @@ library;
 
 import 'package:tithi_engine/src/regions/registry.dart';
 import 'package:tithi_engine/src/regions/delhi/corrections.dart' as delhi;
-import 'package:tithi_engine/src/regions/delhi/boundary_corrections.dart' as delhi_b;
+import 'package:tithi_engine/src/regions/delhi/boundary_corrections.dart'
+    as delhi_b;
 import 'package:tithi_engine/src/regions/mumbai/corrections.dart' as mumbai;
-import 'package:tithi_engine/src/regions/mumbai/boundary_corrections.dart' as mumbai_b;
+import 'package:tithi_engine/src/regions/mumbai/boundary_corrections.dart'
+    as mumbai_b;
 import 'package:tithi_engine/src/regions/kolkata/corrections.dart' as kolkata;
-import 'package:tithi_engine/src/regions/kolkata/boundary_corrections.dart' as kolkata_b;
+import 'package:tithi_engine/src/regions/kolkata/boundary_corrections.dart'
+    as kolkata_b;
 import 'package:tithi_engine/src/regions/chennai/corrections.dart' as chennai;
-import 'package:tithi_engine/src/regions/chennai/boundary_corrections.dart' as chennai_b;
+import 'package:tithi_engine/src/regions/chennai/boundary_corrections.dart'
+    as chennai_b;
 import 'package:tithi_engine/src/regions/srinagar/corrections.dart' as srinagar;
-import 'package:tithi_engine/src/regions/srinagar/boundary_corrections.dart' as srinagar_b;
-import 'package:tithi_engine/src/regions/bangalore/corrections.dart' as bangalore;
-import 'package:tithi_engine/src/regions/bangalore/boundary_corrections.dart' as bangalore_b;
-import 'package:tithi_engine/src/regions/hyderabad/corrections.dart' as hyderabad;
-import 'package:tithi_engine/src/regions/hyderabad/boundary_corrections.dart' as hyderabad_b;
+import 'package:tithi_engine/src/regions/srinagar/boundary_corrections.dart'
+    as srinagar_b;
+import 'package:tithi_engine/src/regions/bangalore/corrections.dart'
+    as bangalore;
+import 'package:tithi_engine/src/regions/bangalore/boundary_corrections.dart'
+    as bangalore_b;
+import 'package:tithi_engine/src/regions/hyderabad/corrections.dart'
+    as hyderabad;
+import 'package:tithi_engine/src/regions/hyderabad/boundary_corrections.dart'
+    as hyderabad_b;
 import 'package:tithi_engine/src/regions/pune/corrections.dart' as pune;
-import 'package:tithi_engine/src/regions/pune/boundary_corrections.dart' as pune_b;
-import 'package:tithi_engine/src/regions/ahmedabad/corrections.dart' as ahmedabad;
-import 'package:tithi_engine/src/regions/ahmedabad/boundary_corrections.dart' as ahmedabad_b;
+import 'package:tithi_engine/src/regions/pune/boundary_corrections.dart'
+    as pune_b;
+import 'package:tithi_engine/src/regions/ahmedabad/corrections.dart'
+    as ahmedabad;
+import 'package:tithi_engine/src/regions/ahmedabad/boundary_corrections.dart'
+    as ahmedabad_b;
 import 'package:tithi_engine/src/regions/jaipur/corrections.dart' as jaipur;
-import 'package:tithi_engine/src/regions/jaipur/boundary_corrections.dart' as jaipur_b;
+import 'package:tithi_engine/src/regions/jaipur/boundary_corrections.dart'
+    as jaipur_b;
 import 'package:tithi_engine/src/regions/lucknow/corrections.dart' as lucknow;
-import 'package:tithi_engine/src/regions/lucknow/boundary_corrections.dart' as lucknow_b;
-import 'package:tithi_engine/src/regions/chandigarh/corrections.dart' as chandigarh;
-import 'package:tithi_engine/src/regions/chandigarh/boundary_corrections.dart' as chandigarh_b;
+import 'package:tithi_engine/src/regions/lucknow/boundary_corrections.dart'
+    as lucknow_b;
+import 'package:tithi_engine/src/regions/chandigarh/corrections.dart'
+    as chandigarh;
+import 'package:tithi_engine/src/regions/chandigarh/boundary_corrections.dart'
+    as chandigarh_b;
 import 'package:tithi_engine/src/regions/jammu/corrections.dart' as jammu;
-import 'package:tithi_engine/src/regions/jammu/boundary_corrections.dart' as jammu_b;
+import 'package:tithi_engine/src/regions/jammu/boundary_corrections.dart'
+    as jammu_b;
 import 'package:tithi_engine/src/regions/indore/corrections.dart' as indore;
-import 'package:tithi_engine/src/regions/indore/boundary_corrections.dart' as indore_b;
+import 'package:tithi_engine/src/regions/indore/boundary_corrections.dart'
+    as indore_b;
 import 'package:tithi_engine/src/regions/ujjain/corrections.dart' as ujjain;
-import 'package:tithi_engine/src/regions/ujjain/boundary_corrections.dart' as ujjain_b;
+import 'package:tithi_engine/src/regions/ujjain/boundary_corrections.dart'
+    as ujjain_b;
 import 'package:tithi_engine/src/regions/bhopal/corrections.dart' as bhopal;
-import 'package:tithi_engine/src/regions/bhopal/boundary_corrections.dart' as bhopal_b;
+import 'package:tithi_engine/src/regions/bhopal/boundary_corrections.dart'
+    as bhopal_b;
 import 'package:tithi_engine/src/regions/nagpur/corrections.dart' as nagpur;
-import 'package:tithi_engine/src/regions/nagpur/boundary_corrections.dart' as nagpur_b;
+import 'package:tithi_engine/src/regions/nagpur/boundary_corrections.dart'
+    as nagpur_b;
 import 'package:tithi_engine/src/regions/patna/corrections.dart' as patna;
-import 'package:tithi_engine/src/regions/patna/boundary_corrections.dart' as patna_b;
+import 'package:tithi_engine/src/regions/patna/boundary_corrections.dart'
+    as patna_b;
 import 'package:tithi_engine/src/regions/kochi/corrections.dart' as kochi;
-import 'package:tithi_engine/src/regions/kochi/boundary_corrections.dart' as kochi_b;
+import 'package:tithi_engine/src/regions/kochi/boundary_corrections.dart'
+    as kochi_b;
 import 'package:tithi_engine/src/regions/guwahati/corrections.dart' as guwahati;
-import 'package:tithi_engine/src/regions/guwahati/boundary_corrections.dart' as guwahati_b;
+import 'package:tithi_engine/src/regions/guwahati/boundary_corrections.dart'
+    as guwahati_b;
 import 'package:tithi_engine/src/regions/varanasi/corrections.dart' as varanasi;
-import 'package:tithi_engine/src/regions/varanasi/boundary_corrections.dart' as varanasi_b;
+import 'package:tithi_engine/src/regions/varanasi/boundary_corrections.dart'
+    as varanasi_b;
 import 'package:tithi_engine/src/regions/amritsar/corrections.dart' as amritsar;
-import 'package:tithi_engine/src/regions/amritsar/boundary_corrections.dart' as amritsar_b;
+import 'package:tithi_engine/src/regions/amritsar/boundary_corrections.dart'
+    as amritsar_b;
 import 'package:tithi_engine/src/regions/dehradun/corrections.dart' as dehradun;
-import 'package:tithi_engine/src/regions/dehradun/boundary_corrections.dart' as dehradun_b;
-import 'package:tithi_engine/src/regions/thiruvananthapuram/corrections.dart' as thiruvananthapuram;
-import 'package:tithi_engine/src/regions/thiruvananthapuram/boundary_corrections.dart' as thiruvananthapuram_b;
-import 'package:tithi_engine/src/regions/coimbatore/corrections.dart' as coimbatore;
-import 'package:tithi_engine/src/regions/coimbatore/boundary_corrections.dart' as coimbatore_b;
-import 'package:tithi_engine/src/regions/visakhapatnam/corrections.dart' as visakhapatnam;
-import 'package:tithi_engine/src/regions/visakhapatnam/boundary_corrections.dart' as visakhapatnam_b;
-import 'package:tithi_engine/src/regions/mangalore/corrections.dart' as mangalore;
-import 'package:tithi_engine/src/regions/mangalore/boundary_corrections.dart' as mangalore_b;
+import 'package:tithi_engine/src/regions/dehradun/boundary_corrections.dart'
+    as dehradun_b;
+import 'package:tithi_engine/src/regions/thiruvananthapuram/corrections.dart'
+    as thiruvananthapuram;
+import 'package:tithi_engine/src/regions/thiruvananthapuram/boundary_corrections.dart'
+    as thiruvananthapuram_b;
+import 'package:tithi_engine/src/regions/coimbatore/corrections.dart'
+    as coimbatore;
+import 'package:tithi_engine/src/regions/coimbatore/boundary_corrections.dart'
+    as coimbatore_b;
+import 'package:tithi_engine/src/regions/visakhapatnam/corrections.dart'
+    as visakhapatnam;
+import 'package:tithi_engine/src/regions/visakhapatnam/boundary_corrections.dart'
+    as visakhapatnam_b;
+import 'package:tithi_engine/src/regions/mangalore/corrections.dart'
+    as mangalore;
+import 'package:tithi_engine/src/regions/mangalore/boundary_corrections.dart'
+    as mangalore_b;
 import 'package:tithi_engine/src/regions/mysore/corrections.dart' as mysore;
-import 'package:tithi_engine/src/regions/mysore/boundary_corrections.dart' as mysore_b;
+import 'package:tithi_engine/src/regions/mysore/boundary_corrections.dart'
+    as mysore_b;
 import 'package:tithi_engine/src/regions/noida/corrections.dart' as noida;
-import 'package:tithi_engine/src/regions/noida/boundary_corrections.dart' as noida_b;
+import 'package:tithi_engine/src/regions/noida/boundary_corrections.dart'
+    as noida_b;
 import 'package:tithi_engine/src/regions/gurgaon/corrections.dart' as gurgaon;
-import 'package:tithi_engine/src/regions/gurgaon/boundary_corrections.dart' as gurgaon_b;
+import 'package:tithi_engine/src/regions/gurgaon/boundary_corrections.dart'
+    as gurgaon_b;
 
 /// Register India's 30 cities.
 bool _registered = false;

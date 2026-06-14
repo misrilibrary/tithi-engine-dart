@@ -107,8 +107,9 @@ String _buildCanonicalViaFacade() {
     for (final system in _systems) {
       final p = Panchang([registerAllCities], system: system);
       final info = p.forDate(date, city);
-      final found = p.getDates(info.month, info.paksha, info.tithiInPaksha,
-          date.year, city, isAdhika: info.isAdhika)
+      final found = p.getDates(
+          info.month, info.paksha, info.tithiInPaksha, date.year, city,
+          isAdhika: info.isAdhika)
         ..sort();
       final stamps = found.map(_ts).join(',');
       b.writeln('${_ts(date)}|$city|${_sys(system)}|${_info(info)}|=>$stamps');

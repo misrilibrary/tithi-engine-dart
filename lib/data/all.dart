@@ -7,4 +7,5 @@
 // the tree-shaker can drop unused city data.
 library;
 
-export 'package:tithi_engine/src/regions/all_cities.g.dart' show registerAllCities;
+export 'package:tithi_engine/src/regions/all_cities.g.dart'
+    show registerAllCities;

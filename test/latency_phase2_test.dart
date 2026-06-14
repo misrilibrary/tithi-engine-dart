@@ -17,7 +17,8 @@ int _daysInMonth(int year, int month) => DateTime(year, month + 1, 0).day;
 Duration _timeMonthGrid(String city, int year, int month, int repeats) {
   final sw = Stopwatch()..start();
   for (var r = 0; r < repeats; r++) {
-    final p = Panchang([registerAllCities], system: MonthSystem.purnimant); // fresh per grid, like the app baseline
+    final p = Panchang([registerAllCities],
+        system: MonthSystem.purnimant); // fresh per grid, like the app baseline
     final days = _daysInMonth(year, month);
     for (var d = 1; d <= days; d++) {
       p.forDate(DateTime(year, month, d), city);
@@ -37,7 +38,8 @@ void main() {
       final perGridUs = elapsed.inMicroseconds / repeats;
       final perDayUs = perGridUs / _daysInMonth(2026, 5);
       // ignore: avoid_print
-      print('[phase2-latency] $city: ${perGridUs.toStringAsFixed(1)} us/month-grid '
+      print(
+          '[phase2-latency] $city: ${perGridUs.toStringAsFixed(1)} us/month-grid '
           '(${perDayUs.toStringAsFixed(1)} us/day) over $repeats repeats');
     }
   }, timeout: const Timeout(Duration(minutes: 3)));
