@@ -1,0 +1,3 @@
+# Dev-only files excluded from the published package (still tracked in git).
+tools/
+coverage/

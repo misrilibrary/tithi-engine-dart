@@ -34,6 +34,14 @@ Add a `FestivalDef` to `lib/src/festival_def.dart` with the appropriate muhurta 
 - Add `///` doc comments to all public APIs
 - No external dependencies allowed (pure Dart)
 
+## Before pushing / publishing
+
+Run the preflight script — it mirrors CI and fails fast on the cheapest check first:
+
+```bash
+bash tools/preflight.sh   # format check → analyze --fatal-infos → test → publish dry-run
+```
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under the Apache License 2.0.
