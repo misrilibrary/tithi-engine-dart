@@ -3,7 +3,8 @@ import 'ayanamsha.dart';
 import 'finder.dart';
 import 'lunar_month.dart';
 import 'lunar_month_resolver.dart';
-import 'regions/corrections_registry.dart';
+import 'month_converter.dart';
+import 'regions/registry.dart';
 import 'tithi.dart' as tithi_core;
 
 export 'lunar_month.dart' show LunarMonth, MonthSystem;
@@ -29,6 +30,41 @@ class TithiInfo {
     required this.displayName,
   });
 
+  /// Build a [TithiInfo] for a STORED tithi spec (number + month + the system
+  /// it was recorded in), deriving paksha/name/position and the display string.
+  ///
+  /// If [displaySystem] differs from [storedSystem], the month name is converted
+  /// between Purnimant/Amant for display (the tithi itself is unchanged).
+  /// This is pure naming/rendering — no astronomy — and is the single source of
+  /// truth for turning a saved tithi into a labelled [TithiInfo].
+  factory TithiInfo.fromStored({
+    required int tithiNumber,
+    required LunarMonth month,
+    required MonthSystem storedSystem,
+    bool isAdhika = false,
+    MonthSystem? displaySystem,
+  }) {
+    final paksha = tithi_core.getPaksha(tithiNumber);
+    final name = tithi_core.getTithiName(tithiNumber);
+    final inPaksha = tithi_core.tithiInPaksha(tithiNumber);
+    final target = displaySystem ?? storedSystem;
+    final displayMonth = target == storedSystem
+        ? month
+        : convertMonth(month, paksha, from: storedSystem, to: target);
+    final pakshaStr = paksha == tithi_core.Paksha.shukla ? 'Shukla' : 'Krishna';
+    final adhikaPrefix = isAdhika ? 'Adhika ' : '';
+    final display = '$adhikaPrefix${displayMonth.displayName} $pakshaStr $name';
+    return TithiInfo(
+      tithiNumber: tithiNumber,
+      tithiName: name,
+      paksha: paksha,
+      tithiInPaksha: inPaksha,
+      month: displayMonth,
+      isAdhika: isAdhika,
+      displayName: display,
+    );
+  }
+
   @override
   String toString() => displayName;
 }
@@ -38,8 +74,21 @@ class TithiCalculator {
   final MonthSystem monthSystem;
   late final LunarMonthResolver _monthResolver;
 
+  /// Per-city resolver cache. The default city uses [_monthResolver]; every
+  /// other city's resolver is built once and reused, so its per-year month-span
+  /// cache survives across calls instead of being recomputed on every
+  /// getTithi/findInYear/findNext (the dominant cost for non-default cities).
+  final Map<String, LunarMonthResolver> _resolverCache = {};
+
   TithiCalculator({this.monthSystem = MonthSystem.purnimant}) {
     _monthResolver = LunarMonthResolver(system: monthSystem);
+  }
+
+  /// Returns the (cached) resolver for [city].
+  LunarMonthResolver _resolverFor(String city) {
+    if (city == defaultCity) return _monthResolver;
+    return _resolverCache[city] ??=
+        LunarMonthResolver(system: monthSystem, city: city);
   }
 
   /// Convert a Gregorian date to its Hindu lunar tithi.
@@ -76,9 +125,7 @@ class TithiCalculator {
     final paksha = tithi_core.getPaksha(tithiNum);
     final name = tithi_core.getTithiName(tithiNum);
     final inPaksha = tithi_core.tithiInPaksha(tithiNum);
-    final resolver = city == defaultCity
-        ? _monthResolver
-        : LunarMonthResolver(system: monthSystem, city: city);
+    final resolver = _resolverFor(city);
     final monthInfo = resolver.getMonthInfo(date);
 
     final pakshaStr = paksha == tithi_core.Paksha.shukla ? 'Shukla' : 'Krishna';
@@ -102,9 +149,7 @@ class TithiCalculator {
   List<DateTime> findInYear(TithiInfo info, int year,
       {String? celebrationCity}) {
     final city = celebrationCity ?? defaultCity;
-    final resolver = city == defaultCity
-        ? _monthResolver
-        : LunarMonthResolver(system: monthSystem, city: city);
+    final resolver = _resolverFor(city);
     return findTithiInYear(
       month: info.month,
       paksha: info.paksha,
@@ -121,9 +166,7 @@ class TithiCalculator {
   DateTime? findNext(TithiInfo info,
       {DateTime? from, String? celebrationCity}) {
     final city = celebrationCity ?? defaultCity;
-    final resolver = city == defaultCity
-        ? _monthResolver
-        : LunarMonthResolver(system: monthSystem, city: city);
+    final resolver = _resolverFor(city);
     return findNextOccurrence(
       month: info.month,
       paksha: info.paksha,

@@ -22,7 +22,7 @@ dart format .    # auto-format
 
 ## Adding a City
 
-Add coordinates to `lib/src/cities.dart` in the `supportedCities` map, then generate a correction table using the benchmark tool and add it under `lib/src/regions/<city>/`.
+Add coordinates to `lib/src/cities.dart` in the `supportedCities` map, then generate a correction table using the benchmark tool and add it under `lib/src/regions/<city>/`. Finally regenerate `lib/src/regions/all_cities.g.dart` (so `registerAllCities()` includes the new city) — and add it to the relevant region pack under `lib/data/` if you maintain one.
 
 ## Adding a Festival
 

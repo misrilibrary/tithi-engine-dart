@@ -1,10 +1,12 @@
 import 'package:test/test.dart';
+import 'package:tithi_engine/data/all.dart';
 import 'package:tithi_engine/src/tithi_calculator.dart';
 import 'package:tithi_engine/src/astronomy.dart';
 import 'package:tithi_engine/src/ayanamsha.dart';
 import 'package:tithi_engine/src/tithi.dart';
 
 void main() {
+  setUpAll(registerAllCities);
   group('Astronomy - Julian Day', () {
     test('J2000.0 epoch', () {
       // Jan 1.5, 2000 = JD 2451545.0

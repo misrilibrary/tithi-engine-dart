@@ -1,13 +1,15 @@
 import 'package:test/test.dart';
+import 'package:tithi_engine/data/all.dart';
 import 'package:tithi_engine/src/astronomy.dart';
 import 'package:tithi_engine/src/lunar_month.dart';
 import 'package:tithi_engine/src/lunar_month_resolver.dart';
-import 'package:tithi_engine/src/regions/corrections_registry.dart';
+import 'package:tithi_engine/src/regions/registry.dart';
 
 /// Regression guards distilled from the Swiss-Ephemeris benchmark (which itself
 /// stays a manual/CI tool). These are fast, deterministic, and assert against
 /// verified Drik values — no Swiss dependency.
 void main() {
+  setUpAll(registerAllCities);
   group('Sunrise day-carry (guards the eastern-city h%24 wrap bug)', () {
     // Eastern / higher-latitude cities whose UTC sunrise goes negative in summer.
     for (final city in [

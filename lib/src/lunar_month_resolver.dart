@@ -1,7 +1,7 @@
 import 'astronomy.dart';
 import 'ayanamsha.dart';
 import 'lunar_month.dart';
-import 'regions/corrections_registry.dart';
+import 'regions/registry.dart';
 import 'tithi.dart';
 
 /// A lunar month span: from one boundary to the next, with its month name.

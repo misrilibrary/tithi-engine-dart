@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:tithi_engine/data/all.dart';
 import 'package:tithi_engine/src/tithi_calculator.dart';
 
 /// Month boundary tests verified against Drik Panchang (New Delhi, Purnimant).
@@ -6,6 +7,7 @@ import 'package:tithi_engine/src/tithi_calculator.dart';
 /// Order within month: Krishna (waning) → Amavasya → Shukla (waxing) → Purnima (last day).
 /// Rule: "Last of last day marks the end; first available marks the beginning."
 void main() {
+  setUpAll(registerAllCities);
   final calc = TithiCalculator();
 
   group('Verified against Drik Panchang (Delhi, Purnimant)', () {

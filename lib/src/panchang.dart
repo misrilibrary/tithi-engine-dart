@@ -16,13 +16,35 @@ class Panchang {
   final MonthSystem monthSystem;
   late final TithiCalculator _calc;
 
-  Panchang([this.monthSystem = MonthSystem.purnimant]) {
+  /// Construct a Panchang, registering the city data it will use.
+  ///
+  /// You MUST supply at least one data-pack registrar — there is no zero-arg
+  /// constructor — so the cities you query have correction tables loaded:
+  /// ```dart
+  /// import 'package:tithi_engine/data/all.dart';
+  /// final p = Panchang([registerAllCities]);
+  /// // or a region pack (links only that region's data):
+  /// import 'package:tithi_engine/data/india.dart';
+  /// final p = Panchang([registerIndia]);
+  /// ```
+  /// Registrars are idempotent, so constructing repeatedly is cheap. Choosing
+  /// which packs to import is also what lets the tree-shaker drop unused cities.
+  Panchang(List<void Function()> data,
+      {MonthSystem system = MonthSystem.purnimant})
+      : monthSystem = system {
+    for (final register in data) {
+      register();
+    }
     _calc = TithiCalculator(monthSystem: monthSystem);
   }
 
   /// Gregorian date → full TithiInfo for the given city.
-  TithiInfo forDate(DateTime date, String city) {
-    return _calc.getTithi(date, timezone: city);
+  ///
+  /// If [date] carries a time-of-day (hour/minute != 0) and [utcOffset] is
+  /// supplied, the tithi is resolved at that exact local moment (used for
+  /// birth-time precision). Date-only inputs resolve at the city's sunrise.
+  TithiInfo forDate(DateTime date, String city, {Duration? utcOffset}) {
+    return _calc.getTithi(date, utcOffset: utcOffset, timezone: city);
   }
 
   /// Tithi spec → first matching Gregorian date in the given year.
@@ -69,6 +91,19 @@ class Panchang {
   /// Returns `null` if the festival doesn't occur in the given year.
   FestivalDate? dateFor(FestivalDef festival, int year, String city) {
     return findFestivalDate(festival, year, city, _calc);
+  }
+
+  /// Recurring festival (e.g. monthly Ekadashi/Purnima) → all occurrences in
+  /// the given year and city, each with its tithi span.
+  List<FestivalDate> recurringDates(FestivalDef festival, int year, String city) {
+    return findRecurringDates(festival, year, city, _calc);
+  }
+
+  /// The UTC moment the tithi changes on [date] (sunrise→next-sunrise window),
+  /// or `null` if no transition occurs that day. [utcOffset] localises the
+  /// search window. Used for birth-time precision on a date-only DOB.
+  DateTime? transitionTime(DateTime date, {Duration? utcOffset}) {
+    return TithiCalculator.findTransitionTime(date, utcOffset: utcOffset);
   }
 
   /// Find the next occurrence of a tithi from a given date.

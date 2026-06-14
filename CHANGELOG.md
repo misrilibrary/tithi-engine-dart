@@ -1,5 +1,55 @@
 # Changelog
 
+## 2.0.0
+
+Major redesign: a single public entry point and registration-based city data,
+mirroring the Java `tithi-engine`. Numerical output is **unchanged** — a
+facade-driven golden parity test reproduces the locked characterization hash
+`ef8a845c5a74b8c6` (39,710 lines) bit-for-bit.
+
+### Breaking changes
+- **`Panchang` is the single public entry point.** The barrel
+  (`package:tithi_engine/tithi_engine.dart`) no longer exports the engine
+  internals — `TithiCalculator`, the tithi-number utilities (`getTithiName` /
+  `getPaksha` / `tithiInPaksha` / `calculateTithi`), `convertMonth`, and the free
+  functions `findFestivalDate` / `findRecurringDates`. Drive everything through
+  `Panchang` (`dateFor` / `recurringDates` / …).
+- **`Panchang` requires a city-data registrar list; the zero-arg constructor is
+  removed:**
+  ```dart
+  Panchang(List<void Function()> data, {MonthSystem system = MonthSystem.purnimant})
+  // e.g. Panchang([registerAllCities])  or  Panchang([registerIndia])
+  ```
+  This makes it impossible to construct a `Panchang` without city data (no silent
+  Meeus fallback) while letting the tree-shaker drop unused cities.
+- **City data is registration-based.** The core holds a mutable registry that
+  consumers populate via data packs; the static all-cities registry is gone.
+  - `package:tithi_engine/data/all.dart` → `registerAllCities()` (all 230 cities)
+  - `package:tithi_engine/data/india.dart` → `registerIndia()` (30 cities; region pack)
+  - A city that is never registered resolves to empty corrections (Meeus fallback).
+  - **Subset win:** importing only `data/india.dart` compiles to ~112 KB JS vs
+    ~404 KB for all-cities (**−72%**) — the tree-shaker drops unused cities.
+
+### Added
+- `Panchang.forDate(date, city, {utcOffset})` — time-of-day (birth-time) precision.
+- `Panchang.recurringDates(festival, year, city)` → `List<FestivalDate>`.
+- `Panchang.transitionTime(date, {utcOffset})` — intra-day tithi transition moment.
+- `TithiInfo.fromStored({tithiNumber, month, storedSystem, isAdhika, displaySystem})`
+  — render a saved tithi, with optional Purnimant↔Amant month-name conversion.
+- Re-exported `tithiNames` (the 15 canonical names).
+- Region data packs + `registerCity` / idempotent registrars.
+
+### Performance
+- Per-city `LunarMonthResolver` caching: non-default cities no longer rebuild the
+  resolver (and recompute month spans) on every call. Month-grid latency for
+  non-default cities dropped ~27–54× (e.g. Seattle 53,168 → 993 µs/grid); all
+  cities now converge to ~1 ms/grid.
+
+### Tests
+- Public-API + day-level coverage (`getDate`/`findNext`/`transitionTime`,
+  time-of-day `forDate`, `TithiInfo.fromStored`, Meeus fallback, registry
+  contract, day-level vriddhi/kshaya). Core line coverage ~87%, 520 tests.
+
 ## 1.0.9
 
 - Fix kshaya tithi detection at 30→1 wraparound (Shukla Pratipada)

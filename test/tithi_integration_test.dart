@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:tithi_engine/data/all.dart';
 import 'package:tithi_engine/src/tithi_calculator.dart';
 import 'package:tithi_engine/src/festival_def.dart';
 import 'package:tithi_engine/src/festival_finder.dart';
@@ -6,6 +7,7 @@ import 'package:tithi_engine/src/astronomy.dart';
 
 /// Integration test matrix — exercises all workflows across cities × systems.
 void main() {
+  setUpAll(registerAllCities);
   final cities = [
     'Ujjain',
     'Delhi',

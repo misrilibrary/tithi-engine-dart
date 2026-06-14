@@ -1,7 +1,10 @@
 import 'package:tithi_engine/tithi_engine.dart';
+import 'package:tithi_engine/data/all.dart';
 
 void main() {
-  final panchang = Panchang(MonthSystem.purnimant);
+  // Supply a city-data pack at construction (registerAllCities links every
+  // city; a region pack like registerIndia links only that region).
+  final panchang = Panchang([registerAllCities], system: MonthSystem.purnimant);
 
   // Date → Tithi
   final info = panchang.forDate(DateTime(2026, 2, 15), City.ujjain);
