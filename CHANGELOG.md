@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.3
+
+Tests only — no API or behavior change (engine output identical to 2.0.x).
+
+- Remove the platform-brittle `golden_facade_parity` hash test from the package.
+  Its exact FNV-1a hash over ~39.7k astronomy outputs depends on libm `sin`/`cos`,
+  which aren't bit-identical across platforms, so it could fail on a different
+  platform than where the baseline was locked. Correctness is covered portably by
+  the Drik-truth tests and the day-level vriddhi/kshaya invariant test.
+
 ## 2.0.2
 
 Packaging only — no API or behavior change (golden hash `ef8a845c5a74b8c6` unchanged).
