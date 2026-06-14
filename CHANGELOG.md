@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.2
+
+Packaging only — no API or behavior change (golden hash `ef8a845c5a74b8c6` unchanged).
+
+- Exclude generated `doc/` from the published archive (2.0.1 accidentally shipped
+  ~165 KB of dartdoc output because `.pubignore` replaces `.gitignore`); archive
+  back to ~226 KB via a comprehensive `.pubignore`.
+
 ## 2.0.1
 
 Tooling/formatting only — no API or behavior change (golden hash
