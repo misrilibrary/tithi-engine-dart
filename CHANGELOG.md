@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0.1
+
+Tooling/formatting only — no API or behavior change (golden hash
+`ef8a845c5a74b8c6` unchanged).
+
+- Apply `dart format` to all sources (2.0.0 shipped unformatted files, costing
+  pub.dev points).
+- Add `tools/preflight.sh` (format → analyze --fatal-infos → test → publish
+  dry-run) and make CI run the format check first with `--fatal-infos`.
+- Exclude dev-only `tools/` and `coverage/` from the published package via
+  `.pubignore`.
+
 ## 2.0.0
 
 Major redesign: a single public entry point and registration-based city data,
