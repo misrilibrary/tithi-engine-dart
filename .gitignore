@@ -1,3 +1,4 @@
-.dart_tool/\npubspec.lock\n
+.dart_tool/
+pubspec.lock
 doc/
 coverage/

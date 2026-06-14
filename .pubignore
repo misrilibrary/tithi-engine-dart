@@ -1,3 +1,9 @@
-# Dev-only files excluded from the published package (still tracked in git).
-tools/
+# Files excluded from the PUBLISHED package.
+# Note: when a .pubignore exists, pub uses it INSTEAD of .gitignore — so this
+# must list every dev/generated artifact, not just the extras.
+.dart_tool/
+build/
 coverage/
+doc/
+tools/
+pubspec.lock
