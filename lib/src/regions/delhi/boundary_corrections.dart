@@ -1,10 +1,5 @@
-const delhiAmavasyaCorrections = <int, int>{
-  54543: 54542,
-};
+const delhiAmavasyaCorrections = <int, int>{};
 const delhiPurnimaCorrections = <int, int>{
-  901: 900,
-};
-const delhiSankrantiCorrections = <int, int>{
-  10634: 10635,
-  44998: 44999,
+  65749: 65750,
+  70444: 70445,
 };

@@ -20,7 +20,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^2.0.3
+  tithi_engine: ^2.1.0
 ```
 
 ## Quick Start
@@ -89,11 +89,11 @@ Combine packs: `Panchang([registerIndia, registerEurope])`.
 | Tithi vs Swiss Ephemeris | 0 mismatches (230 cities × 73,049 days, 1900–2100) |
 | Month boundaries (Purnimant) | 100% (200 years, verified cities) |
 | Festival dates vs Drik Panchang | 22/22 (2025–2026) |
-| Test coverage | 520 tests, ~87% core line coverage |
+| Test coverage | 519 tests, ~87% core line coverage |
 
 ## Cross-Platform
 
-This is the Dart implementation of [tithi-engine](https://github.com/misrilibrary/tithi-engine) (Java). Both libraries produce identical results and share the same correction tables.
+This is the Dart implementation of [tithi-engine](https://github.com/misrilibrary/tithi-engine) (Java). Both produce identical tithi/panchang results, validated against Swiss Ephemeris.
 
 ## License
 

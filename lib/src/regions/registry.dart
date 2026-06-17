@@ -13,7 +13,6 @@ final Map<String, Map<int, int>> _tithi = {};
 final Map<String, Map<int, int>> _trans = {};
 final Map<String, Map<int, int>> _amav = {};
 final Map<String, Map<int, int>> _purn = {};
-final Map<String, Map<int, int>> _sank = {};
 
 /// Register one city's correction tables. Invoked by the generated data packs;
 /// not normally called directly.
@@ -23,13 +22,11 @@ void registerCity(
   Map<int, int>? transitions,
   Map<int, int>? amavasya,
   Map<int, int>? purnima,
-  Map<int, int>? sankranti,
 }) {
   if (tithi != null) _tithi[city] = tithi;
   if (transitions != null) _trans[city] = transitions;
   if (amavasya != null) _amav[city] = amavasya;
   if (purnima != null) _purn[city] = purnima;
-  if (sankranti != null) _sank[city] = sankranti;
 }
 
 /// Whether any city data has been registered (useful to detect missing setup).
@@ -42,4 +39,3 @@ Map<int, int> getTithiCorrections(String city) => _tithi[city] ?? const {};
 Map<int, int> getTransitionMinutes(String city) => _trans[city] ?? const {};
 Map<int, int> getAmavasyaCorrections(String city) => _amav[city] ?? const {};
 Map<int, int> getPurnimaCorrections(String city) => _purn[city] ?? const {};
-Map<int, int> getSankrantiCorrections(String city) => _sank[city] ?? const {};

@@ -1,15 +1,8 @@
 const bramptonAmavasyaCorrections = <int, int>{
-  44089: 44088,
   50349: 50348,
-  54897: 54896,
-  58559: 58558,
+  68776: 68777,
 };
 const bramptonPurnimaCorrections = <int, int>{
-  33384: 33383,
-  34418: 34417,
-  66222: 66221,
-  68614: 68613,
-};
-const bramptonSankrantiCorrections = <int, int>{
-  19460: 19461,
+  57008: 57009,
+  63002: 63003,
 };

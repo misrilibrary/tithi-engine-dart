@@ -1,16 +1,8 @@
-const georgetownAmavasyaCorrections = <int, int>{
-  37740: 37739,
-  42937: 42936,
-  46215: 46214,
-  65115: 65114,
-};
+const georgetownAmavasyaCorrections = <int, int>{};
 const georgetownPurnimaCorrections = <int, int>{
-  64568: 64567,
-};
-const georgetownSankrantiCorrections = <int, int>{
-  6132: 6133,
-  9630: 9629,
-  16844: 16843,
-  23874: 23875,
-  61740: 61741,
+  27093: 27094,
+  58691: 58692,
+  60345: 60346,
+  63002: 63003,
+  64863: 64864,
 };

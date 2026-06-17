@@ -1,15 +1,10 @@
 const portofspainAmavasyaCorrections = <int, int>{
-  47751: 47750,
+  57849: 57850,
 };
 const portofspainPurnimaCorrections = <int, int>{
-  56831: 56830,
-  67521: 67520,
-  69175: 69174,
-};
-const portofspainSankrantiCorrections = <int, int>{
-  6221: 6222,
-  24178: 24179,
-  36113: 36114,
-  52030: 52031,
-  60734: 60735,
+  33383: 33384,
+  64095: 64096,
+  66989: 66990,
+  68229: 68230,
+  69883: 69884,
 };

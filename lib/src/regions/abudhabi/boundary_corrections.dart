@@ -1,14 +1,5 @@
 const abudhabiAmavasyaCorrections = <int, int>{
-  52505: 52504,
+  53509: 53510,
+  71729: 71730,
 };
-const abudhabiPurnimaCorrections = <int, int>{
-  25145: 25144,
-  52107: 52106,
-};
-const abudhabiSankrantiCorrections = <int, int>{
-  21015: 21016,
-  30574: 30575,
-  41741: 41742,
-  55986: 55987,
-  70232: 70231,
-};
+const abudhabiPurnimaCorrections = <int, int>{};

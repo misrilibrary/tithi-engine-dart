@@ -474,1380 +474,1150 @@ void registerAllCities() {
       tithi: abudhabi.abudhabiTithiCorrections,
       transitions: abudhabi.abudhabiTransitionMinutesMap,
       amavasya: abudhabi_b.abudhabiAmavasyaCorrections,
-      purnima: abudhabi_b.abudhabiPurnimaCorrections,
-      sankranti: abudhabi_b.abudhabiSankrantiCorrections);
+      purnima: abudhabi_b.abudhabiPurnimaCorrections);
   registerCity('Accra',
       tithi: accra.accraTithiCorrections,
       transitions: accra.accraTransitionMinutesMap,
       amavasya: accra_b.accraAmavasyaCorrections,
-      purnima: accra_b.accraPurnimaCorrections,
-      sankranti: accra_b.accraSankrantiCorrections);
+      purnima: accra_b.accraPurnimaCorrections);
   registerCity('Addis Ababa',
       tithi: addisababa.addisababaTithiCorrections,
       transitions: addisababa.addisababaTransitionMinutesMap,
       amavasya: addisababa_b.addisababaAmavasyaCorrections,
-      purnima: addisababa_b.addisababaPurnimaCorrections,
-      sankranti: addisababa_b.addisababaSankrantiCorrections);
+      purnima: addisababa_b.addisababaPurnimaCorrections);
   registerCity('Adelaide',
       tithi: adelaide.adelaideTithiCorrections,
       transitions: adelaide.adelaideTransitionMinutesMap,
       amavasya: adelaide_b.adelaideAmavasyaCorrections,
-      purnima: adelaide_b.adelaidePurnimaCorrections,
-      sankranti: adelaide_b.adelaideSankrantiCorrections);
+      purnima: adelaide_b.adelaidePurnimaCorrections);
   registerCity('Agra',
       tithi: agra.agraTithiCorrections,
       transitions: agra.agraTransitionMinutesMap,
       amavasya: agra_b.agraAmavasyaCorrections,
-      purnima: agra_b.agraPurnimaCorrections,
-      sankranti: agra_b.agraSankrantiCorrections);
+      purnima: agra_b.agraPurnimaCorrections);
   registerCity('Ahmedabad',
       tithi: ahmedabad.ahmedabadTithiCorrections,
       transitions: ahmedabad.ahmedabadTransitionMinutesMap,
       amavasya: ahmedabad_b.ahmedabadAmavasyaCorrections,
-      purnima: ahmedabad_b.ahmedabadPurnimaCorrections,
-      sankranti: ahmedabad_b.ahmedabadSankrantiCorrections);
+      purnima: ahmedabad_b.ahmedabadPurnimaCorrections);
   registerCity('Allahabad',
       tithi: allahabad.allahabadTithiCorrections,
       transitions: allahabad.allahabadTransitionMinutesMap,
       amavasya: allahabad_b.allahabadAmavasyaCorrections,
-      purnima: allahabad_b.allahabadPurnimaCorrections,
-      sankranti: allahabad_b.allahabadSankrantiCorrections);
+      purnima: allahabad_b.allahabadPurnimaCorrections);
   registerCity('Almaty',
       tithi: almaty.almatyTithiCorrections,
       transitions: almaty.almatyTransitionMinutesMap,
       amavasya: almaty_b.almatyAmavasyaCorrections,
-      purnima: almaty_b.almatyPurnimaCorrections,
-      sankranti: almaty_b.almatySankrantiCorrections);
+      purnima: almaty_b.almatyPurnimaCorrections);
   registerCity('Amman',
       tithi: amman.ammanTithiCorrections,
       transitions: amman.ammanTransitionMinutesMap,
       amavasya: amman_b.ammanAmavasyaCorrections,
-      purnima: amman_b.ammanPurnimaCorrections,
-      sankranti: amman_b.ammanSankrantiCorrections);
+      purnima: amman_b.ammanPurnimaCorrections);
   registerCity('Amritsar',
       tithi: amritsar.amritsarTithiCorrections,
       transitions: amritsar.amritsarTransitionMinutesMap,
       amavasya: amritsar_b.amritsarAmavasyaCorrections,
-      purnima: amritsar_b.amritsarPurnimaCorrections,
-      sankranti: amritsar_b.amritsarSankrantiCorrections);
+      purnima: amritsar_b.amritsarPurnimaCorrections);
   registerCity('Amsterdam',
       tithi: amsterdam.amsterdamTithiCorrections,
       transitions: amsterdam.amsterdamTransitionMinutesMap,
       amavasya: amsterdam_b.amsterdamAmavasyaCorrections,
-      purnima: amsterdam_b.amsterdamPurnimaCorrections,
-      sankranti: amsterdam_b.amsterdamSankrantiCorrections);
+      purnima: amsterdam_b.amsterdamPurnimaCorrections);
   registerCity('Ankara',
       tithi: ankara.ankaraTithiCorrections,
       transitions: ankara.ankaraTransitionMinutesMap,
       amavasya: ankara_b.ankaraAmavasyaCorrections,
-      purnima: ankara_b.ankaraPurnimaCorrections,
-      sankranti: ankara_b.ankaraSankrantiCorrections);
+      purnima: ankara_b.ankaraPurnimaCorrections);
   registerCity('Athens',
       tithi: athens.athensTithiCorrections,
       transitions: athens.athensTransitionMinutesMap,
       amavasya: athens_b.athensAmavasyaCorrections,
-      purnima: athens_b.athensPurnimaCorrections,
-      sankranti: athens_b.athensSankrantiCorrections);
+      purnima: athens_b.athensPurnimaCorrections);
   registerCity('Atlanta',
       tithi: atlanta.atlantaTithiCorrections,
       transitions: atlanta.atlantaTransitionMinutesMap,
       amavasya: atlanta_b.atlantaAmavasyaCorrections,
-      purnima: atlanta_b.atlantaPurnimaCorrections,
-      sankranti: atlanta_b.atlantaSankrantiCorrections);
+      purnima: atlanta_b.atlantaPurnimaCorrections);
   registerCity('Auckland',
       tithi: auckland.aucklandTithiCorrections,
       transitions: auckland.aucklandTransitionMinutesMap,
       amavasya: auckland_b.aucklandAmavasyaCorrections,
-      purnima: auckland_b.aucklandPurnimaCorrections,
-      sankranti: auckland_b.aucklandSankrantiCorrections);
+      purnima: auckland_b.aucklandPurnimaCorrections);
   registerCity('Aurangabad',
       tithi: aurangabad.aurangabadTithiCorrections,
       transitions: aurangabad.aurangabadTransitionMinutesMap,
       amavasya: aurangabad_b.aurangabadAmavasyaCorrections,
-      purnima: aurangabad_b.aurangabadPurnimaCorrections,
-      sankranti: aurangabad_b.aurangabadSankrantiCorrections);
+      purnima: aurangabad_b.aurangabadPurnimaCorrections);
   registerCity('Austin',
       tithi: austin.austinTithiCorrections,
       transitions: austin.austinTransitionMinutesMap,
       amavasya: austin_b.austinAmavasyaCorrections,
-      purnima: austin_b.austinPurnimaCorrections,
-      sankranti: austin_b.austinSankrantiCorrections);
+      purnima: austin_b.austinPurnimaCorrections);
   registerCity('Ayodhya',
       tithi: ayodhya.ayodhyaTithiCorrections,
       transitions: ayodhya.ayodhyaTransitionMinutesMap,
       amavasya: ayodhya_b.ayodhyaAmavasyaCorrections,
-      purnima: ayodhya_b.ayodhyaPurnimaCorrections,
-      sankranti: ayodhya_b.ayodhyaSankrantiCorrections);
+      purnima: ayodhya_b.ayodhyaPurnimaCorrections);
   registerCity('Bahrain',
       tithi: bahrain.bahrainTithiCorrections,
       transitions: bahrain.bahrainTransitionMinutesMap,
       amavasya: bahrain_b.bahrainAmavasyaCorrections,
-      purnima: bahrain_b.bahrainPurnimaCorrections,
-      sankranti: bahrain_b.bahrainSankrantiCorrections);
+      purnima: bahrain_b.bahrainPurnimaCorrections);
   registerCity('Bangalore',
       tithi: bangalore.bangaloreTithiCorrections,
       transitions: bangalore.bangaloreTransitionMinutesMap,
       amavasya: bangalore_b.bangaloreAmavasyaCorrections,
-      purnima: bangalore_b.bangalorePurnimaCorrections,
-      sankranti: bangalore_b.bangaloreSankrantiCorrections);
+      purnima: bangalore_b.bangalorePurnimaCorrections);
   registerCity('Bangkok',
       tithi: bangkok.bangkokTithiCorrections,
       transitions: bangkok.bangkokTransitionMinutesMap,
       amavasya: bangkok_b.bangkokAmavasyaCorrections,
-      purnima: bangkok_b.bangkokPurnimaCorrections,
-      sankranti: bangkok_b.bangkokSankrantiCorrections);
+      purnima: bangkok_b.bangkokPurnimaCorrections);
   registerCity('Barcelona',
       tithi: barcelona.barcelonaTithiCorrections,
       transitions: barcelona.barcelonaTransitionMinutesMap,
       amavasya: barcelona_b.barcelonaAmavasyaCorrections,
-      purnima: barcelona_b.barcelonaPurnimaCorrections,
-      sankranti: barcelona_b.barcelonaSankrantiCorrections);
+      purnima: barcelona_b.barcelonaPurnimaCorrections);
   registerCity('Beijing',
       tithi: beijing.beijingTithiCorrections,
       transitions: beijing.beijingTransitionMinutesMap,
       amavasya: beijing_b.beijingAmavasyaCorrections,
-      purnima: beijing_b.beijingPurnimaCorrections,
-      sankranti: beijing_b.beijingSankrantiCorrections);
+      purnima: beijing_b.beijingPurnimaCorrections);
   registerCity('Beirut',
       tithi: beirut.beirutTithiCorrections,
       transitions: beirut.beirutTransitionMinutesMap,
       amavasya: beirut_b.beirutAmavasyaCorrections,
-      purnima: beirut_b.beirutPurnimaCorrections,
-      sankranti: beirut_b.beirutSankrantiCorrections);
+      purnima: beirut_b.beirutPurnimaCorrections);
   registerCity('Berlin',
       tithi: berlin.berlinTithiCorrections,
       transitions: berlin.berlinTransitionMinutesMap,
       amavasya: berlin_b.berlinAmavasyaCorrections,
-      purnima: berlin_b.berlinPurnimaCorrections,
-      sankranti: berlin_b.berlinSankrantiCorrections);
+      purnima: berlin_b.berlinPurnimaCorrections);
   registerCity('Bhopal',
       tithi: bhopal.bhopalTithiCorrections,
       transitions: bhopal.bhopalTransitionMinutesMap,
       amavasya: bhopal_b.bhopalAmavasyaCorrections,
-      purnima: bhopal_b.bhopalPurnimaCorrections,
-      sankranti: bhopal_b.bhopalSankrantiCorrections);
+      purnima: bhopal_b.bhopalPurnimaCorrections);
   registerCity('Bhubaneswar',
       tithi: bhubaneswar.bhubaneswarTithiCorrections,
       transitions: bhubaneswar.bhubaneswarTransitionMinutesMap,
       amavasya: bhubaneswar_b.bhubaneswarAmavasyaCorrections,
-      purnima: bhubaneswar_b.bhubaneswarPurnimaCorrections,
-      sankranti: bhubaneswar_b.bhubaneswarSankrantiCorrections);
+      purnima: bhubaneswar_b.bhubaneswarPurnimaCorrections);
   registerCity('Birmingham',
       tithi: birmingham.birminghamTithiCorrections,
       transitions: birmingham.birminghamTransitionMinutesMap,
       amavasya: birmingham_b.birminghamAmavasyaCorrections,
-      purnima: birmingham_b.birminghamPurnimaCorrections,
-      sankranti: birmingham_b.birminghamSankrantiCorrections);
+      purnima: birmingham_b.birminghamPurnimaCorrections);
   registerCity('Bogotá',
       tithi: bogot.bogotTithiCorrections,
       transitions: bogot.bogotTransitionMinutesMap,
       amavasya: bogot_b.bogotAmavasyaCorrections,
-      purnima: bogot_b.bogotPurnimaCorrections,
-      sankranti: bogot_b.bogotSankrantiCorrections);
+      purnima: bogot_b.bogotPurnimaCorrections);
   registerCity('Boston',
       tithi: boston.bostonTithiCorrections,
       transitions: boston.bostonTransitionMinutesMap,
       amavasya: boston_b.bostonAmavasyaCorrections,
-      purnima: boston_b.bostonPurnimaCorrections,
-      sankranti: boston_b.bostonSankrantiCorrections);
+      purnima: boston_b.bostonPurnimaCorrections);
   registerCity('Brampton',
       tithi: brampton.bramptonTithiCorrections,
       transitions: brampton.bramptonTransitionMinutesMap,
       amavasya: brampton_b.bramptonAmavasyaCorrections,
-      purnima: brampton_b.bramptonPurnimaCorrections,
-      sankranti: brampton_b.bramptonSankrantiCorrections);
+      purnima: brampton_b.bramptonPurnimaCorrections);
   registerCity('Brisbane',
       tithi: brisbane.brisbaneTithiCorrections,
       transitions: brisbane.brisbaneTransitionMinutesMap,
       amavasya: brisbane_b.brisbaneAmavasyaCorrections,
-      purnima: brisbane_b.brisbanePurnimaCorrections,
-      sankranti: brisbane_b.brisbaneSankrantiCorrections);
+      purnima: brisbane_b.brisbanePurnimaCorrections);
   registerCity('Brussels',
       tithi: brussels.brusselsTithiCorrections,
       transitions: brussels.brusselsTransitionMinutesMap,
       amavasya: brussels_b.brusselsAmavasyaCorrections,
-      purnima: brussels_b.brusselsPurnimaCorrections,
-      sankranti: brussels_b.brusselsSankrantiCorrections);
+      purnima: brussels_b.brusselsPurnimaCorrections);
   registerCity('Bucharest',
       tithi: bucharest.bucharestTithiCorrections,
       transitions: bucharest.bucharestTransitionMinutesMap,
       amavasya: bucharest_b.bucharestAmavasyaCorrections,
-      purnima: bucharest_b.bucharestPurnimaCorrections,
-      sankranti: bucharest_b.bucharestSankrantiCorrections);
+      purnima: bucharest_b.bucharestPurnimaCorrections);
   registerCity('Budapest',
       tithi: budapest.budapestTithiCorrections,
       transitions: budapest.budapestTransitionMinutesMap,
       amavasya: budapest_b.budapestAmavasyaCorrections,
-      purnima: budapest_b.budapestPurnimaCorrections,
-      sankranti: budapest_b.budapestSankrantiCorrections);
+      purnima: budapest_b.budapestPurnimaCorrections);
   registerCity('Buenos Aires',
       tithi: buenosaires.buenosairesTithiCorrections,
       transitions: buenosaires.buenosairesTransitionMinutesMap,
       amavasya: buenosaires_b.buenosairesAmavasyaCorrections,
-      purnima: buenosaires_b.buenosairesPurnimaCorrections,
-      sankranti: buenosaires_b.buenosairesSankrantiCorrections);
+      purnima: buenosaires_b.buenosairesPurnimaCorrections);
   registerCity('Cairo',
       tithi: cairo.cairoTithiCorrections,
       transitions: cairo.cairoTransitionMinutesMap,
       amavasya: cairo_b.cairoAmavasyaCorrections,
-      purnima: cairo_b.cairoPurnimaCorrections,
-      sankranti: cairo_b.cairoSankrantiCorrections);
+      purnima: cairo_b.cairoPurnimaCorrections);
   registerCity('Calgary',
       tithi: calgary.calgaryTithiCorrections,
       transitions: calgary.calgaryTransitionMinutesMap,
       amavasya: calgary_b.calgaryAmavasyaCorrections,
-      purnima: calgary_b.calgaryPurnimaCorrections,
-      sankranti: calgary_b.calgarySankrantiCorrections);
+      purnima: calgary_b.calgaryPurnimaCorrections);
   registerCity('Canberra',
       tithi: canberra.canberraTithiCorrections,
       transitions: canberra.canberraTransitionMinutesMap,
       amavasya: canberra_b.canberraAmavasyaCorrections,
-      purnima: canberra_b.canberraPurnimaCorrections,
-      sankranti: canberra_b.canberraSankrantiCorrections);
+      purnima: canberra_b.canberraPurnimaCorrections);
   registerCity('Cape Town',
       tithi: capetown.capetownTithiCorrections,
       transitions: capetown.capetownTransitionMinutesMap,
       amavasya: capetown_b.capetownAmavasyaCorrections,
-      purnima: capetown_b.capetownPurnimaCorrections,
-      sankranti: capetown_b.capetownSankrantiCorrections);
+      purnima: capetown_b.capetownPurnimaCorrections);
   registerCity('Chandigarh',
       tithi: chandigarh.chandigarhTithiCorrections,
       transitions: chandigarh.chandigarhTransitionMinutesMap,
       amavasya: chandigarh_b.chandigarhAmavasyaCorrections,
-      purnima: chandigarh_b.chandigarhPurnimaCorrections,
-      sankranti: chandigarh_b.chandigarhSankrantiCorrections);
+      purnima: chandigarh_b.chandigarhPurnimaCorrections);
   registerCity('Charlotte',
       tithi: charlotte.charlotteTithiCorrections,
       transitions: charlotte.charlotteTransitionMinutesMap,
       amavasya: charlotte_b.charlotteAmavasyaCorrections,
-      purnima: charlotte_b.charlottePurnimaCorrections,
-      sankranti: charlotte_b.charlotteSankrantiCorrections);
+      purnima: charlotte_b.charlottePurnimaCorrections);
   registerCity('Chennai',
       tithi: chennai.chennaiTithiCorrections,
       transitions: chennai.chennaiTransitionMinutesMap,
       amavasya: chennai_b.chennaiAmavasyaCorrections,
-      purnima: chennai_b.chennaiPurnimaCorrections,
-      sankranti: chennai_b.chennaiSankrantiCorrections);
+      purnima: chennai_b.chennaiPurnimaCorrections);
   registerCity('Chicago',
       tithi: chicago.chicagoTithiCorrections,
       transitions: chicago.chicagoTransitionMinutesMap,
       amavasya: chicago_b.chicagoAmavasyaCorrections,
-      purnima: chicago_b.chicagoPurnimaCorrections,
-      sankranti: chicago_b.chicagoSankrantiCorrections);
+      purnima: chicago_b.chicagoPurnimaCorrections);
   registerCity('Coimbatore',
       tithi: coimbatore.coimbatoreTithiCorrections,
       transitions: coimbatore.coimbatoreTransitionMinutesMap,
       amavasya: coimbatore_b.coimbatoreAmavasyaCorrections,
-      purnima: coimbatore_b.coimbatorePurnimaCorrections,
-      sankranti: coimbatore_b.coimbatoreSankrantiCorrections);
+      purnima: coimbatore_b.coimbatorePurnimaCorrections);
   registerCity('Colombo',
       tithi: colombo.colomboTithiCorrections,
       transitions: colombo.colomboTransitionMinutesMap,
       amavasya: colombo_b.colomboAmavasyaCorrections,
-      purnima: colombo_b.colomboPurnimaCorrections,
-      sankranti: colombo_b.colomboSankrantiCorrections);
+      purnima: colombo_b.colomboPurnimaCorrections);
   registerCity('Columbus',
       tithi: columbus.columbusTithiCorrections,
       transitions: columbus.columbusTransitionMinutesMap,
       amavasya: columbus_b.columbusAmavasyaCorrections,
-      purnima: columbus_b.columbusPurnimaCorrections,
-      sankranti: columbus_b.columbusSankrantiCorrections);
+      purnima: columbus_b.columbusPurnimaCorrections);
   registerCity('Copenhagen',
       tithi: copenhagen.copenhagenTithiCorrections,
       transitions: copenhagen.copenhagenTransitionMinutesMap,
       amavasya: copenhagen_b.copenhagenAmavasyaCorrections,
-      purnima: copenhagen_b.copenhagenPurnimaCorrections,
-      sankranti: copenhagen_b.copenhagenSankrantiCorrections);
+      purnima: copenhagen_b.copenhagenPurnimaCorrections);
   registerCity('Dallas',
       tithi: dallas.dallasTithiCorrections,
       transitions: dallas.dallasTransitionMinutesMap,
       amavasya: dallas_b.dallasAmavasyaCorrections,
-      purnima: dallas_b.dallasPurnimaCorrections,
-      sankranti: dallas_b.dallasSankrantiCorrections);
+      purnima: dallas_b.dallasPurnimaCorrections);
   registerCity('Dar es Salaam',
       tithi: daressalaam.daressalaamTithiCorrections,
       transitions: daressalaam.daressalaamTransitionMinutesMap,
       amavasya: daressalaam_b.daressalaamAmavasyaCorrections,
-      purnima: daressalaam_b.daressalaamPurnimaCorrections,
-      sankranti: daressalaam_b.daressalaamSankrantiCorrections);
+      purnima: daressalaam_b.daressalaamPurnimaCorrections);
   registerCity('Dehradun',
       tithi: dehradun.dehradunTithiCorrections,
       transitions: dehradun.dehradunTransitionMinutesMap,
       amavasya: dehradun_b.dehradunAmavasyaCorrections,
-      purnima: dehradun_b.dehradunPurnimaCorrections,
-      sankranti: dehradun_b.dehradunSankrantiCorrections);
+      purnima: dehradun_b.dehradunPurnimaCorrections);
   registerCity('Delhi',
       tithi: delhi.delhiTithiCorrections,
       transitions: delhi.delhiTransitionMinutesMap,
       amavasya: delhi_b.delhiAmavasyaCorrections,
-      purnima: delhi_b.delhiPurnimaCorrections,
-      sankranti: delhi_b.delhiSankrantiCorrections);
+      purnima: delhi_b.delhiPurnimaCorrections);
   registerCity('Denpasar',
       tithi: denpasar.denpasarTithiCorrections,
       transitions: denpasar.denpasarTransitionMinutesMap,
       amavasya: denpasar_b.denpasarAmavasyaCorrections,
-      purnima: denpasar_b.denpasarPurnimaCorrections,
-      sankranti: denpasar_b.denpasarSankrantiCorrections);
+      purnima: denpasar_b.denpasarPurnimaCorrections);
   registerCity('Denver',
       tithi: denver.denverTithiCorrections,
       transitions: denver.denverTransitionMinutesMap,
       amavasya: denver_b.denverAmavasyaCorrections,
-      purnima: denver_b.denverPurnimaCorrections,
-      sankranti: denver_b.denverSankrantiCorrections);
+      purnima: denver_b.denverPurnimaCorrections);
   registerCity('Detroit',
       tithi: detroit.detroitTithiCorrections,
       transitions: detroit.detroitTransitionMinutesMap,
       amavasya: detroit_b.detroitAmavasyaCorrections,
-      purnima: detroit_b.detroitPurnimaCorrections,
-      sankranti: detroit_b.detroitSankrantiCorrections);
+      purnima: detroit_b.detroitPurnimaCorrections);
   registerCity('Dhaka',
       tithi: dhaka.dhakaTithiCorrections,
       transitions: dhaka.dhakaTransitionMinutesMap,
       amavasya: dhaka_b.dhakaAmavasyaCorrections,
-      purnima: dhaka_b.dhakaPurnimaCorrections,
-      sankranti: dhaka_b.dhakaSankrantiCorrections);
+      purnima: dhaka_b.dhakaPurnimaCorrections);
   registerCity('Doha',
       tithi: doha.dohaTithiCorrections,
       transitions: doha.dohaTransitionMinutesMap,
       amavasya: doha_b.dohaAmavasyaCorrections,
-      purnima: doha_b.dohaPurnimaCorrections,
-      sankranti: doha_b.dohaSankrantiCorrections);
+      purnima: doha_b.dohaPurnimaCorrections);
   registerCity('Dubai',
       tithi: dubai.dubaiTithiCorrections,
       transitions: dubai.dubaiTransitionMinutesMap,
       amavasya: dubai_b.dubaiAmavasyaCorrections,
-      purnima: dubai_b.dubaiPurnimaCorrections,
-      sankranti: dubai_b.dubaiSankrantiCorrections);
+      purnima: dubai_b.dubaiPurnimaCorrections);
   registerCity('Dublin',
       tithi: dublin.dublinTithiCorrections,
       transitions: dublin.dublinTransitionMinutesMap,
       amavasya: dublin_b.dublinAmavasyaCorrections,
-      purnima: dublin_b.dublinPurnimaCorrections,
-      sankranti: dublin_b.dublinSankrantiCorrections);
+      purnima: dublin_b.dublinPurnimaCorrections);
   registerCity('Durban',
       tithi: durban.durbanTithiCorrections,
       transitions: durban.durbanTransitionMinutesMap,
       amavasya: durban_b.durbanAmavasyaCorrections,
-      purnima: durban_b.durbanPurnimaCorrections,
-      sankranti: durban_b.durbanSankrantiCorrections);
+      purnima: durban_b.durbanPurnimaCorrections);
   registerCity('Dwarka',
       tithi: dwarka.dwarkaTithiCorrections,
       transitions: dwarka.dwarkaTransitionMinutesMap,
       amavasya: dwarka_b.dwarkaAmavasyaCorrections,
-      purnima: dwarka_b.dwarkaPurnimaCorrections,
-      sankranti: dwarka_b.dwarkaSankrantiCorrections);
+      purnima: dwarka_b.dwarkaPurnimaCorrections);
   registerCity('Edinburgh',
       tithi: edinburgh.edinburghTithiCorrections,
       transitions: edinburgh.edinburghTransitionMinutesMap,
       amavasya: edinburgh_b.edinburghAmavasyaCorrections,
-      purnima: edinburgh_b.edinburghPurnimaCorrections,
-      sankranti: edinburgh_b.edinburghSankrantiCorrections);
+      purnima: edinburgh_b.edinburghPurnimaCorrections);
   registerCity('Edmonton',
       tithi: edmonton.edmontonTithiCorrections,
       transitions: edmonton.edmontonTransitionMinutesMap,
       amavasya: edmonton_b.edmontonAmavasyaCorrections,
-      purnima: edmonton_b.edmontonPurnimaCorrections,
-      sankranti: edmonton_b.edmontonSankrantiCorrections);
+      purnima: edmonton_b.edmontonPurnimaCorrections);
   registerCity('Faridabad',
       tithi: faridabad.faridabadTithiCorrections,
       transitions: faridabad.faridabadTransitionMinutesMap,
       amavasya: faridabad_b.faridabadAmavasyaCorrections,
-      purnima: faridabad_b.faridabadPurnimaCorrections,
-      sankranti: faridabad_b.faridabadSankrantiCorrections);
+      purnima: faridabad_b.faridabadPurnimaCorrections);
   registerCity('Fremont',
       tithi: fremont.fremontTithiCorrections,
       transitions: fremont.fremontTransitionMinutesMap,
       amavasya: fremont_b.fremontAmavasyaCorrections,
-      purnima: fremont_b.fremontPurnimaCorrections,
-      sankranti: fremont_b.fremontSankrantiCorrections);
+      purnima: fremont_b.fremontPurnimaCorrections);
   registerCity('Georgetown',
       tithi: georgetown.georgetownTithiCorrections,
       transitions: georgetown.georgetownTransitionMinutesMap,
       amavasya: georgetown_b.georgetownAmavasyaCorrections,
-      purnima: georgetown_b.georgetownPurnimaCorrections,
-      sankranti: georgetown_b.georgetownSankrantiCorrections);
+      purnima: georgetown_b.georgetownPurnimaCorrections);
   registerCity('Ghaziabad',
       tithi: ghaziabad.ghaziabadTithiCorrections,
       transitions: ghaziabad.ghaziabadTransitionMinutesMap,
       amavasya: ghaziabad_b.ghaziabadAmavasyaCorrections,
-      purnima: ghaziabad_b.ghaziabadPurnimaCorrections,
-      sankranti: ghaziabad_b.ghaziabadSankrantiCorrections);
+      purnima: ghaziabad_b.ghaziabadPurnimaCorrections);
   registerCity('Glasgow',
       tithi: glasgow.glasgowTithiCorrections,
       transitions: glasgow.glasgowTransitionMinutesMap,
       amavasya: glasgow_b.glasgowAmavasyaCorrections,
-      purnima: glasgow_b.glasgowPurnimaCorrections,
-      sankranti: glasgow_b.glasgowSankrantiCorrections);
+      purnima: glasgow_b.glasgowPurnimaCorrections);
   registerCity('Gorakhpur',
       tithi: gorakhpur.gorakhpurTithiCorrections,
       transitions: gorakhpur.gorakhpurTransitionMinutesMap,
       amavasya: gorakhpur_b.gorakhpurAmavasyaCorrections,
-      purnima: gorakhpur_b.gorakhpurPurnimaCorrections,
-      sankranti: gorakhpur_b.gorakhpurSankrantiCorrections);
+      purnima: gorakhpur_b.gorakhpurPurnimaCorrections);
   registerCity('Gothenburg',
       tithi: gothenburg.gothenburgTithiCorrections,
       transitions: gothenburg.gothenburgTransitionMinutesMap,
       amavasya: gothenburg_b.gothenburgAmavasyaCorrections,
-      purnima: gothenburg_b.gothenburgPurnimaCorrections,
-      sankranti: gothenburg_b.gothenburgSankrantiCorrections);
+      purnima: gothenburg_b.gothenburgPurnimaCorrections);
   registerCity('Gurgaon',
       tithi: gurgaon.gurgaonTithiCorrections,
       transitions: gurgaon.gurgaonTransitionMinutesMap,
       amavasya: gurgaon_b.gurgaonAmavasyaCorrections,
-      purnima: gurgaon_b.gurgaonPurnimaCorrections,
-      sankranti: gurgaon_b.gurgaonSankrantiCorrections);
+      purnima: gurgaon_b.gurgaonPurnimaCorrections);
   registerCity('Guwahati',
       tithi: guwahati.guwahatiTithiCorrections,
       transitions: guwahati.guwahatiTransitionMinutesMap,
       amavasya: guwahati_b.guwahatiAmavasyaCorrections,
-      purnima: guwahati_b.guwahatiPurnimaCorrections,
-      sankranti: guwahati_b.guwahatiSankrantiCorrections);
+      purnima: guwahati_b.guwahatiPurnimaCorrections);
   registerCity('Gwalior',
       tithi: gwalior.gwaliorTithiCorrections,
       transitions: gwalior.gwaliorTransitionMinutesMap,
       amavasya: gwalior_b.gwaliorAmavasyaCorrections,
-      purnima: gwalior_b.gwaliorPurnimaCorrections,
-      sankranti: gwalior_b.gwaliorSankrantiCorrections);
+      purnima: gwalior_b.gwaliorPurnimaCorrections);
   registerCity('Halifax',
       tithi: halifax.halifaxTithiCorrections,
       transitions: halifax.halifaxTransitionMinutesMap,
       amavasya: halifax_b.halifaxAmavasyaCorrections,
-      purnima: halifax_b.halifaxPurnimaCorrections,
-      sankranti: halifax_b.halifaxSankrantiCorrections);
+      purnima: halifax_b.halifaxPurnimaCorrections);
   registerCity('Hanoi',
       tithi: hanoi.hanoiTithiCorrections,
       transitions: hanoi.hanoiTransitionMinutesMap,
       amavasya: hanoi_b.hanoiAmavasyaCorrections,
-      purnima: hanoi_b.hanoiPurnimaCorrections,
-      sankranti: hanoi_b.hanoiSankrantiCorrections);
+      purnima: hanoi_b.hanoiPurnimaCorrections);
   registerCity('Haridwar',
       tithi: haridwar.haridwarTithiCorrections,
       transitions: haridwar.haridwarTransitionMinutesMap,
       amavasya: haridwar_b.haridwarAmavasyaCorrections,
-      purnima: haridwar_b.haridwarPurnimaCorrections,
-      sankranti: haridwar_b.haridwarSankrantiCorrections);
+      purnima: haridwar_b.haridwarPurnimaCorrections);
   registerCity('Helsinki',
       tithi: helsinki.helsinkiTithiCorrections,
       transitions: helsinki.helsinkiTransitionMinutesMap,
       amavasya: helsinki_b.helsinkiAmavasyaCorrections,
-      purnima: helsinki_b.helsinkiPurnimaCorrections,
-      sankranti: helsinki_b.helsinkiSankrantiCorrections);
+      purnima: helsinki_b.helsinkiPurnimaCorrections);
   registerCity('Ho Chi Minh City',
       tithi: hochiminhcity.hochiminhcityTithiCorrections,
       transitions: hochiminhcity.hochiminhcityTransitionMinutesMap,
       amavasya: hochiminhcity_b.hochiminhcityAmavasyaCorrections,
-      purnima: hochiminhcity_b.hochiminhcityPurnimaCorrections,
-      sankranti: hochiminhcity_b.hochiminhcitySankrantiCorrections);
+      purnima: hochiminhcity_b.hochiminhcityPurnimaCorrections);
   registerCity('Hong Kong',
       tithi: hongkong.hongkongTithiCorrections,
       transitions: hongkong.hongkongTransitionMinutesMap,
       amavasya: hongkong_b.hongkongAmavasyaCorrections,
-      purnima: hongkong_b.hongkongPurnimaCorrections,
-      sankranti: hongkong_b.hongkongSankrantiCorrections);
+      purnima: hongkong_b.hongkongPurnimaCorrections);
   registerCity('Honolulu',
       tithi: honolulu.honoluluTithiCorrections,
       transitions: honolulu.honoluluTransitionMinutesMap,
       amavasya: honolulu_b.honoluluAmavasyaCorrections,
-      purnima: honolulu_b.honoluluPurnimaCorrections,
-      sankranti: honolulu_b.honoluluSankrantiCorrections);
+      purnima: honolulu_b.honoluluPurnimaCorrections);
   registerCity('Houston',
       tithi: houston.houstonTithiCorrections,
       transitions: houston.houstonTransitionMinutesMap,
       amavasya: houston_b.houstonAmavasyaCorrections,
-      purnima: houston_b.houstonPurnimaCorrections,
-      sankranti: houston_b.houstonSankrantiCorrections);
+      purnima: houston_b.houstonPurnimaCorrections);
   registerCity('Hubli',
       tithi: hubli.hubliTithiCorrections,
       transitions: hubli.hubliTransitionMinutesMap,
       amavasya: hubli_b.hubliAmavasyaCorrections,
-      purnima: hubli_b.hubliPurnimaCorrections,
-      sankranti: hubli_b.hubliSankrantiCorrections);
+      purnima: hubli_b.hubliPurnimaCorrections);
   registerCity('Hyderabad',
       tithi: hyderabad.hyderabadTithiCorrections,
       transitions: hyderabad.hyderabadTransitionMinutesMap,
       amavasya: hyderabad_b.hyderabadAmavasyaCorrections,
-      purnima: hyderabad_b.hyderabadPurnimaCorrections,
-      sankranti: hyderabad_b.hyderabadSankrantiCorrections);
+      purnima: hyderabad_b.hyderabadPurnimaCorrections);
   registerCity('Indianapolis',
       tithi: indianapolis.indianapolisTithiCorrections,
       transitions: indianapolis.indianapolisTransitionMinutesMap,
       amavasya: indianapolis_b.indianapolisAmavasyaCorrections,
-      purnima: indianapolis_b.indianapolisPurnimaCorrections,
-      sankranti: indianapolis_b.indianapolisSankrantiCorrections);
+      purnima: indianapolis_b.indianapolisPurnimaCorrections);
   registerCity('Indore',
       tithi: indore.indoreTithiCorrections,
       transitions: indore.indoreTransitionMinutesMap,
       amavasya: indore_b.indoreAmavasyaCorrections,
-      purnima: indore_b.indorePurnimaCorrections,
-      sankranti: indore_b.indoreSankrantiCorrections);
+      purnima: indore_b.indorePurnimaCorrections);
   registerCity('Islamabad',
       tithi: islamabad.islamabadTithiCorrections,
       transitions: islamabad.islamabadTransitionMinutesMap,
       amavasya: islamabad_b.islamabadAmavasyaCorrections,
-      purnima: islamabad_b.islamabadPurnimaCorrections,
-      sankranti: islamabad_b.islamabadSankrantiCorrections);
+      purnima: islamabad_b.islamabadPurnimaCorrections);
   registerCity('Istanbul',
       tithi: istanbul.istanbulTithiCorrections,
       transitions: istanbul.istanbulTransitionMinutesMap,
       amavasya: istanbul_b.istanbulAmavasyaCorrections,
-      purnima: istanbul_b.istanbulPurnimaCorrections,
-      sankranti: istanbul_b.istanbulSankrantiCorrections);
+      purnima: istanbul_b.istanbulPurnimaCorrections);
   registerCity('Jabalpur',
       tithi: jabalpur.jabalpurTithiCorrections,
       transitions: jabalpur.jabalpurTransitionMinutesMap,
       amavasya: jabalpur_b.jabalpurAmavasyaCorrections,
-      purnima: jabalpur_b.jabalpurPurnimaCorrections,
-      sankranti: jabalpur_b.jabalpurSankrantiCorrections);
+      purnima: jabalpur_b.jabalpurPurnimaCorrections);
   registerCity('Jaipur',
       tithi: jaipur.jaipurTithiCorrections,
       transitions: jaipur.jaipurTransitionMinutesMap,
       amavasya: jaipur_b.jaipurAmavasyaCorrections,
-      purnima: jaipur_b.jaipurPurnimaCorrections,
-      sankranti: jaipur_b.jaipurSankrantiCorrections);
+      purnima: jaipur_b.jaipurPurnimaCorrections);
   registerCity('Jakarta',
       tithi: jakarta.jakartaTithiCorrections,
       transitions: jakarta.jakartaTransitionMinutesMap,
       amavasya: jakarta_b.jakartaAmavasyaCorrections,
-      purnima: jakarta_b.jakartaPurnimaCorrections,
-      sankranti: jakarta_b.jakartaSankrantiCorrections);
+      purnima: jakarta_b.jakartaPurnimaCorrections);
   registerCity('Jalandhar',
       tithi: jalandhar.jalandharTithiCorrections,
       transitions: jalandhar.jalandharTransitionMinutesMap,
       amavasya: jalandhar_b.jalandharAmavasyaCorrections,
-      purnima: jalandhar_b.jalandharPurnimaCorrections,
-      sankranti: jalandhar_b.jalandharSankrantiCorrections);
+      purnima: jalandhar_b.jalandharPurnimaCorrections);
   registerCity('Jammu',
       tithi: jammu.jammuTithiCorrections,
       transitions: jammu.jammuTransitionMinutesMap,
       amavasya: jammu_b.jammuAmavasyaCorrections,
-      purnima: jammu_b.jammuPurnimaCorrections,
-      sankranti: jammu_b.jammuSankrantiCorrections);
+      purnima: jammu_b.jammuPurnimaCorrections);
   registerCity('Jeddah',
       tithi: jeddah.jeddahTithiCorrections,
       transitions: jeddah.jeddahTransitionMinutesMap,
       amavasya: jeddah_b.jeddahAmavasyaCorrections,
-      purnima: jeddah_b.jeddahPurnimaCorrections,
-      sankranti: jeddah_b.jeddahSankrantiCorrections);
+      purnima: jeddah_b.jeddahPurnimaCorrections);
   registerCity('Jodhpur',
       tithi: jodhpur.jodhpurTithiCorrections,
       transitions: jodhpur.jodhpurTransitionMinutesMap,
       amavasya: jodhpur_b.jodhpurAmavasyaCorrections,
-      purnima: jodhpur_b.jodhpurPurnimaCorrections,
-      sankranti: jodhpur_b.jodhpurSankrantiCorrections);
+      purnima: jodhpur_b.jodhpurPurnimaCorrections);
   registerCity('Johannesburg',
       tithi: johannesburg.johannesburgTithiCorrections,
       transitions: johannesburg.johannesburgTransitionMinutesMap,
       amavasya: johannesburg_b.johannesburgAmavasyaCorrections,
-      purnima: johannesburg_b.johannesburgPurnimaCorrections,
-      sankranti: johannesburg_b.johannesburgSankrantiCorrections);
+      purnima: johannesburg_b.johannesburgPurnimaCorrections);
   registerCity('Kampala',
       tithi: kampala.kampalaTithiCorrections,
       transitions: kampala.kampalaTransitionMinutesMap,
       amavasya: kampala_b.kampalaAmavasyaCorrections,
-      purnima: kampala_b.kampalaPurnimaCorrections,
-      sankranti: kampala_b.kampalaSankrantiCorrections);
+      purnima: kampala_b.kampalaPurnimaCorrections);
   registerCity('Kanpur',
       tithi: kanpur.kanpurTithiCorrections,
       transitions: kanpur.kanpurTransitionMinutesMap,
       amavasya: kanpur_b.kanpurAmavasyaCorrections,
-      purnima: kanpur_b.kanpurPurnimaCorrections,
-      sankranti: kanpur_b.kanpurSankrantiCorrections);
+      purnima: kanpur_b.kanpurPurnimaCorrections);
   registerCity('Kansas City',
       tithi: kansascity.kansascityTithiCorrections,
       transitions: kansascity.kansascityTransitionMinutesMap,
       amavasya: kansascity_b.kansascityAmavasyaCorrections,
-      purnima: kansascity_b.kansascityPurnimaCorrections,
-      sankranti: kansascity_b.kansascitySankrantiCorrections);
+      purnima: kansascity_b.kansascityPurnimaCorrections);
   registerCity('Karachi',
       tithi: karachi.karachiTithiCorrections,
       transitions: karachi.karachiTransitionMinutesMap,
       amavasya: karachi_b.karachiAmavasyaCorrections,
-      purnima: karachi_b.karachiPurnimaCorrections,
-      sankranti: karachi_b.karachiSankrantiCorrections);
+      purnima: karachi_b.karachiPurnimaCorrections);
   registerCity('Kathmandu',
       tithi: kathmandu.kathmanduTithiCorrections,
       transitions: kathmandu.kathmanduTransitionMinutesMap,
       amavasya: kathmandu_b.kathmanduAmavasyaCorrections,
-      purnima: kathmandu_b.kathmanduPurnimaCorrections,
-      sankranti: kathmandu_b.kathmanduSankrantiCorrections);
+      purnima: kathmandu_b.kathmanduPurnimaCorrections);
   registerCity('Kingston',
       tithi: kingston.kingstonTithiCorrections,
       transitions: kingston.kingstonTransitionMinutesMap,
       amavasya: kingston_b.kingstonAmavasyaCorrections,
-      purnima: kingston_b.kingstonPurnimaCorrections,
-      sankranti: kingston_b.kingstonSankrantiCorrections);
+      purnima: kingston_b.kingstonPurnimaCorrections);
   registerCity('Kirkland',
       tithi: kirkland.kirklandTithiCorrections,
       transitions: kirkland.kirklandTransitionMinutesMap,
       amavasya: kirkland_b.kirklandAmavasyaCorrections,
-      purnima: kirkland_b.kirklandPurnimaCorrections,
-      sankranti: kirkland_b.kirklandSankrantiCorrections);
+      purnima: kirkland_b.kirklandPurnimaCorrections);
   registerCity('Kochi',
       tithi: kochi.kochiTithiCorrections,
       transitions: kochi.kochiTransitionMinutesMap,
       amavasya: kochi_b.kochiAmavasyaCorrections,
-      purnima: kochi_b.kochiPurnimaCorrections,
-      sankranti: kochi_b.kochiSankrantiCorrections);
+      purnima: kochi_b.kochiPurnimaCorrections);
   registerCity('Kolkata',
       tithi: kolkata.kolkataTithiCorrections,
       transitions: kolkata.kolkataTransitionMinutesMap,
       amavasya: kolkata_b.kolkataAmavasyaCorrections,
-      purnima: kolkata_b.kolkataPurnimaCorrections,
-      sankranti: kolkata_b.kolkataSankrantiCorrections);
+      purnima: kolkata_b.kolkataPurnimaCorrections);
   registerCity('Kota',
       tithi: kota.kotaTithiCorrections,
       transitions: kota.kotaTransitionMinutesMap,
       amavasya: kota_b.kotaAmavasyaCorrections,
-      purnima: kota_b.kotaPurnimaCorrections,
-      sankranti: kota_b.kotaSankrantiCorrections);
+      purnima: kota_b.kotaPurnimaCorrections);
   registerCity('Krakow',
       tithi: krakow.krakowTithiCorrections,
       transitions: krakow.krakowTransitionMinutesMap,
       amavasya: krakow_b.krakowAmavasyaCorrections,
-      purnima: krakow_b.krakowPurnimaCorrections,
-      sankranti: krakow_b.krakowSankrantiCorrections);
+      purnima: krakow_b.krakowPurnimaCorrections);
   registerCity('Kuala Lumpur',
       tithi: kualalumpur.kualalumpurTithiCorrections,
       transitions: kualalumpur.kualalumpurTransitionMinutesMap,
       amavasya: kualalumpur_b.kualalumpurAmavasyaCorrections,
-      purnima: kualalumpur_b.kualalumpurPurnimaCorrections,
-      sankranti: kualalumpur_b.kualalumpurSankrantiCorrections);
+      purnima: kualalumpur_b.kualalumpurPurnimaCorrections);
   registerCity('Kuwait City',
       tithi: kuwaitcity.kuwaitcityTithiCorrections,
       transitions: kuwaitcity.kuwaitcityTransitionMinutesMap,
       amavasya: kuwaitcity_b.kuwaitcityAmavasyaCorrections,
-      purnima: kuwaitcity_b.kuwaitcityPurnimaCorrections,
-      sankranti: kuwaitcity_b.kuwaitcitySankrantiCorrections);
+      purnima: kuwaitcity_b.kuwaitcityPurnimaCorrections);
   registerCity('Kyiv',
       tithi: kyiv.kyivTithiCorrections,
       transitions: kyiv.kyivTransitionMinutesMap,
       amavasya: kyiv_b.kyivAmavasyaCorrections,
-      purnima: kyiv_b.kyivPurnimaCorrections,
-      sankranti: kyiv_b.kyivSankrantiCorrections);
+      purnima: kyiv_b.kyivPurnimaCorrections);
   registerCity('Lagos',
       tithi: lagos.lagosTithiCorrections,
       transitions: lagos.lagosTransitionMinutesMap,
       amavasya: lagos_b.lagosAmavasyaCorrections,
-      purnima: lagos_b.lagosPurnimaCorrections,
-      sankranti: lagos_b.lagosSankrantiCorrections);
+      purnima: lagos_b.lagosPurnimaCorrections);
   registerCity('Lahore',
       tithi: lahore.lahoreTithiCorrections,
       transitions: lahore.lahoreTransitionMinutesMap,
       amavasya: lahore_b.lahoreAmavasyaCorrections,
-      purnima: lahore_b.lahorePurnimaCorrections,
-      sankranti: lahore_b.lahoreSankrantiCorrections);
+      purnima: lahore_b.lahorePurnimaCorrections);
   registerCity('Las Vegas',
       tithi: lasvegas.lasvegasTithiCorrections,
       transitions: lasvegas.lasvegasTransitionMinutesMap,
       amavasya: lasvegas_b.lasvegasAmavasyaCorrections,
-      purnima: lasvegas_b.lasvegasPurnimaCorrections,
-      sankranti: lasvegas_b.lasvegasSankrantiCorrections);
+      purnima: lasvegas_b.lasvegasPurnimaCorrections);
   registerCity('Leicester',
       tithi: leicester.leicesterTithiCorrections,
       transitions: leicester.leicesterTransitionMinutesMap,
       amavasya: leicester_b.leicesterAmavasyaCorrections,
-      purnima: leicester_b.leicesterPurnimaCorrections,
-      sankranti: leicester_b.leicesterSankrantiCorrections);
+      purnima: leicester_b.leicesterPurnimaCorrections);
   registerCity('Lima',
       tithi: lima.limaTithiCorrections,
       transitions: lima.limaTransitionMinutesMap,
       amavasya: lima_b.limaAmavasyaCorrections,
-      purnima: lima_b.limaPurnimaCorrections,
-      sankranti: lima_b.limaSankrantiCorrections);
+      purnima: lima_b.limaPurnimaCorrections);
   registerCity('Lisbon',
       tithi: lisbon.lisbonTithiCorrections,
       transitions: lisbon.lisbonTransitionMinutesMap,
       amavasya: lisbon_b.lisbonAmavasyaCorrections,
-      purnima: lisbon_b.lisbonPurnimaCorrections,
-      sankranti: lisbon_b.lisbonSankrantiCorrections);
+      purnima: lisbon_b.lisbonPurnimaCorrections);
   registerCity('London',
       tithi: london.londonTithiCorrections,
       transitions: london.londonTransitionMinutesMap,
       amavasya: london_b.londonAmavasyaCorrections,
-      purnima: london_b.londonPurnimaCorrections,
-      sankranti: london_b.londonSankrantiCorrections);
+      purnima: london_b.londonPurnimaCorrections);
   registerCity('Los Angeles',
       tithi: losangeles.losangelesTithiCorrections,
       transitions: losangeles.losangelesTransitionMinutesMap,
       amavasya: losangeles_b.losangelesAmavasyaCorrections,
-      purnima: losangeles_b.losangelesPurnimaCorrections,
-      sankranti: losangeles_b.losangelesSankrantiCorrections);
+      purnima: losangeles_b.losangelesPurnimaCorrections);
   registerCity('Lucknow',
       tithi: lucknow.lucknowTithiCorrections,
       transitions: lucknow.lucknowTransitionMinutesMap,
       amavasya: lucknow_b.lucknowAmavasyaCorrections,
-      purnima: lucknow_b.lucknowPurnimaCorrections,
-      sankranti: lucknow_b.lucknowSankrantiCorrections);
+      purnima: lucknow_b.lucknowPurnimaCorrections);
   registerCity('Ludhiana',
       tithi: ludhiana.ludhianaTithiCorrections,
       transitions: ludhiana.ludhianaTransitionMinutesMap,
       amavasya: ludhiana_b.ludhianaAmavasyaCorrections,
-      purnima: ludhiana_b.ludhianaPurnimaCorrections,
-      sankranti: ludhiana_b.ludhianaSankrantiCorrections);
+      purnima: ludhiana_b.ludhianaPurnimaCorrections);
   registerCity('Lyon',
       tithi: lyon.lyonTithiCorrections,
       transitions: lyon.lyonTransitionMinutesMap,
       amavasya: lyon_b.lyonAmavasyaCorrections,
-      purnima: lyon_b.lyonPurnimaCorrections,
-      sankranti: lyon_b.lyonSankrantiCorrections);
+      purnima: lyon_b.lyonPurnimaCorrections);
   registerCity('Madrid',
       tithi: madrid.madridTithiCorrections,
       transitions: madrid.madridTransitionMinutesMap,
       amavasya: madrid_b.madridAmavasyaCorrections,
-      purnima: madrid_b.madridPurnimaCorrections,
-      sankranti: madrid_b.madridSankrantiCorrections);
+      purnima: madrid_b.madridPurnimaCorrections);
   registerCity('Madurai',
       tithi: madurai.maduraiTithiCorrections,
       transitions: madurai.maduraiTransitionMinutesMap,
       amavasya: madurai_b.maduraiAmavasyaCorrections,
-      purnima: madurai_b.maduraiPurnimaCorrections,
-      sankranti: madurai_b.maduraiSankrantiCorrections);
+      purnima: madurai_b.maduraiPurnimaCorrections);
   registerCity('Manchester',
       tithi: manchester.manchesterTithiCorrections,
       transitions: manchester.manchesterTransitionMinutesMap,
       amavasya: manchester_b.manchesterAmavasyaCorrections,
-      purnima: manchester_b.manchesterPurnimaCorrections,
-      sankranti: manchester_b.manchesterSankrantiCorrections);
+      purnima: manchester_b.manchesterPurnimaCorrections);
   registerCity('Mangalore',
       tithi: mangalore.mangaloreTithiCorrections,
       transitions: mangalore.mangaloreTransitionMinutesMap,
       amavasya: mangalore_b.mangaloreAmavasyaCorrections,
-      purnima: mangalore_b.mangalorePurnimaCorrections,
-      sankranti: mangalore_b.mangaloreSankrantiCorrections);
+      purnima: mangalore_b.mangalorePurnimaCorrections);
   registerCity('Manila',
       tithi: manila.manilaTithiCorrections,
       transitions: manila.manilaTransitionMinutesMap,
       amavasya: manila_b.manilaAmavasyaCorrections,
-      purnima: manila_b.manilaPurnimaCorrections,
-      sankranti: manila_b.manilaSankrantiCorrections);
+      purnima: manila_b.manilaPurnimaCorrections);
   registerCity('Mathura',
       tithi: mathura.mathuraTithiCorrections,
       transitions: mathura.mathuraTransitionMinutesMap,
       amavasya: mathura_b.mathuraAmavasyaCorrections,
-      purnima: mathura_b.mathuraPurnimaCorrections,
-      sankranti: mathura_b.mathuraSankrantiCorrections);
+      purnima: mathura_b.mathuraPurnimaCorrections);
   registerCity('Medellín',
       tithi: medellin.medellinTithiCorrections,
       transitions: medellin.medellinTransitionMinutesMap,
       amavasya: medellin_b.medellinAmavasyaCorrections,
-      purnima: medellin_b.medellinPurnimaCorrections,
-      sankranti: medellin_b.medellinSankrantiCorrections);
+      purnima: medellin_b.medellinPurnimaCorrections);
   registerCity('Meerut',
       tithi: meerut.meerutTithiCorrections,
       transitions: meerut.meerutTransitionMinutesMap,
       amavasya: meerut_b.meerutAmavasyaCorrections,
-      purnima: meerut_b.meerutPurnimaCorrections,
-      sankranti: meerut_b.meerutSankrantiCorrections);
+      purnima: meerut_b.meerutPurnimaCorrections);
   registerCity('Melbourne',
       tithi: melbourne.melbourneTithiCorrections,
       transitions: melbourne.melbourneTransitionMinutesMap,
       amavasya: melbourne_b.melbourneAmavasyaCorrections,
-      purnima: melbourne_b.melbournePurnimaCorrections,
-      sankranti: melbourne_b.melbourneSankrantiCorrections);
+      purnima: melbourne_b.melbournePurnimaCorrections);
   registerCity('Mexico City',
       tithi: mexicocity.mexicocityTithiCorrections,
       transitions: mexicocity.mexicocityTransitionMinutesMap,
       amavasya: mexicocity_b.mexicocityAmavasyaCorrections,
-      purnima: mexicocity_b.mexicocityPurnimaCorrections,
-      sankranti: mexicocity_b.mexicocitySankrantiCorrections);
+      purnima: mexicocity_b.mexicocityPurnimaCorrections);
   registerCity('Miami',
       tithi: miami.miamiTithiCorrections,
       transitions: miami.miamiTransitionMinutesMap,
       amavasya: miami_b.miamiAmavasyaCorrections,
-      purnima: miami_b.miamiPurnimaCorrections,
-      sankranti: miami_b.miamiSankrantiCorrections);
+      purnima: miami_b.miamiPurnimaCorrections);
   registerCity('Milan',
       tithi: milan.milanTithiCorrections,
       transitions: milan.milanTransitionMinutesMap,
       amavasya: milan_b.milanAmavasyaCorrections,
-      purnima: milan_b.milanPurnimaCorrections,
-      sankranti: milan_b.milanSankrantiCorrections);
+      purnima: milan_b.milanPurnimaCorrections);
   registerCity('Minneapolis',
       tithi: minneapolis.minneapolisTithiCorrections,
       transitions: minneapolis.minneapolisTransitionMinutesMap,
       amavasya: minneapolis_b.minneapolisAmavasyaCorrections,
-      purnima: minneapolis_b.minneapolisPurnimaCorrections,
-      sankranti: minneapolis_b.minneapolisSankrantiCorrections);
+      purnima: minneapolis_b.minneapolisPurnimaCorrections);
   registerCity('Mississauga',
       tithi: mississauga.mississaugaTithiCorrections,
       transitions: mississauga.mississaugaTransitionMinutesMap,
       amavasya: mississauga_b.mississaugaAmavasyaCorrections,
-      purnima: mississauga_b.mississaugaPurnimaCorrections,
-      sankranti: mississauga_b.mississaugaSankrantiCorrections);
+      purnima: mississauga_b.mississaugaPurnimaCorrections);
   registerCity('Mombasa',
       tithi: mombasa.mombasaTithiCorrections,
       transitions: mombasa.mombasaTransitionMinutesMap,
       amavasya: mombasa_b.mombasaAmavasyaCorrections,
-      purnima: mombasa_b.mombasaPurnimaCorrections,
-      sankranti: mombasa_b.mombasaSankrantiCorrections);
+      purnima: mombasa_b.mombasaPurnimaCorrections);
   registerCity('Montreal',
       tithi: montreal.montrealTithiCorrections,
       transitions: montreal.montrealTransitionMinutesMap,
       amavasya: montreal_b.montrealAmavasyaCorrections,
-      purnima: montreal_b.montrealPurnimaCorrections,
-      sankranti: montreal_b.montrealSankrantiCorrections);
+      purnima: montreal_b.montrealPurnimaCorrections);
   registerCity('Moscow',
       tithi: moscow.moscowTithiCorrections,
       transitions: moscow.moscowTransitionMinutesMap,
       amavasya: moscow_b.moscowAmavasyaCorrections,
-      purnima: moscow_b.moscowPurnimaCorrections,
-      sankranti: moscow_b.moscowSankrantiCorrections);
+      purnima: moscow_b.moscowPurnimaCorrections);
   registerCity('Mumbai',
       tithi: mumbai.mumbaiTithiCorrections,
       transitions: mumbai.mumbaiTransitionMinutesMap,
       amavasya: mumbai_b.mumbaiAmavasyaCorrections,
-      purnima: mumbai_b.mumbaiPurnimaCorrections,
-      sankranti: mumbai_b.mumbaiSankrantiCorrections);
+      purnima: mumbai_b.mumbaiPurnimaCorrections);
   registerCity('Munich',
       tithi: munich.munichTithiCorrections,
       transitions: munich.munichTransitionMinutesMap,
       amavasya: munich_b.munichAmavasyaCorrections,
-      purnima: munich_b.munichPurnimaCorrections,
-      sankranti: munich_b.munichSankrantiCorrections);
+      purnima: munich_b.munichPurnimaCorrections);
   registerCity('Muscat',
       tithi: muscat.muscatTithiCorrections,
       transitions: muscat.muscatTransitionMinutesMap,
       amavasya: muscat_b.muscatAmavasyaCorrections,
-      purnima: muscat_b.muscatPurnimaCorrections,
-      sankranti: muscat_b.muscatSankrantiCorrections);
+      purnima: muscat_b.muscatPurnimaCorrections);
   registerCity('Mussoorie',
       tithi: mussoorie.mussoorieTithiCorrections,
       transitions: mussoorie.mussoorieTransitionMinutesMap,
       amavasya: mussoorie_b.mussoorieAmavasyaCorrections,
-      purnima: mussoorie_b.mussooriePurnimaCorrections,
-      sankranti: mussoorie_b.mussoorieSankrantiCorrections);
+      purnima: mussoorie_b.mussooriePurnimaCorrections);
   registerCity('Mysore',
       tithi: mysore.mysoreTithiCorrections,
       transitions: mysore.mysoreTransitionMinutesMap,
       amavasya: mysore_b.mysoreAmavasyaCorrections,
-      purnima: mysore_b.mysorePurnimaCorrections,
-      sankranti: mysore_b.mysoreSankrantiCorrections);
+      purnima: mysore_b.mysorePurnimaCorrections);
   registerCity('Nagpur',
       tithi: nagpur.nagpurTithiCorrections,
       transitions: nagpur.nagpurTransitionMinutesMap,
       amavasya: nagpur_b.nagpurAmavasyaCorrections,
-      purnima: nagpur_b.nagpurPurnimaCorrections,
-      sankranti: nagpur_b.nagpurSankrantiCorrections);
+      purnima: nagpur_b.nagpurPurnimaCorrections);
   registerCity('Nairobi',
       tithi: nairobi.nairobiTithiCorrections,
       transitions: nairobi.nairobiTransitionMinutesMap,
       amavasya: nairobi_b.nairobiAmavasyaCorrections,
-      purnima: nairobi_b.nairobiPurnimaCorrections,
-      sankranti: nairobi_b.nairobiSankrantiCorrections);
+      purnima: nairobi_b.nairobiPurnimaCorrections);
   registerCity('Naples',
       tithi: naples.naplesTithiCorrections,
       transitions: naples.naplesTransitionMinutesMap,
       amavasya: naples_b.naplesAmavasyaCorrections,
-      purnima: naples_b.naplesPurnimaCorrections,
-      sankranti: naples_b.naplesSankrantiCorrections);
+      purnima: naples_b.naplesPurnimaCorrections);
   registerCity('Nashik',
       tithi: nashik.nashikTithiCorrections,
       transitions: nashik.nashikTransitionMinutesMap,
       amavasya: nashik_b.nashikAmavasyaCorrections,
-      purnima: nashik_b.nashikPurnimaCorrections,
-      sankranti: nashik_b.nashikSankrantiCorrections);
+      purnima: nashik_b.nashikPurnimaCorrections);
   registerCity('Nashville',
       tithi: nashville.nashvilleTithiCorrections,
       transitions: nashville.nashvilleTransitionMinutesMap,
       amavasya: nashville_b.nashvilleAmavasyaCorrections,
-      purnima: nashville_b.nashvillePurnimaCorrections,
-      sankranti: nashville_b.nashvilleSankrantiCorrections);
+      purnima: nashville_b.nashvillePurnimaCorrections);
   registerCity('New York',
       tithi: newyork.newyorkTithiCorrections,
       transitions: newyork.newyorkTransitionMinutesMap,
       amavasya: newyork_b.newyorkAmavasyaCorrections,
-      purnima: newyork_b.newyorkPurnimaCorrections,
-      sankranti: newyork_b.newyorkSankrantiCorrections);
+      purnima: newyork_b.newyorkPurnimaCorrections);
   registerCity('Noida',
       tithi: noida.noidaTithiCorrections,
       transitions: noida.noidaTransitionMinutesMap,
       amavasya: noida_b.noidaAmavasyaCorrections,
-      purnima: noida_b.noidaPurnimaCorrections,
-      sankranti: noida_b.noidaSankrantiCorrections);
+      purnima: noida_b.noidaPurnimaCorrections);
   registerCity('Orlando',
       tithi: orlando.orlandoTithiCorrections,
       transitions: orlando.orlandoTransitionMinutesMap,
       amavasya: orlando_b.orlandoAmavasyaCorrections,
-      purnima: orlando_b.orlandoPurnimaCorrections,
-      sankranti: orlando_b.orlandoSankrantiCorrections);
+      purnima: orlando_b.orlandoPurnimaCorrections);
   registerCity('Osaka',
       tithi: osaka.osakaTithiCorrections,
       transitions: osaka.osakaTransitionMinutesMap,
       amavasya: osaka_b.osakaAmavasyaCorrections,
-      purnima: osaka_b.osakaPurnimaCorrections,
-      sankranti: osaka_b.osakaSankrantiCorrections);
+      purnima: osaka_b.osakaPurnimaCorrections);
   registerCity('Oslo',
       tithi: oslo.osloTithiCorrections,
       transitions: oslo.osloTransitionMinutesMap,
       amavasya: oslo_b.osloAmavasyaCorrections,
-      purnima: oslo_b.osloPurnimaCorrections,
-      sankranti: oslo_b.osloSankrantiCorrections);
+      purnima: oslo_b.osloPurnimaCorrections);
   registerCity('Ottawa',
       tithi: ottawa.ottawaTithiCorrections,
       transitions: ottawa.ottawaTransitionMinutesMap,
       amavasya: ottawa_b.ottawaAmavasyaCorrections,
-      purnima: ottawa_b.ottawaPurnimaCorrections,
-      sankranti: ottawa_b.ottawaSankrantiCorrections);
+      purnima: ottawa_b.ottawaPurnimaCorrections);
   registerCity('Panama City',
       tithi: panamacity.panamacityTithiCorrections,
       transitions: panamacity.panamacityTransitionMinutesMap,
       amavasya: panamacity_b.panamacityAmavasyaCorrections,
-      purnima: panamacity_b.panamacityPurnimaCorrections,
-      sankranti: panamacity_b.panamacitySankrantiCorrections);
+      purnima: panamacity_b.panamacityPurnimaCorrections);
   registerCity('Paramaribo',
       tithi: paramaribo.paramariboTithiCorrections,
       transitions: paramaribo.paramariboTransitionMinutesMap,
       amavasya: paramaribo_b.paramariboAmavasyaCorrections,
-      purnima: paramaribo_b.paramariboPurnimaCorrections,
-      sankranti: paramaribo_b.paramariboSankrantiCorrections);
+      purnima: paramaribo_b.paramariboPurnimaCorrections);
   registerCity('Paris',
       tithi: paris.parisTithiCorrections,
       transitions: paris.parisTransitionMinutesMap,
       amavasya: paris_b.parisAmavasyaCorrections,
-      purnima: paris_b.parisPurnimaCorrections,
-      sankranti: paris_b.parisSankrantiCorrections);
+      purnima: paris_b.parisPurnimaCorrections);
   registerCity('Patna',
       tithi: patna.patnaTithiCorrections,
       transitions: patna.patnaTransitionMinutesMap,
       amavasya: patna_b.patnaAmavasyaCorrections,
-      purnima: patna_b.patnaPurnimaCorrections,
-      sankranti: patna_b.patnaSankrantiCorrections);
+      purnima: patna_b.patnaPurnimaCorrections);
   registerCity('Perth',
       tithi: perth.perthTithiCorrections,
       transitions: perth.perthTransitionMinutesMap,
       amavasya: perth_b.perthAmavasyaCorrections,
-      purnima: perth_b.perthPurnimaCorrections,
-      sankranti: perth_b.perthSankrantiCorrections);
+      purnima: perth_b.perthPurnimaCorrections);
   registerCity('Philadelphia',
       tithi: philadelphia.philadelphiaTithiCorrections,
       transitions: philadelphia.philadelphiaTransitionMinutesMap,
       amavasya: philadelphia_b.philadelphiaAmavasyaCorrections,
-      purnima: philadelphia_b.philadelphiaPurnimaCorrections,
-      sankranti: philadelphia_b.philadelphiaSankrantiCorrections);
+      purnima: philadelphia_b.philadelphiaPurnimaCorrections);
   registerCity('Phnom Penh',
       tithi: phnompenh.phnompenhTithiCorrections,
       transitions: phnompenh.phnompenhTransitionMinutesMap,
       amavasya: phnompenh_b.phnompenhAmavasyaCorrections,
-      purnima: phnompenh_b.phnompenhPurnimaCorrections,
-      sankranti: phnompenh_b.phnompenhSankrantiCorrections);
+      purnima: phnompenh_b.phnompenhPurnimaCorrections);
   registerCity('Phoenix',
       tithi: phoenix.phoenixTithiCorrections,
       transitions: phoenix.phoenixTransitionMinutesMap,
       amavasya: phoenix_b.phoenixAmavasyaCorrections,
-      purnima: phoenix_b.phoenixPurnimaCorrections,
-      sankranti: phoenix_b.phoenixSankrantiCorrections);
+      purnima: phoenix_b.phoenixPurnimaCorrections);
   registerCity('Pittsburgh',
       tithi: pittsburgh.pittsburghTithiCorrections,
       transitions: pittsburgh.pittsburghTransitionMinutesMap,
       amavasya: pittsburgh_b.pittsburghAmavasyaCorrections,
-      purnima: pittsburgh_b.pittsburghPurnimaCorrections,
-      sankranti: pittsburgh_b.pittsburghSankrantiCorrections);
+      purnima: pittsburgh_b.pittsburghPurnimaCorrections);
   registerCity('Portland',
       tithi: portland.portlandTithiCorrections,
       transitions: portland.portlandTransitionMinutesMap,
       amavasya: portland_b.portlandAmavasyaCorrections,
-      purnima: portland_b.portlandPurnimaCorrections,
-      sankranti: portland_b.portlandSankrantiCorrections);
+      purnima: portland_b.portlandPurnimaCorrections);
   registerCity('Port Louis',
       tithi: portlouis.portlouisTithiCorrections,
       transitions: portlouis.portlouisTransitionMinutesMap,
       amavasya: portlouis_b.portlouisAmavasyaCorrections,
-      purnima: portlouis_b.portlouisPurnimaCorrections,
-      sankranti: portlouis_b.portlouisSankrantiCorrections);
+      purnima: portlouis_b.portlouisPurnimaCorrections);
   registerCity('Porto',
       tithi: porto.portoTithiCorrections,
       transitions: porto.portoTransitionMinutesMap,
       amavasya: porto_b.portoAmavasyaCorrections,
-      purnima: porto_b.portoPurnimaCorrections,
-      sankranti: porto_b.portoSankrantiCorrections);
+      purnima: porto_b.portoPurnimaCorrections);
   registerCity('Port of Spain',
       tithi: portofspain.portofspainTithiCorrections,
       transitions: portofspain.portofspainTransitionMinutesMap,
       amavasya: portofspain_b.portofspainAmavasyaCorrections,
-      purnima: portofspain_b.portofspainPurnimaCorrections,
-      sankranti: portofspain_b.portofspainSankrantiCorrections);
+      purnima: portofspain_b.portofspainPurnimaCorrections);
   registerCity('Prague',
       tithi: prague.pragueTithiCorrections,
       transitions: prague.pragueTransitionMinutesMap,
       amavasya: prague_b.pragueAmavasyaCorrections,
-      purnima: prague_b.praguePurnimaCorrections,
-      sankranti: prague_b.pragueSankrantiCorrections);
+      purnima: prague_b.praguePurnimaCorrections);
   registerCity('Prayagraj',
       tithi: prayagraj.prayagrajTithiCorrections,
       transitions: prayagraj.prayagrajTransitionMinutesMap,
       amavasya: prayagraj_b.prayagrajAmavasyaCorrections,
-      purnima: prayagraj_b.prayagrajPurnimaCorrections,
-      sankranti: prayagraj_b.prayagrajSankrantiCorrections);
+      purnima: prayagraj_b.prayagrajPurnimaCorrections);
   registerCity('Pune',
       tithi: pune.puneTithiCorrections,
       transitions: pune.puneTransitionMinutesMap,
       amavasya: pune_b.puneAmavasyaCorrections,
-      purnima: pune_b.punePurnimaCorrections,
-      sankranti: pune_b.puneSankrantiCorrections);
+      purnima: pune_b.punePurnimaCorrections);
   registerCity('Quito',
       tithi: quito.quitoTithiCorrections,
       transitions: quito.quitoTransitionMinutesMap,
       amavasya: quito_b.quitoAmavasyaCorrections,
-      purnima: quito_b.quitoPurnimaCorrections,
-      sankranti: quito_b.quitoSankrantiCorrections);
+      purnima: quito_b.quitoPurnimaCorrections);
   registerCity('Raipur',
       tithi: raipur.raipurTithiCorrections,
       transitions: raipur.raipurTransitionMinutesMap,
       amavasya: raipur_b.raipurAmavasyaCorrections,
-      purnima: raipur_b.raipurPurnimaCorrections,
-      sankranti: raipur_b.raipurSankrantiCorrections);
+      purnima: raipur_b.raipurPurnimaCorrections);
   registerCity('Rajkot',
       tithi: rajkot.rajkotTithiCorrections,
       transitions: rajkot.rajkotTransitionMinutesMap,
       amavasya: rajkot_b.rajkotAmavasyaCorrections,
-      purnima: rajkot_b.rajkotPurnimaCorrections,
-      sankranti: rajkot_b.rajkotSankrantiCorrections);
+      purnima: rajkot_b.rajkotPurnimaCorrections);
   registerCity('Raleigh',
       tithi: raleigh.raleighTithiCorrections,
       transitions: raleigh.raleighTransitionMinutesMap,
       amavasya: raleigh_b.raleighAmavasyaCorrections,
-      purnima: raleigh_b.raleighPurnimaCorrections,
-      sankranti: raleigh_b.raleighSankrantiCorrections);
+      purnima: raleigh_b.raleighPurnimaCorrections);
   registerCity('Ranchi',
       tithi: ranchi.ranchiTithiCorrections,
       transitions: ranchi.ranchiTransitionMinutesMap,
       amavasya: ranchi_b.ranchiAmavasyaCorrections,
-      purnima: ranchi_b.ranchiPurnimaCorrections,
-      sankranti: ranchi_b.ranchiSankrantiCorrections);
+      purnima: ranchi_b.ranchiPurnimaCorrections);
   registerCity('Redmond',
       tithi: redmond.redmondTithiCorrections,
       transitions: redmond.redmondTransitionMinutesMap,
       amavasya: redmond_b.redmondAmavasyaCorrections,
-      purnima: redmond_b.redmondPurnimaCorrections,
-      sankranti: redmond_b.redmondSankrantiCorrections);
+      purnima: redmond_b.redmondPurnimaCorrections);
   registerCity('Regina',
       tithi: regina.reginaTithiCorrections,
       transitions: regina.reginaTransitionMinutesMap,
       amavasya: regina_b.reginaAmavasyaCorrections,
-      purnima: regina_b.reginaPurnimaCorrections,
-      sankranti: regina_b.reginaSankrantiCorrections);
+      purnima: regina_b.reginaPurnimaCorrections);
   registerCity('Rio de Janeiro',
       tithi: riodejaneiro.riodejaneiroTithiCorrections,
       transitions: riodejaneiro.riodejaneiroTransitionMinutesMap,
       amavasya: riodejaneiro_b.riodejaneiroAmavasyaCorrections,
-      purnima: riodejaneiro_b.riodejaneiroPurnimaCorrections,
-      sankranti: riodejaneiro_b.riodejaneiroSankrantiCorrections);
+      purnima: riodejaneiro_b.riodejaneiroPurnimaCorrections);
   registerCity('Rishikesh',
       tithi: rishikesh.rishikeshTithiCorrections,
       transitions: rishikesh.rishikeshTransitionMinutesMap,
       amavasya: rishikesh_b.rishikeshAmavasyaCorrections,
-      purnima: rishikesh_b.rishikeshPurnimaCorrections,
-      sankranti: rishikesh_b.rishikeshSankrantiCorrections);
+      purnima: rishikesh_b.rishikeshPurnimaCorrections);
   registerCity('Riyadh',
       tithi: riyadh.riyadhTithiCorrections,
       transitions: riyadh.riyadhTransitionMinutesMap,
       amavasya: riyadh_b.riyadhAmavasyaCorrections,
-      purnima: riyadh_b.riyadhPurnimaCorrections,
-      sankranti: riyadh_b.riyadhSankrantiCorrections);
+      purnima: riyadh_b.riyadhPurnimaCorrections);
   registerCity('Rome',
       tithi: rome.romeTithiCorrections,
       transitions: rome.romeTransitionMinutesMap,
       amavasya: rome_b.romeAmavasyaCorrections,
-      purnima: rome_b.romePurnimaCorrections,
-      sankranti: rome_b.romeSankrantiCorrections);
+      purnima: rome_b.romePurnimaCorrections);
   registerCity('Rotterdam',
       tithi: rotterdam.rotterdamTithiCorrections,
       transitions: rotterdam.rotterdamTransitionMinutesMap,
       amavasya: rotterdam_b.rotterdamAmavasyaCorrections,
-      purnima: rotterdam_b.rotterdamPurnimaCorrections,
-      sankranti: rotterdam_b.rotterdamSankrantiCorrections);
+      purnima: rotterdam_b.rotterdamPurnimaCorrections);
   registerCity('Sacramento',
       tithi: sacramento.sacramentoTithiCorrections,
       transitions: sacramento.sacramentoTransitionMinutesMap,
       amavasya: sacramento_b.sacramentoAmavasyaCorrections,
-      purnima: sacramento_b.sacramentoPurnimaCorrections,
-      sankranti: sacramento_b.sacramentoSankrantiCorrections);
+      purnima: sacramento_b.sacramentoPurnimaCorrections);
   registerCity('Salem',
       tithi: salem.salemTithiCorrections,
       transitions: salem.salemTransitionMinutesMap,
       amavasya: salem_b.salemAmavasyaCorrections,
-      purnima: salem_b.salemPurnimaCorrections,
-      sankranti: salem_b.salemSankrantiCorrections);
+      purnima: salem_b.salemPurnimaCorrections);
   registerCity('Salt Lake City',
       tithi: saltlakecity.saltlakecityTithiCorrections,
       transitions: saltlakecity.saltlakecityTransitionMinutesMap,
       amavasya: saltlakecity_b.saltlakecityAmavasyaCorrections,
-      purnima: saltlakecity_b.saltlakecityPurnimaCorrections,
-      sankranti: saltlakecity_b.saltlakecitySankrantiCorrections);
+      purnima: saltlakecity_b.saltlakecityPurnimaCorrections);
   registerCity('San Diego',
       tithi: sandiego.sandiegoTithiCorrections,
       transitions: sandiego.sandiegoTransitionMinutesMap,
       amavasya: sandiego_b.sandiegoAmavasyaCorrections,
-      purnima: sandiego_b.sandiegoPurnimaCorrections,
-      sankranti: sandiego_b.sandiegoSankrantiCorrections);
+      purnima: sandiego_b.sandiegoPurnimaCorrections);
   registerCity('San Francisco',
       tithi: sanfrancisco.sanfranciscoTithiCorrections,
       transitions: sanfrancisco.sanfranciscoTransitionMinutesMap,
       amavasya: sanfrancisco_b.sanfranciscoAmavasyaCorrections,
-      purnima: sanfrancisco_b.sanfranciscoPurnimaCorrections,
-      sankranti: sanfrancisco_b.sanfranciscoSankrantiCorrections);
+      purnima: sanfrancisco_b.sanfranciscoPurnimaCorrections);
   registerCity('San Jose',
       tithi: sanjose.sanjoseTithiCorrections,
       transitions: sanjose.sanjoseTransitionMinutesMap,
       amavasya: sanjose_b.sanjoseAmavasyaCorrections,
-      purnima: sanjose_b.sanjosePurnimaCorrections,
-      sankranti: sanjose_b.sanjoseSankrantiCorrections);
+      purnima: sanjose_b.sanjosePurnimaCorrections);
   registerCity('Santiago',
       tithi: santiago.santiagoTithiCorrections,
       transitions: santiago.santiagoTransitionMinutesMap,
       amavasya: santiago_b.santiagoAmavasyaCorrections,
-      purnima: santiago_b.santiagoPurnimaCorrections,
-      sankranti: santiago_b.santiagoSankrantiCorrections);
+      purnima: santiago_b.santiagoPurnimaCorrections);
   registerCity('Seattle',
       tithi: seattle.seattleTithiCorrections,
       transitions: seattle.seattleTransitionMinutesMap,
       amavasya: seattle_b.seattleAmavasyaCorrections,
-      purnima: seattle_b.seattlePurnimaCorrections,
-      sankranti: seattle_b.seattleSankrantiCorrections);
+      purnima: seattle_b.seattlePurnimaCorrections);
   registerCity('Seoul',
       tithi: seoul.seoulTithiCorrections,
       transitions: seoul.seoulTransitionMinutesMap,
       amavasya: seoul_b.seoulAmavasyaCorrections,
-      purnima: seoul_b.seoulPurnimaCorrections,
-      sankranti: seoul_b.seoulSankrantiCorrections);
+      purnima: seoul_b.seoulPurnimaCorrections);
   registerCity('Shanghai',
       tithi: shanghai.shanghaiTithiCorrections,
       transitions: shanghai.shanghaiTransitionMinutesMap,
       amavasya: shanghai_b.shanghaiAmavasyaCorrections,
-      purnima: shanghai_b.shanghaiPurnimaCorrections,
-      sankranti: shanghai_b.shanghaiSankrantiCorrections);
+      purnima: shanghai_b.shanghaiPurnimaCorrections);
   registerCity('Shirdi',
       tithi: shirdi.shirdiTithiCorrections,
       transitions: shirdi.shirdiTransitionMinutesMap,
       amavasya: shirdi_b.shirdiAmavasyaCorrections,
-      purnima: shirdi_b.shirdiPurnimaCorrections,
-      sankranti: shirdi_b.shirdiSankrantiCorrections);
+      purnima: shirdi_b.shirdiPurnimaCorrections);
   registerCity('Singapore',
       tithi: singapore.singaporeTithiCorrections,
       transitions: singapore.singaporeTransitionMinutesMap,
       amavasya: singapore_b.singaporeAmavasyaCorrections,
-      purnima: singapore_b.singaporePurnimaCorrections,
-      sankranti: singapore_b.singaporeSankrantiCorrections);
+      purnima: singapore_b.singaporePurnimaCorrections);
   registerCity('Sofia',
       tithi: sofia.sofiaTithiCorrections,
       transitions: sofia.sofiaTransitionMinutesMap,
       amavasya: sofia_b.sofiaAmavasyaCorrections,
-      purnima: sofia_b.sofiaPurnimaCorrections,
-      sankranti: sofia_b.sofiaSankrantiCorrections);
+      purnima: sofia_b.sofiaPurnimaCorrections);
   registerCity('São Paulo',
       tithi: sopaulo.sopauloTithiCorrections,
       transitions: sopaulo.sopauloTransitionMinutesMap,
       amavasya: sopaulo_b.sopauloAmavasyaCorrections,
-      purnima: sopaulo_b.sopauloPurnimaCorrections,
-      sankranti: sopaulo_b.sopauloSankrantiCorrections);
+      purnima: sopaulo_b.sopauloPurnimaCorrections);
   registerCity('Srinagar',
       tithi: srinagar.srinagarTithiCorrections,
       transitions: srinagar.srinagarTransitionMinutesMap,
       amavasya: srinagar_b.srinagarAmavasyaCorrections,
-      purnima: srinagar_b.srinagarPurnimaCorrections,
-      sankranti: srinagar_b.srinagarSankrantiCorrections);
+      purnima: srinagar_b.srinagarPurnimaCorrections);
   registerCity('St. Louis',
       tithi: stlouis.stlouisTithiCorrections,
       transitions: stlouis.stlouisTransitionMinutesMap,
       amavasya: stlouis_b.stlouisAmavasyaCorrections,
-      purnima: stlouis_b.stlouisPurnimaCorrections,
-      sankranti: stlouis_b.stlouisSankrantiCorrections);
+      purnima: stlouis_b.stlouisPurnimaCorrections);
   registerCity('Stockholm',
       tithi: stockholm.stockholmTithiCorrections,
       transitions: stockholm.stockholmTransitionMinutesMap,
       amavasya: stockholm_b.stockholmAmavasyaCorrections,
-      purnima: stockholm_b.stockholmPurnimaCorrections,
-      sankranti: stockholm_b.stockholmSankrantiCorrections);
+      purnima: stockholm_b.stockholmPurnimaCorrections);
   registerCity('Surat',
       tithi: surat.suratTithiCorrections,
       transitions: surat.suratTransitionMinutesMap,
       amavasya: surat_b.suratAmavasyaCorrections,
-      purnima: surat_b.suratPurnimaCorrections,
-      sankranti: surat_b.suratSankrantiCorrections);
+      purnima: surat_b.suratPurnimaCorrections);
   registerCity('Surrey',
       tithi: surrey.surreyTithiCorrections,
       transitions: surrey.surreyTransitionMinutesMap,
       amavasya: surrey_b.surreyAmavasyaCorrections,
-      purnima: surrey_b.surreyPurnimaCorrections,
-      sankranti: surrey_b.surreySankrantiCorrections);
+      purnima: surrey_b.surreyPurnimaCorrections);
   registerCity('Suva',
       tithi: suva.suvaTithiCorrections,
       transitions: suva.suvaTransitionMinutesMap,
       amavasya: suva_b.suvaAmavasyaCorrections,
-      purnima: suva_b.suvaPurnimaCorrections,
-      sankranti: suva_b.suvaSankrantiCorrections);
+      purnima: suva_b.suvaPurnimaCorrections);
   registerCity('Sydney',
       tithi: sydney.sydneyTithiCorrections,
       transitions: sydney.sydneyTransitionMinutesMap,
       amavasya: sydney_b.sydneyAmavasyaCorrections,
-      purnima: sydney_b.sydneyPurnimaCorrections,
-      sankranti: sydney_b.sydneySankrantiCorrections);
+      purnima: sydney_b.sydneyPurnimaCorrections);
   registerCity('Taipei',
       tithi: taipei.taipeiTithiCorrections,
       transitions: taipei.taipeiTransitionMinutesMap,
       amavasya: taipei_b.taipeiAmavasyaCorrections,
-      purnima: taipei_b.taipeiPurnimaCorrections,
-      sankranti: taipei_b.taipeiSankrantiCorrections);
+      purnima: taipei_b.taipeiPurnimaCorrections);
   registerCity('Tampa',
       tithi: tampa.tampaTithiCorrections,
       transitions: tampa.tampaTransitionMinutesMap,
       amavasya: tampa_b.tampaAmavasyaCorrections,
-      purnima: tampa_b.tampaPurnimaCorrections,
-      sankranti: tampa_b.tampaSankrantiCorrections);
+      purnima: tampa_b.tampaPurnimaCorrections);
   registerCity('Tashkent',
       tithi: tashkent.tashkentTithiCorrections,
       transitions: tashkent.tashkentTransitionMinutesMap,
       amavasya: tashkent_b.tashkentAmavasyaCorrections,
-      purnima: tashkent_b.tashkentPurnimaCorrections,
-      sankranti: tashkent_b.tashkentSankrantiCorrections);
+      purnima: tashkent_b.tashkentPurnimaCorrections);
   registerCity('Tel Aviv',
       tithi: telaviv.telavivTithiCorrections,
       transitions: telaviv.telavivTransitionMinutesMap,
       amavasya: telaviv_b.telavivAmavasyaCorrections,
-      purnima: telaviv_b.telavivPurnimaCorrections,
-      sankranti: telaviv_b.telavivSankrantiCorrections);
+      purnima: telaviv_b.telavivPurnimaCorrections);
   registerCity('Thane',
       tithi: thane.thaneTithiCorrections,
       transitions: thane.thaneTransitionMinutesMap,
       amavasya: thane_b.thaneAmavasyaCorrections,
-      purnima: thane_b.thanePurnimaCorrections,
-      sankranti: thane_b.thaneSankrantiCorrections);
+      purnima: thane_b.thanePurnimaCorrections);
   registerCity('Thessaloniki',
       tithi: thessaloniki.thessalonikiTithiCorrections,
       transitions: thessaloniki.thessalonikiTransitionMinutesMap,
       amavasya: thessaloniki_b.thessalonikiAmavasyaCorrections,
-      purnima: thessaloniki_b.thessalonikiPurnimaCorrections,
-      sankranti: thessaloniki_b.thessalonikiSankrantiCorrections);
+      purnima: thessaloniki_b.thessalonikiPurnimaCorrections);
   registerCity('Thiruvananthapuram',
       tithi: thiruvananthapuram.thiruvananthapuramTithiCorrections,
       transitions: thiruvananthapuram.thiruvananthapuramTransitionMinutesMap,
       amavasya: thiruvananthapuram_b.thiruvananthapuramAmavasyaCorrections,
-      purnima: thiruvananthapuram_b.thiruvananthapuramPurnimaCorrections,
-      sankranti: thiruvananthapuram_b.thiruvananthapuramSankrantiCorrections);
+      purnima: thiruvananthapuram_b.thiruvananthapuramPurnimaCorrections);
   registerCity('Tiruchirappalli',
       tithi: tiruchirappalli.tiruchirappalliTithiCorrections,
       transitions: tiruchirappalli.tiruchirappalliTransitionMinutesMap,
       amavasya: tiruchirappalli_b.tiruchirappalliAmavasyaCorrections,
-      purnima: tiruchirappalli_b.tiruchirappalliPurnimaCorrections,
-      sankranti: tiruchirappalli_b.tiruchirappalliSankrantiCorrections);
+      purnima: tiruchirappalli_b.tiruchirappalliPurnimaCorrections);
   registerCity('Tirupati',
       tithi: tirupati.tirupatiTithiCorrections,
       transitions: tirupati.tirupatiTransitionMinutesMap,
       amavasya: tirupati_b.tirupatiAmavasyaCorrections,
-      purnima: tirupati_b.tirupatiPurnimaCorrections,
-      sankranti: tirupati_b.tirupatiSankrantiCorrections);
+      purnima: tirupati_b.tirupatiPurnimaCorrections);
   registerCity('Tokyo',
       tithi: tokyo.tokyoTithiCorrections,
       transitions: tokyo.tokyoTransitionMinutesMap,
       amavasya: tokyo_b.tokyoAmavasyaCorrections,
-      purnima: tokyo_b.tokyoPurnimaCorrections,
-      sankranti: tokyo_b.tokyoSankrantiCorrections);
+      purnima: tokyo_b.tokyoPurnimaCorrections);
   registerCity('Toronto',
       tithi: toronto.torontoTithiCorrections,
       transitions: toronto.torontoTransitionMinutesMap,
       amavasya: toronto_b.torontoAmavasyaCorrections,
-      purnima: toronto_b.torontoPurnimaCorrections,
-      sankranti: toronto_b.torontoSankrantiCorrections);
+      purnima: toronto_b.torontoPurnimaCorrections);
   registerCity('Udaipur',
       tithi: udaipur.udaipurTithiCorrections,
       transitions: udaipur.udaipurTransitionMinutesMap,
       amavasya: udaipur_b.udaipurAmavasyaCorrections,
-      purnima: udaipur_b.udaipurPurnimaCorrections,
-      sankranti: udaipur_b.udaipurSankrantiCorrections);
+      purnima: udaipur_b.udaipurPurnimaCorrections);
   registerCity('Ujjain',
       tithi: ujjain.ujjainTithiCorrections,
       transitions: ujjain.ujjainTransitionMinutesMap,
       amavasya: ujjain_b.ujjainAmavasyaCorrections,
-      purnima: ujjain_b.ujjainPurnimaCorrections,
-      sankranti: ujjain_b.ujjainSankrantiCorrections);
+      purnima: ujjain_b.ujjainPurnimaCorrections);
   registerCity('Vadodara',
       tithi: vadodara.vadodaraTithiCorrections,
       transitions: vadodara.vadodaraTransitionMinutesMap,
       amavasya: vadodara_b.vadodaraAmavasyaCorrections,
-      purnima: vadodara_b.vadodaraPurnimaCorrections,
-      sankranti: vadodara_b.vadodaraSankrantiCorrections);
+      purnima: vadodara_b.vadodaraPurnimaCorrections);
   registerCity('Vancouver',
       tithi: vancouver.vancouverTithiCorrections,
       transitions: vancouver.vancouverTransitionMinutesMap,
       amavasya: vancouver_b.vancouverAmavasyaCorrections,
-      purnima: vancouver_b.vancouverPurnimaCorrections,
-      sankranti: vancouver_b.vancouverSankrantiCorrections);
+      purnima: vancouver_b.vancouverPurnimaCorrections);
   registerCity('Varanasi',
       tithi: varanasi.varanasiTithiCorrections,
       transitions: varanasi.varanasiTransitionMinutesMap,
       amavasya: varanasi_b.varanasiAmavasyaCorrections,
-      purnima: varanasi_b.varanasiPurnimaCorrections,
-      sankranti: varanasi_b.varanasiSankrantiCorrections);
+      purnima: varanasi_b.varanasiPurnimaCorrections);
   registerCity('Vienna',
       tithi: vienna.viennaTithiCorrections,
       transitions: vienna.viennaTransitionMinutesMap,
       amavasya: vienna_b.viennaAmavasyaCorrections,
-      purnima: vienna_b.viennaPurnimaCorrections,
-      sankranti: vienna_b.viennaSankrantiCorrections);
+      purnima: vienna_b.viennaPurnimaCorrections);
   registerCity('Vijayawada',
       tithi: vijayawada.vijayawadaTithiCorrections,
       transitions: vijayawada.vijayawadaTransitionMinutesMap,
       amavasya: vijayawada_b.vijayawadaAmavasyaCorrections,
-      purnima: vijayawada_b.vijayawadaPurnimaCorrections,
-      sankranti: vijayawada_b.vijayawadaSankrantiCorrections);
+      purnima: vijayawada_b.vijayawadaPurnimaCorrections);
   registerCity('Visakhapatnam',
       tithi: visakhapatnam.visakhapatnamTithiCorrections,
       transitions: visakhapatnam.visakhapatnamTransitionMinutesMap,
       amavasya: visakhapatnam_b.visakhapatnamAmavasyaCorrections,
-      purnima: visakhapatnam_b.visakhapatnamPurnimaCorrections,
-      sankranti: visakhapatnam_b.visakhapatnamSankrantiCorrections);
+      purnima: visakhapatnam_b.visakhapatnamPurnimaCorrections);
   registerCity('Vrindavan',
       tithi: vrindavan.vrindavanTithiCorrections,
       transitions: vrindavan.vrindavanTransitionMinutesMap,
       amavasya: vrindavan_b.vrindavanAmavasyaCorrections,
-      purnima: vrindavan_b.vrindavanPurnimaCorrections,
-      sankranti: vrindavan_b.vrindavanSankrantiCorrections);
+      purnima: vrindavan_b.vrindavanPurnimaCorrections);
   registerCity('Warangal',
       tithi: warangal.warangalTithiCorrections,
       transitions: warangal.warangalTransitionMinutesMap,
       amavasya: warangal_b.warangalAmavasyaCorrections,
-      purnima: warangal_b.warangalPurnimaCorrections,
-      sankranti: warangal_b.warangalSankrantiCorrections);
+      purnima: warangal_b.warangalPurnimaCorrections);
   registerCity('Warsaw',
       tithi: warsaw.warsawTithiCorrections,
       transitions: warsaw.warsawTransitionMinutesMap,
       amavasya: warsaw_b.warsawAmavasyaCorrections,
-      purnima: warsaw_b.warsawPurnimaCorrections,
-      sankranti: warsaw_b.warsawSankrantiCorrections);
+      purnima: warsaw_b.warsawPurnimaCorrections);
   registerCity('Washington DC',
       tithi: washingtondc.washingtondcTithiCorrections,
       transitions: washingtondc.washingtondcTransitionMinutesMap,
       amavasya: washingtondc_b.washingtondcAmavasyaCorrections,
-      purnima: washingtondc_b.washingtondcPurnimaCorrections,
-      sankranti: washingtondc_b.washingtondcSankrantiCorrections);
+      purnima: washingtondc_b.washingtondcPurnimaCorrections);
   registerCity('Wellington',
       tithi: wellington.wellingtonTithiCorrections,
       transitions: wellington.wellingtonTransitionMinutesMap,
       amavasya: wellington_b.wellingtonAmavasyaCorrections,
-      purnima: wellington_b.wellingtonPurnimaCorrections,
-      sankranti: wellington_b.wellingtonSankrantiCorrections);
+      purnima: wellington_b.wellingtonPurnimaCorrections);
   registerCity('Winnipeg',
       tithi: winnipeg.winnipegTithiCorrections,
       transitions: winnipeg.winnipegTransitionMinutesMap,
       amavasya: winnipeg_b.winnipegAmavasyaCorrections,
-      purnima: winnipeg_b.winnipegPurnimaCorrections,
-      sankranti: winnipeg_b.winnipegSankrantiCorrections);
+      purnima: winnipeg_b.winnipegPurnimaCorrections);
   registerCity('Yangon',
       tithi: yangon.yangonTithiCorrections,
       transitions: yangon.yangonTransitionMinutesMap,
       amavasya: yangon_b.yangonAmavasyaCorrections,
-      purnima: yangon_b.yangonPurnimaCorrections,
-      sankranti: yangon_b.yangonSankrantiCorrections);
+      purnima: yangon_b.yangonPurnimaCorrections);
   registerCity('Zagreb',
       tithi: zagreb.zagrebTithiCorrections,
       transitions: zagreb.zagrebTransitionMinutesMap,
       amavasya: zagreb_b.zagrebAmavasyaCorrections,
-      purnima: zagreb_b.zagrebPurnimaCorrections,
-      sankranti: zagreb_b.zagrebSankrantiCorrections);
+      purnima: zagreb_b.zagrebPurnimaCorrections);
   registerCity('Zurich',
       tithi: zurich.zurichTithiCorrections,
       transitions: zurich.zurichTransitionMinutesMap,
       amavasya: zurich_b.zurichAmavasyaCorrections,
-      purnima: zurich_b.zurichPurnimaCorrections,
-      sankranti: zurich_b.zurichSankrantiCorrections);
+      purnima: zurich_b.zurichPurnimaCorrections);
 }

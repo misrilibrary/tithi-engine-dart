@@ -4,7 +4,3 @@ const karachiAmavasyaCorrections = <int, int>{
 const karachiPurnimaCorrections = <int, int>{
   54529: 54528,
 };
-const karachiSankrantiCorrections = <int, int>{
-  46155: 46156,
-  71817: 71818,
-};

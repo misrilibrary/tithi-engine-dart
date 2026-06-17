@@ -1,8 +1,7 @@
-const losangelesAmavasyaCorrections = <int, int>{};
-const losangelesPurnimaCorrections = <int, int>{
-  53731: 53730,
+const losangelesAmavasyaCorrections = <int, int>{
+  59532: 59533,
 };
-const losangelesSankrantiCorrections = <int, int>{
-  59335: 59336,
-  69746: 69747,
+const losangelesPurnimaCorrections = <int, int>{
+  18411: 18412,
+  66162: 66163,
 };

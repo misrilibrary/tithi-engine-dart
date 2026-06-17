@@ -1,5 +1,30 @@
 # Changelog
 
+## 2.1.0
+
+Engine accuracy overhaul. **No public API change.** Output is identical for every
+supported city, both month-systems, and every day 1900-2100 (verified by a
+comprehensive 460-file regression: 230 cities x {purnimant, amanta} x every day).
+Behaviour only changes — for the better — for dates outside the tabled range,
+which now use a much more accurate astronomical fallback.
+
+Engine:
+- Evaluate the Meeus Sun/Moon series in Terrestrial Time via a pure-Dart
+  Espenak-Meeus delta-T (UT -> TT); fixes the dominant, time-growing error.
+- Moon longitude now carries the same nutation term as the Sun, so nutation
+  cancels in the Moon-Sun elongation (tithi) and the Moon is apparent
+  (correct for nakshatra / Moon-rasi).
+- Replace the low-accuracy Meeus Ch.25 Sun with a truncated VSOP87 series
+  (mean ~1.5", max ~6.6" vs Swiss Ephemeris over 1900-2100).
+
+Data / size:
+- All 230 per-city correction tables regenerated against the improved engine
+  (invariant Meeus + corrections = Swiss preserved exactly).
+- Removed the unused internal `SankrantiCorrections` tables (month naming uses
+  the sidereal Sun sign at the new-moon moment, not a sankranti table).
+- Net: published library ~42% smaller (lib 675 -> 392 KB; correction data
+  582 -> 296 KB; correction entries 32,603 -> 13,109).
+
 ## 2.0.3
 
 Tests only — no API or behavior change (engine output identical to 2.0.x).

@@ -1,15 +1,9 @@
 const gurgaonAmavasyaCorrections = <int, int>{
-  7589: 7588,
   8800: 8799,
-  54543: 54542,
+  69987: 69988,
 };
-const gurgaonPurnimaCorrections = <int, int>{};
-const gurgaonSankrantiCorrections = <int, int>{
-  10634: 10635,
-  28414: 28413,
-  39124: 39125,
-  41897: 41898,
-  44998: 44999,
-  57144: 57145,
-  71148: 71149,
+const gurgaonPurnimaCorrections = <int, int>{
+  2998: 2997,
+  65749: 65750,
+  70444: 70445,
 };

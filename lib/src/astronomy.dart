@@ -34,37 +34,166 @@ double julianDay(DateTime dt) {
 // ignore: non_constant_identifier_names
 double _T(double jd) => (jd - 2451545.0) / 36525.0;
 
+/// ΔT (TT − UT) in **seconds** — pure-Dart Espenak & Meeus (2006) polynomials.
+/// The Meeus Sun/Moon series expect Terrestrial Time; UT must be advanced by ΔT.
+/// The correction-table generator MUST use this identical function so the
+/// engine's Meeus matches the generator's Meeus (invariant: Meeus+corrections=Swiss).
+double deltaTSeconds(DateTime dt) {
+  final y = dt.year + (dt.month - 0.5) / 12.0;
+  double u;
+  if (y < 1920) {
+    final t = y - 1900;
+    return -2.79 +
+        1.494119 * t -
+        0.0598939 * t * t +
+        0.0061966 * t * t * t -
+        0.000197 * t * t * t * t;
+  } else if (y < 1941) {
+    final t = y - 1920;
+    return 21.20 + 0.84493 * t - 0.076100 * t * t + 0.0020936 * t * t * t;
+  } else if (y < 1961) {
+    final t = y - 1950;
+    return 29.07 + 0.407 * t - t * t / 233 + t * t * t / 2547;
+  } else if (y < 1986) {
+    final t = y - 1975;
+    return 45.45 + 1.067 * t - t * t / 260 - t * t * t / 718;
+  } else if (y < 2005) {
+    final t = y - 2000;
+    return 63.86 +
+        0.3345 * t -
+        0.060374 * t * t +
+        0.0017275 * t * t * t +
+        0.000651814 * t * t * t * t +
+        0.00002373599 * t * t * t * t * t;
+  } else if (y < 2050) {
+    final t = y - 2000;
+    return 62.92 + 0.32217 * t + 0.005589 * t * t;
+  } else if (y < 2150) {
+    u = (y - 1820) / 100;
+    return -20 + 32 * u * u - 0.5628 * (2150 - y);
+  }
+  u = (y - 1820) / 100;
+  return -20 + 32 * u * u;
+}
+
+/// Julian Day in Terrestrial Time (UT advanced by ΔT) for the Meeus series.
+double _ttJulianDay(DateTime dt) => julianDay(dt) + deltaTSeconds(dt) / 86400.0;
+
 /// Normalize angle to 0-360
 double _norm360(double deg) => deg % 360 + (deg < 0 ? 360 : 0);
 
-/// Sun's ecliptic longitude in degrees (tropical). Meeus Ch. 25, low accuracy.
+/// Sun's ecliptic longitude in degrees (tropical), apparent of date.
+/// Geometric longitude from VSOP87 (truncated, ~1-2"); aberration (-0.00569) and
+/// nutation (-0.00478*sin Ω) kept so nutation cancels in the Moon-Sun elongation
+/// and the Sun stays apparent. The generator's ourSun MUST mirror this exactly.
 double sunLongitude(DateTime dt) {
-  final t = _T(julianDay(dt));
+  final jdTT = _ttJulianDay(dt);
+  final t = _T(jdTT); // Julian centuries TT (for omega)
+  final tau = (jdTT - 2451545.0) / 365250.0; // Julian millennia TT (for VSOP)
+  double ser(List<List<double>> terms) {
+    double s = 0;
+    for (final x in terms) {
+      s += x[0] * cos(x[1] + x[2] * tau);
+    }
+    return s;
+  }
 
-  // Geometric mean longitude
-  final l0 = _norm360(280.46646 + 36000.76983 * t + 0.0003032 * t * t);
-  // Mean anomaly
-  final m = _norm360(357.52911 + 35999.05029 * t - 0.0001537 * t * t);
-  final mRad = m * _deg2rad;
-
-  // Equation of center
-  final c = (1.914602 - 0.004817 * t - 0.000014 * t * t) * sin(mRad) +
-      (0.019993 - 0.000101 * t) * sin(2 * mRad) +
-      0.000289 * sin(3 * mRad);
-
-  // Sun's true longitude
-  final sunLon = _norm360(l0 + c);
-
-  // Apparent longitude (nutation correction)
+  // Earth heliocentric longitude (radians)
+  final l = (ser(_vsopL0) +
+          ser(_vsopL1) * tau +
+          ser(_vsopL2) * tau * tau +
+          ser(_vsopL3) * tau * tau * tau +
+          ser(_vsopL4) * tau * tau * tau * tau) /
+      1e8;
+  // Geocentric Sun = Earth helio longitude + 180
+  final geo = _norm360(l * _rad2deg + 180.0);
   final omega = 125.04 - 1934.136 * t;
-  final apparent = sunLon - 0.00569 - 0.00478 * sin(omega * _deg2rad);
-
-  return _norm360(apparent);
+  return _norm360(geo - 0.00569 - 0.00478 * sin(omega * _deg2rad));
 }
+
+// VSOP87D Earth longitude terms [A, B, C]; L = Σ A·cos(B + C·τ), τ in millennia.
+// Truncated set (~1-2" over 1900-2100). Same tables MUST exist in the generator.
+const _vsopL0 = <List<double>>[
+  [175347046, 0, 0],
+  [3341656, 4.6692568, 6283.07585],
+  [34894, 4.6261, 12566.1517],
+  [3497, 2.7441, 5753.3849],
+  [3418, 2.8289, 3.5231],
+  [3136, 3.6277, 77713.7715],
+  [2676, 4.4181, 7860.4194],
+  [2343, 6.1352, 3930.2097],
+  [1324, 0.7425, 11506.7698],
+  [1273, 2.0371, 529.691],
+  [1199, 1.1096, 1577.3435],
+  [990, 5.233, 5884.927],
+  [902, 2.045, 26.298],
+  [857, 3.508, 398.149],
+  [780, 1.179, 5223.694],
+  [753, 2.533, 5507.553],
+  [505, 4.583, 18849.228],
+  [492, 4.205, 775.523],
+  [357, 2.920, 0.067],
+  [317, 5.849, 11790.629],
+  [284, 1.899, 796.298],
+  [271, 0.315, 10977.079],
+  [243, 0.345, 5486.778],
+  [206, 4.806, 2544.314],
+  [205, 1.869, 5573.143],
+  [202, 2.458, 6069.777],
+  [156, 0.833, 213.299],
+  [132, 3.411, 2942.463],
+  [126, 1.083, 20.775],
+  [115, 0.645, 0.980],
+  [103, 0.636, 4694.003],
+  [102, 0.976, 15720.839],
+  [102, 4.267, 7.114],
+];
+const _vsopL1 = <List<double>>[
+  [628331966747, 0, 0],
+  [206059, 2.678235, 6283.07585],
+  [4303, 2.6351, 12566.1517],
+  [425, 1.590, 3.523],
+  [119, 5.796, 26.298],
+  [109, 2.966, 1577.344],
+  [93, 2.59, 18849.23],
+  [72, 1.14, 529.69],
+  [68, 1.87, 398.15],
+  [67, 4.41, 5507.55],
+  [59, 2.89, 5223.69],
+  [56, 2.17, 155.42],
+  [45, 0.40, 796.30],
+  [36, 0.47, 775.52],
+  [29, 2.65, 7.11],
+  [21, 5.34, 0.98],
+  [19, 1.85, 5486.78],
+  [19, 4.97, 213.30],
+  [17, 2.99, 6275.96],
+  [16, 0.03, 2544.31],
+];
+const _vsopL2 = <List<double>>[
+  [52919, 0, 0],
+  [8720, 1.0721, 6283.0758],
+  [309, 0.867, 12566.152],
+  [27, 0.05, 3.52],
+  [16, 5.19, 26.30],
+  [16, 3.68, 155.42],
+  [10, 0.76, 18849.23],
+  [9, 2.06, 77713.77],
+  [7, 0.83, 775.52],
+  [5, 4.66, 1577.34],
+];
+const _vsopL3 = <List<double>>[
+  [289, 5.844, 6283.076],
+  [35, 0, 0],
+  [17, 5.49, 12566.15],
+];
+const _vsopL4 = <List<double>>[
+  [114, 3.142, 0],
+];
 
 /// Moon's ecliptic longitude in degrees (tropical). Meeus Ch. 47, full table.
 double moonLongitude(DateTime dt) {
-  final t = _T(julianDay(dt));
+  final t = _T(_ttJulianDay(dt));
   final t2 = t * t;
   final t3 = t2 * t;
   final t4 = t3 * t;
@@ -172,7 +301,12 @@ double moonLongitude(DateTime dt) {
   sumL += 1962 * sin(lp * _deg2rad - fR);
   sumL += 318 * sin(a2);
 
-  final moonLon = lp + sumL / 1000000.0;
+  // Apparent longitude: add the same Δψ main term the Sun uses, so nutation
+  // cancels in the Moon−Sun elongation (tithi) and the Moon's absolute longitude
+  // is apparent (correct for nakshatra/rasi).
+  final omega = 125.04 - 1934.136 * t;
+  final nutation = -0.00478 * sin(omega * _deg2rad);
+  final moonLon = lp + sumL / 1000000.0 + nutation;
   return _norm360(moonLon);
 }
 

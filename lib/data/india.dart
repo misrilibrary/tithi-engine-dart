@@ -114,180 +114,150 @@ void registerIndia() {
       tithi: delhi.delhiTithiCorrections,
       transitions: delhi.delhiTransitionMinutesMap,
       amavasya: delhi_b.delhiAmavasyaCorrections,
-      purnima: delhi_b.delhiPurnimaCorrections,
-      sankranti: delhi_b.delhiSankrantiCorrections);
+      purnima: delhi_b.delhiPurnimaCorrections);
   registerCity('Mumbai',
       tithi: mumbai.mumbaiTithiCorrections,
       transitions: mumbai.mumbaiTransitionMinutesMap,
       amavasya: mumbai_b.mumbaiAmavasyaCorrections,
-      purnima: mumbai_b.mumbaiPurnimaCorrections,
-      sankranti: mumbai_b.mumbaiSankrantiCorrections);
+      purnima: mumbai_b.mumbaiPurnimaCorrections);
   registerCity('Kolkata',
       tithi: kolkata.kolkataTithiCorrections,
       transitions: kolkata.kolkataTransitionMinutesMap,
       amavasya: kolkata_b.kolkataAmavasyaCorrections,
-      purnima: kolkata_b.kolkataPurnimaCorrections,
-      sankranti: kolkata_b.kolkataSankrantiCorrections);
+      purnima: kolkata_b.kolkataPurnimaCorrections);
   registerCity('Chennai',
       tithi: chennai.chennaiTithiCorrections,
       transitions: chennai.chennaiTransitionMinutesMap,
       amavasya: chennai_b.chennaiAmavasyaCorrections,
-      purnima: chennai_b.chennaiPurnimaCorrections,
-      sankranti: chennai_b.chennaiSankrantiCorrections);
+      purnima: chennai_b.chennaiPurnimaCorrections);
   registerCity('Srinagar',
       tithi: srinagar.srinagarTithiCorrections,
       transitions: srinagar.srinagarTransitionMinutesMap,
       amavasya: srinagar_b.srinagarAmavasyaCorrections,
-      purnima: srinagar_b.srinagarPurnimaCorrections,
-      sankranti: srinagar_b.srinagarSankrantiCorrections);
+      purnima: srinagar_b.srinagarPurnimaCorrections);
   registerCity('Bangalore',
       tithi: bangalore.bangaloreTithiCorrections,
       transitions: bangalore.bangaloreTransitionMinutesMap,
       amavasya: bangalore_b.bangaloreAmavasyaCorrections,
-      purnima: bangalore_b.bangalorePurnimaCorrections,
-      sankranti: bangalore_b.bangaloreSankrantiCorrections);
+      purnima: bangalore_b.bangalorePurnimaCorrections);
   registerCity('Hyderabad',
       tithi: hyderabad.hyderabadTithiCorrections,
       transitions: hyderabad.hyderabadTransitionMinutesMap,
       amavasya: hyderabad_b.hyderabadAmavasyaCorrections,
-      purnima: hyderabad_b.hyderabadPurnimaCorrections,
-      sankranti: hyderabad_b.hyderabadSankrantiCorrections);
+      purnima: hyderabad_b.hyderabadPurnimaCorrections);
   registerCity('Pune',
       tithi: pune.puneTithiCorrections,
       transitions: pune.puneTransitionMinutesMap,
       amavasya: pune_b.puneAmavasyaCorrections,
-      purnima: pune_b.punePurnimaCorrections,
-      sankranti: pune_b.puneSankrantiCorrections);
+      purnima: pune_b.punePurnimaCorrections);
   registerCity('Ahmedabad',
       tithi: ahmedabad.ahmedabadTithiCorrections,
       transitions: ahmedabad.ahmedabadTransitionMinutesMap,
       amavasya: ahmedabad_b.ahmedabadAmavasyaCorrections,
-      purnima: ahmedabad_b.ahmedabadPurnimaCorrections,
-      sankranti: ahmedabad_b.ahmedabadSankrantiCorrections);
+      purnima: ahmedabad_b.ahmedabadPurnimaCorrections);
   registerCity('Jaipur',
       tithi: jaipur.jaipurTithiCorrections,
       transitions: jaipur.jaipurTransitionMinutesMap,
       amavasya: jaipur_b.jaipurAmavasyaCorrections,
-      purnima: jaipur_b.jaipurPurnimaCorrections,
-      sankranti: jaipur_b.jaipurSankrantiCorrections);
+      purnima: jaipur_b.jaipurPurnimaCorrections);
   registerCity('Lucknow',
       tithi: lucknow.lucknowTithiCorrections,
       transitions: lucknow.lucknowTransitionMinutesMap,
       amavasya: lucknow_b.lucknowAmavasyaCorrections,
-      purnima: lucknow_b.lucknowPurnimaCorrections,
-      sankranti: lucknow_b.lucknowSankrantiCorrections);
+      purnima: lucknow_b.lucknowPurnimaCorrections);
   registerCity('Chandigarh',
       tithi: chandigarh.chandigarhTithiCorrections,
       transitions: chandigarh.chandigarhTransitionMinutesMap,
       amavasya: chandigarh_b.chandigarhAmavasyaCorrections,
-      purnima: chandigarh_b.chandigarhPurnimaCorrections,
-      sankranti: chandigarh_b.chandigarhSankrantiCorrections);
+      purnima: chandigarh_b.chandigarhPurnimaCorrections);
   registerCity('Jammu',
       tithi: jammu.jammuTithiCorrections,
       transitions: jammu.jammuTransitionMinutesMap,
       amavasya: jammu_b.jammuAmavasyaCorrections,
-      purnima: jammu_b.jammuPurnimaCorrections,
-      sankranti: jammu_b.jammuSankrantiCorrections);
+      purnima: jammu_b.jammuPurnimaCorrections);
   registerCity('Indore',
       tithi: indore.indoreTithiCorrections,
       transitions: indore.indoreTransitionMinutesMap,
       amavasya: indore_b.indoreAmavasyaCorrections,
-      purnima: indore_b.indorePurnimaCorrections,
-      sankranti: indore_b.indoreSankrantiCorrections);
+      purnima: indore_b.indorePurnimaCorrections);
   registerCity('Ujjain',
       tithi: ujjain.ujjainTithiCorrections,
       transitions: ujjain.ujjainTransitionMinutesMap,
       amavasya: ujjain_b.ujjainAmavasyaCorrections,
-      purnima: ujjain_b.ujjainPurnimaCorrections,
-      sankranti: ujjain_b.ujjainSankrantiCorrections);
+      purnima: ujjain_b.ujjainPurnimaCorrections);
   registerCity('Bhopal',
       tithi: bhopal.bhopalTithiCorrections,
       transitions: bhopal.bhopalTransitionMinutesMap,
       amavasya: bhopal_b.bhopalAmavasyaCorrections,
-      purnima: bhopal_b.bhopalPurnimaCorrections,
-      sankranti: bhopal_b.bhopalSankrantiCorrections);
+      purnima: bhopal_b.bhopalPurnimaCorrections);
   registerCity('Nagpur',
       tithi: nagpur.nagpurTithiCorrections,
       transitions: nagpur.nagpurTransitionMinutesMap,
       amavasya: nagpur_b.nagpurAmavasyaCorrections,
-      purnima: nagpur_b.nagpurPurnimaCorrections,
-      sankranti: nagpur_b.nagpurSankrantiCorrections);
+      purnima: nagpur_b.nagpurPurnimaCorrections);
   registerCity('Patna',
       tithi: patna.patnaTithiCorrections,
       transitions: patna.patnaTransitionMinutesMap,
       amavasya: patna_b.patnaAmavasyaCorrections,
-      purnima: patna_b.patnaPurnimaCorrections,
-      sankranti: patna_b.patnaSankrantiCorrections);
+      purnima: patna_b.patnaPurnimaCorrections);
   registerCity('Kochi',
       tithi: kochi.kochiTithiCorrections,
       transitions: kochi.kochiTransitionMinutesMap,
       amavasya: kochi_b.kochiAmavasyaCorrections,
-      purnima: kochi_b.kochiPurnimaCorrections,
-      sankranti: kochi_b.kochiSankrantiCorrections);
+      purnima: kochi_b.kochiPurnimaCorrections);
   registerCity('Guwahati',
       tithi: guwahati.guwahatiTithiCorrections,
       transitions: guwahati.guwahatiTransitionMinutesMap,
       amavasya: guwahati_b.guwahatiAmavasyaCorrections,
-      purnima: guwahati_b.guwahatiPurnimaCorrections,
-      sankranti: guwahati_b.guwahatiSankrantiCorrections);
+      purnima: guwahati_b.guwahatiPurnimaCorrections);
   registerCity('Varanasi',
       tithi: varanasi.varanasiTithiCorrections,
       transitions: varanasi.varanasiTransitionMinutesMap,
       amavasya: varanasi_b.varanasiAmavasyaCorrections,
-      purnima: varanasi_b.varanasiPurnimaCorrections,
-      sankranti: varanasi_b.varanasiSankrantiCorrections);
+      purnima: varanasi_b.varanasiPurnimaCorrections);
   registerCity('Amritsar',
       tithi: amritsar.amritsarTithiCorrections,
       transitions: amritsar.amritsarTransitionMinutesMap,
       amavasya: amritsar_b.amritsarAmavasyaCorrections,
-      purnima: amritsar_b.amritsarPurnimaCorrections,
-      sankranti: amritsar_b.amritsarSankrantiCorrections);
+      purnima: amritsar_b.amritsarPurnimaCorrections);
   registerCity('Dehradun',
       tithi: dehradun.dehradunTithiCorrections,
       transitions: dehradun.dehradunTransitionMinutesMap,
       amavasya: dehradun_b.dehradunAmavasyaCorrections,
-      purnima: dehradun_b.dehradunPurnimaCorrections,
-      sankranti: dehradun_b.dehradunSankrantiCorrections);
+      purnima: dehradun_b.dehradunPurnimaCorrections);
   registerCity('Thiruvananthapuram',
       tithi: thiruvananthapuram.thiruvananthapuramTithiCorrections,
       transitions: thiruvananthapuram.thiruvananthapuramTransitionMinutesMap,
       amavasya: thiruvananthapuram_b.thiruvananthapuramAmavasyaCorrections,
-      purnima: thiruvananthapuram_b.thiruvananthapuramPurnimaCorrections,
-      sankranti: thiruvananthapuram_b.thiruvananthapuramSankrantiCorrections);
+      purnima: thiruvananthapuram_b.thiruvananthapuramPurnimaCorrections);
   registerCity('Coimbatore',
       tithi: coimbatore.coimbatoreTithiCorrections,
       transitions: coimbatore.coimbatoreTransitionMinutesMap,
       amavasya: coimbatore_b.coimbatoreAmavasyaCorrections,
-      purnima: coimbatore_b.coimbatorePurnimaCorrections,
-      sankranti: coimbatore_b.coimbatoreSankrantiCorrections);
+      purnima: coimbatore_b.coimbatorePurnimaCorrections);
   registerCity('Visakhapatnam',
       tithi: visakhapatnam.visakhapatnamTithiCorrections,
       transitions: visakhapatnam.visakhapatnamTransitionMinutesMap,
       amavasya: visakhapatnam_b.visakhapatnamAmavasyaCorrections,
-      purnima: visakhapatnam_b.visakhapatnamPurnimaCorrections,
-      sankranti: visakhapatnam_b.visakhapatnamSankrantiCorrections);
+      purnima: visakhapatnam_b.visakhapatnamPurnimaCorrections);
   registerCity('Mangalore',
       tithi: mangalore.mangaloreTithiCorrections,
       transitions: mangalore.mangaloreTransitionMinutesMap,
       amavasya: mangalore_b.mangaloreAmavasyaCorrections,
-      purnima: mangalore_b.mangalorePurnimaCorrections,
-      sankranti: mangalore_b.mangaloreSankrantiCorrections);
+      purnima: mangalore_b.mangalorePurnimaCorrections);
   registerCity('Mysore',
       tithi: mysore.mysoreTithiCorrections,
       transitions: mysore.mysoreTransitionMinutesMap,
       amavasya: mysore_b.mysoreAmavasyaCorrections,
-      purnima: mysore_b.mysorePurnimaCorrections,
-      sankranti: mysore_b.mysoreSankrantiCorrections);
+      purnima: mysore_b.mysorePurnimaCorrections);
   registerCity('Noida',
       tithi: noida.noidaTithiCorrections,
       transitions: noida.noidaTransitionMinutesMap,
       amavasya: noida_b.noidaAmavasyaCorrections,
-      purnima: noida_b.noidaPurnimaCorrections,
-      sankranti: noida_b.noidaSankrantiCorrections);
+      purnima: noida_b.noidaPurnimaCorrections);
   registerCity('Gurgaon',
       tithi: gurgaon.gurgaonTithiCorrections,
       transitions: gurgaon.gurgaonTransitionMinutesMap,
       amavasya: gurgaon_b.gurgaonAmavasyaCorrections,
-      purnima: gurgaon_b.gurgaonPurnimaCorrections,
-      sankranti: gurgaon_b.gurgaonSankrantiCorrections);
+      purnima: gurgaon_b.gurgaonPurnimaCorrections);
 }
