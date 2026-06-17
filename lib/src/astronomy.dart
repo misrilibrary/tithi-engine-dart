@@ -318,7 +318,15 @@ class CityLocation {
   final double latitude; // degrees (positive = North)
   final double longitude; // degrees (positive = East)
   final double utcOffset; // standard time offset in hours
-  const CityLocation(this.latitude, this.longitude, this.utcOffset);
+
+  /// Optional region/country qualifier for cities whose name collides with
+  /// another well-known place (e.g. `'WA'` for Redmond, `'UK'` for Birmingham).
+  /// Null for unambiguous cities. Used only for display (see [City.displayName]);
+  /// it does not affect any calculation.
+  final String? region;
+
+  const CityLocation(this.latitude, this.longitude, this.utcOffset,
+      {this.region});
 }
 
 /// Compute exact sunrise as UTC DateTime for a given date and location.

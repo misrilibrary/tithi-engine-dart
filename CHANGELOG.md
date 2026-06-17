@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.2.0
+
+City **display-name disambiguation**. **No breaking changes** — map keys, the
+`City` name constants, and every calculation are unchanged; the new metadata is
+display-only.
+
+- `CityLocation.region` — a region/country qualifier, now populated for **all**
+  cities (US state, Canada province, otherwise country). Null only for
+  self-qualifying names (Singapore, Hong Kong, Bahrain, Washington DC).
+- `City.qualifiedName(name)` — always-qualified label for pickers / search
+  lists (e.g. `'Seattle'` → `'Seattle, WA'`, `'Tokyo'` → `'Tokyo, Japan'`);
+  bare for self-qualifying/unknown names.
+- `City.displayName(name)` — compact label that qualifies **only** the 14
+  commonly-confused names (e.g. `'Redmond'` → `'Redmond, WA'`; `'Delhi'` →
+  `'Delhi'`). It is the selective subset of `qualifiedName`.
+
+
 ## 2.1.0
 
 Engine accuracy overhaul. **No public API change.** Output is identical for every
