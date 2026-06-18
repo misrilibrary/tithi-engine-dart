@@ -181,23 +181,40 @@ class TithiCalculator {
   /// Approximate reference (Ujjain) sunrise as UTC DateTime.
   static DateTime _refSunrise(DateTime date) => defaultSunrise(date);
 
-  /// Find the transition time between two adjacent tithis on a given date.
-  /// Returns the UTC DateTime when tithi changes from [fromTithi] to [toTithi],
-  /// or null if the transition doesn't occur on that day.
-  /// Binary search: ~11 iterations for 1-minute precision.
+  /// Find the tithi transition that occurs on a given **local** date.
+  ///
+  /// When [utcOffset] is supplied, the search window is that caller's local
+  /// calendar day (local-midnight to next local-midnight), so the returned
+  /// instant belongs to the same local date the caller asked about. Without an
+  /// offset it falls back to the reference (Ujjain) sunrise day.
+  ///
+  /// Returns the UTC DateTime when the tithi changes, or null if no transition
+  /// falls within that day. Binary search: ~11 iterations for 1-minute precision.
   static DateTime? findTransitionTime(DateTime date, {Duration? utcOffset}) {
-    // Search window: sunrise to next sunrise (~24h)
-    final sunrise = _refSunrise(date);
-    final nextSunrise = _refSunrise(date.add(const Duration(days: 1)));
+    // Search window. Tithi boundaries are global instants; the only question is
+    // which local day they belong to — so frame the window by the caller's
+    // local day (via utcOffset) instead of a fixed reference, otherwise a
+    // boundary in the 00:00-08:00 UTC band gets mis-attributed to the wrong
+    // local date for western-hemisphere cities.
+    final DateTime windowStart, windowEnd;
+    if (utcOffset != null) {
+      final localMidnightUtc =
+          DateTime.utc(date.year, date.month, date.day).subtract(utcOffset);
+      windowStart = localMidnightUtc;
+      windowEnd = localMidnightUtc.add(const Duration(days: 1));
+    } else {
+      windowStart = _refSunrise(date);
+      windowEnd = _refSunrise(date.add(const Duration(days: 1)));
+    }
 
-    final startTithi = _tithiAt(sunrise);
-    final endTithi = _tithiAt(nextSunrise);
+    final startTithi = _tithiAt(windowStart);
+    final endTithi = _tithiAt(windowEnd);
 
     if (startTithi == endTithi) return null; // no transition this day
 
     // Binary search for the transition point
-    var lo = sunrise;
-    var hi = nextSunrise;
+    var lo = windowStart;
+    var hi = windowEnd;
     while (hi.difference(lo).inMinutes > 1) {
       final mid = lo.add(Duration(minutes: hi.difference(lo).inMinutes ~/ 2));
       if (_tithiAt(mid) == startTithi) {

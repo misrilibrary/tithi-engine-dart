@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.2.1
+
+Bug fix: `transitionTime` now honours `utcOffset`.
+
+- `Panchang.transitionTime(date, utcOffset:)` frames its search by the caller's
+  **local calendar day** instead of the fixed Ujjain (IST) day. Previously the
+  offset was accepted but ignored, so for western-hemisphere cities a tithi
+  boundary landing in the 00:00-08:00 UTC band was attributed to the wrong local
+  date (e.g. Austin 2006-05-30 reported the May-29 evening boundary). With an
+  offset it now returns the boundary that actually falls on that local date;
+  without one it keeps the previous reference-day behaviour. No API change.
+
 ## 2.2.0
 
 City **display-name disambiguation**. **No breaking changes** — map keys, the
