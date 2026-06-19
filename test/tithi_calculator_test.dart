@@ -100,14 +100,14 @@ void main() {
     final calc = TithiCalculator();
 
     test('returns valid tithi range 1-30', () {
-      final info = calc.getTithi(DateTime(2025, 1, 13));
+      final info = calc.tithiOnDate(DateTime(2025, 1, 13), 'Ujjain');
       expect(info.tithiNumber, inInclusiveRange(1, 30));
       expect(info.tithiInPaksha, inInclusiveRange(1, 15));
     });
 
     test('consecutive days have consecutive or same tithis', () {
-      final t1 = calc.getTithi(DateTime(2024, 6, 15));
-      final t2 = calc.getTithi(DateTime(2024, 6, 16));
+      final t1 = calc.tithiOnDate(DateTime(2024, 6, 15), 'Ujjain');
+      final t2 = calc.tithiOnDate(DateTime(2024, 6, 16), 'Ujjain');
       // Tithi advances by 0 or 1 per day (occasionally 2 near boundaries)
       final diff = (t2.tithiNumber - t1.tithiNumber) % 30;
       expect(diff, inInclusiveRange(0, 2));
@@ -115,25 +115,25 @@ void main() {
 
     test('full moon date has tithi near 15', () {
       // Known full moon: Jan 13, 2025 (verified astronomically)
-      final info = calc.getTithi(DateTime(2025, 1, 13));
+      final info = calc.tithiOnDate(DateTime(2025, 1, 13), 'Ujjain');
       expect(info.tithiNumber, inInclusiveRange(14, 16));
     });
 
     test('new moon date has tithi 30 or 1 (boundary)', () {
       // Known new moon: Jan 29, 2025 — could be 30 (Amavasya) or 1 (just past)
-      final info = calc.getTithi(DateTime(2025, 1, 29));
+      final info = calc.tithiOnDate(DateTime(2025, 1, 29), 'Ujjain');
       expect(info.tithiNumber, anyOf(30, 1));
     });
 
     test('display name format is Month Paksha Tithi', () {
-      final info = calc.getTithi(DateTime(2024, 6, 15));
+      final info = calc.tithiOnDate(DateTime(2024, 6, 15), 'Ujjain');
       final parts = info.displayName.split(' ');
       expect(parts.length, 3);
       expect(parts[1], anyOf('Shukla', 'Krishna'));
     });
 
     test('month is a valid LunarMonth', () {
-      final info = calc.getTithi(DateTime(2024, 8, 15));
+      final info = calc.tithiOnDate(DateTime(2024, 8, 15), 'Ujjain');
       expect(LunarMonth.values, contains(info.month));
     });
   });
@@ -142,18 +142,20 @@ void main() {
     final calc = TithiCalculator();
 
     test('finds a tithi in the target year', () {
-      final info = calc.getTithi(DateTime(2024, 3, 25)); // some known date
+      final info =
+          calc.tithiOnDate(DateTime(2024, 3, 25), 'Ujjain'); // some known date
       final found = calc.findInYear(info, 2025);
       expect(found, isNotEmpty);
       expect(found.first.year, 2025);
       // The tithi on that date should be within ±1 (boundary tolerance)
-      final verify = calc.getTithi(found.first);
+      final verify = calc.tithiOnDate(found.first, 'Ujjain');
       expect(
           (verify.tithiNumber - info.tithiNumber).abs(), lessThanOrEqualTo(1));
     });
 
     test('returns a date within reasonable range', () {
-      final info = calc.getTithi(DateTime(2024, 8, 15)); // Independence Day
+      final info =
+          calc.tithiOnDate(DateTime(2024, 8, 15), 'Ujjain'); // Independence Day
       final found = calc.findInYear(info, 2025);
       expect(found, isNotEmpty);
       // Date should be within ~45 days of Jan 1 of target year or within the year

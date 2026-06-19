@@ -8,8 +8,8 @@ import 'tithi_calculator.dart';
 /// Mirrors the Java `Panchang` API for cross-platform consistency.
 ///
 /// ```dart
-/// final panchang = Panchang(MonthSystem.purnimant);
-/// final info = panchang.forDate(DateTime(2026, 2, 15), City.ujjain);
+/// final panchang = Panchang([registerAllCities]);
+/// final info = panchang.tithiOnDate(DateTime.utc(2026, 2, 15), 'Ujjain');
 /// print(info); // "Phalguna Krishna Trayodashi"
 /// ```
 class Panchang {
@@ -38,14 +38,35 @@ class Panchang {
     _calc = TithiCalculator(monthSystem: monthSystem);
   }
 
-  /// Gregorian date → full TithiInfo for the given city.
+  /// Sunrise tithi for the panchang day of [date] at [city] (observance/display).
   ///
-  /// If [date] carries a time-of-day (hour/minute != 0) and [utcOffset] is
-  /// supplied, the tithi is resolved at that exact local moment (used for
-  /// birth-time precision). Date-only inputs resolve at the city's sunrise.
-  TithiInfo forDate(DateTime date, String city, {Duration? utcOffset}) {
-    return _calc.getTithi(date, utcOffset: utcOffset, timezone: city);
-  }
+  /// Only [date]'s calendar fields select the day; time-of-day is ignored and no
+  /// offset is needed (sunrise is astronomical). Use this for "the tithi of the
+  /// day" — calendars, festival display, day observance.
+  TithiInfo tithiOnDate(DateTime date, String city) =>
+      _calc.tithiOnDate(date, city);
+
+  /// Tithi active at the exact UTC [utcInstant] at [city] (birth-time precision).
+  ///
+  /// [utcInstant] must be a true UTC instant. [offset] is the DST-aware UTC
+  /// offset in effect at that instant in [city] (resolved by the caller); it is
+  /// used only to derive the civil date for correction-table selection.
+  TithiInfo tithiAtInstant(DateTime utcInstant, String city,
+          {required Duration offset}) =>
+      _calc.tithiAtInstant(utcInstant, city, offset: offset);
+
+  /// All tithi segments within `[windowStartUtc, windowEndUtc)` at [city]; N
+  /// transitions → N+1 segments, each with its own resolved [TithiInfo] and
+  /// bounding instants.
+  ///
+  /// For a date-only birthday, the caller frames the window as that civil day's
+  /// local-midnight→midnight converted to UTC (DST-aware, so 23h/25h on a DST
+  /// changeover) and supplies [offset] (the offset in effect during the window)
+  /// for correction-table selection. Zero transitions → a single segment.
+  List<TithiSegment> tithiSegments(
+          DateTime windowStartUtc, DateTime windowEndUtc, String city,
+          {required Duration offset}) =>
+      _calc.tithiSegments(windowStartUtc, windowEndUtc, city, offset: offset);
 
   /// Tithi spec → first matching Gregorian date in the given year.
   /// Returns `null` if no match found (e.g., kshaya tithi in a given year).
@@ -98,13 +119,6 @@ class Panchang {
   List<FestivalDate> recurringDates(
       FestivalDef festival, int year, String city) {
     return findRecurringDates(festival, year, city, _calc);
-  }
-
-  /// The UTC moment the tithi changes on [date] (sunrise→next-sunrise window),
-  /// or `null` if no transition occurs that day. [utcOffset] localises the
-  /// search window. Used for birth-time precision on a date-only DOB.
-  DateTime? transitionTime(DateTime date, {Duration? utcOffset}) {
-    return TithiCalculator.findTransitionTime(date, utcOffset: utcOffset);
   }
 
   /// Find the next occurrence of a tithi from a given date.

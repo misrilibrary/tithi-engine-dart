@@ -8,13 +8,14 @@
 ///
 /// ```dart
 /// import 'package:tithi_engine/tithi_engine.dart';
+/// import 'package:tithi_engine/data/all.dart';
 ///
-/// final panchang = Panchang(MonthSystem.purnimant);
-/// final info = panchang.forDate(DateTime(2026, 2, 15), City.ujjain);
+/// final panchang = Panchang([registerAllCities]);
+/// final info = panchang.tithiOnDate(DateTime.utc(2026, 2, 15), 'Ujjain');
 /// print(info.displayName); // "Phalguna Krishna Trayodashi"
 ///
 /// final diwali = panchang.dateFor(festivals.firstWhere((f) => f.id == 'diwali'),
-///     2026, City.seattle);
+///     2026, 'Seattle');
 /// ```
 library;
 
@@ -22,7 +23,7 @@ library;
 export 'src/panchang.dart' show Panchang;
 
 // ── Value types (the "model") ────────────────────────────────────────────
-export 'src/tithi_calculator.dart' show TithiInfo;
+export 'src/tithi_calculator.dart' show TithiInfo, TithiSegment;
 export 'src/lunar_month.dart' show LunarMonth, MonthSystem;
 export 'src/tithi.dart' show Paksha, tithiNames;
 export 'src/festival_def.dart' show FestivalDef, MuhurtaRule, festivals;
@@ -33,12 +34,10 @@ export 'src/cities.dart' show City;
 export 'src/astronomy.dart'
     show CityLocation, supportedCities, defaultCity, getLocationForCity;
 
-// NOTE (Phase 1 of the engine refactor): the following were previously
-// exported and are now internal. Use [Panchang] / the model types instead:
-//   - TithiCalculator            → use Panchang
-//   - getTithiName/getPaksha/tithiInPaksha/calculateTithi
-//                                → read TithiInfo fields, or TithiInfo.fromStored(...)
-//   - convertMonth               → TithiInfo.fromStored(..., displaySystem:)
-//   - findFestivalDate           → Panchang.dateFor
-//   - findRecurringDates         → Panchang.recurringDates
-//   - TithiCalculator.findTransitionTime → Panchang.transitionTime
+// NOTE (3.0): the time-aware API is UTC-instant based. The caller resolves the
+// DST-correct offset and passes UTC instants; the library does no timezone work.
+//   - forDate(wallClock, city, {utcOffset})  → tithiOnDate(date, city)         [sunrise/observance]
+//                                            → tithiAtInstant(utcInstant, city, {offset})  [birth-time]
+//   - transitionTime(date, {utcOffset})      → tithiSegments(windowStartUtc, windowEndUtc, city, {offset})
+//                                              (enumerates ALL transitions, not just one)
+// Engine internals remain unexported — drive everything through [Panchang].

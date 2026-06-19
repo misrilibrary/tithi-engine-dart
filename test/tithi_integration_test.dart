@@ -32,7 +32,7 @@ void main() {
     for (final kd in knownDates) {
       final dt = kd[0] as DateTime;
       test('${dt.day}/${dt.month}/${dt.year} ${kd[1]}', () {
-        final info = calcP.getTithi(dt, timezone: kd[1] as String);
+        final info = calcP.tithiOnDate(dt, kd[1] as String);
         expect(info.tithiNumber, kd[2]);
         expect(info.month, kd[3]);
         expect(info.isAdhika, kd[4]);
@@ -54,10 +54,10 @@ void main() {
         for (final calc in [calcP, calcA]) {
           test('${dt.day}/${dt.month}/${dt.year} $city ${calc.monthSystem}',
               () {
-            final info = calc.getTithi(dt, timezone: city);
+            final info = calc.tithiOnDate(dt, city);
             final found = calc.findInYear(info, dt.year, celebrationCity: city);
             final match = found.any((fd) {
-              final fi = calc.getTithi(fd, timezone: city);
+              final fi = calc.tithiOnDate(fd, city);
               return fi.tithiNumber == info.tithiNumber &&
                   fi.month == info.month &&
                   fi.isAdhika == info.isAdhika;
@@ -83,8 +83,8 @@ void main() {
     for (final city in cities) {
       for (final dt in dates) {
         test('${dt.day}/${dt.month} $city', () {
-          final p = calcP.getTithi(dt, timezone: city);
-          final a = calcA.getTithi(dt, timezone: city);
+          final p = calcP.tithiOnDate(dt, city);
+          final a = calcA.tithiOnDate(dt, city);
           expect(p.tithiNumber, a.tithiNumber);
           expect(p.isAdhika, a.isAdhika);
         });
@@ -98,10 +98,10 @@ void main() {
         for (var d = DateTime.utc(2026, 1, 1);
             d.year == 2026;
             d = d.add(const Duration(days: 1))) {
-          final info = calcP.getTithi(d, timezone: city);
+          final info = calcP.tithiOnDate(d, city);
           if (info.tithiNumber == 15 && !info.isAdhika) {
             final next = d.add(const Duration(days: 1));
-            final nextInfo = calcP.getTithi(next, timezone: city);
+            final nextInfo = calcP.tithiOnDate(next, city);
             if (nextInfo.paksha == Paksha.krishna) {
               final expected = LunarMonth.values[(info.month.index + 1) % 12];
               expect(nextInfo.month, expected,
@@ -114,10 +114,10 @@ void main() {
         for (var d = DateTime.utc(2026, 1, 1);
             d.year == 2026;
             d = d.add(const Duration(days: 1))) {
-          final info = calcA.getTithi(d, timezone: city);
+          final info = calcA.tithiOnDate(d, city);
           if (info.tithiNumber == 30 && !info.isAdhika) {
             final next = d.add(const Duration(days: 1));
-            final nextInfo = calcA.getTithi(next, timezone: city);
+            final nextInfo = calcA.tithiOnDate(next, city);
             if (nextInfo.paksha == Paksha.shukla) {
               final expected = LunarMonth.values[(info.month.index + 1) % 12];
               expect(nextInfo.month == expected || nextInfo.isAdhika, true,
@@ -141,7 +141,7 @@ void main() {
       final city = c[1] as String;
       final expectedMonth = c[2] as LunarMonth;
       test('$city ${dt.day}/${dt.month}/${dt.year}', () {
-        final info = calcP.getTithi(dt, timezone: city);
+        final info = calcP.tithiOnDate(dt, city);
         expect(info.month, expectedMonth);
       });
     }
@@ -179,7 +179,7 @@ void main() {
           displayName: '');
       final dates = calcA.findInYear(info, 2026, celebrationCity: 'Srinagar');
       expect(dates.isNotEmpty, true);
-      final verify = calcA.getTithi(dates.first, timezone: 'Srinagar');
+      final verify = calcA.tithiOnDate(dates.first, 'Srinagar');
       expect(verify.isAdhika, true);
       expect(verify.tithiNumber, 4);
     });
@@ -200,7 +200,7 @@ void main() {
         for (var d = DateTime.utc(e.key, 1, 1);
             d.year == e.key;
             d = d.add(const Duration(days: 1))) {
-          final info = calcP.getTithi(d, timezone: 'Ujjain');
+          final info = calcP.tithiOnDate(d, 'Ujjain');
           if (info.isAdhika) {
             found = info.month.displayName;
             break;
@@ -217,7 +217,7 @@ void main() {
       for (var d = DateTime.utc(1963, 1, 1);
           d.year == 1963;
           d = d.add(const Duration(days: 1))) {
-        final info = calcA.getTithi(d, timezone: 'Ujjain');
+        final info = calcA.tithiOnDate(d, 'Ujjain');
         months.add('${info.isAdhika ? "A." : ""}${info.month.displayName}');
       }
       expect(months.contains('Margashirsha'), false);

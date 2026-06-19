@@ -32,7 +32,7 @@ void main() {
         d.year == year;
         d = d.add(const Duration(days: 1))) {
       dates.add(d);
-      info.add(p.forDate(d, city));
+      info.add(p.tithiOnDate(d, city));
     }
     return (dates: dates, info: info);
   }

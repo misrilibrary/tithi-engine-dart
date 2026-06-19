@@ -1,5 +1,61 @@
 # Changelog
 
+## 3.0.0
+
+Time-aware API redesign: **UTC-instant + explicit offset** (breaking). The
+library now does **no timezone work** — callers resolve the DST-correct offset
+and pass true UTC instants; the engine handles location-correct astronomy and
+correction-table indexing. Tithi/month/festival *numerical output is unchanged*;
+only the time-of-day entry points change shape.
+
+### Breaking changes
+- **`Panchang.forDate(date, city, {utcOffset})` is removed**, split into two
+  intent-revealing methods:
+  - `tithiOnDate(DateTime date, String city)` — sunrise tithi for the panchang
+    day (observance/calendar display). No offset; sunrise is astronomical. This
+    replaces the old date-only `forDate`.
+  - `tithiAtInstant(DateTime utcInstant, String city, {required Duration offset})`
+    — tithi active at an exact moment (birth-time precision). `utcInstant` must
+    be a true UTC instant (asserted); `offset` is the DST-aware offset in effect
+    at that instant, used *only* to derive the civil date for correction-table
+    selection. This replaces the old time-of-day `forDate`.
+  - This also removes the old `hasTime = hour!=0||minute!=0` heuristic, so a
+    birth at exactly local midnight is no longer mis-read as a date-only query.
+- **`Panchang.transitionTime(date, {utcOffset})` is removed**, replaced by
+  `tithiSegments(DateTime windowStartUtc, DateTime windowEndUtc, String city,
+  {required Duration offset})`. The caller frames the window (e.g. a civil day's
+  local-midnight→midnight converted to UTC, DST-aware so 23h/25h on a changeover)
+  and the engine enumerates **every** tithi transition inside it, returning N+1
+  `TithiSegment`s — not just a single boundary. Each segment carries its own
+  fully-resolved `TithiInfo` (paksha/month resolved per segment) and bounding
+  instants.
+
+### Added
+- `TithiSegment` value type (`startUtc`, `endUtc`, `tithi`, `startIsTransition`,
+  `endIsTransition`), exported from the barrel.
+- Hybrid segment accuracy (Phase 1): transition *instants* come from astronomy
+  with the table-known boundary snapped to its corrected instant; segment tithi
+  *labels* are anchored to the corrected sunrise tithi and stepped ±1 across each
+  boundary, so labels stay Swiss-accurate even where Meeus alone would be off.
+  (Multi-transition days carry interim ~1-min precision on extra boundaries until
+  a future correction-table regeneration; common single-transition days are
+  Swiss-exact.)
+
+### Why
+The previous `forDate`/`transitionTime` accepted a wall-clock `DateTime` and
+silently fell back to a city's fixed *standard* offset when none was supplied —
+wrong by the DST hour near a transition. Centering the contract on UTC instants
+removes that whole class of day-attribution bug (e.g. Austin birthdays around
+local midnight). Correction-table indexing now flows through a single
+`civil-date = instant + offset` path, so evening births that cross UTC midnight
+select the correct day's corrections.
+
+### Tests
+- Migrated the suite to the new surface; added UTC-instant edge cases
+  (evening UTC-midnight-crossing birth, exact-midnight, near-midnight DST),
+  multi-transition / paksha-crossing `tithiSegments` days, and Drik cross-checks
+  (Austin 2026). 536 tests pass.
+
 ## 2.2.1
 
 Bug fix: `transitionTime` now honours `utcOffset`.

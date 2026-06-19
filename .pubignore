@@ -6,4 +6,5 @@ build/
 coverage/
 doc/
 tools/
+test/
 pubspec.lock

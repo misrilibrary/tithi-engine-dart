@@ -69,15 +69,47 @@ class TithiInfo {
   String toString() => displayName;
 }
 
+/// A contiguous span of a single tithi within an enumeration window.
+///
+/// Returned by [TithiCalculator.tithiSegments] / `Panchang.tithiSegments`. The
+/// window is partitioned by every tithi transition inside it, so N transitions
+/// yield N+1 segments. [startUtc]/[endUtc] are clipped to the window edges;
+/// [startIsTransition]/[endIsTransition] indicate whether that edge is a real
+/// tithi boundary (true) or just the window clip (false).
+class TithiSegment {
+  final DateTime startUtc; // UTC, inclusive
+  final DateTime endUtc; // UTC, exclusive
+  final TithiInfo tithi;
+  final bool startIsTransition;
+  final bool endIsTransition;
+
+  const TithiSegment({
+    required this.startUtc,
+    required this.endUtc,
+    required this.tithi,
+    required this.startIsTransition,
+    required this.endIsTransition,
+  });
+
+  @override
+  String toString() =>
+      '${tithi.displayName} [${startUtc.toIso8601String()} → ${endUtc.toIso8601String()}]';
+}
+
 /// Pure Dart tithi calculator. No external dependencies.
+///
+/// Time inputs are **UTC instants**; the calculator performs no wall-clock or
+/// DST conversion. Where a civil-day mapping is needed (correction-table row
+/// selection), the caller supplies the `offset` in effect at that instant and
+/// the calculator derives the civil date via [_civilDayIndex]. Resolving the
+/// DST-correct offset is the caller's responsibility.
 class TithiCalculator {
   final MonthSystem monthSystem;
   late final LunarMonthResolver _monthResolver;
 
   /// Per-city resolver cache. The default city uses [_monthResolver]; every
   /// other city's resolver is built once and reused, so its per-year month-span
-  /// cache survives across calls instead of being recomputed on every
-  /// getTithi/findInYear/findNext (the dominant cost for non-default cities).
+  /// cache survives across calls.
   final Map<String, LunarMonthResolver> _resolverCache = {};
 
   TithiCalculator({this.monthSystem = MonthSystem.purnimant}) {
@@ -91,61 +123,127 @@ class TithiCalculator {
         LunarMonthResolver(system: monthSystem, city: city);
   }
 
-  /// Convert a Gregorian date to its Hindu lunar tithi.
-  /// Uses precomputed corrections (1900-2100) when available, Meeus fallback otherwise.
+  // ── Public API ───────────────────────────────────────────────────────────
+
+  /// Sunrise tithi for the panchang day of [date] at [city] (observance/display).
   ///
-  /// If time is provided, calculates tithi at that exact moment.
-  /// If date-only (hour=0, minute=0), uses sunrise tithi for the given timezone.
-  /// If [utcOffset] is provided, converts to UTC for accurate calculation.
-  /// If [timezone] is provided (IANA name), uses location-appropriate sunrise.
-  TithiInfo getTithi(DateTime date, {Duration? utcOffset, String? timezone}) {
-    final hasTime = date.hour != 0 || date.minute != 0;
-    final dayIndex = date.difference(_indiaEpoch).inDays;
-    final city = timezone ?? defaultCity;
-    final tithiCorr = getTithiCorrections(city);
-    final transCorr = getTransitionMinutes(city);
-
-    // Compute tithi number: check corrections first, Meeus fallback
-    final int tithiNum;
-    if (!hasTime) {
-      tithiNum =
-          tithiCorr[dayIndex] ?? _meeusCalcTithi(date, null, false, city);
-    } else {
-      final transMinute = transCorr[dayIndex];
-      if (transMinute != null) {
-        final userIstMinutes = _toLocalMinutes(date, utcOffset, city);
-        final sunriseTithi = tithiCorr[dayIndex]!;
-        tithiNum = userIstMinutes >= transMinute
-            ? sunriseTithi
-            : (sunriseTithi - 1 == 0 ? 30 : sunriseTithi - 1);
-      } else {
-        tithiNum = _meeusCalcTithi(date, utcOffset, true, city);
-      }
-    }
-    final paksha = tithi_core.getPaksha(tithiNum);
-    final name = tithi_core.getTithiName(tithiNum);
-    final inPaksha = tithi_core.tithiInPaksha(tithiNum);
-    final resolver = _resolverFor(city);
-    final monthInfo = resolver.getMonthInfo(date);
-
-    final pakshaStr = paksha == tithi_core.Paksha.shukla ? 'Shukla' : 'Krishna';
-    final adhikaPrefix = monthInfo.isAdhika ? 'Adhika ' : '';
-    final display =
-        '$adhikaPrefix${monthInfo.month.displayName} $pakshaStr $name';
-
-    return TithiInfo(
-      tithiNumber: tithiNum,
-      tithiName: name,
-      paksha: paksha,
-      tithiInPaksha: inPaksha,
-      month: monthInfo.month,
-      isAdhika: monthInfo.isAdhika,
-      displayName: display,
-    );
+  /// Only [date]'s calendar fields (year/month/day) select the day; time-of-day
+  /// is ignored. No offset is required — sunrise is astronomical (from lat/lon).
+  /// Uses the corrected sunrise tithi when tabled, Meeus fallback otherwise.
+  TithiInfo tithiOnDate(DateTime date, String city) {
+    final civilDate = DateTime.utc(date.year, date.month, date.day);
+    final dayIndex = civilDate.difference(_epoch).inDays;
+    final loc = getLocationForCity(city);
+    final tithiNum = getTithiCorrections(city)[dayIndex] ??
+        _meeusTithiAt(computeSunrise(date, loc));
+    return _buildInfo(tithiNum, civilDate, city);
   }
 
-  /// Find when a tithi falls in a given year. Returns all occurrences (usually 1, sometimes 2).
+  /// Tithi active at the exact UTC [utcInstant] at [city] (birth-time precision).
+  ///
+  /// [offset] is the actual (DST-aware) UTC offset in effect at that instant in
+  /// [city]; its only job is to derive the civil date for correction-table row
+  /// selection (see [_civilDayIndex]). The astronomy uses [utcInstant] directly.
+  TithiInfo tithiAtInstant(DateTime utcInstant, String city,
+      {required Duration offset}) {
+    assert(utcInstant.isUtc, 'tithiAtInstant requires a UTC instant');
+    final dayIndex = _civilDayIndex(utcInstant, offset);
+    final transMinute = getTransitionMinutes(city)[dayIndex];
+    final int tithiNum;
+    if (transMinute != null) {
+      final mins = _standardLocalMinutes(utcInstant, city);
+      final sunriseTithi = getTithiCorrections(city)[dayIndex]!;
+      tithiNum = mins >= transMinute
+          ? sunriseTithi
+          : (sunriseTithi - 1 == 0 ? 30 : sunriseTithi - 1);
+    } else {
+      tithiNum = _meeusTithiAt(utcInstant);
+    }
+    final civil = utcInstant.add(offset);
+    return _buildInfo(
+        tithiNum, DateTime.utc(civil.year, civil.month, civil.day), city);
+  }
+
+  /// Enumerate every tithi segment within `[windowStartUtc, windowEndUtc)` at
+  /// [city]. N transitions inside the window → N+1 segments.
+  ///
+  /// The caller frames the window — e.g. a civil day's local-midnight→midnight
+  /// converted to UTC (DST-aware) — and supplies [offset] (the offset in effect
+  /// during the window) used only for correction-table row selection.
+  ///
+  /// Hybrid accuracy (Phase 1): transition *instants* are found by astronomy and
+  /// the table-known boundary is snapped to its corrected instant; segment tithi
+  /// *labels* are anchored to the corrected sunrise tithi and stepped ±1 across
+  /// each boundary, so labels stay Swiss-accurate even where Meeus alone is off.
+  List<TithiSegment> tithiSegments(
+      DateTime windowStartUtc, DateTime windowEndUtc, String city,
+      {required Duration offset}) {
+    assert(windowStartUtc.isUtc && windowEndUtc.isUtc,
+        'tithiSegments requires UTC window bounds');
+    final loc = getLocationForCity(city);
+    final dayIndex = _civilDayIndex(windowStartUtc, offset);
+    final civil = windowStartUtc.add(offset);
+    final civilDate = DateTime.utc(civil.year, civil.month, civil.day);
+
+    // 1. All transition instants inside the window (astronomy).
+    final transitions = _findAllTransitions(windowStartUtc, windowEndUtc);
+
+    // 2. Snap the table-known boundary to its corrected instant (Swiss-exact).
+    final transMinute = getTransitionMinutes(city)[dayIndex];
+    if (transMinute != null && transitions.isNotEmpty) {
+      final correctedUtc = _stdLocalMinutesToUtc(civilDate, transMinute, city);
+      if (correctedUtc.isAfter(windowStartUtc) &&
+          correctedUtc.isBefore(windowEndUtc)) {
+        var bestI = 0;
+        var bestDelta = transitions[0].difference(correctedUtc).abs();
+        for (var i = 1; i < transitions.length; i++) {
+          final d = transitions[i].difference(correctedUtc).abs();
+          if (d < bestDelta) {
+            bestDelta = d;
+            bestI = i;
+          }
+        }
+        if (bestDelta <= const Duration(minutes: 45)) {
+          transitions[bestI] = correctedUtc;
+        }
+      }
+    }
+
+    // 3. Anchor labels to the corrected sunrise tithi, step ±1 across boundaries.
+    final anchorTithi = getTithiCorrections(city)[dayIndex] ??
+        _meeusTithiAt(computeSunrise(civilDate, loc));
+    final sunriseUtc = computeSunrise(civilDate, loc);
+    final bounds = <DateTime>[windowStartUtc, ...transitions, windowEndUtc];
+
+    var sunriseSeg = 0;
+    for (var i = 0; i < bounds.length - 1; i++) {
+      if (!sunriseUtc.isBefore(bounds[i]) &&
+          sunriseUtc.isBefore(bounds[i + 1])) {
+        sunriseSeg = i;
+        break;
+      }
+    }
+
+    final segments = <TithiSegment>[];
+    final last = bounds.length - 2;
+    for (var i = 0; i <= last; i++) {
+      final tnum = _wrap30(anchorTithi + (i - sunriseSeg));
+      final mid = bounds[i].add(Duration(
+          milliseconds:
+              bounds[i + 1].difference(bounds[i]).inMilliseconds ~/ 2));
+      segments.add(TithiSegment(
+        startUtc: bounds[i],
+        endUtc: bounds[i + 1],
+        tithi: _buildInfo(tnum, mid, city),
+        startIsTransition: i > 0,
+        endIsTransition: i < last,
+      ));
+    }
+    return segments;
+  }
+
   /// Find when a tithi falls in a given year for a celebration city.
+  /// Returns all occurrences (usually 1, sometimes 2).
   List<DateTime> findInYear(TithiInfo info, int year,
       {String? celebrationCity}) {
     final city = celebrationCity ?? defaultCity;
@@ -178,96 +276,108 @@ class TithiCalculator {
     );
   }
 
-  /// Approximate reference (Ujjain) sunrise as UTC DateTime.
-  static DateTime _refSunrise(DateTime date) => defaultSunrise(date);
+  // ── Internal helpers ───────────────────────────────────────────────────────
 
-  /// Find the tithi transition that occurs on a given **local** date.
-  ///
-  /// When [utcOffset] is supplied, the search window is that caller's local
-  /// calendar day (local-midnight to next local-midnight), so the returned
-  /// instant belongs to the same local date the caller asked about. Without an
-  /// offset it falls back to the reference (Ujjain) sunrise day.
-  ///
-  /// Returns the UTC DateTime when the tithi changes, or null if no transition
-  /// falls within that day. Binary search: ~11 iterations for 1-minute precision.
-  static DateTime? findTransitionTime(DateTime date, {Duration? utcOffset}) {
-    // Search window. Tithi boundaries are global instants; the only question is
-    // which local day they belong to — so frame the window by the caller's
-    // local day (via utcOffset) instead of a fixed reference, otherwise a
-    // boundary in the 00:00-08:00 UTC band gets mis-attributed to the wrong
-    // local date for western-hemisphere cities.
-    final DateTime windowStart, windowEnd;
-    if (utcOffset != null) {
-      final localMidnightUtc =
-          DateTime.utc(date.year, date.month, date.day).subtract(utcOffset);
-      windowStart = localMidnightUtc;
-      windowEnd = localMidnightUtc.add(const Duration(days: 1));
-    } else {
-      windowStart = _refSunrise(date);
-      windowEnd = _refSunrise(date.add(const Duration(days: 1)));
+  static final _epoch = DateTime.utc(1900, 1, 1);
+
+  /// Correction-table row index for [utcInstant], keyed by its **civil date**
+  /// (instant + the caller's DST-aware [offset]). This is the single indexing
+  /// path: never derive the day from the raw UTC instant, or an evening birth
+  /// that crosses UTC midnight would select the wrong day's corrections.
+  static int _civilDayIndex(DateTime utcInstant, Duration offset) {
+    final civil = utcInstant.add(offset);
+    return DateTime.utc(civil.year, civil.month, civil.day)
+        .difference(_epoch)
+        .inDays;
+  }
+
+  /// [utcInstant] expressed as minute-of-day in the city's **fixed standard**
+  /// local time — the frame the transition-minute table is stored in. Uses the
+  /// city's standard offset (a location constant), never DST.
+  static int _standardLocalMinutes(DateTime utcInstant, String city) {
+    final stdMin = (getLocationForCity(city).utcOffset * 60).round();
+    final local = utcInstant.add(Duration(minutes: stdMin));
+    return (local.hour * 60 + local.minute) % 1440;
+  }
+
+  /// Inverse of [_standardLocalMinutes]: a standard-local minute-of-day on
+  /// [civilDate] back to a UTC instant (for snapping a corrected boundary).
+  static DateTime _stdLocalMinutesToUtc(
+      DateTime civilDate, int minutes, String city) {
+    final stdMin = (getLocationForCity(city).utcOffset * 60).round();
+    return DateTime.utc(civilDate.year, civilDate.month, civilDate.day)
+        .subtract(Duration(minutes: stdMin))
+        .add(Duration(minutes: minutes));
+  }
+
+  /// Pure-astronomy tithi number (1-30) at an absolute UTC instant.
+  static int _meeusTithiAt(DateTime utcInstant) {
+    final sun = toSidereal(sunLongitude(utcInstant), utcInstant);
+    final moon = toSidereal(moonLongitude(utcInstant), utcInstant);
+    return tithi_core.calculateTithi(moon, sun);
+  }
+
+  /// Map any integer to the 1-30 tithi cycle.
+  static int _wrap30(int n) => ((n - 1) % 30 + 30) % 30 + 1;
+
+  /// All tithi transition instants in `[start, end)`, in chronological order.
+  /// Coarse 1-hour scan (tithis are ≥~19.5h, so no transition is skipped) then
+  /// 30-second bisection of each detected change.
+  static List<DateTime> _findAllTransitions(DateTime start, DateTime end) {
+    final out = <DateTime>[];
+    const step = Duration(hours: 1);
+    var segLo = start;
+    var loTithi = _meeusTithiAt(start);
+    var probe = start.add(step);
+    while (true) {
+      final cur = probe.isAfter(end) ? end : probe;
+      final t = _meeusTithiAt(cur);
+      if (t != loTithi) {
+        final b = _bisect(segLo, cur, loTithi);
+        if (b.isAfter(start) && b.isBefore(end)) out.add(b);
+        loTithi = t;
+      }
+      segLo = cur;
+      if (!cur.isBefore(end)) break;
+      probe = probe.add(step);
     }
+    return out;
+  }
 
-    final startTithi = _tithiAt(windowStart);
-    final endTithi = _tithiAt(windowEnd);
-
-    if (startTithi == endTithi) return null; // no transition this day
-
-    // Binary search for the transition point
-    var lo = windowStart;
-    var hi = windowEnd;
-    while (hi.difference(lo).inMinutes > 1) {
-      final mid = lo.add(Duration(minutes: hi.difference(lo).inMinutes ~/ 2));
-      if (_tithiAt(mid) == startTithi) {
+  /// Bisect `[lo, hi]` for the first instant whose tithi differs from
+  /// [startTithi] (30-second precision).
+  static DateTime _bisect(DateTime lo, DateTime hi, int startTithi) {
+    while (hi.difference(lo).inSeconds > 30) {
+      final mid = lo.add(Duration(seconds: hi.difference(lo).inSeconds ~/ 2));
+      if (_meeusTithiAt(mid) == startTithi) {
         lo = mid;
       } else {
         hi = mid;
       }
     }
-    return hi; // moment when new tithi begins (UTC)
+    return hi;
   }
 
-  static int _tithiAt(DateTime utcTime) {
-    final sunLong = toSidereal(sunLongitude(utcTime), utcTime);
-    final moonLong = toSidereal(moonLongitude(utcTime), utcTime);
-    return tithi_core.calculateTithi(moonLong, sunLong);
-  }
-
-  // ─── India precomputed data helpers ───
-
-  static final _indiaEpoch = DateTime.utc(1900, 1, 1);
-
-  static int _toLocalMinutes(DateTime date, Duration? utcOffset, String city) {
-    final cityOffset = getLocationForCity(city).utcOffset;
-    final cityOffsetMinutes = (cityOffset * 60).round();
-    // Convert user's time to UTC minutes, then to city local minutes
-    final utcMinutes = date.hour * 60 +
-        date.minute -
-        (utcOffset?.inMinutes ?? cityOffsetMinutes);
-    final localMinutes = utcMinutes + cityOffsetMinutes;
-    return localMinutes % 1440;
-  }
-
-  static int _meeusCalcTithi(DateTime date, Duration? utcOffset, bool hasTime,
-      [String? timezone]) {
-    DateTime calcTime;
-    if (hasTime && utcOffset != null) {
-      calcTime =
-          DateTime.utc(date.year, date.month, date.day, date.hour, date.minute)
-              .subtract(utcOffset);
-    } else if (hasTime) {
-      // Time provided, use timezone offset or default IST
-      final loc = getLocationForCity(timezone ?? "Delhi");
-      final offset = Duration(minutes: (loc.utcOffset * 60).round());
-      calcTime =
-          DateTime.utc(date.year, date.month, date.day, date.hour, date.minute)
-              .subtract(offset);
-    } else {
-      // Date-only: use sunrise for the timezone
-      final loc = getLocationForCity(timezone ?? "Delhi");
-      calcTime = computeSunrise(date, loc);
-    }
-    final sunLong = toSidereal(sunLongitude(calcTime), calcTime);
-    final moonLong = toSidereal(moonLongitude(calcTime), calcTime);
-    return tithi_core.calculateTithi(moonLong, sunLong);
+  /// Shared labeling: tithi number + month-resolution instant → full [TithiInfo].
+  /// Month/adhika are resolved at [monthAtInstant] (day-granular spans); paksha
+  /// and name derive from [tithiNum].
+  TithiInfo _buildInfo(int tithiNum, DateTime monthAtInstant, String city) {
+    final paksha = tithi_core.getPaksha(tithiNum);
+    final name = tithi_core.getTithiName(tithiNum);
+    final inPaksha = tithi_core.tithiInPaksha(tithiNum);
+    final monthInfo = _resolverFor(city).getMonthInfo(monthAtInstant);
+    final pakshaStr = paksha == tithi_core.Paksha.shukla ? 'Shukla' : 'Krishna';
+    final adhikaPrefix = monthInfo.isAdhika ? 'Adhika ' : '';
+    final display =
+        '$adhikaPrefix${monthInfo.month.displayName} $pakshaStr $name';
+    return TithiInfo(
+      tithiNumber: tithiNum,
+      tithiName: name,
+      paksha: paksha,
+      tithiInPaksha: inPaksha,
+      month: monthInfo.month,
+      isAdhika: monthInfo.isAdhika,
+      displayName: display,
+    );
   }
 }

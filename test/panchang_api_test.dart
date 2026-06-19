@@ -1,6 +1,6 @@
 // Behavior-focused unit tests for public API paths the golden/regression suites
 // don't directly exercise: the Panchang facade methods (getDate/findNext/
-// transitionTime/forDate-with-time), TithiInfo.fromStored display rendering,
+// tithiSegments/tithiAtInstant),, TithiInfo.fromStored display rendering,
 // the Meeus fallback (out-of-table years), the mutable registry contract, and
 // lunar-month naming. Assertions are relative/contractual to avoid brittleness.
 
@@ -29,7 +29,7 @@ void main() {
       final d =
           p.getDate(LunarMonth.kartika, Paksha.shukla, 15, 2026, 'Ujjain');
       expect(d, isNotNull);
-      final info = p.forDate(d!, 'Ujjain');
+      final info = p.tithiOnDate(d!, 'Ujjain');
       expect(info.tithiInPaksha, 15);
       expect(info.paksha, Paksha.shukla);
     });
@@ -44,47 +44,62 @@ void main() {
           p.findNext(LunarMonth.magha, Paksha.shukla, 5, 'Ujjain', from: from);
       expect(next, isNotNull);
       expect(next!.isBefore(from), isFalse);
-      final info = p.forDate(next, 'Ujjain');
+      final info = p.tithiOnDate(next, 'Ujjain');
       expect(info.tithiInPaksha, 5);
       expect(info.paksha, Paksha.shukla);
     });
   });
 
-  group('Panchang.transitionTime', () {
+  group('Panchang.tithiSegments', () {
     final p = Panchang([registerAllCities]);
+    const ist = Duration(hours: 5, minutes: 30);
+    (DateTime, DateTime) ujjainDay(DateTime d) {
+      final start = DateTime.utc(d.year, d.month, d.day).subtract(ist);
+      return (start, start.add(const Duration(days: 1)));
+    }
 
-    test('most days have a tithi transition in the sunrise→next-sunrise window',
-        () {
+    test('most civil days have a transition (≥2 segments)', () {
       var withTransition = 0;
       for (var d = DateTime.utc(2026, 1, 1);
           d.month == 1;
           d = d.add(const Duration(days: 1))) {
-        if (p.transitionTime(d) != null) withTransition++;
+        final (s, e) = ujjainDay(d);
+        if (p.tithiSegments(s, e, 'Ujjain', offset: ist).length >= 2) {
+          withTransition++;
+        }
       }
       // A tithi lasts ~24h, so nearly every day has exactly one transition.
       expect(withTransition, greaterThanOrEqualTo(25));
     });
 
-    test('a returned transition lies within the day window', () {
-      final day = DateTime.utc(2026, 2, 15);
-      final t = p.transitionTime(day);
-      if (t != null) {
-        expect(t.isAfter(day.subtract(const Duration(days: 1))), isTrue);
-        expect(t.isBefore(day.add(const Duration(days: 2))), isTrue);
+    test('segments tile the window contiguously with in-range boundaries', () {
+      final (s, e) = ujjainDay(DateTime.utc(2026, 2, 15));
+      final segs = p.tithiSegments(s, e, 'Ujjain', offset: ist);
+      expect(segs, isNotEmpty);
+      expect(segs.first.startUtc, s);
+      expect(segs.last.endUtc, e);
+      for (var i = 0; i < segs.length; i++) {
+        expect(segs[i].tithi.tithiNumber, inInclusiveRange(1, 30));
+        if (i > 0) {
+          expect(segs[i].startUtc, segs[i - 1].endUtc); // contiguous
+          expect(segs[i].startIsTransition, isTrue);
+          expect(segs[i].startUtc.isAfter(s) && segs[i].startUtc.isBefore(e),
+              isTrue);
+        }
       }
     });
   });
 
-  group('Panchang.forDate with time-of-day (utcOffset path)', () {
+  group('Panchang.tithiAtInstant (time-of-day, offset path)', () {
     final p = Panchang([registerAllCities]);
     final offset =
         Duration(minutes: (getLocationForCity('Delhi').utcOffset * 60).round());
+    // Delhi wall-clock hour → true UTC instant (Shape 2).
+    DateTime instant(int h) => DateTime.utc(2026, 5, 11, h).subtract(offset);
 
     test('time-of-day query returns a valid tithi and full display', () {
-      final morning =
-          p.forDate(DateTime(2026, 5, 11, 7), 'Delhi', utcOffset: offset);
-      final evening =
-          p.forDate(DateTime(2026, 5, 11, 23), 'Delhi', utcOffset: offset);
+      final morning = p.tithiAtInstant(instant(7), 'Delhi', offset: offset);
+      final evening = p.tithiAtInstant(instant(23), 'Delhi', offset: offset);
       for (final info in [morning, evening]) {
         expect(info.tithiNumber, inInclusiveRange(1, 30));
         expect(info.displayName, isNotEmpty);
@@ -99,13 +114,13 @@ void main() {
     final p = Panchang([registerAllCities]);
 
     test('pre-1900 date still yields a valid tithi', () {
-      final info = p.forDate(DateTime.utc(1850, 6, 1), 'Ujjain');
+      final info = p.tithiOnDate(DateTime.utc(1850, 6, 1), 'Ujjain');
       expect(info.tithiNumber, inInclusiveRange(1, 30));
       expect(info.displayName, isNotEmpty);
     });
 
     test('post-2100 date still yields a valid tithi', () {
-      final info = p.forDate(DateTime.utc(2150, 6, 1), 'Ujjain');
+      final info = p.tithiOnDate(DateTime.utc(2150, 6, 1), 'Ujjain');
       expect(info.tithiNumber, inInclusiveRange(1, 30));
     });
   });

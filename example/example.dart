@@ -7,7 +7,7 @@ void main() {
   final panchang = Panchang([registerAllCities], system: MonthSystem.purnimant);
 
   // Date → Tithi
-  final info = panchang.forDate(DateTime(2026, 2, 15), City.ujjain);
+  final info = panchang.tithiOnDate(DateTime(2026, 2, 15), City.ujjain);
   print(info.displayName); // "Phalguna Krishna Trayodashi"
 
   // Festival date

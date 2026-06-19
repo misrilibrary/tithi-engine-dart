@@ -8,7 +8,7 @@ Thank you for considering contributing! Here's how to get started.
 git clone https://github.com/misrilibrary/tithi-engine-dart.git
 cd tithi-engine-dart
 dart pub get
-dart test        # run all 415 tests
+dart test        # run all 536 tests
 dart analyze     # zero issues expected
 dart format .    # auto-format
 ```

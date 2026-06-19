@@ -20,7 +20,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^2.1.0
+  tithi_engine: ^3.0.0
 ```
 
 ## Quick Start
@@ -34,9 +34,17 @@ import 'package:tithi_engine/data/all.dart'; // city correction tables
 // links only that region so the tree-shaker drops the rest.
 final panchang = Panchang([registerAllCities]);
 
-// Date → Tithi
-final info = panchang.forDate(DateTime(2026, 2, 15), City.ujjain);
+// Date → Tithi (sunrise tithi of the panchang day; for display/observance)
+final info = panchang.tithiOnDate(DateTime.utc(2026, 2, 15), City.ujjain);
 print(info.displayName); // "Phalguna Krishna Trayodashi"
+
+// Exact moment → Tithi (birth-time precision). Pass a true UTC instant plus the
+// DST-aware offset that was in effect (the app resolves the offset, e.g. via
+// package:timezone). The offset is used only to pick the civil day's data.
+final cdt = const Duration(hours: -5);
+final birthUtc = DateTime.utc(2006, 5, 30, 20, 0).subtract(cdt); // 8 PM CDT → UTC
+final birthTithi = panchang.tithiAtInstant(birthUtc, 'Austin', offset: cdt);
+print(birthTithi.displayName);
 
 // Festival date
 final shivaratri = panchang.dateFor(
@@ -66,20 +74,25 @@ Combine packs: `Panchang([registerIndia, registerEurope])`.
 
 ## API
 
-`Panchang` is the single entry point. Value types (`TithiInfo`, `LunarMonth`,
-`MonthSystem`, `Paksha`, `FestivalDef`, `MuhurtaRule`, `festivals`, `FestivalDate`,
-`City`, `CityLocation`) are exported; the engine internals are not.
+`Panchang` is the single entry point. Value types (`TithiInfo`, `TithiSegment`,
+`LunarMonth`, `MonthSystem`, `Paksha`, `FestivalDef`, `MuhurtaRule`, `festivals`,
+`FestivalDate`, `City`, `CityLocation`) are exported; the engine internals are not.
+
+The time-aware API is **UTC-instant based**: you pass true UTC instants and, where
+a civil day matters, the DST-aware offset in effect (the engine does no timezone
+resolution — resolve the offset yourself, e.g. via `package:timezone`).
 
 | Method | Description |
 |--------|-------------|
 | `Panchang(data, {system})` | Construct with city-data registrars (`data` required) |
-| `panchang.forDate(date, city, {utcOffset})` | Gregorian date → full TithiInfo (time-of-day aware) |
+| `panchang.tithiOnDate(date, city)` | Sunrise tithi of the panchang day (display/observance) |
+| `panchang.tithiAtInstant(utcInstant, city, {offset})` | Tithi at an exact UTC moment (birth-time) |
+| `panchang.tithiSegments(windowStartUtc, windowEndUtc, city, {offset})` | Every tithi segment in a UTC window (N transitions → N+1 segments) |
 | `panchang.getDate(month, paksha, tithi, year, city)` | Tithi spec → Gregorian date |
 | `panchang.getDates(month, paksha, tithi, year, city)` | Tithi spec → all dates (adhika-aware) |
 | `panchang.dateFor(festival, year, city)` | Festival → date with muhurta rules |
 | `panchang.recurringDates(festival, year, city)` | Recurring festival → all occurrences in the year |
 | `panchang.findNext(month, paksha, tithi, city)` | Next occurrence from today |
-| `panchang.transitionTime(date, {utcOffset})` | UTC moment the tithi changes that day |
 | `TithiInfo.fromStored(...)` | Render a saved tithi (with optional Purnimant↔Amant display conversion) |
 
 ## Accuracy
@@ -89,7 +102,7 @@ Combine packs: `Panchang([registerIndia, registerEurope])`.
 | Tithi vs Swiss Ephemeris | 0 mismatches (230 cities × 73,049 days, 1900–2100) |
 | Month boundaries (Purnimant) | 100% (200 years, verified cities) |
 | Festival dates vs Drik Panchang | 22/22 (2025–2026) |
-| Test coverage | 530 tests, ~87% core line coverage |
+| Test coverage | 536 tests, ~87% core line coverage |
 
 ## Cross-Platform
 
