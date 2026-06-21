@@ -18,11 +18,20 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:tithi_engine/src/astronomy.dart'
-    show computeSunrise, sunLongitude, moonLongitude, getLocationForCity, supportedCities;
+    show
+        computeSunrise,
+        sunLongitude,
+        moonLongitude,
+        getLocationForCity,
+        supportedCities;
 import 'package:tithi_engine/src/ayanamsha.dart' show toSidereal;
 import 'package:tithi_engine/src/tithi.dart' as tithi_core;
 import 'package:tithi_engine/src/regions/registry.dart'
-    show getTithiCorrections, getTransitionMinutes, getAmavasyaCorrections, getPurnimaCorrections;
+    show
+        getTithiCorrections,
+        getTransitionMinutes,
+        getAmavasyaCorrections,
+        getPurnimaCorrections;
 import 'package:tithi_engine/data/all.dart' show registerAllCities;
 
 final _epoch = DateTime.utc(1900, 1, 1);
@@ -36,7 +45,8 @@ int _meeusTithiAt(DateTime utc) {
 
 String _key(String name) => name.toLowerCase().replaceAll(RegExp(r'\s+'), '');
 
-String _jsonStr(String s) => '"${s.replaceAll('\\', '\\\\').replaceAll('"', '\\"')}"';
+String _jsonStr(String s) =>
+    '"${s.replaceAll('\\', '\\\\').replaceAll('"', '\\"')}"';
 
 String _mapJson(Map<int, int> m) {
   final keys = m.keys.toList()..sort();
@@ -62,7 +72,8 @@ void main(List<String> args) {
   Directory('$outDir/darttables').createSync(recursive: true);
 
   final names = supportedCities.keys.toList()..sort();
-  stdout.writeln('Dumping truth for ${names.length} cities x $_totalDays days...');
+  stdout.writeln(
+      'Dumping truth for ${names.length} cities x $_totalDays days...');
 
   // City coordinates + region (feeds Java coord/region parity too).
   final citiesSb = StringBuffer('[');
