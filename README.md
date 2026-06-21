@@ -106,7 +106,19 @@ resolution — resolve the offset yourself, e.g. via `package:timezone`).
 
 ## Cross-Platform
 
-This is the Dart implementation of [tithi-engine](https://github.com/misrilibrary/tithi-engine) (Java). Both produce identical tithi/panchang results, validated against Swiss Ephemeris.
+This is the Dart implementation of [tithi-engine](https://github.com/misrilibrary/tithi-engine) (Java). Both compute identical tithi/panchang results, validated against the Swiss Ephemeris.
+
+The two packages **version independently** — each version string is a semver compatibility contract for *that* ecosystem. What stays locked in step is the **astronomy engine revision** (the correctness-critical part) and the feature parity tracked below.
+
+- **Engine revision:** `r2` — VSOP87 Sun + Meeus Moon in Terrestrial Time (Espenak–Meeus ΔT), nutation cancelled in the Moon–Sun elongation. Dart `2.1.0+` ⟷ Java `1.1.0+`. Verified: correction tables byte-identical across both, 0 mismatches over 230 cities × 73,414 days.
+
+| Capability | Dart (tithi_engine) | Java (tithi-engine) |
+|---|---|---|
+| Astronomy engine rev `r2` (VSOP87/TT) | `2.1.0+` | `1.1.0+` |
+| 230 cities, Swiss-verified tables | `2.1.0+` | `1.1.0+` |
+| City display-name disambiguation (`region` / `qualifiedName` / `displayName`) | `2.2.0+` | _planned_ |
+| Time-aware API (`tithiOnDate` / `tithiAtInstant` / `tithiSegments`) | `3.0.0+` | _planned_ |
+| `recurringDates` / `findNext` / `TithiInfo.fromStored` | `2.0.0+` | _planned_ |
 
 ## License
 
