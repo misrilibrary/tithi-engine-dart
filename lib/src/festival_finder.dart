@@ -108,14 +108,14 @@ DateTime _muhurtaUtc(DateTime date, CityLocation loc, MuhurtaRule rule) {
   final sunset = computeSunset(date, loc);
   switch (rule) {
     case MuhurtaRule.nishita:
-      // Nishita kaal = 3rd quarter of the night (night divided into 4 prahars)
+      // Nishita kaal = the 8th of the night's 15 muhurtas (the central muhurta).
       final nextSunrise =
           computeSunrise(date.add(const Duration(days: 1)), loc);
       final nightMinutes = nextSunrise.difference(sunset).inMinutes;
-      final prahar = nightMinutes ~/ 4;
+      final muhurta = nightMinutes ~/ 15;
       return (
-        sunset.add(Duration(minutes: prahar * 2)),
-        sunset.add(Duration(minutes: prahar * 3))
+        sunset.add(Duration(minutes: muhurta * 7)),
+        sunset.add(Duration(minutes: muhurta * 8))
       );
     case MuhurtaRule.madhyahna:
       // Madhyahna = 3rd of 5 parts of the day

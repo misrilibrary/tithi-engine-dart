@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.1.0
+
+Nishita Kaal muhurta window now uses the precise classical definition — the
+**8th of the night's 15 muhurtas** (the central muhurta) — instead of the coarse
+"third quarter of the night." Displayed Nishita windows now match Drik Panchang
+(e.g. Janmashtami Smarta for Seattle 2026: 12:47–01:30 AM). Festival **dates are
+unchanged** (the day-attribution moment is still the night midpoint, the centre
+of this muhurta). No API change.
+
 ## 3.0.0
 
 Time-aware API redesign: **UTC-instant + explicit offset** (breaking). The
