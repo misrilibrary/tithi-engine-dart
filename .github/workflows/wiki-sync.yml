@@ -26,7 +26,10 @@ jobs:
       - name: Publish README.md to wiki Home
         run: |
           set -euo pipefail
-          git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki
+          if ! git clone "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git" wiki 2>/dev/null; then
+            echo "Wiki not initialized yet — create any page once in the UI and this will auto-sync. Skipping."
+            exit 0
+          fi
           cp README.md wiki/Home.md
           cd wiki
           git config user.name "github-actions[bot]"
