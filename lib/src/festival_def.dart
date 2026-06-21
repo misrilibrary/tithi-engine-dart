@@ -154,6 +154,14 @@ const festivals = <FestivalDef>[
       muhurta: MuhurtaRule.sunrise,
       recurring: true),
   FestivalDef(
+      id: 'masik_shukla_ashtami',
+      name: 'Shukla Ashtami',
+      month: LunarMonth.chaitra,
+      paksha: Paksha.shukla,
+      tithiInPaksha: 8,
+      muhurta: MuhurtaRule.sunrise,
+      recurring: true),
+  FestivalDef(
       id: 'masik_krishna_ekadashi',
       name: 'Krishna Ekadashi',
       month: LunarMonth.chaitra,

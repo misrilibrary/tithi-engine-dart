@@ -2,6 +2,9 @@
 
 ## 3.1.0
 
+Added recurring festival **Shukla Ashtami** (`masik_shukla_ashtami`) — monthly
+bright-fortnight Ashtami.
+
 Nishita Kaal muhurta window now uses the precise classical definition — the
 **8th of the night's 15 muhurtas** (the central muhurta) — instead of the coarse
 "third quarter of the night." Displayed Nishita windows now match Drik Panchang
