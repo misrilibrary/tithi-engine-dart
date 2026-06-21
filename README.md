@@ -116,9 +116,13 @@ The two packages **version independently** — each version string is a semver c
 |---|---|---|
 | Astronomy engine rev `r2` (VSOP87/TT) | `2.1.0+` | `1.1.0+` |
 | 230 cities, Swiss-verified tables | `2.1.0+` | `1.1.0+` |
-| City display-name disambiguation (`region` / `qualifiedName` / `displayName`) | `2.2.0+` | _planned_ |
-| Time-aware API (`tithiOnDate` / `tithiAtInstant` / `tithiSegments`) | `3.0.0+` | _planned_ |
-| `recurringDates` / `findNext` / `TithiInfo.fromStored` | `2.0.0+` | _planned_ |
+| City display-name disambiguation (`region` / `qualifiedName` / `displayName`) | `2.2.0+` | `2.0.0+` |
+| Time-aware API (`tithiOnDate` / `tithiAtInstant` / `tithiSegments`) | `3.0.0+` | `2.0.0+` |
+| `recurringDates` / `findNext` / `TithiInfo.fromStored` | `2.0.0+` | `2.0.0+` |
+
+> **API generation:** Dart `3.x` and Java `2.x` are the same (UTC-instant)
+> API generation. The version numbers differ only because each follows its own
+> ecosystem's semver.
 
 ## License
 
