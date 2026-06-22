@@ -1,5 +1,17 @@
 # Changelog
 
+## 4.0.1
+
+Festival data corrections (curated against the Kashmiri jantri):
+- **Zang Trayi** corrected to Chaitra Shukla **3** (was Shukla 2).
+- Removed duplicate entries: **Holika Dahan** (use **Holi**, both Phalguna S.15)
+  and **Thal Buth Vuchun** (use **Navreh**, both Chaitra S.1).
+- Removed **Thal Barun (Navreh)** — it is a *relative* observance (the day before
+  Navreh, i.e. Chaitra K.15 normally but K.14 when Chaitra S.1 is kshaya), which a
+  fixed tithi cannot represent. Deferred pending relative-festival support.
+
+**36 built-in festivals.**
+
 ## 4.0.0
 
 Added recurring festival **Shukla Ashtami** (`masik_shukla_ashtami`) — monthly

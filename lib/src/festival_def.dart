@@ -65,13 +65,6 @@ const festivals = <FestivalDef>[
       tithiInPaksha: 14,
       muhurta: MuhurtaRule.nishita),
   FestivalDef(
-      id: 'holika_dahan',
-      name: 'Holika Dahan',
-      month: LunarMonth.phalguna,
-      paksha: Paksha.shukla,
-      tithiInPaksha: 15,
-      muhurta: MuhurtaRule.pradosh),
-  FestivalDef(
       id: 'ram_navami',
       name: 'Ram Navami',
       month: LunarMonth.chaitra,
@@ -154,19 +147,11 @@ const festivals = <FestivalDef>[
       muhurta: MuhurtaRule.sunrise,
       tradition: FestivalTradition.kashmiri),
   FestivalDef(
-      id: 'thal_buth_vuchun',
-      name: 'Thal Buth Vuchun',
-      month: LunarMonth.chaitra,
-      paksha: Paksha.shukla,
-      tithiInPaksha: 1,
-      muhurta: MuhurtaRule.sunrise,
-      tradition: FestivalTradition.kashmiri),
-  FestivalDef(
       id: 'zang_trayi',
       name: 'Zang Trayi',
       month: LunarMonth.chaitra,
       paksha: Paksha.shukla,
-      tithiInPaksha: 2,
+      tithiInPaksha: 3,
       muhurta: MuhurtaRule.sunrise,
       tradition: FestivalTradition.kashmiri),
   FestivalDef(
@@ -286,14 +271,6 @@ const festivals = <FestivalDef>[
       month: LunarMonth.chaitra,
       paksha: Paksha.krishna,
       tithiInPaksha: 10,
-      muhurta: MuhurtaRule.sunrise,
-      tradition: FestivalTradition.kashmiri),
-  FestivalDef(
-      id: 'thal_barun_navreh',
-      name: 'Thal Barun (Navreh)',
-      month: LunarMonth.chaitra,
-      paksha: Paksha.krishna,
-      tithiInPaksha: 14,
       muhurta: MuhurtaRule.sunrise,
       tradition: FestivalTradition.kashmiri),
   // Recurring monthly tithis
