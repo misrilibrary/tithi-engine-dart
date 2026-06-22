@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.1.0
+
+Added **sunrise/sunset** to the public API: `Panchang.sunrise(date, city)` and
+`Panchang.sunset(date, city)` (also on `Panchang.at(location)`), returning UTC
+instants. Meeus astronomy (~1-minute accuracy); no per-city correction (the
+correction tables adjust tithi, not sun times). Inherits strict city resolution
+(throws on unknown city).
+
 ## 4.0.1
 
 Festival data corrections (curated against the Kashmiri jantri):

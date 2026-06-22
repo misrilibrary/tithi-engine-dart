@@ -94,6 +94,7 @@ resolution — resolve the offset yourself, e.g. via `package:timezone`).
 | `panchang.recurringDates(festival, year, city)` | Recurring festival → all occurrences in the year |
 | `panchang.findNext(month, paksha, tithi, city)` | Next occurrence from today |
 | `panchang.at(location)` | Bind to a `Location` (city name or raw `lat/lng`) → `PanchangAt` (same methods, no `city` arg) |
+| `panchang.sunrise(date, city)` / `sunset(date, city)` | Sunrise/sunset UTC `DateTime` (Meeus, ~1 min; no per-city correction) |
 | `TithiInfo.fromStored(...)` | Render a saved tithi (with optional Purnimant↔Amant display conversion) |
 
 ### City names
@@ -179,12 +180,13 @@ The two packages **version independently** — each version string is a semver c
 | `recurringDates` / `findNext` / `TithiInfo.fromStored` | `2.0.0+` | `2.0.0+` |
 | Strict city resolution (`resolveCityName`, fail-fast on unknown, `"City, Region"` form) | `4.0.0+` | `3.0.0+` |
 | Coordinate input (`Location` / `Panchang.at`, 0.1° cell reuse) | `4.0.0+` | `3.0.0+` |
+| Sunrise / sunset (`sunrise` / `sunset`, Meeus) | `4.1.0+` | `3.1.0+` |
 
 > **API generation:** Dart `3.x` and Java `2.x` are the same (UTC-instant)
 > API generation. Dart `4.0.0` ⟷ Java `3.0.0` add strict city resolution
 > (unknown cities now throw — a behavior break) and coordinate input
-> (`Location` / `Panchang.at`). The version numbers differ only because each
-> follows its own ecosystem's semver.
+> (`Location` / `Panchang.at`); Dart `4.1.0` ⟷ Java `3.1.0` add sunrise/sunset.
+> The version numbers differ only because each follows its own ecosystem's semver.
 
 ## License
 

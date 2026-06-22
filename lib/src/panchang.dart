@@ -1,3 +1,4 @@
+import 'astronomy.dart' show computeSunrise, computeSunset, getLocationForCity;
 import 'festival_def.dart';
 import 'festival_finder.dart';
 import 'location.dart';
@@ -146,6 +147,20 @@ class Panchang {
     return _calc.findNext(info, from: from, celebrationCity: city);
   }
 
+  /// Sunrise as a UTC instant for [date] at [city].
+  ///
+  /// Meeus astronomy (~1-minute accuracy); there is **no** per-city correction
+  /// (the correction tables adjust tithi, not sun times). Convert to local time
+  /// using the city's offset (e.g. via a tz library). Throws [ArgumentError] if
+  /// [city] is not supported. At extreme latitudes on a no-sunrise day the value
+  /// is a clamped approximation.
+  DateTime sunrise(DateTime date, String city) =>
+      computeSunrise(date, getLocationForCity(city));
+
+  /// Sunset as a UTC instant for [date] at [city]. See [sunrise].
+  DateTime sunset(DateTime date, String city) =>
+      computeSunset(date, getLocationForCity(city));
+
   /// Bind this Panchang to a [Location] (a registered city or raw coordinates),
   /// returning a view whose methods drop the `city` argument.
   ///
@@ -206,4 +221,10 @@ class PanchangAt {
           LunarMonth month, tithi_core.Paksha paksha, int tithiInPaksha,
           {DateTime? from}) =>
       _p.findNext(month, paksha, tithiInPaksha, _loc.key, from: from);
+
+  /// See [Panchang.sunrise].
+  DateTime sunrise(DateTime date) => _p.sunrise(date, _loc.key);
+
+  /// See [Panchang.sunset].
+  DateTime sunset(DateTime date) => _p.sunset(date, _loc.key);
 }
