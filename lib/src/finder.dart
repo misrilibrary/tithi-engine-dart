@@ -67,9 +67,19 @@ List<TithiMatch> findTithiRaw({
         break;
       } else if (prevTithi != null &&
           _isKshaya(prevTithi, targetTithi, currentTithi)) {
-        // Kshaya: tithi was skipped, observe on previous day
-        lastSeen = dt.subtract(const Duration(days: 1));
-        break;
+        // Kshaya: target tithi was skipped, observe on the previous day.
+        final obs = dt.subtract(const Duration(days: 1));
+        // Guard: if the observance falls BEFORE this span, the skipped tithi
+        // belongs to the previous month (e.g. the prior Purnima/Amavasya going
+        // kshaya right at the boundary). Only a paksha-leading tithi (Pratipada,
+        // abs 1 or 16) legitimately starts a span via the previous day; anything
+        // else here is a boundary artifact and must not be attributed to this span.
+        if (!obs.isBefore(span.start) ||
+            targetTithi == 1 ||
+            targetTithi == 16) {
+          lastSeen = obs;
+          break;
+        }
       }
       prevTithi = currentTithi;
     }

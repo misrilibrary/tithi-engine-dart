@@ -9,6 +9,11 @@ Nirjala Ekadashi, Zyeth Ashtami, Haar Ashtami, Navratri (Sharad) Begins,
 Maha Navami, Karva Chauth, Bhai Dooj, Khichdi Amavasya, Gauri Tritiya, Kaav
 Punim (Magh Purnima), Huri Aukdoh, Huri Ashtami.
 
+Fixed: the festival/date finder no longer mis-attributes a previous month's
+kshaya Purnima/Amavasya to the next month's span (e.g. getDates(Pausha, Shukla,
+15) wrongly returning Margashirsha purnima dates); boundary-kshaya now applies
+only to paksha-leading tithis (Pratipada).
+
 Nishita Kaal muhurta window now uses the precise classical definition — the
 **8th of the night's 15 muhurtas** (the central muhurta) — instead of the coarse
 "third quarter of the night." Displayed Nishita windows now match Drik Panchang
