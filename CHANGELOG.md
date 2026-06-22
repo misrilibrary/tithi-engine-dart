@@ -3,7 +3,10 @@
 ## 3.1.0
 
 Added recurring festival **Shukla Ashtami** (`masik_shukla_ashtami`) — monthly
-bright-fortnight Ashtami.
+bright-fortnight Ashtami. Also added 11 curated festivals from the Kashmiri
+jantri (Samvat 2082): Navreh, Thal Buth Vuchun, Zang Trayi, Durga Ashtami,
+Nirjala Ekadashi, Zyeth Ashtami, Haar Ashtami, Navratri (Sharad) Begins,
+Maha Navami, Karva Chauth, Bhai Dooj.
 
 Nishita Kaal muhurta window now uses the precise classical definition — the
 **8th of the night's 15 muhurtas** (the central muhurta) — instead of the coarse
