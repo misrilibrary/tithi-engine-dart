@@ -452,3 +452,28 @@ abstract class City {
     return region == null ? city : '$city, $region';
   }
 }
+
+// ── City-name resolution ──────────────────────────────────────────────────
+// Normalized lookup so callers can pass any reasonable spelling — case/space
+// variants and the "City, Region" qualified form (what [City.qualifiedName]
+// emits) — without silently falling back to the default city. Both coordinate
+// and correction lookups route through this, so they can never disagree.
+String _canonCity(String s) => s.toLowerCase().replaceAll(RegExp(r'\s+'), '');
+
+final Map<String, String> _cityResolveMap = () {
+  final m = <String, String>{};
+  supportedCities.forEach((name, loc) {
+    m[_canonCity(name)] = name;
+    if (loc.region != null) m[_canonCity('$name, ${loc.region}')] = name;
+  });
+  return m;
+}();
+
+/// Resolve any reasonable city spelling to a registered city name, or `null` if
+/// it matches no supported city.
+///
+/// Matches (case/space-insensitive): the bare name (the *primary* city‑region
+/// for that name) and the `"City, Region"` qualified form (a specific
+/// city‑region). There is intentionally **no** region‑stripping fuzzy match, so
+/// `"Vancouver, WA"` never silently resolves to `"Vancouver, BC"`.
+String? resolveCityName(String city) => _cityResolveMap[_canonCity(city)];

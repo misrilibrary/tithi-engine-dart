@@ -95,6 +95,29 @@ resolution — resolve the offset yourself, e.g. via `package:timezone`).
 | `panchang.findNext(month, paksha, tithi, city)` | Next occurrence from today |
 | `TithiInfo.fromStored(...)` | Render a saved tithi (with optional Purnimant↔Amant display conversion) |
 
+### City names
+
+Every method takes a `city` name. Resolution is **case- and space-insensitive** and
+accepts the qualified `"City, Region"` form, so all of these resolve to the same city:
+
+```dart
+getLocationForCity('New York');      // canonical
+getLocationForCity('new york');      // case-insensitive
+getLocationForCity('New York, NY');  // qualified form (as City.qualifiedName emits)
+```
+
+The canonical identity is the **(city, region)** pair: the bare name maps to the
+*primary* city for that name, and the qualified `"City, Region"` form selects a
+specific one when several share a name (e.g. a future `'Vancouver, WA'` vs
+`'Vancouver, BC'`). There is **no fuzzy/region-stripping match** — a wrong region
+(`'Vancouver, WA'` when only BC exists) is treated as unknown.
+
+An **unsupported city throws `ArgumentError`** — the engine never silently substitutes
+another location, because a wrong location produces wrong sunrise-based tithis and
+festival dates. To check without throwing, use `resolveCityName(name)` (returns `null`
+if unsupported) or inspect `supportedCities`. Need a city added? Open an issue:
+<https://github.com/misrilibrary/tithi-engine-dart/issues>.
+
 ## Accuracy
 
 | Metric | Value |
@@ -119,10 +142,12 @@ The two packages **version independently** — each version string is a semver c
 | City display-name disambiguation (`region` / `qualifiedName` / `displayName`) | `2.2.0+` | `2.0.0+` |
 | Time-aware API (`tithiOnDate` / `tithiAtInstant` / `tithiSegments`) | `3.0.0+` | `2.0.0+` |
 | `recurringDates` / `findNext` / `TithiInfo.fromStored` | `2.0.0+` | `2.0.0+` |
+| Strict city resolution (`resolveCityName`, fail-fast on unknown, `"City, Region"` form) | `4.0.0+` | `3.0.0+` |
 
 > **API generation:** Dart `3.x` and Java `2.x` are the same (UTC-instant)
-> API generation. The version numbers differ only because each follows its own
-> ecosystem's semver.
+> API generation. Dart `4.0.0` ⟷ Java `3.0.0` add strict city resolution
+> (unknown cities now throw — a behavior break). The version numbers differ
+> only because each follows its own ecosystem's semver.
 
 ## License
 

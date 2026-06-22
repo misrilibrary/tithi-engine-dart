@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.1.0
+## 4.0.0
 
 Added recurring festival **Shukla Ashtami** (`masik_shukla_ashtami`) — monthly
 bright-fortnight Ashtami. Also added 11 curated festivals from the Kashmiri
@@ -20,6 +20,22 @@ Nishita Kaal muhurta window now uses the precise classical definition — the
 (e.g. Janmashtami Smarta for Seattle 2026: 12:47–01:30 AM). Festival **dates are
 unchanged** (the day-attribution moment is still the night midpoint, the centre
 of this muhurta). No API change.
+
+**City name resolution.** Lookup is now case- and space-insensitive and accepts the
+qualified `"City, Region"` form, so `getLocationForCity('new york')` and
+`'New York, NY'` resolve the same as `'New York'`. The canonical identity is the
+`(city, region)` pair — the bare name maps to the *primary* city, the qualified form
+selects a specific one when several share a name; there is **no fuzzy/region-stripping
+match**. New `resolveCityName(name)` returns the canonical name or `null` (non-throwing
+probe).
+
+**Behavior change — unsupported cities now fail fast.** `getLocationForCity(name)`
+(and therefore every `Panchang` call) throws `ArgumentError` for an unknown or
+wrong-region city instead of silently using the default reference city. A wrong
+location yields wrong sunrise-based tithis/festival dates, so the engine refuses to
+guess. Validate with `resolveCityName(name)` (returns `null`) or `supportedCities`.
+The correction-registry getters are unaffected (still return empty for an unregistered
+city). Request new cities at <https://github.com/misrilibrary/tithi-engine-dart/issues>.
 
 ## 3.0.0
 

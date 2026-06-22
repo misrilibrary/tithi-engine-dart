@@ -401,9 +401,23 @@ DateTime computeSunset(DateTime date, CityLocation loc) {
       .add(Duration(minutes: (sunsetUTC * 60).round()));
 }
 
-/// Get location for a city. Falls back to the default reference city if unknown.
+/// Get location for a [city] (case/space-insensitive, or `"City, Region"`).
+///
+/// Throws [ArgumentError] if the city is not supported — the engine never
+/// silently substitutes a different location, because a wrong location yields
+/// wrong sunrise-based tithis and festival dates. Use [resolveCityName] (returns
+/// `null`) or [supportedCities] to validate input first.
 CityLocation getLocationForCity(String city) {
-  return supportedCities[city] ?? supportedCities[defaultCity]!;
+  final name = resolveCityName(city);
+  if (name == null) {
+    throw ArgumentError.value(
+      city,
+      'city',
+      'Unsupported city. Pick the nearest city in `supportedCities` and use that, '
+          'or request it at https://github.com/misrilibrary/tithi-engine-dart/issues',
+    );
+  }
+  return supportedCities[name]!;
 }
 
 /// Sunrise at the default reference city (used when no city is specified).

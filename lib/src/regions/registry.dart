@@ -9,6 +9,8 @@
 // astronomical fallback (slightly less precise than the per-city Swiss-Ephemeris
 // tables). Register the cities you use at startup, before calling Panchang.
 
+import '../cities.dart' show resolveCityName;
+
 final Map<String, Map<int, int>> _tithi = {};
 final Map<String, Map<int, int>> _trans = {};
 final Map<String, Map<int, int>> _amav = {};
@@ -35,7 +37,11 @@ bool get hasRegisteredCities => _tithi.isNotEmpty;
 /// City names with registered tithi corrections.
 Iterable<String> get registeredCities => _tithi.keys;
 
-Map<int, int> getTithiCorrections(String city) => _tithi[city] ?? const {};
-Map<int, int> getTransitionMinutes(String city) => _trans[city] ?? const {};
-Map<int, int> getAmavasyaCorrections(String city) => _amav[city] ?? const {};
-Map<int, int> getPurnimaCorrections(String city) => _purn[city] ?? const {};
+Map<int, int> getTithiCorrections(String city) =>
+    _tithi[resolveCityName(city) ?? city] ?? const {};
+Map<int, int> getTransitionMinutes(String city) =>
+    _trans[resolveCityName(city) ?? city] ?? const {};
+Map<int, int> getAmavasyaCorrections(String city) =>
+    _amav[resolveCityName(city) ?? city] ?? const {};
+Map<int, int> getPurnimaCorrections(String city) =>
+    _purn[resolveCityName(city) ?? city] ?? const {};
