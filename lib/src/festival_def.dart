@@ -265,6 +265,37 @@ const festivals = <FestivalDef>[
       tithiInPaksha: 8,
       muhurta: MuhurtaRule.sunrise,
       tradition: FestivalTradition.kashmiri),
+  FestivalDef(
+      id: 'teil_ashtami',
+      name: 'Teil Ashtami',
+      month: LunarMonth.phalguna,
+      paksha: Paksha.shukla,
+      tithiInPaksha: 8,
+      muhurta: MuhurtaRule.sunrise,
+      tradition: FestivalTradition.kashmiri),
+  FestivalDef(
+      id: 'holi',
+      name: 'Holi',
+      month: LunarMonth.phalguna,
+      paksha: Paksha.shukla,
+      tithiInPaksha: 15,
+      muhurta: MuhurtaRule.sunrise),
+  FestivalDef(
+      id: 'sonth',
+      name: 'Sonth',
+      month: LunarMonth.chaitra,
+      paksha: Paksha.krishna,
+      tithiInPaksha: 10,
+      muhurta: MuhurtaRule.sunrise,
+      tradition: FestivalTradition.kashmiri),
+  FestivalDef(
+      id: 'thal_barun_navreh',
+      name: 'Thal Barun (Navreh)',
+      month: LunarMonth.chaitra,
+      paksha: Paksha.krishna,
+      tithiInPaksha: 14,
+      muhurta: MuhurtaRule.sunrise,
+      tradition: FestivalTradition.kashmiri),
   // Recurring monthly tithis
   FestivalDef(
       id: 'masik_krishna_ashtami',
