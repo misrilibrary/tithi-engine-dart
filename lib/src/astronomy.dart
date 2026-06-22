@@ -409,15 +409,15 @@ DateTime computeSunset(DateTime date, CityLocation loc) {
 /// `null`) or [supportedCities] to validate input first.
 CityLocation getLocationForCity(String city) {
   final name = resolveCityName(city);
-  if (name == null) {
-    throw ArgumentError.value(
-      city,
-      'city',
-      'Unsupported city. Pick the nearest city in `supportedCities` and use that, '
-          'or request it at https://github.com/misrilibrary/tithi-engine-dart/issues',
-    );
-  }
-  return supportedCities[name]!;
+  if (name != null) return supportedCities[name]!;
+  final adhoc = adHocLocation(city);
+  if (adhoc != null) return adhoc;
+  throw ArgumentError.value(
+    city,
+    'city',
+    'Unsupported city. Pick the nearest city in `supportedCities` and use that, '
+        'or request it at https://github.com/misrilibrary/tithi-engine-dart/issues',
+  );
 }
 
 /// Sunrise at the default reference city (used when no city is specified).

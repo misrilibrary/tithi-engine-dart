@@ -20,10 +20,11 @@
 library;
 
 // ── Single public entry point ────────────────────────────────────────────
-export 'src/panchang.dart' show Panchang;
+export 'src/panchang.dart' show Panchang, PanchangAt;
 
 // ── Value types (the "model") ────────────────────────────────────────────
 export 'src/tithi_calculator.dart' show TithiInfo, TithiSegment;
+export 'src/location.dart' show Location, LocationSource;
 export 'src/lunar_month.dart' show LunarMonth, MonthSystem;
 export 'src/tithi.dart' show Paksha, tithiNames;
 export 'src/festival_def.dart' show FestivalDef, MuhurtaRule, festivals;

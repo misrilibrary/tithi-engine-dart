@@ -477,3 +477,39 @@ final Map<String, String> _cityResolveMap = () {
 /// city‑region). There is intentionally **no** region‑stripping fuzzy match, so
 /// `"Vancouver, WA"` never silently resolves to `"Vancouver, BC"`.
 String? resolveCityName(String city) => _cityResolveMap[_canonCity(city)];
+
+// ── Coordinate (0.1°) cell index + ad-hoc locations ───────────────────────
+// The canonical spatial key is the 0.1° cell (cities are stored at 1 decimal,
+// ~11 km). A lat/long that rounds into a supported city's cell reuses that
+// city wholesale (coords + Swiss corrections); see design doc. Points outside
+// every city's cell are addressed as "ad-hoc" locations through the normal
+// name-keyed pipeline (Meeus-only — no correction table).
+String _cellKey(double lat, double lng) =>
+    '${(lat * 10).round()}|${(lng * 10).round()}';
+
+final Map<String, String> _cellToCity = () {
+  final m = <String, String>{};
+  supportedCities.forEach((name, loc) {
+    m.putIfAbsent(_cellKey(loc.latitude, loc.longitude), () => name);
+  });
+  return m;
+}();
+
+/// Registered city whose stored 0.1° cell contains ([lat],[lng]), or `null`.
+String? cityForCell(double lat, double lng) => _cellToCity[_cellKey(lat, lng)];
+
+final Map<String, CityLocation> _adHocLocations = {};
+
+/// Register raw coordinates so the engine can address them through its normal
+/// name-keyed pipeline, returning a stable opaque key. Used for points that
+/// don't fall in a supported city's cell (Meeus-only). Idempotent per point.
+String registerAdHocLocation(double lat, double lng, double utcOffsetHours) {
+  final key =
+      '@${lat.toStringAsFixed(4)},${lng.toStringAsFixed(4)}@$utcOffsetHours';
+  _adHocLocations.putIfAbsent(
+      key, () => CityLocation(lat, lng, utcOffsetHours));
+  return key;
+}
+
+/// Coordinates previously registered via [registerAdHocLocation], or `null`.
+CityLocation? adHocLocation(String key) => _adHocLocations[key];

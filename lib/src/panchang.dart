@@ -1,5 +1,6 @@
 import 'festival_def.dart';
 import 'festival_finder.dart';
+import 'location.dart';
 import 'tithi.dart' as tithi_core;
 import 'tithi_calculator.dart';
 
@@ -144,4 +145,65 @@ class Panchang {
     );
     return _calc.findNext(info, from: from, celebrationCity: city);
   }
+
+  /// Bind this Panchang to a [Location] (a registered city or raw coordinates),
+  /// returning a view whose methods drop the `city` argument.
+  ///
+  /// ```dart
+  /// panchang.at(Location.at(47.61, -122.33, offset: Duration(hours: -8)))
+  ///     .tithiOnDate(date);
+  /// ```
+  PanchangAt at(Location location) => PanchangAt(this, location);
+}
+
+/// A [Panchang] bound to a [Location]; forwards to the city-keyed API.
+///
+/// Obtain via `panchang.at(location)`. [source] reports whether the location is
+/// Swiss-corrected or Meeus-only (see [LocationSource]).
+class PanchangAt {
+  final Panchang _p;
+  final Location _loc;
+  PanchangAt(this._p, this._loc);
+
+  /// Accuracy tier of the bound location.
+  LocationSource get source => _loc.source;
+
+  /// See [Panchang.tithiOnDate].
+  TithiInfo tithiOnDate(DateTime date) => _p.tithiOnDate(date, _loc.key);
+
+  /// See [Panchang.tithiAtInstant].
+  TithiInfo tithiAtInstant(DateTime utcInstant, {required Duration offset}) =>
+      _p.tithiAtInstant(utcInstant, _loc.key, offset: offset);
+
+  /// See [Panchang.tithiSegments].
+  List<TithiSegment> tithiSegments(
+          DateTime windowStartUtc, DateTime windowEndUtc,
+          {required Duration offset}) =>
+      _p.tithiSegments(windowStartUtc, windowEndUtc, _loc.key, offset: offset);
+
+  /// See [Panchang.getDate].
+  DateTime? getDate(LunarMonth month, tithi_core.Paksha paksha,
+          int tithiInPaksha, int year, {bool isAdhika = false}) =>
+      _p.getDate(month, paksha, tithiInPaksha, year, _loc.key,
+          isAdhika: isAdhika);
+
+  /// See [Panchang.getDates].
+  List<DateTime> getDates(LunarMonth month, tithi_core.Paksha paksha,
+          int tithiInPaksha, int year, {bool isAdhika = false}) =>
+      _p.getDates(month, paksha, tithiInPaksha, year, _loc.key,
+          isAdhika: isAdhika);
+
+  /// See [Panchang.dateFor].
+  FestivalDate? dateFor(FestivalDef festival, int year) =>
+      _p.dateFor(festival, year, _loc.key);
+
+  /// See [Panchang.recurringDates].
+  List<FestivalDate> recurringDates(FestivalDef festival, int year) =>
+      _p.recurringDates(festival, year, _loc.key);
+
+  /// See [Panchang.findNext].
+  DateTime? findNext(
+          LunarMonth month, tithi_core.Paksha paksha, int tithiInPaksha,
+          {DateTime? from}) =>
+      _p.findNext(month, paksha, tithiInPaksha, _loc.key, from: from);
 }

@@ -37,6 +37,12 @@ guess. Validate with `resolveCityName(name)` (returns `null`) or `supportedCitie
 The correction-registry getters are unaffected (still return empty for an unregistered
 city). Request new cities at <https://github.com/misrilibrary/tithi-engine-dart/issues>.
 
+**Coordinate input.** New `Location` + `Panchang.at(Location)`: `Location.city(name)`
+or `Location.at(lat, lng, {offset})`. A point that rounds into a supported city's
+**0.1° cell** reuses that city wholesale (Swiss-corrected, `LocationSource.cityCorrected`);
+a point outside every cell is Meeus-only (`LocationSource.meeusRaw`) and requires an
+`offset`. Usage: `panchang.at(loc).tithiOnDate(date)` (and the other read methods).
+
 ## 3.0.0
 
 Time-aware API redesign: **UTC-instant + explicit offset** (breaking). The

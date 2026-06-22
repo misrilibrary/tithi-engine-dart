@@ -20,7 +20,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^3.0.0
+  tithi_engine: ^4.0.0
 ```
 
 ## Quick Start
@@ -93,6 +93,7 @@ resolution — resolve the offset yourself, e.g. via `package:timezone`).
 | `panchang.dateFor(festival, year, city)` | Festival → date with muhurta rules |
 | `panchang.recurringDates(festival, year, city)` | Recurring festival → all occurrences in the year |
 | `panchang.findNext(month, paksha, tithi, city)` | Next occurrence from today |
+| `panchang.at(location)` | Bind to a `Location` (city name or raw `lat/lng`) → `PanchangAt` (same methods, no `city` arg) |
 | `TithiInfo.fromStored(...)` | Render a saved tithi (with optional Purnimant↔Amant display conversion) |
 
 ### City names
@@ -117,6 +118,40 @@ another location, because a wrong location produces wrong sunrise-based tithis a
 festival dates. To check without throwing, use `resolveCityName(name)` (returns `null`
 if unsupported) or inspect `supportedCities`. Need a city added? Open an issue:
 <https://github.com/misrilibrary/tithi-engine-dart/issues>.
+
+### By coordinates
+
+Have raw `lat/lng` (a GPS fix, a map pin) instead of a name? Bind a `Location` with
+`Panchang.at(...)`:
+
+```dart
+final panchang = Panchang([registerAllCities]);
+
+// A point that rounds into a supported city's 0.1° cell reuses that city
+// wholesale (Swiss-corrected). offset is optional here.
+final here = panchang.at(Location.at(47.61, -122.33));
+final info = here.tithiOnDate(DateTime.utc(2026, 2, 15));
+here.source; // LocationSource.cityCorrected
+
+// A point outside every city's cell is Meeus-only (~99.97%) and REQUIRES the
+// DST-aware UTC offset (used to frame the civil day).
+final remote = panchang.at(Location.at(0.0, -140.0, offset: Duration(hours: -9)));
+remote.source; // LocationSource.meeusRaw
+
+// Location.city(name) is the named-city form of the same binding.
+panchang.at(Location.city('Seattle')).tithiOnDate(DateTime.utc(2026, 2, 15));
+```
+
+`PanchangAt` exposes the same read methods as `Panchang` minus the `city` argument
+(`tithiOnDate`, `tithiAtInstant`, `tithiSegments`, `getDate(s)`, `findNext`, `dateFor`,
+`recurringDates`). Cities are stored at ~0.1° (~11 km), so any point within a city's cell
+is treated as that city.
+
+> **Recommendation:** prefer `Location.city(name)` (or a coordinate that lands in a
+> supported city's cell) when you can. A named city carries Swiss‑Ephemeris correction
+> tables — guaranteed accuracy. Off‑grid coordinates are Meeus‑only (~99.97% on
+> day‑assignment): excellent, but the rare knife‑edge days a city's correction would fix
+> are not covered. Use raw coordinates only when no nearby supported city exists.
 
 ## Accuracy
 
@@ -143,11 +178,13 @@ The two packages **version independently** — each version string is a semver c
 | Time-aware API (`tithiOnDate` / `tithiAtInstant` / `tithiSegments`) | `3.0.0+` | `2.0.0+` |
 | `recurringDates` / `findNext` / `TithiInfo.fromStored` | `2.0.0+` | `2.0.0+` |
 | Strict city resolution (`resolveCityName`, fail-fast on unknown, `"City, Region"` form) | `4.0.0+` | `3.0.0+` |
+| Coordinate input (`Location` / `Panchang.at`, 0.1° cell reuse) | `4.0.0+` | `3.0.0+` |
 
 > **API generation:** Dart `3.x` and Java `2.x` are the same (UTC-instant)
 > API generation. Dart `4.0.0` ⟷ Java `3.0.0` add strict city resolution
-> (unknown cities now throw — a behavior break). The version numbers differ
-> only because each follows its own ecosystem's semver.
+> (unknown cities now throw — a behavior break) and coordinate input
+> (`Location` / `Panchang.at`). The version numbers differ only because each
+> follows its own ecosystem's semver.
 
 ## License
 
