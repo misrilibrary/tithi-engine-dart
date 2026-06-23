@@ -1,5 +1,3 @@
-const seattleAmavasyaCorrectionsCenter = <int, int>{
-  24598: 24599,
-};
+const seattleAmavasyaCorrectionsCenter = <int, int>{};
 
 const seattlePurnimaCorrectionsCenter = <int, int>{};
