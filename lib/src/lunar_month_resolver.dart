@@ -26,10 +26,17 @@ class MonthSpan {
 class LunarMonthResolver {
   final MonthSystem system;
   final String city;
+
+  /// Sunrise convention for the boundary scan and corrections. Defaults to
+  /// [SunriseConvention.upperLimb] (original behavior).
+  final SunriseConvention convention;
   final Map<int, List<MonthSpan>> _cache = {};
 
-  LunarMonthResolver(
-      {this.system = MonthSystem.purnimant, this.city = defaultCity});
+  LunarMonthResolver({
+    this.system = MonthSystem.purnimant,
+    this.city = defaultCity,
+    this.convention = SunriseConvention.upperLimb,
+  });
 
   /// Get the lunar month for a given date.
   LunarMonth getMonth(DateTime date) => getMonthInfo(date).month;
@@ -62,12 +69,13 @@ class LunarMonthResolver {
     final scanEnd = DateTime.utc(year + 1, 3, 1);
 
     // Meeus scan for boundaries, with corrections applied
-    final tithiCorr = getTithiCorrections(city);
+    final tithiCorr = getTithiCorrections(city, convention);
     int? prevTithi;
     for (var dt = scanStart;
         dt.isBefore(scanEnd);
         dt = dt.add(const Duration(days: 1))) {
-      final sunrise = computeSunrise(dt, getLocationForCity(city));
+      final sunrise =
+          computeSunrise(dt, getLocationForCity(city), convention: convention);
       final sunLong = toSidereal(sunLongitude(sunrise), sunrise);
       final moonLong = toSidereal(moonLongitude(sunrise), sunrise);
       final tithiNum = calculateTithi(moonLong, sunLong);
@@ -214,14 +222,14 @@ class LunarMonthResolver {
   /// Apply Amavasya correction if this date is a known Meeus error.
   DateTime _correctAmavasya(DateTime dt) {
     final dayIndex = dt.difference(_epoch).inDays;
-    final corrected = getAmavasyaCorrections(city)[dayIndex];
+    final corrected = getAmavasyaCorrections(city, convention)[dayIndex];
     return corrected != null ? _epoch.add(Duration(days: corrected)) : dt;
   }
 
   /// Apply Purnima correction if this date is a known Meeus error.
   DateTime _correctPurnima(DateTime dt) {
     final dayIndex = dt.difference(_epoch).inDays;
-    final corrected = getPurnimaCorrections(city)[dayIndex];
+    final corrected = getPurnimaCorrections(city, convention)[dayIndex];
     return corrected != null ? _epoch.add(Duration(days: corrected)) : dt;
   }
 }

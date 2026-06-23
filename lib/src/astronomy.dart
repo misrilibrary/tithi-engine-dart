@@ -10,6 +10,33 @@ export 'cities.dart'
 const _deg2rad = pi / 180;
 const _rad2deg = 180 / pi;
 
+/// Which point of the Sun's disk defines the sunrise/sunset instant.
+///
+/// The value is the geometric altitude of the Sun's **center** (in degrees) at
+/// the rise/set moment. Switching convention only shifts this one constant; the
+/// rest of the rise/set math (declination, equation of time, hour angle) is
+/// unchanged.
+enum SunriseConvention {
+  /// Upper limb of the disk tangent to the horizon — the classic "first ray"
+  /// definition (USNO/NOAA, and what Drik Panchang uses for Sūryodaya):
+  /// 34′ mean refraction + 16′ solar semidiameter = 50′ → −0.833°.
+  ///
+  /// This is the library **default**; omitting the convention reproduces the
+  /// engine's original behavior byte-for-byte.
+  upperLimb(-0.833),
+
+  /// Center of the disk on the horizon — "half the disk visible". Refraction
+  /// only, no semidiameter term: 34′ → −0.5667°. Sits ~16′ (one semidiameter)
+  /// higher than [upperLimb], so sunrise is ~1–4 min later and sunset ~1–4 min
+  /// earlier (the exact delta grows with latitude).
+  centerDisc(-0.5667);
+
+  /// Geometric altitude of the Sun's center (degrees) at the rise/set instant.
+  final double horizonAltitudeDeg;
+
+  const SunriseConvention(this.horizonAltitudeDeg);
+}
+
 /// Julian Day Number from DateTime (UTC).
 double julianDay(DateTime dt) {
   final utc = dt.toUtc();
@@ -331,7 +358,11 @@ class CityLocation {
 
 /// Compute exact sunrise as UTC DateTime for a given date and location.
 /// Uses solar declination from our Sun longitude + hour angle formula.
-DateTime computeSunrise(DateTime date, CityLocation loc) {
+///
+/// [convention] selects which point of the disk marks sunrise; it defaults to
+/// [SunriseConvention.upperLimb] so existing callers are unaffected.
+DateTime computeSunrise(DateTime date, CityLocation loc,
+    {SunriseConvention convention = SunriseConvention.upperLimb}) {
   // Sun's declination from its ecliptic longitude
   final jd = julianDay(DateTime.utc(date.year, date.month, date.day, 12));
   final t = (jd - 2451545.0) / 36525.0;
@@ -343,7 +374,8 @@ DateTime computeSunrise(DateTime date, CityLocation loc) {
 
   // Hour angle at sunrise (-0.833° for atmospheric refraction)
   final latRad = loc.latitude * _deg2rad;
-  final cosH = (sin(-0.833 * _deg2rad) - sin(latRad) * sin(declination)) /
+  final cosH = (sin(convention.horizonAltitudeDeg * _deg2rad) -
+          sin(latRad) * sin(declination)) /
       (cos(latRad) * cos(declination));
 
   // Clamp for polar regions (midnight sun / polar night)
@@ -373,7 +405,8 @@ DateTime computeSunrise(DateTime date, CityLocation loc) {
 
 /// Compute exact sunset as UTC DateTime for a given date and location.
 /// Mirror of computeSunrise: noon + hourAngle instead of noon - hourAngle.
-DateTime computeSunset(DateTime date, CityLocation loc) {
+DateTime computeSunset(DateTime date, CityLocation loc,
+    {SunriseConvention convention = SunriseConvention.upperLimb}) {
   final jd = julianDay(DateTime.utc(date.year, date.month, date.day, 12));
   final t = (jd - 2451545.0) / 36525.0;
   final sunLon =
@@ -383,7 +416,8 @@ DateTime computeSunset(DateTime date, CityLocation loc) {
   final declination = asin(sin(obliquity) * sin(sunLonRad));
 
   final latRad = loc.latitude * _deg2rad;
-  final cosH = (sin(-0.833 * _deg2rad) - sin(latRad) * sin(declination)) /
+  final cosH = (sin(convention.horizonAltitudeDeg * _deg2rad) -
+          sin(latRad) * sin(declination)) /
       (cos(latRad) * cos(declination));
   final hourAngle = cosH.abs() > 1.0 ? pi : acos(cosH.clamp(-1.0, 1.0));
 
@@ -421,13 +455,16 @@ CityLocation getLocationForCity(String city) {
 }
 
 /// Sunrise at the default reference city (used when no city is specified).
-DateTime defaultSunrise(DateTime date) =>
-    computeSunrise(date, getLocationForCity(defaultCity));
+DateTime defaultSunrise(DateTime date,
+        {SunriseConvention convention = SunriseConvention.upperLimb}) =>
+    computeSunrise(date, getLocationForCity(defaultCity),
+        convention: convention);
 
 /// Get sunrise function for a city.
-SunriseFn getSunriseFnForCity(String city) {
+SunriseFn getSunriseFnForCity(String city,
+    {SunriseConvention convention = SunriseConvention.upperLimb}) {
   final loc = getLocationForCity(city);
-  return (date) => computeSunrise(date, loc);
+  return (date) => computeSunrise(date, loc, convention: convention);
 }
 
 /// Legacy compatibility: get sunrise params-style offset for a city.

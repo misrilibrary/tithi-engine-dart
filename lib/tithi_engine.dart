@@ -33,7 +33,12 @@ export 'src/festival_finder.dart' show FestivalDate;
 // ── City registry / location data ────────────────────────────────────────
 export 'src/cities.dart' show City;
 export 'src/astronomy.dart'
-    show CityLocation, supportedCities, defaultCity, getLocationForCity;
+    show
+        CityLocation,
+        supportedCities,
+        defaultCity,
+        getLocationForCity,
+        SunriseConvention;
 
 // NOTE (3.0): the time-aware API is UTC-instant based. The caller resolves the
 // DST-correct offset and passes UTC instants; the library does no timezone work.

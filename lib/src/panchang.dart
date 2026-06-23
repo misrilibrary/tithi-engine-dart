@@ -1,4 +1,5 @@
-import 'astronomy.dart' show computeSunrise, computeSunset, getLocationForCity;
+import 'astronomy.dart'
+    show computeSunrise, computeSunset, getLocationForCity, SunriseConvention;
 import 'festival_def.dart';
 import 'festival_finder.dart';
 import 'location.dart';
@@ -16,6 +17,12 @@ import 'tithi_calculator.dart';
 /// ```
 class Panchang {
   final MonthSystem monthSystem;
+
+  /// The sunrise/sunset convention this Panchang uses for every sun-time-derived
+  /// calculation (tithi-at-sunrise, month boundaries, festival muhurtas,
+  /// [sunrise]/[sunset]). Defaults to [SunriseConvention.upperLimb] — omit it
+  /// and the engine behaves exactly as it always has.
+  final SunriseConvention convention;
   late final TithiCalculator _calc;
 
   /// Construct a Panchang, registering the city data it will use.
@@ -32,12 +39,14 @@ class Panchang {
   /// Registrars are idempotent, so constructing repeatedly is cheap. Choosing
   /// which packs to import is also what lets the tree-shaker drop unused cities.
   Panchang(List<void Function()> data,
-      {MonthSystem system = MonthSystem.purnimant})
-      : monthSystem = system {
+      {MonthSystem system = MonthSystem.purnimant,
+      SunriseConvention convention = SunriseConvention.upperLimb})
+      : monthSystem = system,
+        convention = convention {
     for (final register in data) {
       register();
     }
-    _calc = TithiCalculator(monthSystem: monthSystem);
+    _calc = TithiCalculator(monthSystem: monthSystem, convention: convention);
   }
 
   /// Sunrise tithi for the panchang day of [date] at [city] (observance/display).
@@ -155,11 +164,11 @@ class Panchang {
   /// [city] is not supported. At extreme latitudes on a no-sunrise day the value
   /// is a clamped approximation.
   DateTime sunrise(DateTime date, String city) =>
-      computeSunrise(date, getLocationForCity(city));
+      computeSunrise(date, getLocationForCity(city), convention: convention);
 
   /// Sunset as a UTC instant for [date] at [city]. See [sunrise].
   DateTime sunset(DateTime date, String city) =>
-      computeSunset(date, getLocationForCity(city));
+      computeSunset(date, getLocationForCity(city), convention: convention);
 
   /// Bind this Panchang to a [Location] (a registered city or raw coordinates),
   /// returning a view whose methods drop the `city` argument.

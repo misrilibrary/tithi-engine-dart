@@ -1,5 +1,34 @@
 # Changelog
 
+## 4.2.0
+
+Added a **sunrise convention** toggle: `SunriseConvention.upperLimb` (the classic
+"first ray" / upper-limb-at-horizon definition, −0.833°) and
+`SunriseConvention.centerDisc` ("half disk visible" / centre-of-disc, −0.5667°).
+Pass it to the constructor — `Panchang(data, {convention})` — defaulting to
+`upperLimb`, so omitting it leaves existing behavior **byte-for-byte unchanged**
+(verified across all 230 cities × 73,414 days × both month systems).
+
+The convention is threaded through every sun-time-derived calculation
+(`tithiOnDate`, `tithiAtInstant`, `tithiSegments`, month boundaries, festival
+muhurtas, `sunrise`/`sunset`).
+
+**centerDisc is Swiss-corrected, not Meeus-only.** New opt-in data pack
+`package:tithi_engine/data/all_center.dart` (`registerAllCitiesCenterDisc`) ships
+per-city centerDisc correction tables for all 230 cities; register it alongside
+`registerAllCities`:
+
+```dart
+final p = Panchang([registerAllCities, registerAllCitiesCenterDisc],
+    convention: SunriseConvention.centerDisc);
+```
+
+Verified: `tithiOnDate` + centerDisc tables == Swiss Ephemeris (disc-center) with
+**0 mismatches over 230 cities × 73,414 days** (16,885,220 city-days), matching the
+upper-limb guarantee. Transition minutes are convention-independent and reused
+from the upper-limb tables (not duplicated). Pure upper-limb consumers omit the
+new pack and pay **zero** added size.
+
 ## 4.1.0
 
 Added **sunrise/sunset** to the public API: `Panchang.sunrise(date, city)` and

@@ -105,6 +105,10 @@ class TithiSegment {
 /// DST-correct offset is the caller's responsibility.
 class TithiCalculator {
   final MonthSystem monthSystem;
+
+  /// Which sunrise/sunset convention all sun-time-derived calculations use.
+  /// Defaults to [SunriseConvention.upperLimb] (the original behavior).
+  final SunriseConvention convention;
   late final LunarMonthResolver _monthResolver;
 
   /// Per-city resolver cache. The default city uses [_monthResolver]; every
@@ -112,15 +116,19 @@ class TithiCalculator {
   /// cache survives across calls.
   final Map<String, LunarMonthResolver> _resolverCache = {};
 
-  TithiCalculator({this.monthSystem = MonthSystem.purnimant}) {
-    _monthResolver = LunarMonthResolver(system: monthSystem);
+  TithiCalculator({
+    this.monthSystem = MonthSystem.purnimant,
+    this.convention = SunriseConvention.upperLimb,
+  }) {
+    _monthResolver =
+        LunarMonthResolver(system: monthSystem, convention: convention);
   }
 
   /// Returns the (cached) resolver for [city].
   LunarMonthResolver _resolverFor(String city) {
     if (city == defaultCity) return _monthResolver;
-    return _resolverCache[city] ??=
-        LunarMonthResolver(system: monthSystem, city: city);
+    return _resolverCache[city] ??= LunarMonthResolver(
+        system: monthSystem, city: city, convention: convention);
   }
 
   // ── Public API ───────────────────────────────────────────────────────────
@@ -134,8 +142,8 @@ class TithiCalculator {
     final civilDate = DateTime.utc(date.year, date.month, date.day);
     final dayIndex = civilDate.difference(_epoch).inDays;
     final loc = getLocationForCity(city);
-    final tithiNum = getTithiCorrections(city)[dayIndex] ??
-        _meeusTithiAt(computeSunrise(date, loc));
+    final tithiNum = getTithiCorrections(city, convention)[dayIndex] ??
+        _meeusTithiAt(computeSunrise(date, loc, convention: convention));
     return _buildInfo(tithiNum, civilDate, city);
   }
 
@@ -149,10 +157,13 @@ class TithiCalculator {
     assert(utcInstant.isUtc, 'tithiAtInstant requires a UTC instant');
     final dayIndex = _civilDayIndex(utcInstant, offset);
     final transMinute = getTransitionMinutes(city)[dayIndex];
+    final sunriseTithi = getTithiCorrections(city, convention)[dayIndex];
     final int tithiNum;
-    if (transMinute != null) {
+    // Transition minutes are convention-independent (shared), so under a
+    // convention whose corrections aren't tabled the sunrise-tithi may be
+    // absent — fall back to Meeus rather than asserting it exists.
+    if (transMinute != null && sunriseTithi != null) {
       final mins = _standardLocalMinutes(utcInstant, city);
-      final sunriseTithi = getTithiCorrections(city)[dayIndex]!;
       tithiNum = mins >= transMinute
           ? sunriseTithi
           : (sunriseTithi - 1 == 0 ? 30 : sunriseTithi - 1);
@@ -210,9 +221,9 @@ class TithiCalculator {
     }
 
     // 3. Anchor labels to the corrected sunrise tithi, step ±1 across boundaries.
-    final anchorTithi = getTithiCorrections(city)[dayIndex] ??
-        _meeusTithiAt(computeSunrise(civilDate, loc));
-    final sunriseUtc = computeSunrise(civilDate, loc);
+    final anchorTithi = getTithiCorrections(city, convention)[dayIndex] ??
+        _meeusTithiAt(computeSunrise(civilDate, loc, convention: convention));
+    final sunriseUtc = computeSunrise(civilDate, loc, convention: convention);
     final bounds = <DateTime>[windowStartUtc, ...transitions, windowEndUtc];
 
     var sunriseSeg = 0;
@@ -256,7 +267,8 @@ class TithiCalculator {
       resolver: resolver,
       system: monthSystem,
       isAdhika: info.isAdhika,
-      sunriseFn: (dt) => computeSunrise(dt, getLocationForCity(city)),
+      sunriseFn: (dt) =>
+          computeSunrise(dt, getLocationForCity(city), convention: convention),
     );
   }
 
@@ -272,7 +284,8 @@ class TithiCalculator {
       resolver: resolver,
       from: from,
       system: monthSystem,
-      sunriseFn: (dt) => computeSunrise(dt, getLocationForCity(city)),
+      sunriseFn: (dt) =>
+          computeSunrise(dt, getLocationForCity(city), convention: convention),
     );
   }
 

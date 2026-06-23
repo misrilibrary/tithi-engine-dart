@@ -13,6 +13,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 - **Month resolution** — moment-based adhika/kshaya detection, Purnimant & Amant systems
 - **Date finding** — tithi → Gregorian date in any year
 - **230 cities** — per-city correction tables verified against Swiss Ephemeris
+- **Sunrise convention** — upper-limb "first ray" (default) or centre-of-disc "half disk visible", both Swiss-corrected
 - **Pure Dart** — no dependencies, works in Flutter, server, CLI, and web (WASM)
 - **200-year accuracy** — validated 1900–2100 against Drik Panchang
 
@@ -20,7 +21,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^4.0.0
+  tithi_engine: ^4.2.0
 ```
 
 ## Quick Start
@@ -69,14 +70,15 @@ print('Janmashtami 2026 Seattle: $date');
 |--------|---------------------|-------|
 | `package:tithi_engine/data/all.dart` | `Panchang([registerAllCities])` | all 230 cities |
 | `package:tithi_engine/data/india.dart` | `Panchang([registerIndia])` | India (30 cities) |
+| `package:tithi_engine/data/all_center.dart` | `Panchang([registerAllCities, registerAllCitiesCenterDisc], convention: SunriseConvention.centerDisc)` | centerDisc tables for all 230 cities (opt-in) |
 
 Combine packs: `Panchang([registerIndia, registerEurope])`.
 
 ## API
 
 `Panchang` is the single entry point. Value types (`TithiInfo`, `TithiSegment`,
-`LunarMonth`, `MonthSystem`, `Paksha`, `FestivalDef`, `MuhurtaRule`, `festivals`,
-`FestivalDate`, `City`, `CityLocation`) are exported; the engine internals are not.
+`LunarMonth`, `MonthSystem`, `Paksha`, `SunriseConvention`, `FestivalDef`, `MuhurtaRule`,
+`festivals`, `FestivalDate`, `City`, `CityLocation`) are exported; the engine internals are not.
 
 The time-aware API is **UTC-instant based**: you pass true UTC instants and, where
 a civil day matters, the DST-aware offset in effect (the engine does no timezone
@@ -84,7 +86,7 @@ resolution — resolve the offset yourself, e.g. via `package:timezone`).
 
 | Method | Description |
 |--------|-------------|
-| `Panchang(data, {system})` | Construct with city-data registrars (`data` required) |
+| `Panchang(data, {system, convention})` | Construct with city-data registrars (`data` required); `convention` selects the sunrise definition (default `upperLimb`) |
 | `panchang.tithiOnDate(date, city)` | Sunrise tithi of the panchang day (display/observance) |
 | `panchang.tithiAtInstant(utcInstant, city, {offset})` | Tithi at an exact UTC moment (birth-time) |
 | `panchang.tithiSegments(windowStartUtc, windowEndUtc, city, {offset})` | Every tithi segment in a UTC window (N transitions → N+1 segments) |
@@ -154,14 +156,42 @@ is treated as that city.
 > day‑assignment): excellent, but the rare knife‑edge days a city's correction would fix
 > are not covered. Use raw coordinates only when no nearby supported city exists.
 
+### Sunrise convention
+
+The instant of "sunrise" — which the whole sunrise-tithi/observance model hinges
+on — has two common definitions. Pick one at construction (default is unchanged):
+
+```dart
+import 'package:tithi_engine/data/all.dart';
+import 'package:tithi_engine/data/all_center.dart';
+
+// Default: upper limb at the horizon ("first ray"), −0.833° (34′ refraction +
+// 16′ semidiameter). Omitting `convention` reproduces the original behavior.
+final p = Panchang([registerAllCities]);
+
+// Centre of the disc on the horizon ("half disk visible"), −0.5667° (refraction
+// only). Sunrise lands ~1–4 min later (sunset earlier), latitude-dependent.
+// REQUIRES the centerDisc data pack for Swiss accuracy.
+final pc = Panchang([registerAllCities, registerAllCitiesCenterDisc],
+    convention: SunriseConvention.centerDisc);
+```
+
+Both conventions are **Swiss-corrected** when their data pack is registered
+(0 mismatches over 230 cities × 73,414 days). The convention threads through
+`tithiOnDate`, `tithiAtInstant`, `tithiSegments`, month boundaries, festival
+muhurtas, and `sunrise`/`sunset`. If you register `centerDisc` but want the
+default behavior, just construct without the `convention` argument — the two
+table sets are independent and the upper-limb path is untouched.
+
 ## Accuracy
 
 | Metric | Value |
 |--------|-------|
-| Tithi vs Swiss Ephemeris | 0 mismatches (230 cities × 73,049 days, 1900–2100) |
+| Tithi vs Swiss Ephemeris (upper limb) | 0 mismatches (230 cities × 73,049 days, 1900–2100) |
+| Tithi vs Swiss Ephemeris (centre of disc) | 0 mismatches (230 cities × 73,414 days = 16,885,220 city-days, 1900–2100) |
 | Month boundaries (Purnimant) | 100% (200 years, verified cities) |
 | Festival dates vs Drik Panchang | 22/22 (2025–2026) |
-| Test coverage | 536 tests, ~87% core line coverage |
+| Test coverage | 567 tests, ~87% core line coverage |
 
 ## Cross-Platform
 
@@ -181,11 +211,14 @@ The two packages **version independently** — each version string is a semver c
 | Strict city resolution (`resolveCityName`, fail-fast on unknown, `"City, Region"` form) | `4.0.0+` | `3.0.0+` |
 | Coordinate input (`Location` / `Panchang.at`, 0.1° cell reuse) | `4.0.0+` | `3.0.0+` |
 | Sunrise / sunset (`sunrise` / `sunset`, Meeus) | `4.1.0+` | `3.1.0+` |
+| Sunrise-convention toggle (`SunriseConvention`, centerDisc Swiss tables) | `4.2.0+` | _(pending)_ |
 
 > **API generation:** Dart `3.x` and Java `2.x` are the same (UTC-instant)
 > API generation. Dart `4.0.0` ⟷ Java `3.0.0` add strict city resolution
 > (unknown cities now throw — a behavior break) and coordinate input
 > (`Location` / `Panchang.at`); Dart `4.1.0` ⟷ Java `3.1.0` add sunrise/sunset.
+> Dart `4.2.0` adds the sunrise-convention toggle (upper-limb default / centerDisc
+> half-disk, Swiss-corrected); the Java counterpart is pending.
 > The version numbers differ only because each follows its own ecosystem's semver.
 
 ## License

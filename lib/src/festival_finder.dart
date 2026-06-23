@@ -28,10 +28,12 @@ class FestivalDate {
 /// Festival definitions use Purnimant month names, so finding always uses Purnimant internally.
 FestivalDate? findFestivalDate(
     FestivalDef fest, int year, String city, TithiCalculator calc) {
+  final convention = calc.convention;
   // Always use Purnimant for finding — festival defs are in Purnimant convention
   final findCalc = calc.monthSystem == MonthSystem.purnimant
       ? calc
-      : TithiCalculator(monthSystem: MonthSystem.purnimant);
+      : TithiCalculator(
+          monthSystem: MonthSystem.purnimant, convention: convention);
   final info = TithiInfo(
     tithiNumber: fest.tithiNumber,
     tithiName: '',
@@ -49,7 +51,7 @@ FestivalDate? findFestivalDate(
   // Apply muhurta rule: check if D-1 has the target tithi at muhurta time
   if (fest.muhurta != MuhurtaRule.sunrise) {
     final prev = d.subtract(const Duration(days: 1));
-    final muhurtaTime = _muhurtaUtc(prev, loc, fest.muhurta);
+    final muhurtaTime = _muhurtaUtc(prev, loc, fest.muhurta, convention);
     final tithiAtMuhurta = _tithiAt(muhurtaTime);
     if (tithiAtMuhurta == fest.tithiNumber) {
       d = prev;
@@ -57,13 +59,15 @@ FestivalDate? findFestivalDate(
   }
 
   // Compute tithi start/end times via binary search
-  final tithiStart = _findTithiTransition(d, loc, fest.tithiNumber, true);
-  final tithiEnd = _findTithiTransition(d, loc, fest.tithiNumber, false);
+  final tithiStart =
+      _findTithiTransition(d, loc, fest.tithiNumber, true, convention);
+  final tithiEnd =
+      _findTithiTransition(d, loc, fest.tithiNumber, false, convention);
 
   // Compute muhurta window
   DateTime? muhurtaStart, muhurtaEnd;
   if (fest.muhurta != MuhurtaRule.sunrise) {
-    final mw = _muhurtaWindow(d, loc, fest.muhurta);
+    final mw = _muhurtaWindow(d, loc, fest.muhurta, convention);
     muhurtaStart = mw.$1;
     muhurtaEnd = mw.$2;
   }
@@ -79,14 +83,15 @@ FestivalDate? findFestivalDate(
 }
 
 /// Compute the representative UTC moment for a muhurta rule on a given date.
-DateTime _muhurtaUtc(DateTime date, CityLocation loc, MuhurtaRule rule) {
-  final sunrise = computeSunrise(date, loc);
-  final sunset = computeSunset(date, loc);
+DateTime _muhurtaUtc(DateTime date, CityLocation loc, MuhurtaRule rule,
+    [SunriseConvention convention = SunriseConvention.upperLimb]) {
+  final sunrise = computeSunrise(date, loc, convention: convention);
+  final sunset = computeSunset(date, loc, convention: convention);
   switch (rule) {
     case MuhurtaRule.nishita:
       // Midnight ≈ midpoint between sunset and next sunrise
-      final nextSunrise =
-          computeSunrise(date.add(const Duration(days: 1)), loc);
+      final nextSunrise = computeSunrise(date.add(const Duration(days: 1)), loc,
+          convention: convention);
       return sunset.add(
           Duration(minutes: nextSunrise.difference(sunset).inMinutes ~/ 2));
     case MuhurtaRule.madhyahna:
@@ -103,14 +108,15 @@ DateTime _muhurtaUtc(DateTime date, CityLocation loc, MuhurtaRule rule) {
 
 /// Compute the muhurta window (start, end) as UTC DateTimes.
 (DateTime, DateTime) _muhurtaWindow(
-    DateTime date, CityLocation loc, MuhurtaRule rule) {
-  final sunrise = computeSunrise(date, loc);
-  final sunset = computeSunset(date, loc);
+    DateTime date, CityLocation loc, MuhurtaRule rule,
+    [SunriseConvention convention = SunriseConvention.upperLimb]) {
+  final sunrise = computeSunrise(date, loc, convention: convention);
+  final sunset = computeSunset(date, loc, convention: convention);
   switch (rule) {
     case MuhurtaRule.nishita:
       // Nishita kaal = the 8th of the night's 15 muhurtas (the central muhurta).
-      final nextSunrise =
-          computeSunrise(date.add(const Duration(days: 1)), loc);
+      final nextSunrise = computeSunrise(date.add(const Duration(days: 1)), loc,
+          convention: convention);
       final nightMinutes = nextSunrise.difference(sunset).inMinutes;
       final muhurta = nightMinutes ~/ 15;
       return (
@@ -136,9 +142,10 @@ DateTime _muhurtaUtc(DateTime date, CityLocation loc, MuhurtaRule rule) {
 /// Binary search for when the target tithi starts (searchStart=true) or ends (searchStart=false).
 /// Searches a 48-hour window around the festival date.
 DateTime _findTithiTransition(
-    DateTime date, CityLocation loc, int targetTithi, bool searchStart) {
+    DateTime date, CityLocation loc, int targetTithi, bool searchStart,
+    [SunriseConvention convention = SunriseConvention.upperLimb]) {
   // Search window: 24h before to 24h after the date's sunrise
-  final sunrise = computeSunrise(date, loc);
+  final sunrise = computeSunrise(date, loc, convention: convention);
   var lo = sunrise.subtract(const Duration(hours: 36));
   var hi = sunrise.add(const Duration(hours: 36));
 
@@ -200,12 +207,13 @@ int _tithiAt(DateTime utcTime) {
 /// Find all occurrences of a recurring tithi in a year.
 List<FestivalDate> findRecurringDates(
     FestivalDef fest, int year, String city, TithiCalculator calc) {
+  final convention = calc.convention;
   final loc = getLocationForCity(city);
   final results = <FestivalDate>[];
   final target = fest.tithiNumber;
 
   // Scan the year day by day, find each occurrence using "last day at sunrise" rule
-  final sunriseFn = getSunriseFnForCity(city);
+  final sunriseFn = getSunriseFnForCity(city, convention: convention);
   DateTime? lastSeen;
 
   for (var d = DateTime.utc(year, 1, 1);
@@ -217,8 +225,10 @@ List<FestivalDate> findRecurringDates(
       lastSeen = d;
     } else if (lastSeen != null) {
       // Tithi ended — lastSeen is the festival date
-      final tithiStart = _findTithiTransition(lastSeen, loc, target, true);
-      final tithiEnd = _findTithiTransition(lastSeen, loc, target, false);
+      final tithiStart =
+          _findTithiTransition(lastSeen, loc, target, true, convention);
+      final tithiEnd =
+          _findTithiTransition(lastSeen, loc, target, false, convention);
       results.add(FestivalDate(
           festival: fest,
           date: lastSeen,
@@ -229,8 +239,10 @@ List<FestivalDate> findRecurringDates(
   }
   // Handle if year ends with the tithi still active
   if (lastSeen != null) {
-    final tithiStart = _findTithiTransition(lastSeen, loc, target, true);
-    final tithiEnd = _findTithiTransition(lastSeen, loc, target, false);
+    final tithiStart =
+        _findTithiTransition(lastSeen, loc, target, true, convention);
+    final tithiEnd =
+        _findTithiTransition(lastSeen, loc, target, false, convention);
     results.add(FestivalDate(
         festival: fest,
         date: lastSeen,
