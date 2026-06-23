@@ -1,22 +1,23 @@
 # Changelog
 
-## 4.3.0 (UNRELEASED — WIP, do not publish)
+## 4.3.0
 
 **Iterative sunrise/sunset.** `computeSunrise`/`computeSunset` now refine the
 Sun's declination / equation-of-time **at the rise/set instant** (3 iterations)
-instead of at noon, and return full resolution (no minute rounding). This removes
-a systematic, latitude-growing sunrise error (engine-vs-Swiss 18–38s → 4–6s) and
-cuts correction-table entries ~40% (≥50% at high latitude) toward the
-tables-free-with-100%-accuracy goal.
+instead of at noon, at full resolution (no minute rounding). This removes a
+systematic, latitude-growing sunrise error (engine-vs-Swiss **18–38s → 4–6s**),
+most pronounced at high latitude.
 
-⚠️ **Correction tables MUST be regenerated before release.** The sunrise change is
-bi-directional (some entries removed, some added), so the shipped 4.2.0 tables are
-inconsistent on a few "added" days until regenerated (gen_city_corrections +
-gen_convention_corrections, all cities × both conventions) and re-verified
-(verify_convention → 0 mismatches). Validated so far: 586/586 engine tests pass;
-real-engine Swiss benchmark −40% (102→61 across Hyderabad/Ujjain/Seattle/Moscow).
-Phase 2 (higher-fidelity ELP elongation) is the remaining lever toward the ~1–6/
-city irreducible floor.
+**Correction tables regenerated for all 230 cities, both conventions**, against
+the iterative sunrise and **verified 0 mismatches vs Swiss Ephemeris**
+(1900–2100, every supported city):
+- upperLimb: 6215 → 3932 entries (**−37%**)
+- centerDisc: regenerated (3972 entries)
+
+586/586 engine tests pass. Generated via the unified engine-backed
+`gen_convention_corrections`; the drifted standalone `gen_city_corrections` was
+deprecated. (A higher-fidelity ELP elongation pass toward the ~1–6/city
+irreducible floor remains as future work.)
 
 ## 4.2.0
 
