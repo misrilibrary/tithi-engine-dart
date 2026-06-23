@@ -1,5 +1,23 @@
 # Changelog
 
+## 4.3.0 (UNRELEASED — WIP, do not publish)
+
+**Iterative sunrise/sunset.** `computeSunrise`/`computeSunset` now refine the
+Sun's declination / equation-of-time **at the rise/set instant** (3 iterations)
+instead of at noon, and return full resolution (no minute rounding). This removes
+a systematic, latitude-growing sunrise error (engine-vs-Swiss 18–38s → 4–6s) and
+cuts correction-table entries ~40% (≥50% at high latitude) toward the
+tables-free-with-100%-accuracy goal.
+
+⚠️ **Correction tables MUST be regenerated before release.** The sunrise change is
+bi-directional (some entries removed, some added), so the shipped 4.2.0 tables are
+inconsistent on a few "added" days until regenerated (gen_city_corrections +
+gen_convention_corrections, all cities × both conventions) and re-verified
+(verify_convention → 0 mismatches). Validated so far: 586/586 engine tests pass;
+real-engine Swiss benchmark −40% (102→61 across Hyderabad/Ujjain/Seattle/Moscow).
+Phase 2 (higher-fidelity ELP elongation) is the remaining lever toward the ~1–6/
+city irreducible floor.
+
 ## 4.2.0
 
 Added a **sunrise convention** toggle: `SunriseConvention.upperLimb` (the classic

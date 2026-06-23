@@ -361,78 +361,64 @@ class CityLocation {
 ///
 /// [convention] selects which point of the disk marks sunrise; it defaults to
 /// [SunriseConvention.upperLimb] so existing callers are unaffected.
-DateTime computeSunrise(DateTime date, CityLocation loc,
-    {SunriseConvention convention = SunriseConvention.upperLimb}) {
-  // Sun's declination from its ecliptic longitude
-  final jd = julianDay(DateTime.utc(date.year, date.month, date.day, 12));
-  final t = (jd - 2451545.0) / 36525.0;
-  final sunLon =
-      sunLongitude(DateTime.utc(date.year, date.month, date.day, 12));
+/// Sun rise/set UTC hours for [loc]/[convention], evaluating the Sun's position
+/// at [sunInstant]. [sign] = -1 for rise (noon − HA), +1 for set (noon + HA).
+double _riseSetUtcHours(CityLocation loc, SunriseConvention convention,
+    DateTime sunInstant, double sign) {
+  final t = (julianDay(sunInstant) - 2451545.0) / 36525.0;
+  final sunLon = sunLongitude(sunInstant);
   final obliquity = (23.4393 - 0.0130 * t) * _deg2rad;
   final sunLonRad = sunLon * _deg2rad;
   final declination = asin(sin(obliquity) * sin(sunLonRad));
-
-  // Hour angle at sunrise (-0.833° for atmospheric refraction)
   final latRad = loc.latitude * _deg2rad;
   final cosH = (sin(convention.horizonAltitudeDeg * _deg2rad) -
           sin(latRad) * sin(declination)) /
       (cos(latRad) * cos(declination));
-
-  // Clamp for polar regions (midnight sun / polar night)
+  // Clamp for polar regions (midnight sun / polar night).
   final hourAngle = cosH.abs() > 1.0 ? pi : acos(cosH.clamp(-1.0, 1.0));
-
-  // Equation of time: true solar noon differs from mean noon by E = L0 - RA.
-  // (Without this the sunrise is off by up to ~±16 min seasonally.)
   final rightAsc = atan2(cos(obliquity) * sin(sunLonRad), cos(sunLonRad));
   final meanLon =
       _norm360(280.46646 + 36000.76983 * t + 0.0003032 * t * t) * _deg2rad;
   var eot = meanLon - rightAsc;
   eot = atan2(sin(eot), cos(eot)); // wrap to (-pi, pi]
   final eotHours = eot * _rad2deg / 15.0;
-
-  // True solar noon in UTC (mean noon via longitude, corrected by equation of time)
   final solarNoonUTC = 12.0 - loc.longitude / 15.0 - eotHours;
+  return solarNoonUTC + sign * (hourAngle * _rad2deg / 15.0);
+}
 
-  // Sunrise in UTC hours
-  final sunriseUTC = solarNoonUTC - (hourAngle * _rad2deg / 15.0);
-
-  // Build the instant via Duration so a sunrise before/after the UTC day
-  // (sunriseUTC < 0 or >= 24, e.g. eastern cities in summer) carries to the
-  // correct calendar day instead of wrapping within the same day.
-  return DateTime.utc(date.year, date.month, date.day)
-      .add(Duration(minutes: (sunriseUTC * 60).round()));
+/// Compute exact sunrise as UTC DateTime for a given date and location.
+///
+/// The Sun's declination / equation-of-time are refined **iteratively at the
+/// rise instant** (not at noon), removing a systematic, latitude-growing error;
+/// the result is kept at full resolution (no minute rounding). [convention]
+/// selects which point of the disk marks sunrise (default upper limb).
+DateTime computeSunrise(DateTime date, CityLocation loc,
+    {SunriseConvention convention = SunriseConvention.upperLimb}) {
+  // Build via Duration so a sunrise before/after the UTC day (e.g. eastern
+  // cities in summer) carries to the correct calendar day.
+  final base = DateTime.utc(date.year, date.month, date.day);
+  var sunInstant = DateTime.utc(date.year, date.month, date.day, 12); // noon seed
+  var hours = 0.0;
+  for (var i = 0; i < 3; i++) {
+    hours = _riseSetUtcHours(loc, convention, sunInstant, -1.0);
+    sunInstant = base.add(Duration(milliseconds: (hours * 3600000).round()));
+  }
+  return base.add(Duration(milliseconds: (hours * 3600000).round()));
 }
 
 /// Compute exact sunset as UTC DateTime for a given date and location.
 /// Mirror of computeSunrise: noon + hourAngle instead of noon - hourAngle.
 DateTime computeSunset(DateTime date, CityLocation loc,
     {SunriseConvention convention = SunriseConvention.upperLimb}) {
-  final jd = julianDay(DateTime.utc(date.year, date.month, date.day, 12));
-  final t = (jd - 2451545.0) / 36525.0;
-  final sunLon =
-      sunLongitude(DateTime.utc(date.year, date.month, date.day, 12));
-  final obliquity = (23.4393 - 0.0130 * t) * _deg2rad;
-  final sunLonRad = sunLon * _deg2rad;
-  final declination = asin(sin(obliquity) * sin(sunLonRad));
-
-  final latRad = loc.latitude * _deg2rad;
-  final cosH = (sin(convention.horizonAltitudeDeg * _deg2rad) -
-          sin(latRad) * sin(declination)) /
-      (cos(latRad) * cos(declination));
-  final hourAngle = cosH.abs() > 1.0 ? pi : acos(cosH.clamp(-1.0, 1.0));
-
-  final rightAsc = atan2(cos(obliquity) * sin(sunLonRad), cos(sunLonRad));
-  final meanLon =
-      _norm360(280.46646 + 36000.76983 * t + 0.0003032 * t * t) * _deg2rad;
-  var eot = meanLon - rightAsc;
-  eot = atan2(sin(eot), cos(eot));
-  final eotHours = eot * _rad2deg / 15.0;
-
-  final solarNoonUTC = 12.0 - loc.longitude / 15.0 - eotHours;
-  final sunsetUTC = solarNoonUTC + (hourAngle * _rad2deg / 15.0);
-
-  return DateTime.utc(date.year, date.month, date.day)
-      .add(Duration(minutes: (sunsetUTC * 60).round()));
+  // Iterative (declination/EOT at the set instant), full resolution.
+  final base = DateTime.utc(date.year, date.month, date.day);
+  var sunInstant = DateTime.utc(date.year, date.month, date.day, 12); // noon seed
+  var hours = 0.0;
+  for (var i = 0; i < 3; i++) {
+    hours = _riseSetUtcHours(loc, convention, sunInstant, 1.0);
+    sunInstant = base.add(Duration(milliseconds: (hours * 3600000).round()));
+  }
+  return base.add(Duration(milliseconds: (hours * 3600000).round()));
 }
 
 /// Get location for a [city] (case/space-insensitive, or `"City, Region"`).
