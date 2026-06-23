@@ -4,5 +4,5 @@ const leicesterAmavasyaCorrectionsCenter = <int, int>{
 };
 
 const leicesterPurnimaCorrectionsCenter = <int, int>{
-  20184: 20183,
+  6895: 6894,
 };

@@ -1,6 +1,4 @@
-const udaipurAmavasyaCorrectionsCenter = <int, int>{
-  56107: 56108,
-};
+const udaipurAmavasyaCorrectionsCenter = <int, int>{};
 
 const udaipurPurnimaCorrectionsCenter = <int, int>{
   72689: 72690,

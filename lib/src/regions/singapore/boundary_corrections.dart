@@ -1,4 +1,5 @@
 const singaporeAmavasyaCorrections = <int, int>{
-  71552: 71553,
+  67831: 67832,
 };
+
 const singaporePurnimaCorrections = <int, int>{};

@@ -1,8 +1,3 @@
-const dubaiAmavasyaCorrectionsCenter = <int, int>{
-  12846: 12845,
-};
+const dubaiAmavasyaCorrectionsCenter = <int, int>{};
 
-const dubaiPurnimaCorrectionsCenter = <int, int>{
-  4355: 4356,
-  59400: 59401,
-};
+const dubaiPurnimaCorrectionsCenter = <int, int>{};

@@ -1,5 +1,7 @@
-const johannesburgAmavasyaCorrections = <int, int>{};
+const johannesburgAmavasyaCorrections = <int, int>{
+  61748: 61749,
+};
+
 const johannesburgPurnimaCorrections = <int, int>{
-  39821: 39822,
   59193: 59194,
 };

@@ -1,5 +1,3 @@
-const zurichAmavasyaCorrectionsCenter = <int, int>{
-  47809: 47810,
-};
+const zurichAmavasyaCorrectionsCenter = <int, int>{};
 
 const zurichPurnimaCorrectionsCenter = <int, int>{};

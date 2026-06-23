@@ -1,5 +1,7 @@
 const shanghaiAmavasyaCorrectionsCenter = <int, int>{
-  23507: 23506,
+  20997: 20996,
 };
 
-const shanghaiPurnimaCorrectionsCenter = <int, int>{};
+const shanghaiPurnimaCorrectionsCenter = <int, int>{
+  13688: 13687,
+};

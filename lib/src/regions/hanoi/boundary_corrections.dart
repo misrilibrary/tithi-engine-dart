@@ -1,4 +1,3 @@
-const hanoiAmavasyaCorrections = <int, int>{
-  49376: 49375,
-};
+const hanoiAmavasyaCorrections = <int, int>{};
+
 const hanoiPurnimaCorrections = <int, int>{};

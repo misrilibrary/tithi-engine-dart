@@ -2,6 +2,5 @@ const bostonAmavasyaCorrections = <int, int>{
   61983: 61984,
   71492: 71493,
 };
-const bostonPurnimaCorrections = <int, int>{
-  61585: 61586,
-};
+
+const bostonPurnimaCorrections = <int, int>{};

@@ -1,4 +1,3 @@
 const hongkongAmavasyaCorrections = <int, int>{};
-const hongkongPurnimaCorrections = <int, int>{
-  45404: 45403,
-};
+
+const hongkongPurnimaCorrections = <int, int>{};

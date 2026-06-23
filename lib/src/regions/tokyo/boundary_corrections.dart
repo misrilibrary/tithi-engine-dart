@@ -1,5 +1,3 @@
-const tokyoAmavasyaCorrections = <int, int>{
-  89: 88,
-  53008: 53007,
-};
+const tokyoAmavasyaCorrections = <int, int>{};
+
 const tokyoPurnimaCorrections = <int, int>{};

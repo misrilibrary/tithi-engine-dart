@@ -1,5 +1,3 @@
-const hubliAmavasyaCorrectionsCenter = <int, int>{
-  21734: 21735,
-};
+const hubliAmavasyaCorrectionsCenter = <int, int>{};
 
 const hubliPurnimaCorrectionsCenter = <int, int>{};

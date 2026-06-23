@@ -1,6 +1,4 @@
-const ammanAmavasyaCorrectionsCenter = <int, int>{
-  20434: 20435,
-};
+const ammanAmavasyaCorrectionsCenter = <int, int>{};
 
 const ammanPurnimaCorrectionsCenter = <int, int>{
   56949: 56950,

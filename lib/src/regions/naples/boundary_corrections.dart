@@ -1,6 +1,5 @@
-const naplesAmavasyaCorrections = <int, int>{
-  11045: 11044,
-};
+const naplesAmavasyaCorrections = <int, int>{};
+
 const naplesPurnimaCorrections = <int, int>{
   20007: 20006,
 };

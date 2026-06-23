@@ -1,5 +1,4 @@
 const nashikAmavasyaCorrectionsCenter = <int, int>{
-  44443: 44444,
   72733: 72734,
 };
 

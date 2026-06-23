@@ -4,6 +4,7 @@ const ankaraAmavasyaCorrectionsCenter = <int, int>{
 };
 
 const ankaraPurnimaCorrectionsCenter = <int, int>{
-  36987: 36986,
+  61762: 61763,
   62589: 62590,
+  62855: 62856,
 };

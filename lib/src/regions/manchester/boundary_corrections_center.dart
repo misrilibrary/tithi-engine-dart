@@ -1,6 +1,6 @@
 const manchesterAmavasyaCorrectionsCenter = <int, int>{
   23152: 23151,
-  45092: 45093,
+  60625: 60626,
 };
 
 const manchesterPurnimaCorrectionsCenter = <int, int>{};

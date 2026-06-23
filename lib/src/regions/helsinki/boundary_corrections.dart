@@ -1,7 +1,9 @@
 const helsinkiAmavasyaCorrections = <int, int>{
-  13230: 13229,
-  48075: 48076,
+  32100: 32099,
 };
+
 const helsinkiPurnimaCorrections = <int, int>{
-  41622: 41623,
+  26563: 26562,
+  68377: 68378,
+  70917: 70918,
 };

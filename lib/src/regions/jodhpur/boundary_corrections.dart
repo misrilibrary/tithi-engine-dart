@@ -1,6 +1,5 @@
-const jodhpurAmavasyaCorrections = <int, int>{
-  28261: 28260,
-};
+const jodhpurAmavasyaCorrections = <int, int>{};
+
 const jodhpurPurnimaCorrections = <int, int>{
   73132: 73133,
 };

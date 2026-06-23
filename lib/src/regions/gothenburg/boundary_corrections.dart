@@ -1,7 +1,8 @@
 const gothenburgAmavasyaCorrections = <int, int>{
-  3572: 3573,
+  34935: 34934,
+  37592: 37591,
 };
+
 const gothenburgPurnimaCorrections = <int, int>{
-  17999: 17998,
-  52431: 52432,
+  6511: 6510,
 };

@@ -1,6 +1,4 @@
-const dwarkaAmavasyaCorrectionsCenter = <int, int>{
-  52829: 52830,
-};
+const dwarkaAmavasyaCorrectionsCenter = <int, int>{};
 
 const dwarkaPurnimaCorrectionsCenter = <int, int>{
   53760: 53761,

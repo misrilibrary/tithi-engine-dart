@@ -1,8 +1,7 @@
-const puneAmavasyaCorrectionsCenter = <int, int>{
-  8800: 8799,
-};
+const puneAmavasyaCorrectionsCenter = <int, int>{};
 
 const punePurnimaCorrectionsCenter = <int, int>{
   61260: 61261,
   66842: 66843,
+  73132: 73133,
 };

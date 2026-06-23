@@ -1,6 +1,5 @@
-const kualalumpurAmavasyaCorrections = <int, int>{
-  73028: 73029,
-};
+const kualalumpurAmavasyaCorrections = <int, int>{};
+
 const kualalumpurPurnimaCorrections = <int, int>{
   46555: 46554,
 };

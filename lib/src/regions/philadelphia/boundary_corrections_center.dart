@@ -1,6 +1,6 @@
 const philadelphiaAmavasyaCorrectionsCenter = <int, int>{};
 
 const philadelphiaPurnimaCorrectionsCenter = <int, int>{
-  52845: 52844,
+  66605: 66606,
   69174: 69175,
 };

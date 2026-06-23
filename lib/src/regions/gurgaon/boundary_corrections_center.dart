@@ -4,5 +4,6 @@ const gurgaonAmavasyaCorrectionsCenter = <int, int>{
 };
 
 const gurgaonPurnimaCorrectionsCenter = <int, int>{
+  27006: 27005,
   70090: 70091,
 };

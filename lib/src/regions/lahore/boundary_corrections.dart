@@ -1,6 +1,8 @@
-const lahoreAmavasyaCorrections = <int, int>{};
+const lahoreAmavasyaCorrections = <int, int>{
+  35230: 35229,
+};
+
 const lahorePurnimaCorrections = <int, int>{
   67432: 67433,
-  67816: 67817,
   70710: 70711,
 };

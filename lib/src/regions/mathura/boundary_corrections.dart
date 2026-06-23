@@ -1,4 +1,3 @@
-const mathuraAmavasyaCorrections = <int, int>{
-  41992: 41993,
-};
+const mathuraAmavasyaCorrections = <int, int>{};
+
 const mathuraPurnimaCorrections = <int, int>{};

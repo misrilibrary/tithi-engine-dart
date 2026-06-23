@@ -1,4 +1,5 @@
 const portlouisAmavasyaCorrections = <int, int>{
-  32395: 32394,
+  56403: 56404,
 };
+
 const portlouisPurnimaCorrections = <int, int>{};

@@ -1,5 +1,3 @@
 const osakaAmavasyaCorrectionsCenter = <int, int>{};
 
-const osakaPurnimaCorrectionsCenter = <int, int>{
-  33355: 33354,
-};
+const osakaPurnimaCorrectionsCenter = <int, int>{};

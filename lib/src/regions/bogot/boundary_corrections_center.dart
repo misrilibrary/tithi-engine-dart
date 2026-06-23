@@ -1,8 +1,3 @@
-const bogotAmavasyaCorrectionsCenter = <int, int>{
-  45742: 45743,
-};
+const bogotAmavasyaCorrectionsCenter = <int, int>{};
 
-const bogotPurnimaCorrectionsCenter = <int, int>{
-  23373: 23372,
-  38936: 38935,
-};
+const bogotPurnimaCorrectionsCenter = <int, int>{};

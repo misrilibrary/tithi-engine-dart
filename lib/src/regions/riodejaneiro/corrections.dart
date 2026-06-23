@@ -1,17 +1,11 @@
 const riodejaneiroTithiCorrections = <int, int>{
-  10155: 28,
-  13554: 29,
-  21985: 14,
-  26695: 29,
-  36064: 8,
+  9282: 10,
   36319: 27,
-  39213: 26,
-  41606: 27,
-  43731: 27,
-  46840: 5,
-  55553: 6,
   57659: 16,
   57777: 15,
+  59303: 6,
+  61574: 3,
+  61812: 5,
   65703: 28,
   66915: 29,
   67822: 21,
@@ -23,6 +17,7 @@ const riodejaneiroTithiCorrections = <int, int>{
   72015: 20,
   72118: 5,
   72620: 5,
+  73305: 11,
 };
 
 const riodejaneiroTransitionMinutesMap = <int, int>{

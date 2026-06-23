@@ -6,5 +6,5 @@ const perthAmavasyaCorrectionsCenter = <int, int>{
 
 const perthPurnimaCorrectionsCenter = <int, int>{
   26238: 26237,
-  69086: 69087,
+  72187: 72188,
 };

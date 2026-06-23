@@ -1,8 +1,5 @@
-const glasgowAmavasyaCorrectionsCenter = <int, int>{
-  12284: 12285,
-};
+const glasgowAmavasyaCorrectionsCenter = <int, int>{};
 
 const glasgowPurnimaCorrectionsCenter = <int, int>{
-  5951: 5950,
-  18470: 18471,
+  63239: 63240,
 };

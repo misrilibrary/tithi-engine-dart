@@ -1,4 +1,7 @@
-const medellinAmavasyaCorrections = <int, int>{};
+const medellinAmavasyaCorrections = <int, int>{
+  49405: 49404,
+};
+
 const medellinPurnimaCorrections = <int, int>{
-  36426: 36425,
+  4001: 4000,
 };

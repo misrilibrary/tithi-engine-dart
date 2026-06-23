@@ -1,5 +1,4 @@
 const romeAmavasyaCorrectionsCenter = <int, int>{
-  36943: 36942,
   66088: 66089,
 };
 

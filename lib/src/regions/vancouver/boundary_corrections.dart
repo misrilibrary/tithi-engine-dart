@@ -1,6 +1,3 @@
-const vancouverAmavasyaCorrections = <int, int>{
-  33399: 33398,
-};
-const vancouverPurnimaCorrections = <int, int>{
-  53642: 53641,
-};
+const vancouverAmavasyaCorrections = <int, int>{};
+
+const vancouverPurnimaCorrections = <int, int>{};

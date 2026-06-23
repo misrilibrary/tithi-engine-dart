@@ -1,4 +1,3 @@
-const sandiegoAmavasyaCorrections = <int, int>{
-  42405: 42406,
-};
+const sandiegoAmavasyaCorrections = <int, int>{};
+
 const sandiegoPurnimaCorrections = <int, int>{};

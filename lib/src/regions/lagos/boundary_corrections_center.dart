@@ -1,5 +1,5 @@
-const lagosAmavasyaCorrectionsCenter = <int, int>{
-  5138: 5137,
-};
+const lagosAmavasyaCorrectionsCenter = <int, int>{};
 
-const lagosPurnimaCorrectionsCenter = <int, int>{};
+const lagosPurnimaCorrectionsCenter = <int, int>{
+  635: 634,
+};

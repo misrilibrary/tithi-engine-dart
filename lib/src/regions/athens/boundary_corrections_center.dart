@@ -1,5 +1,3 @@
-const athensAmavasyaCorrectionsCenter = <int, int>{
-  1417: 1416,
-};
+const athensAmavasyaCorrectionsCenter = <int, int>{};
 
 const athensPurnimaCorrectionsCenter = <int, int>{};

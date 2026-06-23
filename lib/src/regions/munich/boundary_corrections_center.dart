@@ -1,5 +1,5 @@
-const munichAmavasyaCorrectionsCenter = <int, int>{};
-
-const munichPurnimaCorrectionsCenter = <int, int>{
-  28601: 28600,
+const munichAmavasyaCorrectionsCenter = <int, int>{
+  30860: 30859,
 };
+
+const munichPurnimaCorrectionsCenter = <int, int>{};

@@ -1,5 +1,4 @@
 const halifaxAmavasyaCorrectionsCenter = <int, int>{
-  64612: 64613,
   66738: 66739,
 };
 

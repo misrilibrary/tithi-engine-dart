@@ -1,8 +1,3 @@
-const austinAmavasyaCorrectionsCenter = <int, int>{
-  26458: 26459,
-};
+const austinAmavasyaCorrectionsCenter = <int, int>{};
 
-const austinPurnimaCorrectionsCenter = <int, int>{
-  4385: 4384,
-  13717: 13716,
-};
+const austinPurnimaCorrectionsCenter = <int, int>{};

@@ -1,4 +1,3 @@
-const quitoAmavasyaCorrections = <int, int>{
-  52859: 52858,
-};
+const quitoAmavasyaCorrections = <int, int>{};
+
 const quitoPurnimaCorrections = <int, int>{};

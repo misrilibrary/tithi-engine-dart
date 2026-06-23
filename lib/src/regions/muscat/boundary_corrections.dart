@@ -1,6 +1,7 @@
 const muscatAmavasyaCorrections = <int, int>{};
+
 const muscatPurnimaCorrections = <int, int>{
-  63948: 63949,
+  62146: 62147,
   65572: 65573,
   72984: 72985,
 };

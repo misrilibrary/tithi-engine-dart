@@ -5,7 +5,6 @@ const delhiAmavasyaCorrectionsCenter = <int, int>{
 };
 
 const delhiPurnimaCorrectionsCenter = <int, int>{
-  2998: 2997,
   70090: 70091,
   70444: 70445,
 };

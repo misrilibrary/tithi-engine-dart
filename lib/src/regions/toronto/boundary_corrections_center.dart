@@ -1,5 +1,4 @@
 const torontoAmavasyaCorrectionsCenter = <int, int>{
-  50349: 50348,
   68776: 68777,
 };
 

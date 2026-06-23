@@ -1,5 +1,3 @@
-const tiruchirappalliAmavasyaCorrectionsCenter = <int, int>{
-  50762: 50763,
-};
+const tiruchirappalliAmavasyaCorrectionsCenter = <int, int>{};
 
 const tiruchirappalliPurnimaCorrectionsCenter = <int, int>{};

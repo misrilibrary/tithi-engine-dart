@@ -1,5 +1,3 @@
-const edinburghAmavasyaCorrectionsCenter = <int, int>{
-  25159: 25160,
-};
+const edinburghAmavasyaCorrectionsCenter = <int, int>{};
 
 const edinburghPurnimaCorrectionsCenter = <int, int>{};

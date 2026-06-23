@@ -1,5 +1,3 @@
-const amritsarAmavasyaCorrectionsCenter = <int, int>{
-  5078: 5079,
-};
+const amritsarAmavasyaCorrectionsCenter = <int, int>{};
 
 const amritsarPurnimaCorrectionsCenter = <int, int>{};

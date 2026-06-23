@@ -1,7 +1,3 @@
-const naplesAmavasyaCorrectionsCenter = <int, int>{
-  11399: 11398,
-};
+const naplesAmavasyaCorrectionsCenter = <int, int>{};
 
-const naplesPurnimaCorrectionsCenter = <int, int>{
-  13953: 13952,
-};
+const naplesPurnimaCorrectionsCenter = <int, int>{};

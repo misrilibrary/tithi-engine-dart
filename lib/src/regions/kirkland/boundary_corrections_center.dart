@@ -1,5 +1,5 @@
-const kirklandAmavasyaCorrectionsCenter = <int, int>{};
-
-const kirklandPurnimaCorrectionsCenter = <int, int>{
-  3470: 3469,
+const kirklandAmavasyaCorrectionsCenter = <int, int>{
+  57554: 57555,
 };
+
+const kirklandPurnimaCorrectionsCenter = <int, int>{};

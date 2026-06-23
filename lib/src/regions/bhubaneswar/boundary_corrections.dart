@@ -1,4 +1,5 @@
 const bhubaneswarAmavasyaCorrections = <int, int>{};
+
 const bhubaneswarPurnimaCorrections = <int, int>{
-  35157: 35156,
+  53317: 53318,
 };

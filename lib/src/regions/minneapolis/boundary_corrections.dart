@@ -1,6 +1,5 @@
-const minneapolisAmavasyaCorrections = <int, int>{
-  56432: 56433,
-};
+const minneapolisAmavasyaCorrections = <int, int>{};
+
 const minneapolisPurnimaCorrections = <int, int>{
   64242: 64243,
 };

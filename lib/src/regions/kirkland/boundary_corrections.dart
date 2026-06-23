@@ -1,5 +1,7 @@
 const kirklandAmavasyaCorrections = <int, int>{
-  1683: 1682,
   54837: 54838,
 };
-const kirklandPurnimaCorrections = <int, int>{};
+
+const kirklandPurnimaCorrections = <int, int>{
+  70030: 70031,
+};

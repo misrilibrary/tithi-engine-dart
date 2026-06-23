@@ -1,6 +1,5 @@
-const orlandoAmavasyaCorrections = <int, int>{
-  56432: 56433,
-};
+const orlandoAmavasyaCorrections = <int, int>{};
+
 const orlandoPurnimaCorrections = <int, int>{
-  41533: 41534,
+  723: 722,
 };

@@ -1,17 +1,13 @@
 const kualalumpurTithiCorrections = <int, int>{
-  1744: 3,
   1752: 11,
-  17083: 15,
+  14201: 27,
   26425: 25,
-  30744: 2,
-  36079: 23,
   43262: 30,
   46554: 15,
   52280: 11,
   60349: 18,
   61903: 7,
   63571: 21,
-  63740: 13,
   64991: 24,
   65412: 1,
   65981: 10,
@@ -20,9 +16,9 @@ const kualalumpurTithiCorrections = <int, int>{
   68442: 19,
   70315: 2,
   71335: 18,
+  71520: 27,
   71707: 7,
   72946: 6,
-  73029: 30,
 };
 
 const kualalumpurTransitionMinutesMap = <int, int>{

@@ -1,8 +1,5 @@
-const dohaAmavasyaCorrectionsCenter = <int, int>{
-  798: 797,
-  24186: 24185,
-};
+const dohaAmavasyaCorrectionsCenter = <int, int>{};
 
 const dohaPurnimaCorrectionsCenter = <int, int>{
-  63770: 63771,
+  64656: 64657,
 };

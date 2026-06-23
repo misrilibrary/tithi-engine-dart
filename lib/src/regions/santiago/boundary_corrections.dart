@@ -1,5 +1,5 @@
-const santiagoAmavasyaCorrections = <int, int>{
-  34313: 34314,
-  64996: 64997,
+const santiagoAmavasyaCorrections = <int, int>{};
+
+const santiagoPurnimaCorrections = <int, int>{
+  68731: 68732,
 };
-const santiagoPurnimaCorrections = <int, int>{};

@@ -1,6 +1,4 @@
-const melbourneAmavasyaCorrectionsCenter = <int, int>{
-  18249: 18250,
-};
+const melbourneAmavasyaCorrectionsCenter = <int, int>{};
 
 const melbournePurnimaCorrectionsCenter = <int, int>{
   68407: 68408,

@@ -1,4 +1,3 @@
-const dhakaAmavasyaCorrections = <int, int>{
-  36973: 36972,
-};
+const dhakaAmavasyaCorrections = <int, int>{};
+
 const dhakaPurnimaCorrections = <int, int>{};

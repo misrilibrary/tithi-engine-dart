@@ -1,4 +1,3 @@
-const rotterdamAmavasyaCorrections = <int, int>{
-  19253: 19254,
-};
+const rotterdamAmavasyaCorrections = <int, int>{};
+
 const rotterdamPurnimaCorrections = <int, int>{};

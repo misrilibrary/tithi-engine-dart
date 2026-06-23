@@ -1,5 +1,5 @@
-const almatyAmavasyaCorrections = <int, int>{};
-const almatyPurnimaCorrections = <int, int>{
-  43100: 43099,
-  55267: 55266,
+const almatyAmavasyaCorrections = <int, int>{
+  54424: 54425,
 };
+
+const almatyPurnimaCorrections = <int, int>{};

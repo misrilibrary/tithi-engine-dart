@@ -1,6 +1,3 @@
-const georgetownAmavasyaCorrectionsCenter = <int, int>{
-  32010: 32011,
-  42347: 42346,
-};
+const georgetownAmavasyaCorrectionsCenter = <int, int>{};
 
 const georgetownPurnimaCorrectionsCenter = <int, int>{};

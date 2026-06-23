@@ -1,8 +1,8 @@
 const osakaAmavasyaCorrections = <int, int>{
-  50114: 50113,
+  50467: 50468,
+  63608: 63609,
 };
+
 const osakaPurnimaCorrections = <int, int>{
-  16699: 16700,
-  26237: 26238,
   56979: 56980,
 };

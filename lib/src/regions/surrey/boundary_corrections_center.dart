@@ -1,5 +1,4 @@
 const surreyAmavasyaCorrectionsCenter = <int, int>{
-  1683: 1682,
   56638: 56639,
 };
 

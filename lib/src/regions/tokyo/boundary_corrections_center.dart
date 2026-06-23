@@ -1,7 +1,5 @@
-const tokyoAmavasyaCorrectionsCenter = <int, int>{};
-
-const tokyoPurnimaCorrectionsCenter = <int, int>{
-  2170: 2171,
-  54587: 54588,
-  71921: 71922,
+const tokyoAmavasyaCorrectionsCenter = <int, int>{
+  61157: 61158,
 };
+
+const tokyoPurnimaCorrectionsCenter = <int, int>{};

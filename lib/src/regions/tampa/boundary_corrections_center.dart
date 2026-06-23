@@ -1,7 +1,5 @@
 const tampaAmavasyaCorrectionsCenter = <int, int>{
-  52386: 52387,
+  55752: 55753,
 };
 
-const tampaPurnimaCorrectionsCenter = <int, int>{
-  60049: 60050,
-};
+const tampaPurnimaCorrectionsCenter = <int, int>{};

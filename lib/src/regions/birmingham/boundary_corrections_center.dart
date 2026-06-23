@@ -1,6 +1,5 @@
-const birminghamAmavasyaCorrectionsCenter = <int, int>{
-  12284: 12285,
-  13555: 13554,
-};
+const birminghamAmavasyaCorrectionsCenter = <int, int>{};
 
-const birminghamPurnimaCorrectionsCenter = <int, int>{};
+const birminghamPurnimaCorrectionsCenter = <int, int>{
+  6807: 6806,
+};

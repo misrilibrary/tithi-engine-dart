@@ -3,6 +3,5 @@ const gwaliorAmavasyaCorrectionsCenter = <int, int>{
 };
 
 const gwaliorPurnimaCorrectionsCenter = <int, int>{
-  34389: 34388,
   65040: 65041,
 };

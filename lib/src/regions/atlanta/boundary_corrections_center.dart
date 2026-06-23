@@ -1,5 +1,4 @@
 const atlantaAmavasyaCorrectionsCenter = <int, int>{
-  3483: 3484,
   51677: 51678,
 };
 

@@ -1,5 +1,3 @@
-const vrindavanAmavasyaCorrections = <int, int>{
-  41992: 41993,
-  54543: 54542,
-};
+const vrindavanAmavasyaCorrections = <int, int>{};
+
 const vrindavanPurnimaCorrections = <int, int>{};
