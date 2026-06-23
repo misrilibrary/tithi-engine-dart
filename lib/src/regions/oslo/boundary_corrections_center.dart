@@ -1,7 +1,3 @@
-const osloAmavasyaCorrectionsCenter = <int, int>{
-  34934: 34935,
-};
+const osloAmavasyaCorrectionsCenter = <int, int>{};
 
-const osloPurnimaCorrectionsCenter = <int, int>{
-  1018: 1019,
-};
+const osloPurnimaCorrectionsCenter = <int, int>{};

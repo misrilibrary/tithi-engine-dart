@@ -1,5 +1,3 @@
-const kampalaAmavasyaCorrectionsCenter = <int, int>{
-  58086: 58087,
-};
+const kampalaAmavasyaCorrectionsCenter = <int, int>{};
 
 const kampalaPurnimaCorrectionsCenter = <int, int>{};

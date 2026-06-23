@@ -1,5 +1,5 @@
-const jabalpurAmavasyaCorrectionsCenter = <int, int>{};
-
-const jabalpurPurnimaCorrectionsCenter = <int, int>{
-  49891: 49892,
+const jabalpurAmavasyaCorrectionsCenter = <int, int>{
+  29: 30,
 };
+
+const jabalpurPurnimaCorrectionsCenter = <int, int>{};

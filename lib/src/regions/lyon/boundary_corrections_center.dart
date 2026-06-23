@@ -1,6 +1,6 @@
 const lyonAmavasyaCorrectionsCenter = <int, int>{};
 
 const lyonPurnimaCorrectionsCenter = <int, int>{
-  1018: 1019,
+  635: 634,
   6511: 6510,
 };

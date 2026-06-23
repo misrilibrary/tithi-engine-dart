@@ -3,6 +3,4 @@ const aurangabadAmavasyaCorrectionsCenter = <int, int>{
   70134: 70135,
 };
 
-const aurangabadPurnimaCorrectionsCenter = <int, int>{
-  19919: 19918,
-};
+const aurangabadPurnimaCorrectionsCenter = <int, int>{};
