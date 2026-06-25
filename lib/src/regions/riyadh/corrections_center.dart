@@ -4,6 +4,7 @@ const riyadhTithiCorrectionsCenter = <int, int>{
   53849: 15,
   56269: 13,
   57636: 22,
+  58392: 10,
   59637: 15,
   59660: 8,
   60814: 10,

@@ -1,5 +1,4 @@
 const gurgaonTithiCorrectionsCenter = <int, int>{
-  23163: 11,
   27006: 16,
   35320: 2,
   59827: 28,

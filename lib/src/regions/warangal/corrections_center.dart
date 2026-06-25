@@ -2,7 +2,6 @@ const warangalTithiCorrectionsCenter = <int, int>{
   4868: 26,
   21058: 4,
   35563: 9,
-  48774: 19,
   58848: 23,
   60439: 20,
   62645: 11,

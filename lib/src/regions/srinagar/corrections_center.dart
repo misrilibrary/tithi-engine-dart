@@ -2,7 +2,6 @@ const srinagarTithiCorrectionsCenter = <int, int>{
   11822: 10,
   23262: 23,
   37314: 18,
-  43237: 5,
   62839: 28,
   63128: 21,
   63456: 24,

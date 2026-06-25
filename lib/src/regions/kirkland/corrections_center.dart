@@ -1,5 +1,4 @@
 const kirklandTithiCorrectionsCenter = <int, int>{
-  2077: 12,
   9506: 28,
   13400: 25,
   17700: 13,

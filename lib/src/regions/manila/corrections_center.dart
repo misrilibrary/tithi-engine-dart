@@ -2,7 +2,6 @@ const manilaTithiCorrectionsCenter = <int, int>{
   2763: 18,
   13829: 9,
   22816: 19,
-  32512: 29,
   54020: 9,
   55172: 9,
   64477: 11,

@@ -2,6 +2,7 @@ const dhakaTithiCorrectionsCenter = <int, int>{
   24441: 20,
   40961: 3,
   47664: 1,
+  48232: 9,
   48617: 10,
   54225: 6,
   57121: 8,

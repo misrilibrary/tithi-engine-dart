@@ -11,6 +11,7 @@ const salemTithiCorrectionsCenter = <int, int>{
   61958: 3,
   65502: 3,
   66292: 25,
+  66495: 22,
   67072: 8,
   68176: 20,
   69387: 20,

@@ -16,7 +16,6 @@ const gwaliorTithiCorrectionsCenter = <int, int>{
   69755: 4,
   70135: 30,
   70265: 11,
-  70600: 22,
   71064: 13,
   72036: 11,
   72421: 12,

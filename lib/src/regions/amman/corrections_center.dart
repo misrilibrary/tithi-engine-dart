@@ -1,6 +1,6 @@
 const ammanTithiCorrectionsCenter = <int, int>{
-  5333: 19,
   15215: 8,
+  20434: 30,
   30643: 21,
   52709: 26,
   56949: 14,
@@ -10,6 +10,7 @@ const ammanTithiCorrectionsCenter = <int, int>{
   63917: 13,
   64650: 8,
   66459: 15,
+  66633: 12,
   67345: 15,
   67738: 25,
   69886: 17,

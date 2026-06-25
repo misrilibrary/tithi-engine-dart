@@ -1,8 +1,8 @@
 const redmondTithiCorrectionsCenter = <int, int>{
   32573: 2,
-  46337: 4,
   53371: 9,
   56866: 20,
+  57443: 6,
   63686: 19,
   66009: 9,
   68028: 19,

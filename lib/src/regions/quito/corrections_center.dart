@@ -4,6 +4,7 @@ const quitoTithiCorrectionsCenter = <int, int>{
   31445: 26,
   36458: 19,
   49416: 12,
+  55435: 6,
   56194: 28,
   56196: 30,
   58388: 6,

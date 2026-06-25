@@ -6,6 +6,7 @@ import 'lunar_month_resolver.dart';
 import 'month_converter.dart';
 import 'regions/registry.dart';
 import 'tithi.dart' as tithi_core;
+import 'transitions/global_transition_corrections.g.dart';
 
 export 'lunar_month.dart' show LunarMonth, MonthSystem;
 export 'tithi.dart' show Paksha;
@@ -101,7 +102,7 @@ class TithiSegment {
 /// Time inputs are **UTC instants**; the calculator performs no wall-clock or
 /// DST conversion. Where a civil-day mapping is needed (correction-table row
 /// selection), the caller supplies the `offset` in effect at that instant and
-/// the calculator derives the civil date via [_civilDayIndex]. Resolving the
+/// the calculator derives the civil date from the instant + offset. Resolving the
 /// DST-correct offset is the caller's responsibility.
 class TithiCalculator {
   final MonthSystem monthSystem;
@@ -151,28 +152,31 @@ class TithiCalculator {
   ///
   /// [offset] is the actual (DST-aware) UTC offset in effect at that instant in
   /// [city]; its only job is to derive the civil date for correction-table row
-  /// selection (see [_civilDayIndex]). The astronomy uses [utcInstant] directly.
+  /// selection (instant + offset). The astronomy uses [utcInstant] directly.
   TithiInfo tithiAtInstant(DateTime utcInstant, String city,
       {required Duration offset}) {
     assert(utcInstant.isUtc, 'tithiAtInstant requires a UTC instant');
-    final dayIndex = _civilDayIndex(utcInstant, offset);
-    final transMinute = getTransitionMinutes(city)[dayIndex];
-    final sunriseTithi = getTithiCorrections(city, convention)[dayIndex];
-    final int tithiNum;
-    // Transition minutes are convention-independent (shared), so under a
-    // convention whose corrections aren't tabled the sunrise-tithi may be
-    // absent — fall back to Meeus rather than asserting it exists.
-    if (transMinute != null && sunriseTithi != null) {
-      final mins = _standardLocalMinutes(utcInstant, city);
-      tithiNum = mins >= transMinute
-          ? sunriseTithi
-          : (sunriseTithi - 1 == 0 ? 30 : sunriseTithi - 1);
-    } else {
-      tithiNum = _meeusTithiAt(utcInstant);
-    }
     final civil = utcInstant.add(offset);
-    return _buildInfo(
-        tithiNum, DateTime.utc(civil.year, civil.month, civil.day), city);
+    final civilDate = DateTime.utc(civil.year, civil.month, civil.day);
+    // The tithi at an instant is the Swiss-corrected elongation tithi of the
+    // segment (bounded by corrected transitions) that contains it. Labeling by
+    // the segment's own elongation — not a sunrise anchor — keeps it correct even
+    // when the engine's Meeus sunrise lands on the opposite side of a
+    // near-sunrise transition from the true sunrise (the straddle case).
+    final lo = utcInstant.subtract(const Duration(hours: 30));
+    final hi = utcInstant.add(const Duration(hours: 30));
+    var a = lo, b = hi;
+    for (final tr in _findAllTransitions(lo, hi)) {
+      if (!tr.isAfter(utcInstant)) {
+        a = tr;
+      } else {
+        b = tr;
+        break;
+      }
+    }
+    final mid =
+        a.add(Duration(milliseconds: b.difference(a).inMilliseconds ~/ 2));
+    return _buildInfo(_meeusTithiAt(mid), civilDate, city);
   }
 
   /// Enumerate every tithi segment within `[windowStartUtc, windowEndUtc)` at
@@ -182,70 +186,36 @@ class TithiCalculator {
   /// converted to UTC (DST-aware) — and supplies [offset] (the offset in effect
   /// during the window) used only for correction-table row selection.
   ///
-  /// Hybrid accuracy (Phase 1): transition *instants* are found by astronomy and
-  /// the table-known boundary is snapped to its corrected instant; segment tithi
-  /// *labels* are anchored to the corrected sunrise tithi and stepped ±1 across
-  /// each boundary, so labels stay Swiss-accurate even where Meeus alone is off.
+  /// Accuracy: transition *instants* are Swiss-corrected at the source by the
+  /// global (city-independent) transition correction; each segment's *label* is
+  /// its own corrected-elongation tithi (at the segment midpoint), so labels are
+  /// Swiss-exact and independent of any sunrise anchor.
   List<TithiSegment> tithiSegments(
       DateTime windowStartUtc, DateTime windowEndUtc, String city,
       {required Duration offset}) {
     assert(windowStartUtc.isUtc && windowEndUtc.isUtc,
         'tithiSegments requires UTC window bounds');
-    final loc = getLocationForCity(city);
-    final dayIndex = _civilDayIndex(windowStartUtc, offset);
-    final civil = windowStartUtc.add(offset);
-    final civilDate = DateTime.utc(civil.year, civil.month, civil.day);
 
-    // 1. All transition instants inside the window (astronomy).
+    // 1. All transition instants inside the window — already Swiss-corrected at
+    //    the source via the global transition correction (_findAllTransitions).
     final transitions = _findAllTransitions(windowStartUtc, windowEndUtc);
 
-    // 2. Snap the table-known boundary to its corrected instant (Swiss-exact).
-    final transMinute = getTransitionMinutes(city)[dayIndex];
-    if (transMinute != null && transitions.isNotEmpty) {
-      final correctedUtc = _stdLocalMinutesToUtc(civilDate, transMinute, city);
-      if (correctedUtc.isAfter(windowStartUtc) &&
-          correctedUtc.isBefore(windowEndUtc)) {
-        var bestI = 0;
-        var bestDelta = transitions[0].difference(correctedUtc).abs();
-        for (var i = 1; i < transitions.length; i++) {
-          final d = transitions[i].difference(correctedUtc).abs();
-          if (d < bestDelta) {
-            bestDelta = d;
-            bestI = i;
-          }
-        }
-        if (bestDelta <= const Duration(minutes: 45)) {
-          transitions[bestI] = correctedUtc;
-        }
-      }
-    }
-
-    // 3. Anchor labels to the corrected sunrise tithi, step ±1 across boundaries.
-    final anchorTithi = getTithiCorrections(city, convention)[dayIndex] ??
-        _meeusTithiAt(computeSunrise(civilDate, loc, convention: convention));
-    final sunriseUtc = computeSunrise(civilDate, loc, convention: convention);
+    // 2. Label each segment by its OWN Swiss-corrected elongation tithi (the
+    //    tithi at the segment midpoint), independent of any sunrise anchor — so
+    //    labels stay .se1-correct even on sunrise-straddle days (where the
+    //    engine's Meeus sunrise and the true sunrise fall on opposite sides of a
+    //    near-sunrise transition).
     final bounds = <DateTime>[windowStartUtc, ...transitions, windowEndUtc];
-
-    var sunriseSeg = 0;
-    for (var i = 0; i < bounds.length - 1; i++) {
-      if (!sunriseUtc.isBefore(bounds[i]) &&
-          sunriseUtc.isBefore(bounds[i + 1])) {
-        sunriseSeg = i;
-        break;
-      }
-    }
-
     final segments = <TithiSegment>[];
     final last = bounds.length - 2;
     for (var i = 0; i <= last; i++) {
-      final tnum = _wrap30(anchorTithi + (i - sunriseSeg));
       final mid = bounds[i].add(Duration(
           milliseconds:
               bounds[i + 1].difference(bounds[i]).inMilliseconds ~/ 2));
       segments.add(TithiSegment(
         startUtc: bounds[i],
         endUtc: bounds[i + 1],
-        tithi: _buildInfo(tnum, mid, city),
+        tithi: _buildInfo(_meeusTithiAt(mid), mid, city),
         startIsTransition: i > 0,
         endIsTransition: i < last,
       ));
@@ -293,36 +263,6 @@ class TithiCalculator {
 
   static final _epoch = DateTime.utc(1900, 1, 1);
 
-  /// Correction-table row index for [utcInstant], keyed by its **civil date**
-  /// (instant + the caller's DST-aware [offset]). This is the single indexing
-  /// path: never derive the day from the raw UTC instant, or an evening birth
-  /// that crosses UTC midnight would select the wrong day's corrections.
-  static int _civilDayIndex(DateTime utcInstant, Duration offset) {
-    final civil = utcInstant.add(offset);
-    return DateTime.utc(civil.year, civil.month, civil.day)
-        .difference(_epoch)
-        .inDays;
-  }
-
-  /// [utcInstant] expressed as minute-of-day in the city's **fixed standard**
-  /// local time — the frame the transition-minute table is stored in. Uses the
-  /// city's standard offset (a location constant), never DST.
-  static int _standardLocalMinutes(DateTime utcInstant, String city) {
-    final stdMin = (getLocationForCity(city).utcOffset * 60).round();
-    final local = utcInstant.add(Duration(minutes: stdMin));
-    return (local.hour * 60 + local.minute) % 1440;
-  }
-
-  /// Inverse of [_standardLocalMinutes]: a standard-local minute-of-day on
-  /// [civilDate] back to a UTC instant (for snapping a corrected boundary).
-  static DateTime _stdLocalMinutesToUtc(
-      DateTime civilDate, int minutes, String city) {
-    final stdMin = (getLocationForCity(city).utcOffset * 60).round();
-    return DateTime.utc(civilDate.year, civilDate.month, civilDate.day)
-        .subtract(Duration(minutes: stdMin))
-        .add(Duration(minutes: minutes));
-  }
-
   /// Pure-astronomy tithi number (1-30) at an absolute UTC instant.
   static int _meeusTithiAt(DateTime utcInstant) {
     final sun = toSidereal(sunLongitude(utcInstant), utcInstant);
@@ -330,12 +270,53 @@ class TithiCalculator {
     return tithi_core.calculateTithi(moon, sun);
   }
 
-  /// Map any integer to the 1-30 tithi cycle.
-  static int _wrap30(int n) => ((n - 1) % 30 + 30) % 30 + 1;
+  /// Lazily-decoded absolute Swiss transition instants (UTC minutes since 1900),
+  /// reconstructed once by prefix-summing the delta-encoded global table.
+  static List<int>? _absTransCache;
+  static List<int> get _absTransitions {
+    final cached = _absTransCache;
+    if (cached != null) return cached;
+    final d = globalTransitionCorrectionDeltas;
+    final abs = List<int>.filled(d.length, 0);
+    var acc = 0;
+    for (var i = 0; i < d.length; i++) {
+      acc += d[i];
+      abs[i] = acc;
+    }
+    return _absTransCache = abs;
+  }
+
+  /// Override a Meeus transition instant with the Swiss-exact one from the
+  /// global (city-independent) correction list when one exists within ±60 min
+  /// (transitions are ≥~19.5h apart, so the match is unambiguous). Returns the
+  /// Swiss instant (minute resolution) or the Meeus instant unchanged.
+  static DateTime _correctTransition(DateTime meeus) {
+    final list = _absTransitions;
+    final meeusMin = meeus.difference(_epoch).inMinutes;
+    var lo = 0, hi = list.length - 1;
+    while (lo <= hi) {
+      final mid = (lo + hi) >> 1;
+      if (list[mid] < meeusMin) {
+        lo = mid + 1;
+      } else {
+        hi = mid - 1;
+      }
+    }
+    var best = -1, bestDelta = 61;
+    for (final i in [lo - 1, lo]) {
+      if (i < 0 || i >= list.length) continue;
+      final d = (list[i] - meeusMin).abs();
+      if (d <= 60 && d < bestDelta) {
+        bestDelta = d;
+        best = i;
+      }
+    }
+    return best >= 0 ? _epoch.add(Duration(minutes: list[best])) : meeus;
+  }
 
   /// All tithi transition instants in `[start, end)`, in chronological order.
   /// Coarse 1-hour scan (tithis are ≥~19.5h, so no transition is skipped) then
-  /// 30-second bisection of each detected change.
+  /// 1-second bisection of each detected change.
   static List<DateTime> _findAllTransitions(DateTime start, DateTime end) {
     final out = <DateTime>[];
     const step = Duration(hours: 1);
@@ -347,7 +328,7 @@ class TithiCalculator {
       final t = _meeusTithiAt(cur);
       if (t != loTithi) {
         final b = _bisect(segLo, cur, loTithi);
-        if (b.isAfter(start) && b.isBefore(end)) out.add(b);
+        if (b.isAfter(start) && b.isBefore(end)) out.add(_correctTransition(b));
         loTithi = t;
       }
       segLo = cur;
@@ -358,10 +339,11 @@ class TithiCalculator {
   }
 
   /// Bisect `[lo, hi]` for the first instant whose tithi differs from
-  /// [startTithi] (30-second precision).
+  /// [startTithi] (1-second precision).
   static DateTime _bisect(DateTime lo, DateTime hi, int startTithi) {
-    while (hi.difference(lo).inSeconds > 30) {
-      final mid = lo.add(Duration(seconds: hi.difference(lo).inSeconds ~/ 2));
+    while (hi.difference(lo).inMilliseconds > 1000) {
+      final mid =
+          lo.add(Duration(milliseconds: hi.difference(lo).inMilliseconds ~/ 2));
       if (_meeusTithiAt(mid) == startTithi) {
         lo = mid;
       } else {

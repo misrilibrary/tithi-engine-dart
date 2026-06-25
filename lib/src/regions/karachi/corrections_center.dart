@@ -1,6 +1,7 @@
 const karachiTithiCorrectionsCenter = <int, int>{
   16893: 2,
   25210: 21,
+  34030: 11,
   45880: 19,
   55044: 29,
   56958: 23,

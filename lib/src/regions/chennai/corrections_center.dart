@@ -1,8 +1,6 @@
 const chennaiTithiCorrectionsCenter = <int, int>{
-  10666: 6,
   11150: 18,
   14256: 24,
-  15413: 29,
   15570: 8,
   21875: 23,
   23831: 30,
@@ -11,6 +9,7 @@ const chennaiTithiCorrectionsCenter = <int, int>{
   27090: 11,
   30400: 14,
   34202: 6,
+  38492: 14,
   51243: 7,
   55129: 25,
   55331: 20,

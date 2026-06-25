@@ -2,7 +2,6 @@ const helsinkiTithiCorrectionsCenter = <int, int>{
   14766: 1,
   23562: 27,
   23843: 13,
-  28594: 9,
   30699: 18,
   33116: 13,
   34189: 23,

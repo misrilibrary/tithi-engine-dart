@@ -85,23 +85,23 @@ class LunarMonthResolver {
 
       if (prevTithi != null) {
         if (effTithi == 30 && prevTithi != 30) {
-          amavasyas.add(_correctAmavasya(dt));
+          amavasyas.add(dt);
         } else if (effTithi == 30 && prevTithi == 30) {
-          // Double Amavasya: use the last day directly (don't correct — it IS the boundary)
+          // Double Amavasya: use the last day directly — it IS the boundary.
           if (amavasyas.isNotEmpty) amavasyas[amavasyas.length - 1] = dt;
         } else if (prevTithi >= 28 && prevTithi < 30 && effTithi <= 2) {
-          amavasyas.add(_correctAmavasya(dt.subtract(const Duration(days: 1))));
+          amavasyas.add(dt.subtract(const Duration(days: 1)));
         }
         if (effTithi == 15 && prevTithi != 15) {
-          purnimas.add(_correctPurnima(dt));
+          purnimas.add(dt);
         } else if (effTithi == 15 && prevTithi == 15) {
-          // Double Purnima: use the last day directly (don't correct — it IS the boundary)
+          // Double Purnima: use the last day directly — it IS the boundary.
           if (purnimas.isNotEmpty) purnimas[purnimas.length - 1] = dt;
         } else if (prevTithi >= 13 &&
             prevTithi < 15 &&
             effTithi > 15 &&
             effTithi <= 17) {
-          purnimas.add(_correctPurnima(dt.subtract(const Duration(days: 1))));
+          purnimas.add(dt.subtract(const Duration(days: 1)));
         }
       }
       prevTithi = effTithi;
@@ -218,20 +218,6 @@ class LunarMonthResolver {
   }
 
   static final _epoch = DateTime.utc(1900, 1, 1);
-
-  /// Apply Amavasya correction if this date is a known Meeus error.
-  DateTime _correctAmavasya(DateTime dt) {
-    final dayIndex = dt.difference(_epoch).inDays;
-    final corrected = getAmavasyaCorrections(city, convention)[dayIndex];
-    return corrected != null ? _epoch.add(Duration(days: corrected)) : dt;
-  }
-
-  /// Apply Purnima correction if this date is a known Meeus error.
-  DateTime _correctPurnima(DateTime dt) {
-    final dayIndex = dt.difference(_epoch).inDays;
-    final corrected = getPurnimaCorrections(city, convention)[dayIndex];
-    return corrected != null ? _epoch.add(Duration(days: corrected)) : dt;
-  }
 }
 
 /// Sidereal Sun sign (0=Mesha .. 11=Meena) at an exact moment.

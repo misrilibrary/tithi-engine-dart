@@ -1,6 +1,5 @@
 const detroitTithiCorrectionsCenter = <int, int>{
   14613: 27,
-  25409: 14,
   45007: 4,
   51561: 1,
   56080: 2,

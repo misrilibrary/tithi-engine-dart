@@ -2,7 +2,6 @@ const riodejaneiroTithiCorrectionsCenter = <int, int>{
   36215: 12,
   44558: 27,
   55743: 19,
-  57759: 27,
   58528: 28,
   59460: 15,
   62550: 4,

@@ -1,7 +1,6 @@
 const barcelonaTithiCorrectionsCenter = <int, int>{
   7306: 13,
   8807: 7,
-  22069: 10,
   39605: 6,
   58625: 7,
   64090: 8,

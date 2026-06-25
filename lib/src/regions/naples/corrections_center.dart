@@ -2,7 +2,6 @@ const naplesTithiCorrectionsCenter = <int, int>{
   10199: 12,
   18654: 21,
   18734: 11,
-  24759: 14,
   27261: 5,
   27773: 14,
   37010: 9,

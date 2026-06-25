@@ -5,6 +5,7 @@ const portlouisTithiCorrectionsCenter = <int, int>{
   39416: 24,
   47609: 5,
   49006: 15,
+  51691: 12,
   54774: 24,
   55342: 2,
   58603: 14,

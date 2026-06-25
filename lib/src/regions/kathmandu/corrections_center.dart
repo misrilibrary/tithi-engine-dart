@@ -1,5 +1,6 @@
 const kathmanduTithiCorrectionsCenter = <int, int>{
   4257: 6,
+  14342: 20,
   49926: 19,
   58106: 19,
   60292: 20,

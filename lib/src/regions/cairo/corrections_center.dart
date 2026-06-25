@@ -18,6 +18,7 @@ const cairoTithiCorrectionsCenter = <int, int>{
   69660: 27,
   70654: 17,
   71057: 6,
+  71502: 8,
   72155: 12,
   72244: 12,
   72697: 23,

@@ -1,5 +1,4 @@
 const bhopalTithiCorrectionsCenter = <int, int>{
-  31842: 8,
   35320: 2,
   51804: 7,
   54774: 24,

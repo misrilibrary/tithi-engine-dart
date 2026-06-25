@@ -1,5 +1,6 @@
 const lagosTithiCorrectionsCenter = <int, int>{
   635: 16,
+  3185: 26,
   23701: 19,
   33785: 3,
   58183: 8,

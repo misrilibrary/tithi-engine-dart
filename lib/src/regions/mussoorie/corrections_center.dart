@@ -5,7 +5,6 @@ const mussoorieTithiCorrectionsCenter = <int, int>{
   58303: 9,
   61039: 29,
   62045: 1,
-  62346: 7,
   62831: 20,
   63956: 22,
   64892: 13,

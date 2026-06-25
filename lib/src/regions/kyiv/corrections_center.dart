@@ -1,6 +1,8 @@
 const kyivTithiCorrectionsCenter = <int, int>{
+  13375: 29,
   28029: 5,
   29514: 14,
+  36206: 2,
   36870: 17,
   38101: 7,
   38468: 20,

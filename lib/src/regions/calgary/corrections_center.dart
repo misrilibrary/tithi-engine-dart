@@ -1,5 +1,6 @@
 const calgaryTithiCorrectionsCenter = <int, int>{
   23855: 25,
+  46927: 3,
   60926: 5,
   62667: 4,
   63404: 2,

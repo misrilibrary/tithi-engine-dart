@@ -3,7 +3,6 @@ const portlandTithiCorrectionsCenter = <int, int>{
   11036: 23,
   24042: 6,
   34112: 5,
-  43746: 12,
   51679: 1,
   57662: 19,
   58240: 6,

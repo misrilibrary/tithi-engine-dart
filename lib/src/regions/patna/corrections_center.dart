@@ -1,9 +1,7 @@
 const patnaTithiCorrectionsCenter = <int, int>{
-  604: 14,
   11469: 12,
   13429: 24,
   29596: 7,
-  37102: 13,
   38233: 22,
   40879: 10,
   45714: 1,

@@ -1,5 +1,7 @@
 const abudhabiTithiCorrectionsCenter = <int, int>{
+  3268: 21,
   28297: 7,
+  34837: 21,
   42643: 2,
   56820: 3,
   58310: 17,

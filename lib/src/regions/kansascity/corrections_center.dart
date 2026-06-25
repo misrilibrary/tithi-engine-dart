@@ -1,7 +1,9 @@
 const kansascityTithiCorrectionsCenter = <int, int>{
   8457: 12,
-  9654: 29,
+  11198: 8,
+  23974: 26,
   35549: 25,
+  41579: 1,
   47375: 10,
   56323: 8,
   58943: 30,

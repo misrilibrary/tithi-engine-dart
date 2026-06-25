@@ -1,9 +1,7 @@
 const varanasiTithiCorrectionsCenter = <int, int>{
   2923: 30,
-  5277: 21,
   18549: 5,
   20112: 2,
-  25260: 12,
   59486: 11,
   61998: 13,
   63570: 20,

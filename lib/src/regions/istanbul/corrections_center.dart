@@ -1,8 +1,8 @@
 const istanbulTithiCorrectionsCenter = <int, int>{
-  7640: 23,
   31615: 19,
   52115: 24,
   53249: 6,
+  55235: 13,
   61748: 29,
   64395: 18,
   65634: 17,

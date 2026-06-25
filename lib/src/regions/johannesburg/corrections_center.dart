@@ -1,7 +1,7 @@
 const johannesburgTithiCorrectionsCenter = <int, int>{
+  14787: 23,
   21636: 21,
   32042: 2,
-  45688: 5,
   51901: 16,
   56412: 9,
   64408: 2,

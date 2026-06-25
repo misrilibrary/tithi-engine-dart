@@ -1,6 +1,7 @@
 const torontoTithiCorrectionsCenter = <int, int>{
   57009: 15,
   57996: 28,
+  59949: 2,
   60041: 5,
   63000: 12,
   63002: 14,

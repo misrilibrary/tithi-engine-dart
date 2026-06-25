@@ -1,5 +1,6 @@
 const hongkongTithiCorrectionsCenter = <int, int>{
   41027: 9,
+  41283: 29,
   57623: 9,
   58891: 7,
   59630: 7,

@@ -1,7 +1,6 @@
 const almatyTithiCorrectionsCenter = <int, int>{
   21896: 15,
   38228: 17,
-  54460: 6,
   54970: 13,
   56173: 6,
   58344: 22,

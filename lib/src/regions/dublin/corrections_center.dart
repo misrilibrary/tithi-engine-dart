@@ -1,8 +1,8 @@
 const dublinTithiCorrectionsCenter = <int, int>{
   9461: 13,
-  15599: 8,
   24879: 15,
   28225: 25,
+  38579: 13,
   58605: 16,
   59306: 9,
   61218: 1,

@@ -14,6 +14,7 @@ const nashvilleTithiCorrectionsCenter = <int, int>{
   71223: 25,
   71364: 18,
   72299: 8,
+  72977: 8,
   73044: 15,
   73309: 15,
 };

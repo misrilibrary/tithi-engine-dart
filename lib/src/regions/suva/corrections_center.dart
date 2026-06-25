@@ -4,7 +4,6 @@ const suvaTithiCorrectionsCenter = <int, int>{
   31034: 28,
   31720: 5,
   35614: 1,
-  53097: 30,
   61100: 1,
   61247: 30,
   64471: 5,

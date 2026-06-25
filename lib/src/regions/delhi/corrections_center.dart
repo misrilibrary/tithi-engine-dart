@@ -2,7 +2,6 @@ const delhiTithiCorrectionsCenter = <int, int>{
   8275: 8,
   14205: 2,
   24009: 2,
-  32193: 6,
   35286: 27,
   50417: 8,
   52977: 29,

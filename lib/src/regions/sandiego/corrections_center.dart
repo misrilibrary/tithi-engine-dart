@@ -1,6 +1,4 @@
 const sandiegoTithiCorrectionsCenter = <int, int>{
-  1355: 28,
-  10510: 29,
   36380: 30,
   42936: 30,
   53538: 29,
@@ -14,5 +12,4 @@ const sandiegoTithiCorrectionsCenter = <int, int>{
   69954: 26,
   70572: 24,
   71934: 28,
-  72142: 29,
 };

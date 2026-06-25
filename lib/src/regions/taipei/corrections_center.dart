@@ -1,9 +1,9 @@
 const taipeiTithiCorrectionsCenter = <int, int>{
-  3881: 13,
   5595: 13,
   9177: 23,
   10011: 1,
   54986: 30,
+  55020: 4,
   58847: 22,
   60634: 8,
   60956: 5,
@@ -16,5 +16,4 @@ const taipeiTithiCorrectionsCenter = <int, int>{
   70266: 12,
   70829: 15,
   72783: 20,
-  73280: 15,
 };

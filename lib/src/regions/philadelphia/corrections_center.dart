@@ -1,6 +1,7 @@
 const philadelphiaTithiCorrectionsCenter = <int, int>{
   11687: 24,
   34145: 9,
+  52563: 29,
   56775: 18,
   65351: 30,
   65524: 25,

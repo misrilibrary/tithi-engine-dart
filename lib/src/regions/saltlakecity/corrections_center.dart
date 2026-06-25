@@ -1,5 +1,4 @@
 const saltlakecityTithiCorrectionsCenter = <int, int>{
-  7682: 5,
   25096: 26,
   30395: 9,
   31218: 5,
@@ -11,7 +10,6 @@ const saltlakecityTithiCorrectionsCenter = <int, int>{
   61913: 17,
   66375: 20,
   69272: 23,
-  70151: 16,
   71043: 23,
   71192: 24,
   72548: 21,

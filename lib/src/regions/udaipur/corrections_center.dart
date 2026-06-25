@@ -1,5 +1,6 @@
 const udaipurTithiCorrectionsCenter = <int, int>{
   2841: 7,
+  24689: 2,
   29741: 5,
   46461: 9,
   51780: 13,

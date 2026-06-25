@@ -1,6 +1,7 @@
 const mississaugaTithiCorrectionsCenter = <int, int>{
-  13972: 4,
+  2356: 24,
   41368: 27,
+  48488: 29,
   55120: 17,
   59294: 26,
   63115: 9,

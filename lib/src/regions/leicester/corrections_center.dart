@@ -20,6 +20,7 @@ const leicesterTithiCorrectionsCenter = <int, int>{
   62048: 4,
   63813: 27,
   64315: 27,
+  65468: 28,
   68922: 28,
   69108: 6,
   70262: 8,

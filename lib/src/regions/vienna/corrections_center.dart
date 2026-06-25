@@ -1,6 +1,8 @@
 const viennaTithiCorrectionsCenter = <int, int>{
   20007: 16,
   34725: 28,
+  35462: 26,
+  53526: 17,
   59645: 23,
   59989: 12,
   61326: 21,
@@ -8,6 +10,7 @@ const viennaTithiCorrectionsCenter = <int, int>{
   62202: 11,
   64724: 22,
   64778: 17,
+  64885: 6,
   64979: 12,
   67432: 14,
   67927: 7,

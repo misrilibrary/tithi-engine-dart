@@ -3,6 +3,7 @@ const kingstonTithiCorrectionsCenter = <int, int>{
   46228: 13,
   56578: 28,
   57306: 17,
+  58701: 25,
   60040: 4,
   62240: 19,
   64113: 2,

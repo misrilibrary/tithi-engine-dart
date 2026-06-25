@@ -1,4 +1,5 @@
 const indianapolisTithiCorrectionsCenter = <int, int>{
+  19841: 27,
   20910: 3,
   46292: 18,
   57941: 2,

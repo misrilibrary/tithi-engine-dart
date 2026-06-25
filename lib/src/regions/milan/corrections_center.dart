@@ -10,6 +10,7 @@ const milanTithiCorrectionsCenter = <int, int>{
   61463: 10,
   68132: 5,
   68722: 4,
+  69100: 28,
   69283: 5,
   69895: 26,
   71509: 16,

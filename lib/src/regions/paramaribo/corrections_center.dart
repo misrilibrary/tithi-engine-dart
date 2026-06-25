@@ -1,5 +1,6 @@
 const paramariboTithiCorrectionsCenter = <int, int>{
   1774: 4,
+  2836: 2,
   42491: 27,
   51734: 27,
   52694: 12,
@@ -10,6 +11,7 @@ const paramariboTithiCorrectionsCenter = <int, int>{
   63712: 15,
   66139: 21,
   66583: 22,
+  67318: 18,
   67857: 26,
   67976: 26,
   69173: 13,

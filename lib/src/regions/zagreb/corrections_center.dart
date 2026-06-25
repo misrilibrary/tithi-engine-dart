@@ -1,5 +1,6 @@
 const zagrebTithiCorrectionsCenter = <int, int>{
   1097: 5,
+  4798: 14,
   13509: 15,
   16892: 1,
   19550: 1,

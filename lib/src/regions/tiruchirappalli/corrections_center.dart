@@ -3,7 +3,6 @@ const tiruchirappalliTithiCorrectionsCenter = <int, int>{
   2266: 23,
   19918: 15,
   22754: 15,
-  48162: 27,
   59170: 21,
   60765: 21,
   63217: 22,

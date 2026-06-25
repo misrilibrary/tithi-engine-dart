@@ -1,6 +1,7 @@
 const shanghaiTithiCorrectionsCenter = <int, int>{
   7017: 19,
   13687: 15,
+  20942: 5,
   20997: 1,
   33294: 14,
   50347: 27,
@@ -10,6 +11,7 @@ const shanghaiTithiCorrectionsCenter = <int, int>{
   61751: 2,
   62415: 17,
   64667: 24,
+  65514: 15,
   65816: 22,
   66066: 6,
   67719: 5,

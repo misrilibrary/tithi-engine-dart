@@ -9,6 +9,7 @@ const lahoreTithiCorrectionsCenter = <int, int>{
   64564: 10,
   64654: 12,
   64847: 28,
+  65537: 9,
   66777: 9,
   67433: 15,
   67817: 15,

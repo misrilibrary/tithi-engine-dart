@@ -1,6 +1,8 @@
 const tokyoTithiCorrectionsCenter = <int, int>{
   7289: 26,
   43974: 3,
+  51397: 15,
+  57592: 7,
   60132: 8,
   61008: 27,
   61157: 29,

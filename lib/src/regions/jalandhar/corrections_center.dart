@@ -1,7 +1,6 @@
 const jalandharTithiCorrectionsCenter = <int, int>{
   7870: 16,
   40255: 5,
-  40311: 2,
   44142: 24,
   47088: 16,
   57386: 8,

@@ -1,6 +1,4 @@
 const bahrainTithiCorrectionsCenter = <int, int>{
-  20731: 1,
-  39288: 13,
   59361: 5,
   61919: 23,
   64265: 7,

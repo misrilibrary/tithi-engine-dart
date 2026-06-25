@@ -1,7 +1,6 @@
 const vadodaraTithiCorrectionsCenter = <int, int>{
   26408: 9,
   40567: 23,
-  50616: 30,
   57543: 18,
   64564: 10,
   66292: 25,

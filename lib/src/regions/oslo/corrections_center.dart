@@ -4,6 +4,7 @@ const osloTithiCorrectionsCenter = <int, int>{
   35783: 23,
   47646: 13,
   48602: 25,
+  55787: 4,
   57397: 19,
   58851: 26,
   61495: 12,

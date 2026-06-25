@@ -6,6 +6,7 @@ const meerutTithiCorrectionsCenter = <int, int>{
   25090: 20,
   36908: 26,
   51817: 21,
+  62098: 25,
   63709: 11,
   65636: 19,
   65750: 15,

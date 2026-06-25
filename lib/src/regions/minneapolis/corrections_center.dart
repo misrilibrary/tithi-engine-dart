@@ -1,8 +1,8 @@
 const minneapolisTithiCorrectionsCenter = <int, int>{
   19268: 16,
   23093: 1,
+  31885: 23,
   34059: 11,
-  39979: 25,
   51677: 29,
   52950: 2,
   57427: 20,

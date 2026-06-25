@@ -2,6 +2,7 @@ const ayodhyaTithiCorrectionsCenter = <int, int>{
   13647: 5,
   23766: 25,
   27808: 21,
+  33554: 7,
   42900: 22,
   45792: 19,
   55769: 15,
@@ -13,4 +14,6 @@ const ayodhyaTithiCorrectionsCenter = <int, int>{
   68907: 12,
   69165: 4,
   71808: 19,
+  72003: 7,
+  72781: 18,
 };

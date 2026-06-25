@@ -1,5 +1,6 @@
 const kotaTithiCorrectionsCenter = <int, int>{
   1932: 13,
+  8741: 1,
   23262: 23,
   24530: 21,
   28542: 16,

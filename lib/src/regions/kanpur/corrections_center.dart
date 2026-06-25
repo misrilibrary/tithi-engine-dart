@@ -1,8 +1,7 @@
 const kanpurTithiCorrectionsCenter = <int, int>{
   13548: 24,
   16157: 5,
-  22636: 17,
-  43622: 6,
+  43382: 3,
   44287: 22,
   54868: 30,
   59572: 8,

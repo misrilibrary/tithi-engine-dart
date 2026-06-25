@@ -3,7 +3,6 @@ const pragueTithiCorrectionsCenter = <int, int>{
   11839: 28,
   20367: 22,
   37919: 3,
-  42426: 21,
   55777: 24,
   55825: 12,
   58618: 30,

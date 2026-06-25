@@ -1,6 +1,8 @@
 const montrealTithiCorrectionsCenter = <int, int>{
   24020: 13,
   34569: 20,
+  51937: 22,
+  57475: 8,
   57517: 22,
   58143: 27,
   61837: 30,

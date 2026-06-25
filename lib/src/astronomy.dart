@@ -397,7 +397,8 @@ DateTime computeSunrise(DateTime date, CityLocation loc,
   // Build via Duration so a sunrise before/after the UTC day (e.g. eastern
   // cities in summer) carries to the correct calendar day.
   final base = DateTime.utc(date.year, date.month, date.day);
-  var sunInstant = DateTime.utc(date.year, date.month, date.day, 12); // noon seed
+  var sunInstant =
+      DateTime.utc(date.year, date.month, date.day, 12); // noon seed
   var hours = 0.0;
   for (var i = 0; i < 3; i++) {
     hours = _riseSetUtcHours(loc, convention, sunInstant, -1.0);
@@ -412,7 +413,8 @@ DateTime computeSunset(DateTime date, CityLocation loc,
     {SunriseConvention convention = SunriseConvention.upperLimb}) {
   // Iterative (declination/EOT at the set instant), full resolution.
   final base = DateTime.utc(date.year, date.month, date.day);
-  var sunInstant = DateTime.utc(date.year, date.month, date.day, 12); // noon seed
+  var sunInstant =
+      DateTime.utc(date.year, date.month, date.day, 12); // noon seed
   var hours = 0.0;
   for (var i = 0; i < 3; i++) {
     hours = _riseSetUtcHours(loc, convention, sunInstant, 1.0);

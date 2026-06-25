@@ -2,7 +2,6 @@ const birminghamTithiCorrectionsCenter = <int, int>{
   2032: 25,
   6807: 16,
   6989: 21,
-  18477: 21,
   36773: 9,
   37031: 30,
   40975: 17,

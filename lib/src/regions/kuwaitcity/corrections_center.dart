@@ -1,5 +1,4 @@
 const kuwaitcityTithiCorrectionsCenter = <int, int>{
-  20392: 17,
   57567: 12,
   57826: 5,
   63463: 2,

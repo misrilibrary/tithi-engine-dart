@@ -1,5 +1,4 @@
 const jeddahTithiCorrectionsCenter = <int, int>{
-  33255: 4,
   35039: 17,
   37288: 22,
   43369: 19,

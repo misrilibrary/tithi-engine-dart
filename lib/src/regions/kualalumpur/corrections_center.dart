@@ -7,6 +7,7 @@ const kualalumpurTithiCorrectionsCenter = <int, int>{
   61957: 2,
   61990: 5,
   62535: 19,
+  63740: 13,
   66978: 2,
   68284: 9,
   70315: 2,

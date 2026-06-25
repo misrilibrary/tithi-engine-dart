@@ -1,6 +1,5 @@
 const phnompenhTithiCorrectionsCenter = <int, int>{
   8535: 30,
-  8945: 27,
   30798: 27,
   45968: 19,
   61398: 4,

@@ -6,6 +6,7 @@ const nairobiTithiCorrectionsCenter = <int, int>{
   50934: 24,
   51743: 5,
   53010: 2,
+  56269: 13,
   56348: 3,
   65478: 9,
   65628: 11,

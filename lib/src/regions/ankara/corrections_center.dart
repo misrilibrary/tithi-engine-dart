@@ -1,7 +1,7 @@
 const ankaraTithiCorrectionsCenter = <int, int>{
-  710: 2,
   32481: 28,
   46274: 30,
+  47928: 1,
   57419: 11,
   59826: 27,
   61762: 14,

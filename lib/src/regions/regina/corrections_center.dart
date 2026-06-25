@@ -1,5 +1,5 @@
 const reginaTithiCorrectionsCenter = <int, int>{
-  5238: 12,
+  20187: 19,
   43481: 13,
   58968: 25,
   62410: 12,

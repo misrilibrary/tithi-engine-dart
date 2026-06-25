@@ -1,6 +1,8 @@
 const addisababaTithiCorrectionsCenter = <int, int>{
   23518: 13,
+  33710: 17,
   37145: 26,
+  59099: 8,
   61513: 1,
   61619: 19,
   67873: 12,

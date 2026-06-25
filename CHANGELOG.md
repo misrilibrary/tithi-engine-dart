@@ -19,6 +19,53 @@ the iterative sunrise and **verified 0 mismatches vs Swiss Ephemeris**
 deprecated. (A higher-fidelity ELP elongation pass toward the ~1–6/city
 irreducible floor remains as future work.)
 
+**Global tithi-transition-time correction.** Tithi *transition times* (used for
+displayed transition instants and birth-time `tithiAtInstant`) were previously
+raw Meeus — up to **~134s off Swiss** on days not covered by the sunrise-tithi
+table (the old per-city snapping only fixed days where the sunrise tithi itself
+disagreed). Because a tithi transition is a **geocentric** event (the instant is
+identical worldwide), the per-city transition tables were both incomplete and
+redundant. They are replaced by a **single city-independent Swiss correction
+list** (delta-encoded, 16,219 entries) applied at the astronomy layer:
+- Every transition is now **within 30s of Swiss** worldwide — verified across
+  **74,582 transitions (1900–2100), 0 remaining off**.
+- `tithiAtInstant` and `tithiSegments` now share one anchored model (corrected
+  sunrise tithi + step across corrected transitions), so they always agree.
+- The 230 per-city `TransitionMinutesMap` tables (~6.2k entries) were removed;
+  net the published archive is **smaller** (173 KB vs 175 KB) despite the more
+  complete correction, thanks to delta encoding.
+
+**Source of truth = JPL `.se1` (Swiss Ephemeris), and redundant tables removed.**
+All correction tables were regenerated against the JPL-derived Swiss Ephemeris
+(`seFlgSwiEph`) instead of Moshier. Verified vs `.se1` over 1900–2100:
+- **tithiOnDate**: 230 cities × 73,414 days × both conventions = **33.77M checks,
+  0 mismatches**.
+- **Sunrise/sunset**: full coverage, **0 days >60s** off `.se1` (max ~16s, high
+  latitude far from epoch).
+- **Amavasya/Purnima correction tables removed** (565 entries): with the day-tithi
+  now `.se1`-exact, the resolver derives new-moon/full-moon boundary days from the
+  corrected sequence, making the boundary tables dormant (0 fired, 0 double-dip) —
+  removal is output-neutral.
+- **Tithi → date lookup / festival dates corrected.** `findTithiRaw` /
+  `findNextOccurrence` (behind `getDates`, `findInYear`, `dateFor`) matched on raw
+  Meeus tithi, ignoring the correction table — so festival dates were off by a day
+  on correction days (frequent at high latitude). Now use the corrected day-tithi.
+  Full verification (all 230 cities × 1900–2100, 16.9M days): 0 invalid dates, 0
+  missing dates vs `tithiOnDate` (kshaya/vriddhi conventions verified).
+- **Segment / birth-time labels corrected on sunrise-straddle days.**
+  `tithiSegments` and `tithiAtInstant` anchored their labels on `tithiOnDate` (the
+  `.se1` tithi at the *true* sunrise) but stepped in the engine's Meeus frame. On
+  ~0.008–0.010% of days (both conventions), where the engine's Meeus sunrise lands
+  on the opposite side of a near-sunrise transition from the true sunrise, the
+  anchor was placed on the wrong segment and the **whole day's** tithi labels /
+  birth-time tithi shifted by one. Now each segment/instant is labeled by its own
+  Swiss-corrected elongation tithi (segment midpoint), independent of the sunrise
+  anchor (`tithiOnDate` remains a separate, correct day label). Exhaustive
+  verification: `tithiAtInstant` whole-day-shift days **→ 0** (135M samples);
+  segment-label mismatches **8,391/8,413 → 7,425** per convention — the remainder
+  being only sub-minute slivers at near-midnight transitions (the ≤30s
+  transition-time floor, accepted at minute resolution).
+
 ## 4.2.0
 
 Added a **sunrise convention** toggle: `SunriseConvention.upperLimb` (the classic

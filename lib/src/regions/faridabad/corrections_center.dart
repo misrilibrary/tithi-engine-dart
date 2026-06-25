@@ -2,6 +2,7 @@ const faridabadTithiCorrectionsCenter = <int, int>{
   880: 23,
   14642: 26,
   16829: 27,
+  24113: 17,
   46821: 15,
   54543: 30,
   57492: 26,

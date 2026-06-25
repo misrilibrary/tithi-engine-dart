@@ -5,6 +5,7 @@ const durbanTithiCorrectionsCenter = <int, int>{
   18792: 11,
   19530: 11,
   22941: 26,
+  42689: 19,
   52643: 20,
   58494: 23,
   60921: 29,

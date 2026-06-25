@@ -16,7 +16,6 @@ const jammuTithiCorrectionsCenter = <int, int>{
   71710: 10,
   72431: 22,
   72945: 5,
-  73213: 6,
   73283: 18,
   73316: 21,
 };

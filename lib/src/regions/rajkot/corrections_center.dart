@@ -1,6 +1,5 @@
 const rajkotTithiCorrectionsCenter = <int, int>{
   13904: 26,
-  24033: 26,
   28965: 26,
   34773: 16,
   54544: 1,

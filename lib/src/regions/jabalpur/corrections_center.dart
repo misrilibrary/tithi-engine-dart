@@ -4,7 +4,6 @@ const jabalpurTithiCorrectionsCenter = <int, int>{
   7571: 12,
   7884: 30,
   19706: 9,
-  19723: 27,
   56211: 14,
   64283: 24,
   64440: 4,

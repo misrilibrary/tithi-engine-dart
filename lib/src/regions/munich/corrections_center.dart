@@ -1,6 +1,7 @@
 const munichTithiCorrectionsCenter = <int, int>{
   30362: 5,
   30860: 1,
+  49915: 9,
   56452: 19,
   60530: 22,
   62259: 9,

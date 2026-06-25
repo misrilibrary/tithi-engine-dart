@@ -1,6 +1,5 @@
 const seoulTithiCorrectionsCenter = <int, int>{
   4582: 5,
-  10870: 4,
   22181: 4,
   49945: 9,
   52269: 29,

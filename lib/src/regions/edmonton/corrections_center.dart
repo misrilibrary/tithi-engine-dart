@@ -4,6 +4,7 @@ const edmontonTithiCorrectionsCenter = <int, int>{
   15727: 18,
   21133: 20,
   23949: 1,
+  46250: 7,
   52272: 3,
   57461: 25,
   57698: 25,

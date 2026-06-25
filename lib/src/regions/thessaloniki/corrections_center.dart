@@ -1,5 +1,7 @@
 const thessalonikiTithiCorrectionsCenter = <int, int>{
   912: 27,
+  24809: 5,
+  33182: 20,
   41165: 30,
   48872: 29,
   52932: 13,
@@ -12,6 +14,7 @@ const thessalonikiTithiCorrectionsCenter = <int, int>{
   64339: 21,
   65807: 13,
   66335: 10,
+  66654: 3,
   68595: 26,
   68982: 29,
   69931: 2,

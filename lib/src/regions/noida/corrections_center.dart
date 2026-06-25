@@ -1,7 +1,6 @@
 const noidaTithiCorrectionsCenter = <int, int>{
   1232: 22,
   5897: 21,
-  9192: 8,
   14447: 7,
   23890: 30,
   46821: 15,
@@ -9,6 +8,7 @@ const noidaTithiCorrectionsCenter = <int, int>{
   53680: 23,
   59753: 13,
   60474: 25,
+  61039: 29,
   62045: 1,
   63956: 22,
   66161: 12,

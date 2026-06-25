@@ -1,6 +1,5 @@
 const sacramentoTithiCorrectionsCenter = <int, int>{
   2392: 1,
-  10734: 16,
   29879: 26,
   50088: 4,
   53995: 14,

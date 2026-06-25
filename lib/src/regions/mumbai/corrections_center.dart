@@ -1,5 +1,6 @@
 const mumbaiTithiCorrectionsCenter = <int, int>{
   603: 13,
+  3122: 22,
   5504: 12,
   8741: 1,
   10470: 17,

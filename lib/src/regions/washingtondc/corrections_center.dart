@@ -5,6 +5,7 @@ const washingtondcTithiCorrectionsCenter = <int, int>{
   50937: 27,
   59017: 15,
   59294: 26,
+  60036: 30,
   62934: 4,
   64096: 15,
   64910: 2,

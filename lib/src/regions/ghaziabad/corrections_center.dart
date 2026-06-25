@@ -4,6 +4,7 @@ const ghaziabadTithiCorrectionsCenter = <int, int>{
   61039: 29,
   61897: 1,
   63956: 22,
+  63999: 6,
   64145: 4,
   65750: 15,
   66161: 12,

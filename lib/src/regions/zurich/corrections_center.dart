@@ -1,5 +1,6 @@
 const zurichTithiCorrectionsCenter = <int, int>{
   979: 6,
+  10745: 25,
   42247: 20,
   45141: 19,
   55100: 26,

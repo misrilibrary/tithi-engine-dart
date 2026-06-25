@@ -11,6 +11,7 @@ const berlinTithiCorrectionsCenter = <int, int>{
   65819: 25,
   66089: 30,
   66724: 15,
+  67432: 14,
   67888: 27,
   70193: 29,
   70434: 4,

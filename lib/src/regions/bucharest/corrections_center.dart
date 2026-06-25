@@ -1,6 +1,5 @@
 const bucharestTithiCorrectionsCenter = <int, int>{
   3128: 29,
-  34453: 22,
   38304: 4,
   54074: 4,
   59677: 25,

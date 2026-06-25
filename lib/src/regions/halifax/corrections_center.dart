@@ -2,7 +2,6 @@ const halifaxTithiCorrectionsCenter = <int, int>{
   8319: 22,
   9145: 21,
   45614: 20,
-  53933: 11,
   57109: 27,
   59987: 10,
   61110: 11,

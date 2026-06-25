@@ -1,6 +1,7 @@
 const edinburghTithiCorrectionsCenter = <int, int>{
   20290: 4,
   21739: 5,
+  37048: 17,
   59659: 7,
   59744: 4,
   59769: 29,

@@ -1,6 +1,5 @@
 const orlandoTithiCorrectionsCenter = <int, int>{
   16953: 4,
-  52740: 28,
   55573: 26,
   58772: 6,
   58960: 17,

@@ -1,7 +1,7 @@
 const tirupatiTithiCorrectionsCenter = <int, int>{
   21493: 25,
-  24386: 24,
   49481: 17,
+  52854: 24,
   55467: 8,
   62799: 17,
   66987: 11,

@@ -1,5 +1,4 @@
 const phoenixTithiCorrectionsCenter = <int, int>{
-  50161: 20,
   60263: 21,
   63270: 16,
   67524: 18,

@@ -1,5 +1,4 @@
 const sydneyTithiCorrectionsCenter = <int, int>{
-  1386: 29,
   10568: 27,
   29320: 26,
   48424: 24,

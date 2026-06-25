@@ -1,6 +1,5 @@
 const krakowTithiCorrectionsCenter = <int, int>{
   7443: 2,
-  19219: 26,
   23208: 28,
   29904: 21,
   37032: 1,

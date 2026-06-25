@@ -1,7 +1,7 @@
 const amritsarTithiCorrectionsCenter = <int, int>{
-  560: 30,
   25196: 8,
   37578: 16,
+  54893: 25,
   57205: 4,
   58413: 1,
   58994: 21,

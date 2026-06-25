@@ -1,6 +1,6 @@
 const surreyTithiCorrectionsCenter = <int, int>{
+  11989: 1,
   27994: 30,
-  29880: 27,
   30834: 5,
   40924: 26,
   56638: 29,

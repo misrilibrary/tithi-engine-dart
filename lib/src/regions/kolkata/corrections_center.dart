@@ -3,7 +3,6 @@ const kolkataTithiCorrectionsCenter = <int, int>{
   49002: 11,
   50099: 15,
   55557: 10,
-  58378: 26,
   58568: 9,
   62568: 22,
   62904: 3,

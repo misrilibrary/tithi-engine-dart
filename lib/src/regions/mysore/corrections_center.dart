@@ -1,7 +1,6 @@
 const mysoreTithiCorrectionsCenter = <int, int>{
   7761: 25,
   13813: 24,
-  18260: 11,
   22295: 30,
   36265: 2,
   56041: 21,

@@ -1,7 +1,6 @@
 const miamiTithiCorrectionsCenter = <int, int>{
   3660: 29,
   8906: 19,
-  30396: 10,
   52122: 1,
   56332: 18,
   58273: 9,

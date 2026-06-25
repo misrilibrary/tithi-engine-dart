@@ -14,35 +14,27 @@ import '../cities.dart' show resolveCityName;
 
 // Tithi / boundary corrections are convention-specific (they patch the
 // sunrise-tithi, which shifts when the convention changes). They are stored in
-// per-convention maps. Transition minutes are an astronomical elongation event
-// (independent of the observer's sunrise), so they are shared across both.
+// per-convention maps. Tithi transition *times* are an astronomical elongation
+// event (geocentric, observer-independent), so they are not stored per city —
+// the engine applies a single global Swiss correction (see
+// transitions/global_transition_corrections.g.dart).
 final Map<String, Map<int, int>> _tithi = {}; // upperLimb (default)
 final Map<String, Map<int, int>> _tithiCenter = {}; // centerDisc
-final Map<String, Map<int, int>> _trans = {}; // shared (convention-independent)
-final Map<String, Map<int, int>> _amav = {}; // upperLimb (default)
-final Map<String, Map<int, int>> _amavCenter = {}; // centerDisc
-final Map<String, Map<int, int>> _purn = {}; // upperLimb (default)
-final Map<String, Map<int, int>> _purnCenter = {}; // centerDisc
 
 /// Register one city's correction tables. Invoked by the generated data packs;
 /// not normally called directly.
 ///
-/// [convention] selects which table set the tithi/amavasya/purnima corrections
-/// belong to (default [SunriseConvention.upperLimb], matching today's generated
-/// packs). Transition minutes are convention-independent and always shared.
+/// [convention] selects which tithi table set the corrections belong to
+/// (default [SunriseConvention.upperLimb]). Tithi transition times are corrected
+/// globally, and new-moon/full-moon boundary DAYS are derived from the corrected
+/// day-tithi — neither needs a per-city table.
 void registerCity(
   String city, {
   Map<int, int>? tithi,
-  Map<int, int>? transitions,
-  Map<int, int>? amavasya,
-  Map<int, int>? purnima,
   SunriseConvention convention = SunriseConvention.upperLimb,
 }) {
   final center = convention == SunriseConvention.centerDisc;
   if (tithi != null) (center ? _tithiCenter : _tithi)[city] = tithi;
-  if (transitions != null) _trans[city] = transitions;
-  if (amavasya != null) (center ? _amavCenter : _amav)[city] = amavasya;
-  if (purnima != null) (center ? _purnCenter : _purn)[city] = purnima;
 }
 
 /// Whether any city data has been registered (useful to detect missing setup).
@@ -60,25 +52,4 @@ Map<int, int> getTithiCorrections(String city,
     return _tithiCenter[key] ?? const {};
   }
   return _tithi[key] ?? const {};
-}
-
-Map<int, int> getTransitionMinutes(String city) =>
-    _trans[resolveCityName(city) ?? city] ?? const {};
-
-Map<int, int> getAmavasyaCorrections(String city,
-    [SunriseConvention convention = SunriseConvention.upperLimb]) {
-  final key = resolveCityName(city) ?? city;
-  if (convention == SunriseConvention.centerDisc) {
-    return _amavCenter[key] ?? const {};
-  }
-  return _amav[key] ?? const {};
-}
-
-Map<int, int> getPurnimaCorrections(String city,
-    [SunriseConvention convention = SunriseConvention.upperLimb]) {
-  final key = resolveCityName(city) ?? city;
-  if (convention == SunriseConvention.centerDisc) {
-    return _purnCenter[key] ?? const {};
-  }
-  return _purn[key] ?? const {};
 }

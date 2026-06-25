@@ -1,5 +1,4 @@
 const denpasarTithiCorrectionsCenter = <int, int>{
-  5275: 19,
   5817: 30,
   13069: 18,
   50949: 8,

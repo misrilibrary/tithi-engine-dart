@@ -2,7 +2,10 @@ import 'astronomy.dart';
 import 'ayanamsha.dart';
 import 'lunar_month.dart';
 import 'lunar_month_resolver.dart';
+import 'regions/registry.dart';
 import 'tithi.dart';
+
+final _finderEpoch = DateTime.utc(1900, 1, 1);
 
 /// A raw tithi match with its span context.
 class TithiMatch {
@@ -52,7 +55,12 @@ List<TithiMatch> findTithiRaw({
       final sr = sunrise(dt);
       final sunLong = toSidereal(sunLongitude(sr), sr);
       final moonLong = toSidereal(moonLongitude(sr), sr);
-      final currentTithi = calculateTithi(moonLong, sunLong);
+      // Use the CORRECTED day-tithi (same table tithiOnDate uses), not raw
+      // Meeus — otherwise getDates/festival dates disagree with tithiOnDate on
+      // correction days (off by a day, frequent at high latitude).
+      final currentTithi = getTithiCorrections(resolver.city,
+              resolver.convention)[dt.difference(_finderEpoch).inDays] ??
+          calculateTithi(moonLong, sunLong);
 
       if (dt.isBefore(span.start)) {
         // Pre-span day: only capture prevTithi for kshaya detection
@@ -236,7 +244,9 @@ DateTime? findNextOccurrence({
     final sr = sunrise(dt);
     final sunLong = toSidereal(sunLongitude(sr), sr);
     final moonLong = toSidereal(moonLongitude(sr), sr);
-    final currentTithi = calculateTithi(moonLong, sunLong);
+    final currentTithi = getTithiCorrections(resolver.city,
+            resolver.convention)[dt.difference(_finderEpoch).inDays] ??
+        calculateTithi(moonLong, sunLong);
     final currentMonth = resolver.getMonth(dt);
 
     if (currentTithi == targetTithi && currentMonth == month) {

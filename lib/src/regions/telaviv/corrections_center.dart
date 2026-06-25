@@ -1,6 +1,9 @@
 const telavivTithiCorrectionsCenter = <int, int>{
   8281: 14,
   12879: 5,
+  36987: 16,
+  48943: 12,
+  49677: 6,
   56043: 23,
   56840: 23,
   67791: 19,

@@ -3,7 +3,6 @@ const sanfranciscoTithiCorrectionsCenter = <int, int>{
   5250: 25,
   30449: 4,
   32051: 12,
-  32892: 26,
   33949: 20,
   57812: 21,
   57834: 13,
@@ -17,4 +16,5 @@ const sanfranciscoTithiCorrectionsCenter = <int, int>{
   70030: 14,
   70661: 25,
   71234: 7,
+  71564: 12,
 };

@@ -1,5 +1,4 @@
 const lucknowTithiCorrectionsCenter = <int, int>{
-  4912: 11,
   14237: 4,
   24382: 20,
   55212: 19,

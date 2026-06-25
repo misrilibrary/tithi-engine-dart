@@ -1,6 +1,6 @@
 const osakaTithiCorrectionsCenter = <int, int>{
   1040: 7,
-  12068: 20,
+  24918: 25,
   39953: 27,
   57953: 14,
   59245: 6,

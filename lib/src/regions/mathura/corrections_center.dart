@@ -1,7 +1,7 @@
 const mathuraTithiCorrectionsCenter = <int, int>{
-  3848: 10,
   13421: 15,
   17082: 14,
+  29234: 29,
   48298: 15,
   54729: 9,
   59753: 13,

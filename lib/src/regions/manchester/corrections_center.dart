@@ -7,7 +7,6 @@ const manchesterTithiCorrectionsCenter = <int, int>{
   60219: 7,
   60626: 30,
   65313: 22,
-  65690: 14,
   65910: 27,
   66543: 10,
   67214: 3,

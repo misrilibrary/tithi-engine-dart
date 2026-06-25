@@ -189,7 +189,6 @@ void main() {
   group('Registry contract', () {
     test('unregistered city → empty corrections (Meeus fallback)', () {
       expect(getTithiCorrections('NoSuchCity_XYZ'), isEmpty);
-      expect(getTransitionMinutes('NoSuchCity_XYZ'), isEmpty);
     });
 
     test('registered city has data after registerAllCities', () {

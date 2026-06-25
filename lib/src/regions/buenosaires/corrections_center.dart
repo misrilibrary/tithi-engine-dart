@@ -1,7 +1,6 @@
 const buenosairesTithiCorrectionsCenter = <int, int>{
   871: 16,
   19465: 6,
-  29117: 1,
   35581: 28,
   41280: 27,
   42159: 20,
@@ -15,6 +14,7 @@ const buenosairesTithiCorrectionsCenter = <int, int>{
   64872: 24,
   66916: 30,
   67585: 19,
+  68065: 27,
   72490: 22,
   73271: 6,
 };

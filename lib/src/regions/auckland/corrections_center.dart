@@ -1,5 +1,4 @@
 const aucklandTithiCorrectionsCenter = <int, int>{
-  25733: 12,
   33144: 10,
   39193: 7,
   55772: 18,

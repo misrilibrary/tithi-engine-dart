@@ -1,6 +1,6 @@
 const indoreTithiCorrectionsCenter = <int, int>{
   6904: 25,
-  53905: 12,
+  24403: 12,
   58674: 27,
   58940: 26,
   60806: 2,

@@ -1,5 +1,6 @@
 const rotterdamTithiCorrectionsCenter = <int, int>{
   1799: 29,
+  23662: 8,
   43894: 12,
   60774: 30,
   65185: 11,

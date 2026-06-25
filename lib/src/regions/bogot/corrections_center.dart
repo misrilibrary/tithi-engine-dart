@@ -6,7 +6,6 @@ const bogotTithiCorrectionsCenter = <int, int>{
   60742: 28,
   60888: 26,
   61043: 4,
-  63213: 18,
   65434: 24,
   65684: 8,
   66132: 13,

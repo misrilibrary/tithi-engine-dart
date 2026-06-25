@@ -7,6 +7,7 @@ const jodhpurTithiCorrectionsCenter = <int, int>{
   57292: 3,
   57582: 27,
   60120: 25,
+  61614: 13,
   62062: 19,
   64302: 14,
   64992: 25,

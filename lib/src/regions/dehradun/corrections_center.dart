@@ -11,6 +11,7 @@ const dehradunTithiCorrectionsCenter = <int, int>{
   64124: 13,
   65347: 26,
   66881: 24,
+  67018: 13,
   68573: 3,
   68659: 30,
   70090: 14,

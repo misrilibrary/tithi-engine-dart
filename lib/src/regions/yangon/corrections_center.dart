@@ -1,6 +1,6 @@
 const yangonTithiCorrectionsCenter = <int, int>{
   28690: 17,
-  51707: 29,
+  39885: 19,
   60382: 22,
   61251: 4,
   61658: 28,
