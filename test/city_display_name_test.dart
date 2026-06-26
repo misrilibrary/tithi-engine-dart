@@ -53,9 +53,11 @@ void main() {
 
     test('displayName is a subset of qualifiedName for every city', () {
       for (final c in City.values) {
-        final d = City.displayName(c);
-        final q = City.qualifiedName(c);
-        expect(d == c || d == q, isTrue, reason: 'displayName($c)=$d vs $q');
+        final name = c.name;
+        final d = City.displayName(name);
+        final q = City.qualifiedName(name);
+        expect(d == name || d == q, isTrue,
+            reason: 'displayName($name)=$d vs $q');
       }
     });
 

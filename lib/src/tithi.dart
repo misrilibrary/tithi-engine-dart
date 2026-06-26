@@ -7,12 +7,6 @@
 enum Paksha { shukla, krishna }
 
 /// Tithi names within a paksha (1-15).
-@Deprecated('Use getTithiName(int) (handles the paksha-dependent 15th: Purnima '
-    'vs Amavasya). Will be removed in 5.0.0.')
-const tithiNames = _tithiNames;
-
-// Private backing list so internal callers (getTithiName) don't trip the
-// same-package deprecation lint. Public [tithiNames] is the deprecated alias.
 const _tithiNames = [
   'Pratipada', // 1
   'Dwitiya', // 2

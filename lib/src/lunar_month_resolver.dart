@@ -1,5 +1,6 @@
 import 'astronomy.dart';
 import 'ayanamsha.dart';
+import 'cities.dart' show defaultCityName;
 import 'lunar_month.dart';
 import 'regions/registry.dart';
 import 'tithi.dart';
@@ -34,7 +35,7 @@ class LunarMonthResolver {
 
   LunarMonthResolver({
     this.system = MonthSystem.purnimant,
-    this.city = defaultCity,
+    this.city = defaultCityName,
     this.convention = SunriseConvention.upperLimb,
   });
 

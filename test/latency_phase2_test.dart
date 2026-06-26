@@ -21,7 +21,7 @@ Duration _timeMonthGrid(String city, int year, int month, int repeats) {
         system: MonthSystem.purnimant); // fresh per grid, like the app baseline
     final days = _daysInMonth(year, month);
     for (var d = 1; d <= days; d++) {
-      p.tithiOnDate(DateTime(year, month, d), city);
+      p.tithiOnDate(DateTime(year, month, d), City.of(city));
     }
   }
   sw.stop();

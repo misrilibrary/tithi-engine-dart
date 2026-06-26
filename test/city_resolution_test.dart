@@ -35,10 +35,15 @@ void main() {
     expect(lookupCityLocation('new york').longitude, ny.longitude);
 
     final p = Panchang([registerAllCities]);
-    final a = p.tithiOnDate(DateTime.utc(2026, 1, 3), 'New York').tithiNumber;
-    final b =
-        p.tithiOnDate(DateTime.utc(2026, 1, 3), 'New York, NY').tithiNumber;
-    final c = p.tithiOnDate(DateTime.utc(2026, 1, 3), 'new york').tithiNumber;
+    final a = p
+        .tithiOnDate(DateTime.utc(2026, 1, 3), City.of('New York'))
+        .tithiNumber;
+    final b = p
+        .tithiOnDate(DateTime.utc(2026, 1, 3), City.of('New York, NY'))
+        .tithiNumber;
+    final c = p
+        .tithiOnDate(DateTime.utc(2026, 1, 3), City.of('new york'))
+        .tithiNumber;
     expect(b, a);
     expect(c, a);
   });
@@ -48,7 +53,7 @@ void main() {
     expect(() => lookupCityLocation('Vancouver, WA'), throwsArgumentError);
     expect(
         () => Panchang([registerAllCities])
-            .tithiOnDate(DateTime.utc(2026, 1, 3), 'Nonexistent City'),
+            .tithiOnDate(DateTime.utc(2026, 1, 3), City.of('Nonexistent City')),
         throwsArgumentError);
   });
 }

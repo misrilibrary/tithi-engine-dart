@@ -27,7 +27,7 @@ void main() {
     final ny = lookupCityLocation('New York');
     final byCoord =
         p.at(Location.at(ny.latitude, ny.longitude)).tithiOnDate(date);
-    final byName = p.tithiOnDate(date, 'New York');
+    final byName = p.tithiOnDate(date, City.of('New York'));
     expect(byCoord.displayName, byName.displayName);
   });
 

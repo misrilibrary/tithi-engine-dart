@@ -11,11 +11,11 @@
 /// import 'package:tithi_engine/data/all.dart';
 ///
 /// final panchang = Panchang([registerAllCities]);
-/// final info = panchang.tithiOnDate(DateTime.utc(2026, 2, 15), 'Ujjain');
+/// final info = panchang.tithiOnDate(DateTime.utc(2026, 2, 15), City.ujjain);
 /// print(info.displayName); // "Phalguna Krishna Trayodashi"
 ///
 /// final diwali = panchang.dateFor(festivals.firstWhere((f) => f.id == 'diwali'),
-///     2026, 'Seattle');
+///     2026, City.seattle);
 /// ```
 library;
 
@@ -26,19 +26,13 @@ export 'src/panchang.dart' show Panchang, PanchangAt;
 export 'src/tithi_calculator.dart' show TithiInfo, TithiSegment;
 export 'src/location.dart' show Location, LocationSource;
 export 'src/lunar_month.dart' show LunarMonth, MonthSystem;
-export 'src/tithi.dart' show Paksha, tithiNames, getTithiName, Tithi;
+export 'src/tithi.dart' show Paksha, getTithiName, Tithi;
 export 'src/festival_def.dart' show FestivalDef, MuhurtaRule, festivals;
 export 'src/festival_finder.dart' show FestivalDate;
 
 // ── City registry / location data ────────────────────────────────────────
 export 'src/cities.dart' show City, resolveCityName;
-export 'src/astronomy.dart'
-    show
-        CityLocation,
-        supportedCities,
-        defaultCity,
-        getLocationForCity,
-        SunriseConvention;
+export 'src/astronomy.dart' show defaultCity, SunriseConvention;
 
 // NOTE (3.0): the time-aware API is UTC-instant based. The caller resolves the
 // DST-correct offset and passes UTC instants; the library does no timezone work.

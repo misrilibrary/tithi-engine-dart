@@ -24,8 +24,7 @@ void main() {
   int delta(int a, int b) => (b - a + 30) % 30; // sunrise-to-sunrise tithi step
 
   // Daily sunrise tithis for a year at one city, with parallel dates.
-  ({List<DateTime> dates, List<TithiInfo> info}) yearSeq(
-      int year, String city) {
+  ({List<DateTime> dates, List<TithiInfo> info}) yearSeq(int year, City city) {
     final dates = <DateTime>[];
     final info = <TithiInfo>[];
     for (var d = DateTime.utc(year, 1, 1);
@@ -38,7 +37,7 @@ void main() {
   }
 
   group('Day-level vriddhi & kshaya occur in the sunrise sequence', () {
-    final seq = yearSeq(2026, 'Ujjain');
+    final seq = yearSeq(2026, City.of('Ujjain'));
 
     test('vriddhi happens: a tithi repeats on two consecutive sunrises', () {
       var n = 0;
@@ -79,14 +78,14 @@ void main() {
       // Scan a few years for a vriddhi within a single month, away from the
       // paksha boundary (tithi not 15/30) so the spec is unambiguous.
       for (final year in [2026, 2025, 2024, 2027]) {
-        final seq = yearSeq(year, 'Ujjain');
+        final seq = yearSeq(year, City.of('Ujjain'));
         for (var i = 0; i + 1 < seq.info.length; i++) {
           final a = seq.info[i], b = seq.info[i + 1];
           if (a.tithiNumber != b.tithiNumber) continue; // not vriddhi
           if (a.tithiNumber == 15 || a.tithiNumber == 30) continue; // boundary
           if (a.month != b.month) continue; // same month
           final dates = p.findDates(
-              a.month, Tithi.ofNumber(a.tithiNumber), year, 'Ujjain');
+              a.month, Tithi.ofNumber(a.tithiNumber), year, City.of('Ujjain'));
           expect(dates, contains(seq.dates[i + 1]),
               reason:
                   'vriddhi ${a.displayName} ($year): finder should return the '
@@ -101,7 +100,7 @@ void main() {
   group('Kshaya resolves to the day BEFORE the skip', () {
     test('finder returns the prior day for a skipped tithi', () {
       for (final year in [2026, 2025, 2024, 2027]) {
-        final seq = yearSeq(year, 'Ujjain');
+        final seq = yearSeq(year, City.of('Ujjain'));
         for (var i = 0; i + 1 < seq.info.length; i++) {
           final before = seq.info[i].tithiNumber;
           final after = seq.info[i + 1].tithiNumber;
@@ -115,8 +114,8 @@ void main() {
           expect(before, isNot(skipped));
           expect(after, isNot(skipped));
           // Finder maps it to the prior day (where `before` was at sunrise).
-          final dates = p.findDates(
-              seq.info[i].month, Tithi.ofNumber(skipped), year, 'Ujjain');
+          final dates = p.findDates(seq.info[i].month, Tithi.ofNumber(skipped),
+              year, City.of('Ujjain'));
           expect(dates, isNotEmpty,
               reason: 'kshaya tithi should still resolve to a date');
           expect(dates, contains(seq.dates[i]),

@@ -1,5 +1,6 @@
 import 'astronomy.dart';
 import 'ayanamsha.dart';
+import 'cities.dart' show defaultCityName;
 import 'finder.dart';
 import 'lunar_month.dart';
 import 'lunar_month_resolver.dart';
@@ -127,7 +128,7 @@ class TithiCalculator {
 
   /// Returns the (cached) resolver for [city].
   LunarMonthResolver _resolverFor(String city) {
-    if (city == defaultCity) return _monthResolver;
+    if (city == defaultCityName) return _monthResolver;
     return _resolverCache[city] ??= LunarMonthResolver(
         system: monthSystem, city: city, convention: convention);
   }
@@ -227,7 +228,7 @@ class TithiCalculator {
   /// Returns all occurrences (usually 1, sometimes 2).
   List<DateTime> findInYear(TithiInfo info, int year,
       {String? celebrationCity}) {
-    final city = celebrationCity ?? defaultCity;
+    final city = celebrationCity ?? defaultCityName;
     final resolver = _resolverFor(city);
     return findTithiInYear(
       month: info.month,
@@ -245,7 +246,7 @@ class TithiCalculator {
   /// Find the next occurrence of a tithi from today (or a given date).
   DateTime? findNext(TithiInfo info,
       {DateTime? from, String? celebrationCity}) {
-    final city = celebrationCity ?? defaultCity;
+    final city = celebrationCity ?? defaultCityName;
     final resolver = _resolverFor(city);
     return findNextOccurrence(
       month: info.month,

@@ -21,7 +21,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^4.4.0
+  tithi_engine: ^5.0.0
 ```
 
 ## Quick Start
@@ -44,7 +44,7 @@ print(info.displayName); // "Phalguna Krishna Trayodashi"
 // package:timezone). The offset is used only to pick the civil day's data.
 final cdt = const Duration(hours: -5);
 final birthUtc = DateTime.utc(2006, 5, 30, 20, 0).subtract(cdt); // 8 PM CDT → UTC
-final birthTithi = panchang.tithiAtInstant(birthUtc, 'Austin', offset: cdt);
+final birthTithi = panchang.tithiAtInstant(birthUtc, City.of('Austin'), offset: cdt);
 print(birthTithi.displayName);
 
 // Festival date
@@ -52,9 +52,9 @@ final shivaratri = panchang.dateFor(
   festivals.firstWhere((f) => f.name == 'Maha Shivaratri'), 2026, City.ujjain);
 print('Maha Shivaratri 2026: ${shivaratri?.date}');
 
-// Tithi → Date
-final date = panchang.getDate(
-  LunarMonth.bhadrapada, Paksha.krishna, 8, 2026, City.seattle);
+// Tithi → Date (typed: pass a Tithi and a City)
+final date = panchang.findDate(
+  LunarMonth.bhadrapada, Tithi.krishna(8), 2026, City.seattle);
 print('Janmashtami 2026 Seattle: $date');
 ```
 
@@ -77,8 +77,8 @@ Combine packs: `Panchang([registerIndia, registerEurope])`.
 ## API
 
 `Panchang` is the single entry point. Value types (`TithiInfo`, `TithiSegment`,
-`LunarMonth`, `MonthSystem`, `Paksha`, `SunriseConvention`, `FestivalDef`, `MuhurtaRule`,
-`festivals`, `FestivalDate`, `City`, `CityLocation`, `Location`, `LocationSource`) are
+`LunarMonth`, `MonthSystem`, `Paksha`, `Tithi`, `SunriseConvention`, `FestivalDef`,
+`MuhurtaRule`, `festivals`, `FestivalDate`, `City`, `Location`, `LocationSource`) are
 exported; the engine internals are not.
 
 `FestivalDate` carries `month` (actual `LunarMonth` of the occurrence) and `isAdhika`,
@@ -89,13 +89,18 @@ The time-aware API is **UTC-instant based**: you pass true UTC instants and, whe
 a civil day matters, the DST-aware offset in effect (the engine does no timezone
 resolution — resolve the offset yourself, e.g. via `package:timezone`).
 
-> **New in 4.4.0:** typed value types `Tithi` (`Tithi.shukla(8)`, `Tithi.krishna(11)`,
-> `Tithi.ofNumber(23)`; `.number`/`.name` own the Purnima/Amavasya rule) and `City`
-> (`City(name, {region})`, `City.isSupported`, `resolveCityName`). New typed
-> `findDate`/`findDates` take a `Tithi`. The legacy `getDate`/`getDates`,
-> `findNext` (primitive form), `tithiNames`, `supportedCities`, `CityLocation`,
-> `getLocationForCity`, and `FestivalDate.festival` are **deprecated** (removed in
-> 5.0, where methods take `City`/`Tithi`).
+> **Breaking in 5.0.0:** every city-keyed method now takes a `City` (not a
+> `String`) and `findNext` is typed (`findNext(month, Tithi, city, {from})`).
+> `City.*` constants are now `City` instances and `City.values` returns
+> `List<City>`. The 4.x deprecated surface — `getDate`/`getDates`, the primitive
+> `findNext`, `tithiNames`, `supportedCities`, `CityLocation`, `getLocationForCity`,
+> and `FestivalDate.festival` — has been **removed**. Use the typed value types
+> `Tithi` (`Tithi.shukla(8)`, `Tithi.krishna(11)`, `Tithi.ofNumber(23)`;
+> `.number`/`.name` own the Purnima/Amavasya rule) and `City`
+> (`City.of(name)` / `City.tryOf(name)`, `City.ujjain`, `resolveCityName`).
+> Construct a `City` at the boundary; persisted data can stay string-keyed.
+>
+> See [Migrating from 4.x to 5.0](#migrating-from-4x-to-50) for the full mapping.
 
 | Method | Description |
 |--------|-------------|
@@ -103,25 +108,28 @@ resolution — resolve the offset yourself, e.g. via `package:timezone`).
 | `panchang.tithiOnDate(date, city)` | Sunrise tithi of the panchang day (display/observance) |
 | `panchang.tithiAtInstant(utcInstant, city, {offset})` | Tithi at an exact UTC moment (birth-time) |
 | `panchang.tithiSegments(windowStartUtc, windowEndUtc, city, {offset})` | Every tithi segment in a UTC window (N transitions → N+1 segments) |
-| `panchang.findDate(month, Tithi, year, city)` | Tithi spec → Gregorian date (typed; **preferred**) |
-| `panchang.findDates(month, Tithi, year, city)` | Tithi spec → all dates, adhika-aware (typed; **preferred**) |
-| `panchang.getDate(...)` / `getDates(...)` | _Deprecated (5.0): use `findDate`/`findDates` with a `Tithi`_ |
+| `panchang.findDate(month, Tithi, year, city)` | Tithi spec → Gregorian date |
+| `panchang.findDates(month, Tithi, year, city)` | Tithi spec → all dates, adhika-aware |
 | `panchang.dateFor(festival, year, city)` | Festival → date with muhurta rules |
 | `panchang.recurringDates(festival, year, city)` | Recurring festival → all occurrences in the year |
-| `panchang.findNext(month, paksha, tithi, city)` | Next occurrence from today |
+| `panchang.findNext(month, Tithi, city, {from})` | Next occurrence of a tithi on/after `from` (defaults to now) |
 | `panchang.at(location)` | Bind to a `Location` (city name or raw `lat/lng`) → `PanchangAt` (same methods, no `city` arg) |
 | `panchang.sunrise(date, city)` / `sunset(date, city)` | Sunrise/sunset UTC `DateTime` (Meeus, ~1 min; no per-city correction) |
 | `TithiInfo.fromStored(...)` | Render a saved tithi (with optional Purnimant↔Amant display conversion) |
 
 ### City names
 
-Every method takes a `city` name. Resolution is **case- and space-insensitive** and
+Every city-keyed method takes a `City`. Construct one with `City.of('Name')`
+(throws `ArgumentError` if unsupported) or `City.tryOf('Name')` (returns `null`),
+or use a convenience constant like `City.seattle`. Either way a `City` value always
+denotes a **supported** city. Name resolution is **case- and space-insensitive** and
 accepts the qualified `"City, Region"` form, so all of these resolve to the same city:
 
 ```dart
-getLocationForCity('New York');      // canonical
-getLocationForCity('new york');      // case-insensitive
-getLocationForCity('New York, NY');  // qualified form (as City.qualifiedName emits)
+City.of('New York');               // canonical
+City.of('new york');               // case-insensitive
+City.tryOf('Atlantis');            // unsupported → null
+resolveCityName('New York, NY');   // qualified form → 'New York'
 ```
 
 The canonical identity is the **(city, region)** pair: the bare name maps to the
@@ -130,10 +138,11 @@ specific one when several share a name (e.g. a future `'Vancouver, WA'` vs
 `'Vancouver, BC'`). There is **no fuzzy/region-stripping match** — a wrong region
 (`'Vancouver, WA'` when only BC exists) is treated as unknown.
 
-An **unsupported city throws `ArgumentError`** — the engine never silently substitutes
-another location, because a wrong location produces wrong sunrise-based tithis and
-festival dates. To check without throwing, use `resolveCityName(name)` (returns `null`
-if unsupported) or inspect `supportedCities`. Need a city added? Open an issue:
+An **unsupported name is rejected at construction**: `City.of` throws `ArgumentError`
+(the engine never silently substitutes another location, because a wrong location
+produces wrong sunrise-based tithis and festival dates). To validate without throwing,
+use `City.tryOf(name)` (or `resolveCityName(name)`); enumerate with `City.values`. Need
+a city added? Open an issue:
 <https://github.com/misrilibrary/tithi-engine-dart/issues>.
 
 ### By coordinates
@@ -160,9 +169,9 @@ panchang.at(Location.city('Seattle')).tithiOnDate(DateTime.utc(2026, 2, 15));
 ```
 
 `PanchangAt` exposes the same read methods as `Panchang` minus the `city` argument
-(`tithiOnDate`, `tithiAtInstant`, `tithiSegments`, `getDate(s)`, `findNext`, `dateFor`,
-`recurringDates`). Cities are stored at ~0.1° (~11 km), so any point within a city's cell
-is treated as that city.
+(`tithiOnDate`, `tithiAtInstant`, `tithiSegments`, `findDate`/`findDates`, `findNext`,
+`dateFor`, `recurringDates`, `sunrise`/`sunset`). Cities are stored at ~0.1° (~11 km),
+so any point within a city's cell is treated as that city.
 
 > **Recommendation:** prefer `Location.city(name)` (or a coordinate that lands in a
 > supported city's cell) when you can. A named city carries Swiss‑Ephemeris correction
@@ -197,6 +206,65 @@ muhurtas, and `sunrise`/`sunset`. If you register `centerDisc` but want the
 default behavior, just construct without the `convention` argument — the two
 table sets are independent and the upper-limb path is untouched.
 
+## Migrating from 4.x to 5.0
+
+5.0 is a breaking release that removes the 4.x deprecated surface and makes the
+city/tithi API fully typed. The calculations are **unchanged** (byte-identical to
+4.4.0, verified against `.se1`) — only the API surface changed. If you adopted the
+4.4.0 replacements already, most of this is done.
+
+**Removed symbol → replacement**
+
+| Removed in 5.0 | Use instead |
+|---|---|
+| `getDate(month, paksha, tithiInPaksha, year, city)` | `findDate(month, Tithi.shukla(n)` / `Tithi.krishna(n), year, City.of(city))` |
+| `getDates(...)` | `findDates(month, Tithi, year, City)` |
+| `findNext(month, paksha, tithiInPaksha, city)` (primitive) | `findNext(month, Tithi, City, {from})` (typed) |
+| `tithiNames[i]` | `getTithiName(n)` (owns the Purnima/Amavasya rule) |
+| `supportedCities` (`Map<String, CityLocation>`) | `City.values` (`List<City>`) |
+| `supportedCities.containsKey(c)` / `City.isSupported(c)` | `City.tryOf(c) != null` |
+| `CityLocation` | removed — coordinates via `Location`, offsets via your own tz layer |
+| `getLocationForCity(c)` | `Panchang.at(Location.city(c))`; the engine no longer exposes city geo/offset data |
+| `FestivalDate.festival` | direct getters: `result.month`, `.name`, `.tithiNumber`, `.paksha`, `.tithiInPaksha`, `.muhurta`, `.recurring` |
+
+**Every city-keyed method now takes a `City`, and tithi specs take a `Tithi`:**
+
+```dart
+// 4.x
+panchang.tithiOnDate(date, 'Ujjain');
+panchang.getDates(LunarMonth.kartika, Paksha.shukla, 11, 2026, 'Seattle');
+panchang.findNext(LunarMonth.chaitra, Paksha.shukla, 9, 'Delhi');
+
+// 5.0
+panchang.tithiOnDate(date, City.of('Ujjain'));            // or City.ujjain
+panchang.findDates(LunarMonth.kartika, Tithi.shukla(11), 2026, City.of('Seattle'));
+panchang.findNext(LunarMonth.chaitra, Tithi.shukla(9), City.of('Delhi'));
+```
+
+**Constructing a `City`.** `City` has no public default constructor — it validates
+at construction, so a `City` value always denotes a supported city:
+
+```dart
+City.of('Ujjain');         // throws ArgumentError if unsupported
+City.tryOf('Ujjain');      // City? — null if unsupported
+City.ujjain;               // a const convenience instance
+```
+
+For persisted/user-supplied names, resolve at the boundary and fall back to the
+engine-provided `defaultCity` (itself a `City`, always supported):
+
+```dart
+final city = City.tryOf(savedName) ?? defaultCity;
+```
+
+**`Tithi`** is likewise factory-only: `Tithi.shukla(1..15)`, `Tithi.krishna(1..15)`,
+or `Tithi.ofNumber(1..30)`; `.number`/`.name`/`.paksha`/`.dayInPaksha` read it back.
+
+**Type changes to remember:** `City.values` now returns `List<City>` (was
+`List<String>`); the `City.*` constants are `City` instances (was `String`);
+`defaultCity` is a `City` (was a `String`). Persisted data can stay string-keyed —
+construct a `City` only at the boundary.
+
 ## Accuracy
 
 Source of truth: **JPL Swiss Ephemeris (`.se1`)**, exhaustively verified 1900–2100,
@@ -216,6 +284,37 @@ all 230 cities, both conventions (upper limb / centre of disc), both month syste
 All 14 compute points are 🟢 at the minute-level accuracy bar. The only residual
 is sub-minute (≤30 s near-transition slivers, provably below display resolution).
 Full benchmark: [`ACCURACY_BENCHMARK.md`](ACCURACY_BENCHMARK.md).
+
+## Performance
+
+Per-call latency of the public API, timed the way a client calls it (warm VM, a
+reused `City`) with the `bench_api` tool, the same business outcome benchmarked
+against each engine version. Absolute numbers are machine-dependent (measured on
+an Apple-silicon laptop, `minMs=400`) — read them as orders of magnitude and
+relative cost, not a spec.
+
+| API (µs/call) | 4.3.1 | 4.4.0 | 5.0.0 |
+|--------|------:|------:|------:|
+| `sunrise` / `sunset` | 2.55 | 2.56 | 2.56 |
+| `tithiOnDate` | 11.3 | 12.3 | 11.3 |
+| `tithiSegments` (1-day window) | 33.5 | 33.8 | 33.2 |
+| `tithiAtInstant` | 80.8 | 77.3 | 76.5 |
+| `findDate` | 220 | 222 | 223 |
+| `findDates` | 224 | 220 | 219 |
+| `dateFor` (festival + muhurta) | 276 | 281 | 274 |
+| `findNext` | 802 | 763 | 774 |
+| `recurringDates` (full year) | 1646 | 1907 | 1895 |
+
+**The 5.0 typed-API migration adds no measurable latency** — every column matches
+4.4 within run-to-run noise (the compute is identical; only the surface types
+changed). The typed value types are effectively free: `City.of(name)` ~0.4 µs and
+`Tithi.shukla(n)` ~0.02 µs, below the noise floor of every operation above and a
+one-time cost when a `City` is reused.
+
+The one intentional difference is `recurringDates`, ~15% slower in 4.4/5.0 than
+4.3 — since 4.4 its year scan uses the Swiss-corrected day tithi (the
+masik-festival accuracy fix) instead of raw astronomy, a deliberate
+accuracy-for-latency trade carried unchanged into 5.0.
 
 ## Cross-Platform
 

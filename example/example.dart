@@ -12,7 +12,7 @@ void main() {
   final panchang = Panchang([registerAllCities]);
 
   // ─── tithiOnDate: sunrise tithi of a panchang day (display/observance) ──
-  final info = panchang.tithiOnDate(DateTime.utc(2026, 6, 25), 'New York');
+  final info = panchang.tithiOnDate(DateTime.utc(2026, 6, 25), City.newyork);
   print('tithiOnDate: ${info.displayName}');
   print('  month=${info.month.displayName}, paksha=${info.paksha}, '
       'tithiInPaksha=${info.tithiInPaksha}, isAdhika=${info.isAdhika}');
@@ -21,13 +21,14 @@ void main() {
   // Pass the DST-aware offset in effect at the birth location+time.
   const nyOffset = Duration(hours: -4); // EDT
   final birthUtc = DateTime.utc(2026, 6, 25, 22, 30); // 6:30 PM EDT → UTC
-  final birth = panchang.tithiAtInstant(birthUtc, 'New York', offset: nyOffset);
+  final birth =
+      panchang.tithiAtInstant(birthUtc, City.newyork, offset: nyOffset);
   print('\ntithiAtInstant: ${birth.displayName}');
 
   // ─── tithiSegments: all tithi segments in a UTC window ──────────────────
   final windowStart = DateTime.utc(2026, 6, 25, 0, 0);
   final windowEnd = DateTime.utc(2026, 6, 26, 0, 0);
-  final segments = panchang.tithiSegments(windowStart, windowEnd, 'New York',
+  final segments = panchang.tithiSegments(windowStart, windowEnd, City.newyork,
       offset: nyOffset);
   print('\ntithiSegments (${segments.length} segments in 24h window):');
   for (final seg in segments) {
@@ -36,16 +37,16 @@ void main() {
 
   // ─── findDate / findDates: tithi spec → Gregorian date(s) ──────────────
   final date = panchang.findDate(
-      LunarMonth.bhadrapada, Tithi.krishna(8), 2026, 'Seattle');
+      LunarMonth.bhadrapada, Tithi.krishna(8), 2026, City.seattle);
   print('\nfindDate (Janmashtami 2026 Seattle): $date');
 
-  final dates =
-      panchang.findDates(LunarMonth.jyeshtha, Tithi.shukla(11), 2026, 'Ujjain');
+  final dates = panchang.findDates(
+      LunarMonth.jyeshtha, Tithi.shukla(11), 2026, City.ujjain);
   print('findDates (Jyeshtha Shukla Ekadashi 2026): $dates');
 
   // ─── dateFor: named festival → date with muhurta rules ─────────────────
   final shivaratri = panchang.dateFor(
-      festivals.firstWhere((f) => f.id == 'maha_shivaratri'), 2026, 'Delhi');
+      festivals.firstWhere((f) => f.id == 'maha_shivaratri'), 2026, City.delhi);
   if (shivaratri != null) {
     print('\ndateFor (Maha Shivaratri 2026 Delhi):');
     print('  date=${shivaratri.date}, month=${shivaratri.month.displayName}');
@@ -57,7 +58,7 @@ void main() {
 
   // ─── recurringDates: a recurring festival → all occurrences in a year ───
   final ekadashi = festivals.firstWhere((f) => f.id == 'masik_shukla_ekadashi');
-  final ekadashiDates = panchang.recurringDates(ekadashi, 2026, 'Ujjain');
+  final ekadashiDates = panchang.recurringDates(ekadashi, 2026, City.ujjain);
   print(
       '\nrecurringDates (Shukla Ekadashi 2026, ${ekadashiDates.length} occurrences):');
   for (final fd in ekadashiDates.take(3)) {
@@ -68,15 +69,13 @@ void main() {
   print('  ...');
 
   // ─── findNext: next occurrence of a tithi from today ────────────────────
-  // (findNext is deprecated in 4.4; a typed findNext(Tithi) lands in 5.0.)
-  // ignore: deprecated_member_use
   final next =
-      panchang.findNext(LunarMonth.kartika, Paksha.krishna, 15, 'Seattle');
+      panchang.findNext(LunarMonth.kartika, Tithi.krishna(15), City.seattle);
   print('\nfindNext (Kartika Amavasya from today): $next');
 
   // ─── sunrise / sunset ──────────────────────────────────────────────────
-  final sr = panchang.sunrise(DateTime.utc(2026, 6, 25), 'Seattle');
-  final ss = panchang.sunset(DateTime.utc(2026, 6, 25), 'Seattle');
+  final sr = panchang.sunrise(DateTime.utc(2026, 6, 25), City.seattle);
+  final ss = panchang.sunset(DateTime.utc(2026, 6, 25), City.seattle);
   print('\nsunrise Seattle 2026-06-25: $sr');
   print('sunset  Seattle 2026-06-25: $ss');
 
@@ -97,11 +96,11 @@ void main() {
   // Register the centerDisc data pack and pass the convention.
   final pcenter = Panchang([registerAllCities, registerAllCitiesCenterDisc],
       convention: SunriseConvention.centerDisc);
-  final centerInfo = pcenter.tithiOnDate(DateTime.utc(2026, 6, 25), 'Delhi');
+  final centerInfo = pcenter.tithiOnDate(DateTime.utc(2026, 6, 25), City.delhi);
   print('\ncenterDisc convention:');
   print('  tithiOnDate Delhi: ${centerInfo.displayName}');
   print(
-      '  sunrise Delhi: ${pcenter.sunrise(DateTime.utc(2026, 6, 25), "Delhi")}');
+      '  sunrise Delhi: ${pcenter.sunrise(DateTime.utc(2026, 6, 25), City.delhi)}');
 
   // ─── TithiInfo.fromStored: render a saved tithi with system conversion ──
   final stored = TithiInfo.fromStored(

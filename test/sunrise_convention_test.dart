@@ -26,13 +26,14 @@ void main() {
     final explicitUpper =
         Panchang([registerAllCities], convention: SunriseConvention.upperLimb);
 
-    for (final city in ['New York', 'Ujjain', 'London', 'Tokyo', 'Sydney']) {
-      test('$city sunrise/sunset identical when convention omitted', () {
+    for (final name in ['New York', 'Ujjain', 'London', 'Tokyo', 'Sydney']) {
+      final city = City.of(name);
+      test('$name sunrise/sunset identical when convention omitted', () {
         expect(implicit.sunrise(d, city), explicitUpper.sunrise(d, city));
         expect(implicit.sunset(d, city), explicitUpper.sunset(d, city));
       });
 
-      test('$city tithiOnDate identical when convention omitted', () {
+      test('$name tithiOnDate identical when convention omitted', () {
         expect(implicit.tithiOnDate(d, city).displayName,
             explicitUpper.tithiOnDate(d, city).displayName);
       });
@@ -40,8 +41,8 @@ void main() {
 
     test('festival date unchanged when convention omitted (Diwali 2026)', () {
       final diwali = festivals.firstWhere((f) => f.id == 'diwali');
-      expect(implicit.dateFor(diwali, 2026, 'Ujjain')?.date,
-          explicitUpper.dateFor(diwali, 2026, 'Ujjain')?.date);
+      expect(implicit.dateFor(diwali, 2026, City.of('Ujjain'))?.date,
+          explicitUpper.dateFor(diwali, 2026, City.of('Ujjain'))?.date);
     });
   });
 
@@ -51,8 +52,9 @@ void main() {
     final center =
         Panchang([registerAllCities], convention: SunriseConvention.centerDisc);
 
-    for (final city in ['New York', 'London', 'Ujjain', 'Tokyo']) {
-      test('$city: centerDisc sunrise later, sunset earlier', () {
+    for (final name in ['New York', 'London', 'Ujjain', 'Tokyo']) {
+      final city = City.of(name);
+      test('$name: centerDisc sunrise later, sunset earlier', () {
         final upSr = upper.sunrise(d, city);
         final ctSr = center.sunrise(d, city);
         final upSs = upper.sunset(d, city);
@@ -75,14 +77,14 @@ void main() {
 
     test('centerDisc tithiOnDate still returns a valid tithi (Meeus fallback)',
         () {
-      final info = center.tithiOnDate(d, 'Ujjain');
+      final info = center.tithiOnDate(d, City.of('Ujjain'));
       expect(info.tithiNumber, inInclusiveRange(1, 30));
       expect(info.displayName, isNotEmpty);
     });
 
     test('centerDisc tithiAtInstant does not crash and is in range', () {
       final info = center.tithiAtInstant(
-          DateTime.utc(2026, 6, 22, 3, 30), 'Ujjain',
+          DateTime.utc(2026, 6, 22, 3, 30), City.of('Ujjain'),
           offset: const Duration(hours: 5, minutes: 30));
       expect(info.tithiNumber, inInclusiveRange(1, 30));
     });

@@ -3,7 +3,12 @@ import 'astronomy.dart' show CityLocation;
 /// The single default reference city used wherever no city is specified
 /// (month/tithi resolution, sunrise, UI defaults). Change this one value to
 /// swap the app-wide default. Must be a supported city (see [City.values]).
-const defaultCity = 'Ujjain';
+const defaultCity = City._('Ujjain', 'India');
+
+/// Internal string key for the default city, used by the package-private
+/// string-keyed calculators (month/tithi resolution, sunrise). Not exported;
+/// the public default is [defaultCity] (a [City]).
+const defaultCityName = 'Ujjain';
 
 /// Priority cities shown at the top of dropdowns (above all groups).
 const pinnedCities = [
@@ -305,11 +310,6 @@ const cityRegistry = <String, CityLocation>{
   'Redmond': CityLocation(47.7, -122.1, -8.0, region: 'WA'),
 };
 
-/// Deprecated public alias for the internal [cityRegistry] map.
-@Deprecated('Use City.values / City.isSupported / resolveCityName. '
-    'Will be removed in 5.0.0.')
-const supportedCities = cityRegistry;
-
 /// India cities (UTC +5.5) for grouping.
 const _indiaCities = {
   // Metros / tier-1
@@ -391,13 +391,12 @@ List<String?> get orderedCityList {
 }
 
 /// A supported city: a canonical [name] plus an optional [region]/country
-/// qualifier (e.g. `City('Redmond', region: 'WA')`).
+/// qualifier. Construct via [City.of] / [City.tryOf] (validated against the
+/// supported-city registry) or use a [City] constant (e.g. [City.ujjain]); a
+/// `City` value therefore always denotes a supported city.
 ///
-/// `City` is both a value type and a namespace of convenience constants. The
-/// `City.*` members (e.g. [City.ujjain]) remain plain [String]s in 4.x so they
-/// keep working wherever a `String city` is expected; constructing a `City`
-/// instance gives a canonical [key]/[toString] the engine's string-keyed methods
-/// already accept. (At 5.0 the constants and method params flip to `City`.)
+/// It is the input type for every city-keyed [Panchang] method; [region] is
+/// display-only and never affects a calculation.
 class City {
   /// Canonical city name (e.g. `'Seattle'`).
   final String name;
@@ -406,37 +405,60 @@ class City {
   /// cities. Display-only — it does not affect any calculation.
   final String? region;
 
-  /// Construct a city value from a canonical [name] and optional [region].
-  const City(this.name, {this.region});
+  /// Private generative const ctor — backs the [City] constants and [values].
+  /// Public construction goes through [City.of] / [City.tryOf], which validate
+  /// against the supported-city registry, so a `City` value always denotes a
+  /// supported city.
+  const City._(this.name, [this.region]);
 
-  static const ujjain = 'Ujjain';
-  static const srinagar = 'Srinagar';
-  static const delhi = 'Delhi';
-  static const mumbai = 'Mumbai';
-  static const kolkata = 'Kolkata';
-  static const chennai = 'Chennai';
-  static const bangalore = 'Bangalore';
-  static const hyderabad = 'Hyderabad';
-  static const pune = 'Pune';
-  static const jaipur = 'Jaipur';
-  static const seattle = 'Seattle';
-  static const london = 'London';
-  static const newyork = 'New York';
-  static const sanfrancisco = 'San Francisco';
-  static const losangeles = 'Los Angeles';
-  static const chicago = 'Chicago';
-  static const toronto = 'Toronto';
-  static const dubai = 'Dubai';
-  static const singapore = 'Singapore';
-  static const tokyo = 'Tokyo';
-  static const sydney = 'Sydney';
+  /// Resolve [name] (any reasonable spelling, or the `"City, Region"` form) to a
+  /// supported [City]. Throws [ArgumentError] if it matches no supported city —
+  /// use [City.tryOf] for a nullable result, or [City.values] to enumerate.
+  ///
+  /// The [region] is taken from the registry, so callers never supply (or
+  /// mismatch) one: `City.of('Redmond')` → `Redmond, WA`.
+  factory City.of(String name) {
+    final c = City.tryOf(name);
+    if (c == null) {
+      throw ArgumentError.value(name, 'name',
+          'Unsupported city. See City.values (or use City.tryOf for null).');
+    }
+    return c;
+  }
 
-  /// All supported city names.
-  static List<String> get values => cityRegistry.keys.toList();
+  /// Like [City.of] but returns `null` instead of throwing when [name] matches
+  /// no supported city. Use at the persisted-data boundary, e.g.
+  /// `City.tryOf(savedName) ?? defaultCity`.
+  static City? tryOf(String name) {
+    final canon = resolveCityName(name);
+    return canon == null ? null : City._(canon, cityRegistry[canon]?.region);
+  }
 
-  /// Whether [name] resolves to a supported city (any reasonable spelling or the
-  /// `"City, Region"` qualified form). See [resolveCityName].
-  static bool isSupported(String name) => resolveCityName(name) != null;
+  static const ujjain = City._('Ujjain', 'India');
+  static const srinagar = City._('Srinagar', 'India');
+  static const delhi = City._('Delhi', 'India');
+  static const mumbai = City._('Mumbai', 'India');
+  static const kolkata = City._('Kolkata', 'India');
+  static const chennai = City._('Chennai', 'India');
+  static const bangalore = City._('Bangalore', 'India');
+  static const hyderabad = City._('Hyderabad', 'India');
+  static const pune = City._('Pune', 'India');
+  static const jaipur = City._('Jaipur', 'India');
+  static const seattle = City._('Seattle', 'WA');
+  static const london = City._('London', 'UK');
+  static const newyork = City._('New York', 'NY');
+  static const sanfrancisco = City._('San Francisco', 'CA');
+  static const losangeles = City._('Los Angeles', 'CA');
+  static const chicago = City._('Chicago', 'IL');
+  static const toronto = City._('Toronto', 'ON');
+  static const dubai = City._('Dubai', 'UAE');
+  static const singapore = City._('Singapore');
+  static const tokyo = City._('Tokyo', 'Japan');
+  static const sydney = City._('Sydney', 'Australia');
+
+  /// All supported cities (with their display region where applicable).
+  static List<City> get values =>
+      cityRegistry.entries.map((e) => City._(e.key, e.value.region)).toList();
 
   /// City names whose bare form is commonly confused with another well-known
   /// place; only these receive a qualifier from [displayName].

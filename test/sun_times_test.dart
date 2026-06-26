@@ -8,8 +8,8 @@ void main() {
   final d = DateTime.utc(2026, 6, 22);
 
   test('sunrise is before sunset; both at sensible local times (New York)', () {
-    final sr = p.sunrise(d, 'New York');
-    final ss = p.sunset(d, 'New York');
+    final sr = p.sunrise(d, City.of('New York'));
+    final ss = p.sunset(d, City.of('New York'));
     expect(sr.isBefore(ss), true);
     final srLocal = sr.add(const Duration(hours: -4)); // EDT
     final ssLocal = ss.add(const Duration(hours: -4));
@@ -20,13 +20,13 @@ void main() {
   test('coords on a city cell give the same sun times as the named city', () {
     final ny = lookupCityLocation('New York');
     expect(p.at(Location.at(ny.latitude, ny.longitude)).sunrise(d),
-        p.sunrise(d, 'New York'));
+        p.sunrise(d, City.of('New York')));
     expect(p.at(Location.at(ny.latitude, ny.longitude)).sunset(d),
-        p.sunset(d, 'New York'));
+        p.sunset(d, City.of('New York')));
   });
 
   test('unsupported city throws', () {
-    expect(() => p.sunrise(d, 'Nowhere'), throwsArgumentError);
-    expect(() => p.sunset(d, 'Nowhere'), throwsArgumentError);
+    expect(() => p.sunrise(d, City.of('Nowhere')), throwsArgumentError);
+    expect(() => p.sunset(d, City.of('Nowhere')), throwsArgumentError);
   });
 }

@@ -19,18 +19,18 @@ void main() {
 
     test('findDate returns the first of findDates (non-empty case)', () {
       const month = LunarMonth.chaitra;
-      final all = p.findDates(month, Tithi.shukla(5), 2026, 'Ujjain');
-      final one = p.findDate(month, Tithi.shukla(5), 2026, 'Ujjain');
+      final all = p.findDates(month, Tithi.shukla(5), 2026, City.of('Ujjain'));
+      final one = p.findDate(month, Tithi.shukla(5), 2026, City.of('Ujjain'));
       expect(all, isNotEmpty);
       expect(one, isNotNull);
       expect(one, all.first);
     });
 
     test('resolved findDate actually lands on the requested tithi', () {
-      final d =
-          p.findDate(LunarMonth.kartika, Tithi.shukla(15), 2026, 'Ujjain');
+      final d = p.findDate(
+          LunarMonth.kartika, Tithi.shukla(15), 2026, City.of('Ujjain'));
       expect(d, isNotNull);
-      final info = p.tithiOnDate(d!, 'Ujjain');
+      final info = p.tithiOnDate(d!, City.of('Ujjain'));
       expect(info.tithiInPaksha, 15);
       expect(info.paksha, Paksha.shukla);
     });
@@ -41,12 +41,12 @@ void main() {
 
     test('finds an occurrence on/after `from` matching the spec', () {
       final from = DateTime.utc(2026, 1, 1);
-      // ignore: deprecated_member_use_from_same_package
-      final next =
-          p.findNext(LunarMonth.magha, Paksha.shukla, 5, 'Ujjain', from: from);
+      final next = p.findNext(
+          LunarMonth.magha, Tithi.shukla(5), City.of('Ujjain'),
+          from: from);
       expect(next, isNotNull);
       expect(next!.isBefore(from), isFalse);
-      final info = p.tithiOnDate(next, 'Ujjain');
+      final info = p.tithiOnDate(next, City.of('Ujjain'));
       expect(info.tithiInPaksha, 5);
       expect(info.paksha, Paksha.shukla);
     });
@@ -66,7 +66,7 @@ void main() {
           d.month == 1;
           d = d.add(const Duration(days: 1))) {
         final (s, e) = ujjainDay(d);
-        if (p.tithiSegments(s, e, 'Ujjain', offset: ist).length >= 2) {
+        if (p.tithiSegments(s, e, City.of('Ujjain'), offset: ist).length >= 2) {
           withTransition++;
         }
       }
@@ -76,7 +76,7 @@ void main() {
 
     test('segments tile the window contiguously with in-range boundaries', () {
       final (s, e) = ujjainDay(DateTime.utc(2026, 2, 15));
-      final segs = p.tithiSegments(s, e, 'Ujjain', offset: ist);
+      final segs = p.tithiSegments(s, e, City.of('Ujjain'), offset: ist);
       expect(segs, isNotEmpty);
       expect(segs.first.startUtc, s);
       expect(segs.last.endUtc, e);
@@ -100,8 +100,10 @@ void main() {
     DateTime instant(int h) => DateTime.utc(2026, 5, 11, h).subtract(offset);
 
     test('time-of-day query returns a valid tithi and full display', () {
-      final morning = p.tithiAtInstant(instant(7), 'Delhi', offset: offset);
-      final evening = p.tithiAtInstant(instant(23), 'Delhi', offset: offset);
+      final morning =
+          p.tithiAtInstant(instant(7), City.of('Delhi'), offset: offset);
+      final evening =
+          p.tithiAtInstant(instant(23), City.of('Delhi'), offset: offset);
       for (final info in [morning, evening]) {
         expect(info.tithiNumber, inInclusiveRange(1, 30));
         expect(info.displayName, isNotEmpty);
@@ -116,13 +118,13 @@ void main() {
     final p = Panchang([registerAllCities]);
 
     test('pre-1900 date still yields a valid tithi', () {
-      final info = p.tithiOnDate(DateTime.utc(1850, 6, 1), 'Ujjain');
+      final info = p.tithiOnDate(DateTime.utc(1850, 6, 1), City.of('Ujjain'));
       expect(info.tithiNumber, inInclusiveRange(1, 30));
       expect(info.displayName, isNotEmpty);
     });
 
     test('post-2100 date still yields a valid tithi', () {
-      final info = p.tithiOnDate(DateTime.utc(2150, 6, 1), 'Ujjain');
+      final info = p.tithiOnDate(DateTime.utc(2150, 6, 1), City.of('Ujjain'));
       expect(info.tithiNumber, inInclusiveRange(1, 30));
     });
   });

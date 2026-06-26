@@ -23,8 +23,10 @@ void main() {
       final instant = DateTime.utc(2026, 5, 6, 20).subtract(cdt);
       expect(
           instant.toUtc(), DateTime.utc(2026, 5, 7, 1)); // really May 7 in UTC
-      final atInstant = p.tithiAtInstant(instant, 'Austin', offset: cdt);
-      final sunrise = p.tithiOnDate(DateTime.utc(2026, 5, 6), 'Austin');
+      final atInstant =
+          p.tithiAtInstant(instant, City.of('Austin'), offset: cdt);
+      final sunrise =
+          p.tithiOnDate(DateTime.utc(2026, 5, 6), City.of('Austin'));
       // No transition between sunrise and 8 PM that civil day → same tithi.
       expect(atInstant.tithiNumber, sunrise.tithiNumber);
       expect(atInstant.tithiInPaksha, 5); // Krishna Panchami
@@ -35,16 +37,19 @@ void main() {
       // 00:00 CDT May 21 2026. The old hasTime=hour!=0 heuristic would have
       // mis-read this as a date-only query; tithiAtInstant treats it as a moment.
       final midnight = DateTime.utc(2026, 5, 21).subtract(cdt);
-      final atMid = p.tithiAtInstant(midnight, 'Austin', offset: cdt);
+      final atMid = p.tithiAtInstant(midnight, City.of('Austin'), offset: cdt);
       expect(atMid.tithiNumber, inInclusiveRange(1, 30));
       // Before the 19:55 transition → same as the day's sunrise tithi (Shashthi).
-      expect(atMid.tithiInPaksha,
-          p.tithiOnDate(DateTime.utc(2026, 5, 21), 'Austin').tithiInPaksha);
+      expect(
+          atMid.tithiInPaksha,
+          p
+              .tithiOnDate(DateTime.utc(2026, 5, 21), City.of('Austin'))
+              .tithiInPaksha);
     });
 
     test('requires a UTC instant (asserts on wall-clock input)', () {
       final local = DateTime(2026, 5, 6, 20); // isUtc == false
-      expect(() => p.tithiAtInstant(local, 'Austin', offset: cdt),
+      expect(() => p.tithiAtInstant(local, City.of('Austin'), offset: cdt),
           throwsA(isA<AssertionError>()));
     });
   });
@@ -52,7 +57,7 @@ void main() {
   group('tithiSegments — Drik cross-check (Austin 2026-05-21)', () {
     test('Shukla Shashthi → Saptami at ~19:55 CDT (Drik: 07:54 PM)', () {
       final (s, e) = austinDay(2026, 5, 21);
-      final segs = p.tithiSegments(s, e, 'Austin', offset: cdt);
+      final segs = p.tithiSegments(s, e, City.of('Austin'), offset: cdt);
       expect(segs.length, 2);
       expect(segs[0].tithi.tithiInPaksha, 6); // Shashthi
       expect(segs[0].tithi.paksha, Paksha.shukla);
@@ -69,7 +74,7 @@ void main() {
   group('tithiSegments — multi-transition / paksha-crossing day', () {
     test('Austin 2026-06-14 has 3 segments: K.14 → Amavasya → S.1', () {
       final (s, e) = austinDay(2026, 6, 14);
-      final segs = p.tithiSegments(s, e, 'Austin', offset: cdt);
+      final segs = p.tithiSegments(s, e, City.of('Austin'), offset: cdt);
 
       expect(segs.length, 3, reason: 'two transitions inside the civil day');
 
@@ -96,7 +101,7 @@ void main() {
         'segments tile the window contiguously; internal edges are transitions',
         () {
       final (s, e) = austinDay(2026, 6, 14);
-      final segs = p.tithiSegments(s, e, 'Austin', offset: cdt);
+      final segs = p.tithiSegments(s, e, City.of('Austin'), offset: cdt);
       expect(segs.first.startUtc, s);
       expect(segs.first.startIsTransition, isFalse);
       expect(segs.last.endUtc, e);

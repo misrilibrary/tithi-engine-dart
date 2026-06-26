@@ -32,7 +32,7 @@ void main() {
         () {
       const cdt = Duration(hours: -5);
       final (s, e) = civilDay(2006, 5, 30, cdt);
-      final segs = panchang.tithiSegments(s, e, 'Austin', offset: cdt);
+      final segs = panchang.tithiSegments(s, e, City.of('Austin'), offset: cdt);
 
       // Exactly one transition inside the local day → two segments.
       expect(segs.length, 2);
@@ -50,7 +50,8 @@ void main() {
     test('Seattle 2020-05-31 (PDT −7): boundary on the correct local day', () {
       const pdt = Duration(hours: -7);
       final (s, e) = civilDay(2020, 5, 31, pdt);
-      final segs = panchang.tithiSegments(s, e, 'Seattle', offset: pdt);
+      final segs =
+          panchang.tithiSegments(s, e, City.of('Seattle'), offset: pdt);
 
       expect(segs.length, 2);
       final boundary = segs[1].startUtc;
@@ -64,7 +65,7 @@ void main() {
     test('segments always tile the window contiguously', () {
       const cdt = Duration(hours: -5);
       final (s, e) = civilDay(2006, 5, 30, cdt);
-      final segs = panchang.tithiSegments(s, e, 'Austin', offset: cdt);
+      final segs = panchang.tithiSegments(s, e, City.of('Austin'), offset: cdt);
       expect(segs.first.startUtc, s);
       expect(segs.last.endUtc, e);
       for (var i = 1; i < segs.length; i++) {

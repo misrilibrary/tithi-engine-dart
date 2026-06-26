@@ -1,3 +1,45 @@
+## 5.0.0
+
+**BREAKING** — the cutover release that completes the 4.4.0 API evolution. All
+symbols deprecated in 4.4.0 are now removed, and the city/tithi method surface is
+fully typed. Migrate off the deprecated APIs on 4.4.0 first (zero
+`// ignore: deprecated_member_use`), then bump to 5.0.0.
+
+**Removed (were deprecated in 4.4.0):**
+- `FestivalDate.festival` — use the direct getters (`id`, `name`, `month`,
+  `tithiNumber`, `paksha`, `tithiInPaksha`, `muhurta`, `recurring`, `isAdhika`).
+- `tithiNames` — use `getTithiName(int)`.
+- `supportedCities` — use `City.values` + `City.tryOf` (or `resolveCityName`).
+- `CityLocation` — retracted from the public surface (the engine no longer
+  publishes city geo/timezone data; resolve coordinates via `Location` and
+  offsets via IANA).
+- `getLocationForCity` — use `Panchang.at(Location.city(name))`.
+- `getDate` / `getDates` — use `findDate` / `findDates` with a `Tithi`.
+- primitive `findNext(month, paksha, tithiInPaksha, city)` — replaced by the
+  typed signature below.
+
+**Changed (breaking):**
+- Every city-keyed `Panchang`/`PanchangAt` method now takes a `City` (not a
+  `String`): `tithiOnDate`, `tithiAtInstant`, `tithiSegments`, `findDate`,
+  `findDates`, `dateFor`, `recurringDates`, `sunrise`, `sunset`. Construct a
+  `City` at the boundary (`City.of('Seattle')` or `City.seattle`); persisted data can
+  stay string-keyed. `region` is display-only and never affects a calculation.
+- `findNext` is now typed: `findNext(LunarMonth month, Tithi tithi, City city,
+  {DateTime? from})` (and `PanchangAt.findNext(month, tithi, {from})`).
+- `City.*` convenience constants (`City.ujjain`, `City.seattle`, …) are now `City`
+  instances instead of `String`s.
+- `City.values` now returns `List<City>` (was `List<String>`).
+- `defaultCity` is now a `City` instance (was a `String`).
+- **`City` has no public default constructor.** Construct via `City.of(String)`
+  (throws `ArgumentError` if unsupported) or `City.tryOf(String)` (returns `null`),
+  so a `City` value always denotes a supported city — symmetric with `Tithi`'s
+  validated factories. The `region` is taken from the registry (callers don't
+  supply it). Use at the persisted-data boundary: `City.tryOf(saved) ?? defaultCity`.
+- `City.isSupported(String)` is **removed** — it is exactly `City.tryOf(name) != null`.
+
+**Public city surface (string-level only):** `City.of`, `City.tryOf`, `City.values`,
+`resolveCityName`, `City.qualifiedName`, `City.displayName`, `defaultCity`.
+
 ## 4.4.0
 
 Additive, non-breaking release that introduces typed value types and replacement
@@ -26,7 +68,7 @@ in 5.0.0).
 **Deprecated (removed in 5.0.0):**
 - `FestivalDate.festival` → access fields directly on `FestivalDate`.
 - `tithiNames` → `getTithiName(int)`.
-- `supportedCities` → `City.values` + `City.isSupported` / `resolveCityName`.
+- `supportedCities` → `City.values` + `City.tryOf` (or `resolveCityName`).
 - `getLocationForCity` → `Panchang.at(Location.city(name))`.
 - `getDate` / `getDates` → `findDate` / `findDates` (typed `Tithi`).
 - `findNext` → typed `findNext(Tithi)` arrives in 5.0.

@@ -30,12 +30,6 @@ class FestivalDate {
     this.isAdhika = false,
   }) : _festival = festival;
 
-  /// The originating festival definition.
-  @Deprecated('Access fields directly on FestivalDate (name, month, '
-      'tithiNumber, paksha, tithiInPaksha, muhurta, recurring, isAdhika). '
-      'Will be removed in 5.0.0.')
-  FestivalDef get festival => _festival;
-
   /// Stable festival identifier (see [FestivalDef.id]).
   String get id => _festival.id;
 

@@ -1,8 +1,7 @@
 import 'dart:math';
 
 import 'cities.dart';
-export 'cities.dart'
-    show supportedCities, pinnedCities, orderedCityList, defaultCity;
+export 'cities.dart' show pinnedCities, orderedCityList, defaultCity;
 
 /// Meeus astronomical algorithms for Sun and Moon ecliptic longitude.
 /// Reference: Jean Meeus, "Astronomical Algorithms", 2nd Edition.
@@ -425,13 +424,11 @@ DateTime computeSunset(DateTime date, CityLocation loc,
 
 /// Get location for a [city] (case/space-insensitive, or `"City, Region"`).
 ///
-/// Throws [ArgumentError] if the city is not supported — the engine never
-/// silently substitutes a different location, because a wrong location yields
-/// wrong sunrise-based tithis and festival dates. Use [resolveCityName] (returns
-/// `null`) or [City.isSupported] to validate input first.
+/// Throws [ArgumentError] if the city is not supported.
 ///
-/// Package-internal twin of the deprecated [getLocationForCity]; internal
-/// callers use this so they don't trip the same-package deprecation lint.
+/// Package-internal: the engine never exposes its city geo/timezone data
+/// publicly (callers resolve offsets via IANA). Internal callers use this so
+/// they don't depend on the (removed) public accessor.
 CityLocation lookupCityLocation(String city) {
   final name = resolveCityName(city);
   if (name != null) return cityRegistry[name]!;
@@ -446,16 +443,10 @@ CityLocation lookupCityLocation(String city) {
   );
 }
 
-/// Get location for a [city] (case/space-insensitive, or `"City, Region"`).
-///
-/// Throws [ArgumentError] if the city is not supported.
-@Deprecated('Use Panchang.at(Location.city(name)). Will be removed in 5.0.0.')
-CityLocation getLocationForCity(String city) => lookupCityLocation(city);
-
 /// Sunrise at the default reference city (used when no city is specified).
 DateTime defaultSunrise(DateTime date,
         {SunriseConvention convention = SunriseConvention.upperLimb}) =>
-    computeSunrise(date, lookupCityLocation(defaultCity),
+    computeSunrise(date, lookupCityLocation(defaultCityName),
         convention: convention);
 
 /// Get sunrise function for a city.

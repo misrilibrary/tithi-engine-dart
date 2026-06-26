@@ -1,5 +1,6 @@
 import 'astronomy.dart'
     show computeSunrise, computeSunset, lookupCityLocation, SunriseConvention;
+import 'cities.dart' show City;
 import 'festival_def.dart';
 import 'festival_finder.dart';
 import 'location.dart';
@@ -12,7 +13,7 @@ import 'tithi_calculator.dart';
 ///
 /// ```dart
 /// final panchang = Panchang([registerAllCities]);
-/// final info = panchang.tithiOnDate(DateTime.utc(2026, 2, 15), 'Ujjain');
+/// final info = panchang.tithiOnDate(DateTime.utc(2026, 2, 15), City.ujjain);
 /// print(info); // "Phalguna Krishna Trayodashi"
 /// ```
 class Panchang {
@@ -54,17 +55,17 @@ class Panchang {
   /// Only [date]'s calendar fields select the day; time-of-day is ignored and no
   /// offset is needed (sunrise is astronomical). Use this for "the tithi of the
   /// day" — calendars, festival display, day observance.
-  TithiInfo tithiOnDate(DateTime date, String city) =>
-      _calc.tithiOnDate(date, city);
+  TithiInfo tithiOnDate(DateTime date, City city) =>
+      _calc.tithiOnDate(date, city.name);
 
   /// Tithi active at the exact UTC [utcInstant] at [city] (birth-time precision).
   ///
   /// [utcInstant] must be a true UTC instant. [offset] is the DST-aware UTC
   /// offset in effect at that instant in [city] (resolved by the caller); it is
   /// used only to derive the civil date for correction-table selection.
-  TithiInfo tithiAtInstant(DateTime utcInstant, String city,
+  TithiInfo tithiAtInstant(DateTime utcInstant, City city,
           {required Duration offset}) =>
-      _calc.tithiAtInstant(utcInstant, city, offset: offset);
+      _calc.tithiAtInstant(utcInstant, city.name, offset: offset);
 
   /// All tithi segments within `[windowStartUtc, windowEndUtc)` at [city]; N
   /// transitions → N+1 segments, each with its own resolved [TithiInfo] and
@@ -75,9 +76,10 @@ class Panchang {
   /// changeover) and supplies [offset] (the offset in effect during the window)
   /// for correction-table selection. Zero transitions → a single segment.
   List<TithiSegment> tithiSegments(
-          DateTime windowStartUtc, DateTime windowEndUtc, String city,
+          DateTime windowStartUtc, DateTime windowEndUtc, City city,
           {required Duration offset}) =>
-      _calc.tithiSegments(windowStartUtc, windowEndUtc, city, offset: offset);
+      _calc.tithiSegments(windowStartUtc, windowEndUtc, city.name,
+          offset: offset);
 
   /// Tithi spec → first matching Gregorian date in the given year.
   /// Returns `null` if no match found (e.g., kshaya tithi in a given year).
@@ -85,11 +87,11 @@ class Panchang {
     LunarMonth month,
     tithi_core.Tithi tithi,
     int year,
-    String city, {
+    City city, {
     bool isAdhika = false,
   }) {
     final dates = _findDatesImpl(
-        month, tithi.paksha, tithi.dayInPaksha, year, city,
+        month, tithi.paksha, tithi.dayInPaksha, year, city.name,
         isAdhika: isAdhika);
     return dates.isEmpty ? null : dates.first;
   }
@@ -99,43 +101,14 @@ class Panchang {
     LunarMonth month,
     tithi_core.Tithi tithi,
     int year,
-    String city, {
+    City city, {
     bool isAdhika = false,
   }) =>
-      _findDatesImpl(month, tithi.paksha, tithi.dayInPaksha, year, city,
+      _findDatesImpl(month, tithi.paksha, tithi.dayInPaksha, year, city.name,
           isAdhika: isAdhika);
 
-  /// Tithi spec → first matching Gregorian date in the given year.
-  /// Returns `null` if no match found (e.g., kshaya tithi in a given year).
-  @Deprecated('Use findDate with a Tithi. Will be removed in 5.0.0.')
-  DateTime? getDate(
-    LunarMonth month,
-    tithi_core.Paksha paksha,
-    int tithiInPaksha,
-    int year,
-    String city, {
-    bool isAdhika = false,
-  }) {
-    final dates = _findDatesImpl(month, paksha, tithiInPaksha, year, city,
-        isAdhika: isAdhika);
-    return dates.isEmpty ? null : dates.first;
-  }
-
-  /// Tithi spec → all matching Gregorian dates in the given year (adhika-aware).
-  @Deprecated('Use findDates with a Tithi. Will be removed in 5.0.0.')
-  List<DateTime> getDates(
-    LunarMonth month,
-    tithi_core.Paksha paksha,
-    int tithiInPaksha,
-    int year,
-    String city, {
-    bool isAdhika = false,
-  }) =>
-      _findDatesImpl(month, paksha, tithiInPaksha, year, city,
-          isAdhika: isAdhika);
-
-  /// Shared find-in-year logic (paksha + position), used by both the typed
-  /// [findDate]/[findDates] and the deprecated [getDate]/[getDates].
+  /// Shared find-in-year logic (paksha + position), used by the typed
+  /// [findDate]/[findDates].
   List<DateTime> _findDatesImpl(
     LunarMonth month,
     tithi_core.Paksha paksha,
@@ -162,28 +135,26 @@ class Panchang {
 
   /// Festival → date with muhurta rules applied for the given year and city.
   /// Returns `null` if the festival doesn't occur in the given year.
-  FestivalDate? dateFor(FestivalDef festival, int year, String city) {
-    return findFestivalDate(festival, year, city, _calc);
+  FestivalDate? dateFor(FestivalDef festival, int year, City city) {
+    return findFestivalDate(festival, year, city.name, _calc);
   }
 
   /// Recurring festival (e.g. monthly Ekadashi/Purnima) → all occurrences in
   /// the given year and city, each with its tithi span.
-  List<FestivalDate> recurringDates(
-      FestivalDef festival, int year, String city) {
-    return findRecurringDates(festival, year, city, _calc);
+  List<FestivalDate> recurringDates(FestivalDef festival, int year, City city) {
+    return findRecurringDates(festival, year, city.name, _calc);
   }
 
-  /// Find the next occurrence of a tithi from a given date.
-  @Deprecated('The typed findNext(Tithi) arrives in 5.0. '
-      'Will change signature in 5.0.0.')
+  /// Find the next occurrence of [tithi] in [month] at [city], on or after
+  /// [from] (defaults to now). Returns `null` if none is found.
   DateTime? findNext(
     LunarMonth month,
-    tithi_core.Paksha paksha,
-    int tithiInPaksha,
-    String city, {
+    tithi_core.Tithi tithi,
+    City city, {
     DateTime? from,
   }) =>
-      _findNextImpl(month, paksha, tithiInPaksha, city, from: from);
+      _findNextImpl(month, tithi.paksha, tithi.dayInPaksha, city.name,
+          from: from);
 
   /// Shared next-occurrence logic, used by [findNext] (and its bound view).
   DateTime? _findNextImpl(
@@ -216,12 +187,14 @@ class Panchang {
   /// using the city's offset (e.g. via a tz library). Throws [ArgumentError] if
   /// [city] is not supported. At extreme latitudes on a no-sunrise day the value
   /// is a clamped approximation.
-  DateTime sunrise(DateTime date, String city) =>
-      computeSunrise(date, lookupCityLocation(city), convention: convention);
+  DateTime sunrise(DateTime date, City city) =>
+      computeSunrise(date, lookupCityLocation(city.name),
+          convention: convention);
 
   /// Sunset as a UTC instant for [date] at [city]. See [sunrise].
-  DateTime sunset(DateTime date, String city) =>
-      computeSunset(date, lookupCityLocation(city), convention: convention);
+  DateTime sunset(DateTime date, City city) =>
+      computeSunset(date, lookupCityLocation(city.name),
+          convention: convention);
 
   /// Bind this Panchang to a [Location] (a registered city or raw coordinates),
   /// returning a view whose methods drop the `city` argument.
@@ -246,65 +219,55 @@ class PanchangAt {
   LocationSource get source => _loc.source;
 
   /// See [Panchang.tithiOnDate].
-  TithiInfo tithiOnDate(DateTime date) => _p.tithiOnDate(date, _loc.key);
+  TithiInfo tithiOnDate(DateTime date) => _p._calc.tithiOnDate(date, _loc.key);
 
   /// See [Panchang.tithiAtInstant].
   TithiInfo tithiAtInstant(DateTime utcInstant, {required Duration offset}) =>
-      _p.tithiAtInstant(utcInstant, _loc.key, offset: offset);
+      _p._calc.tithiAtInstant(utcInstant, _loc.key, offset: offset);
 
   /// See [Panchang.tithiSegments].
   List<TithiSegment> tithiSegments(
           DateTime windowStartUtc, DateTime windowEndUtc,
           {required Duration offset}) =>
-      _p.tithiSegments(windowStartUtc, windowEndUtc, _loc.key, offset: offset);
+      _p._calc.tithiSegments(windowStartUtc, windowEndUtc, _loc.key,
+          offset: offset);
 
   /// See [Panchang.findDate].
   DateTime? findDate(LunarMonth month, tithi_core.Tithi tithi, int year,
-          {bool isAdhika = false}) =>
-      _p.findDate(month, tithi, year, _loc.key, isAdhika: isAdhika);
+      {bool isAdhika = false}) {
+    final d = _p._findDatesImpl(
+        month, tithi.paksha, tithi.dayInPaksha, year, _loc.key,
+        isAdhika: isAdhika);
+    return d.isEmpty ? null : d.first;
+  }
 
   /// See [Panchang.findDates].
   List<DateTime> findDates(LunarMonth month, tithi_core.Tithi tithi, int year,
           {bool isAdhika = false}) =>
-      _p.findDates(month, tithi, year, _loc.key, isAdhika: isAdhika);
-
-  /// See [Panchang.getDate].
-  @Deprecated('Use findDate with a Tithi. Will be removed in 5.0.0.')
-  DateTime? getDate(
-      LunarMonth month, tithi_core.Paksha paksha, int tithiInPaksha, int year,
-      {bool isAdhika = false}) {
-    final dates = _p._findDatesImpl(
-        month, paksha, tithiInPaksha, year, _loc.key,
-        isAdhika: isAdhika);
-    return dates.isEmpty ? null : dates.first;
-  }
-
-  /// See [Panchang.getDates].
-  @Deprecated('Use findDates with a Tithi. Will be removed in 5.0.0.')
-  List<DateTime> getDates(LunarMonth month, tithi_core.Paksha paksha,
-          int tithiInPaksha, int year, {bool isAdhika = false}) =>
-      _p._findDatesImpl(month, paksha, tithiInPaksha, year, _loc.key,
+      _p._findDatesImpl(month, tithi.paksha, tithi.dayInPaksha, year, _loc.key,
           isAdhika: isAdhika);
 
   /// See [Panchang.dateFor].
   FestivalDate? dateFor(FestivalDef festival, int year) =>
-      _p.dateFor(festival, year, _loc.key);
+      findFestivalDate(festival, year, _loc.key, _p._calc);
 
   /// See [Panchang.recurringDates].
   List<FestivalDate> recurringDates(FestivalDef festival, int year) =>
-      _p.recurringDates(festival, year, _loc.key);
+      findRecurringDates(festival, year, _loc.key, _p._calc);
 
   /// See [Panchang.findNext].
-  @Deprecated('The typed findNext(Tithi) arrives in 5.0. '
-      'Will change signature in 5.0.0.')
-  DateTime? findNext(
-          LunarMonth month, tithi_core.Paksha paksha, int tithiInPaksha,
+  DateTime? findNext(LunarMonth month, tithi_core.Tithi tithi,
           {DateTime? from}) =>
-      _p._findNextImpl(month, paksha, tithiInPaksha, _loc.key, from: from);
+      _p._findNextImpl(month, tithi.paksha, tithi.dayInPaksha, _loc.key,
+          from: from);
 
   /// See [Panchang.sunrise].
-  DateTime sunrise(DateTime date) => _p.sunrise(date, _loc.key);
+  DateTime sunrise(DateTime date) =>
+      computeSunrise(date, lookupCityLocation(_loc.key),
+          convention: _p.convention);
 
   /// See [Panchang.sunset].
-  DateTime sunset(DateTime date) => _p.sunset(date, _loc.key);
+  DateTime sunset(DateTime date) =>
+      computeSunset(date, lookupCityLocation(_loc.key),
+          convention: _p.convention);
 }

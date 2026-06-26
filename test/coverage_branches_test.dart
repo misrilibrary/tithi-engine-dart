@@ -23,39 +23,42 @@ void main() {
     });
     test('tithiOnDate / sunrise / sunset match the keyed calls', () {
       expect(at.tithiOnDate(d).displayName,
-          p.tithiOnDate(d, 'Seattle').displayName);
-      expect(at.sunrise(d), p.sunrise(d, 'Seattle'));
-      expect(at.sunset(d), p.sunset(d, 'Seattle'));
+          p.tithiOnDate(d, City.of('Seattle')).displayName);
+      expect(at.sunrise(d), p.sunrise(d, City.of('Seattle')));
+      expect(at.sunset(d), p.sunset(d, City.of('Seattle')));
     });
     test('tithiAtInstant / tithiSegments match the keyed calls', () {
       final utc = DateTime.utc(2026, 2, 15, 18);
-      expect(at.tithiAtInstant(utc, offset: pstOffset).displayName,
-          p.tithiAtInstant(utc, 'Seattle', offset: pstOffset).displayName);
+      expect(
+          at.tithiAtInstant(utc, offset: pstOffset).displayName,
+          p
+              .tithiAtInstant(utc, City.of('Seattle'), offset: pstOffset)
+              .displayName);
       final s = DateTime.utc(2026, 2, 15, 8);
       final e = DateTime.utc(2026, 2, 16, 8);
       expect(at.tithiSegments(s, e, offset: pstOffset).length,
-          p.tithiSegments(s, e, 'Seattle', offset: pstOffset).length);
+          p.tithiSegments(s, e, City.of('Seattle'), offset: pstOffset).length);
     });
     test('findDate / findDates / findNext / dateFor / recurringDates match',
         () {
-      expect(at.findDate(LunarMonth.bhadrapada, Tithi.krishna(8), 2026),
-          p.findDate(LunarMonth.bhadrapada, Tithi.krishna(8), 2026, 'Seattle'));
+      expect(
+          at.findDate(LunarMonth.bhadrapada, Tithi.krishna(8), 2026),
+          p.findDate(LunarMonth.bhadrapada, Tithi.krishna(8), 2026,
+              City.of('Seattle')));
       expect(
           at.findDates(LunarMonth.bhadrapada, Tithi.krishna(8), 2026).length,
           p
-              .findDates(
-                  LunarMonth.bhadrapada, Tithi.krishna(8), 2026, 'Seattle')
+              .findDates(LunarMonth.bhadrapada, Tithi.krishna(8), 2026,
+                  City.of('Seattle'))
               .length);
-      // findNext is deprecated (typed variant lands in 5.0); still exercised.
-      // ignore: deprecated_member_use_from_same_package
-      final atNext = at.findNext(LunarMonth.chaitra, Paksha.shukla, 1, from: d);
-      // ignore: deprecated_member_use_from_same_package
-      final pNext =
-          p.findNext(LunarMonth.chaitra, Paksha.shukla, 1, 'Seattle', from: d);
+      final atNext = at.findNext(LunarMonth.chaitra, Tithi.shukla(1), from: d);
+      final pNext = p.findNext(
+          LunarMonth.chaitra, Tithi.shukla(1), City.of('Seattle'),
+          from: d);
       expect(atNext, pNext);
       final diwali = festivals.firstWhere((f) => f.id == 'diwali');
       expect(at.dateFor(diwali, 2026)?.date,
-          p.dateFor(diwali, 2026, 'Seattle')?.date);
+          p.dateFor(diwali, 2026, City.of('Seattle'))?.date);
       expect(
           at
               .recurringDates(
@@ -65,7 +68,7 @@ void main() {
               .recurringDates(
                   festivals.firstWhere((f) => f.id == 'masik_purnima'),
                   2026,
-                  'Seattle')
+                  City.of('Seattle'))
               .length);
     });
   });
@@ -90,7 +93,8 @@ void main() {
         final pp = Panchang([registerAllCities], convention: conv);
         final start = DateTime.utc(2026, 2, 15, 8);
         final end = DateTime.utc(2026, 2, 16, 8);
-        final segs = pp.tithiSegments(start, end, 'Ujjain', offset: istOffset);
+        final segs =
+            pp.tithiSegments(start, end, City.of('Ujjain'), offset: istOffset);
         expect(segs, isNotEmpty);
         expect(segs.first.startUtc, start);
         expect(segs.last.endUtc, end);
@@ -107,7 +111,9 @@ void main() {
   group('recurringDates / findNext / getDates', () {
     test('masik_purnima recurs ~monthly, always Purnima (T15)', () {
       final r = p.recurringDates(
-          festivals.firstWhere((f) => f.id == 'masik_purnima'), 2026, 'Ujjain');
+          festivals.firstWhere((f) => f.id == 'masik_purnima'),
+          2026,
+          City.of('Ujjain'));
       expect(r.length, inInclusiveRange(12, 13));
       for (final fd in r) {
         expect(fd.tithiStart.isBefore(fd.tithiEnd), isTrue);
@@ -117,15 +123,15 @@ void main() {
       final from = DateTime.utc(2026, 1, 1);
       // Bhadrapada Krishna 8 (Janmashtami) reliably occurs each year, so the
       // 400-day forward scan resolves it (exercises findNext's success path).
-      // ignore: deprecated_member_use_from_same_package
-      final n = p.findNext(LunarMonth.bhadrapada, Paksha.krishna, 8, 'Ujjain',
+      final n = p.findNext(
+          LunarMonth.bhadrapada, Tithi.krishna(8), City.of('Ujjain'),
           from: from);
       expect(n, isNotNull);
       expect(n!.isBefore(from), isFalse);
     });
     test('findDates returns at least one date for a normal tithi', () {
-      final dates =
-          p.findDates(LunarMonth.kartika, Tithi.krishna(15), 2026, 'Ujjain');
+      final dates = p.findDates(
+          LunarMonth.kartika, Tithi.krishna(15), 2026, City.of('Ujjain'));
       expect(dates, isNotEmpty);
     });
   });
@@ -135,7 +141,7 @@ void main() {
       final fd = p.dateFor(
           festivals.firstWhere((f) => f.id == 'maha_shivaratri'),
           2026,
-          'Ujjain');
+          City.of('Ujjain'));
       expect(fd, isNotNull);
       expect(fd!.muhurtaStart, isNotNull);
       expect(fd.muhurtaEnd, isNotNull);
@@ -144,11 +150,11 @@ void main() {
     test('madhyahna (Ram Navami) and pradosh (Diwali) resolve', () {
       expect(
           p.dateFor(festivals.firstWhere((f) => f.id == 'ram_navami'), 2026,
-              'Ujjain'),
+              City.of('Ujjain')),
           isNotNull);
       expect(
-          p.dateFor(
-              festivals.firstWhere((f) => f.id == 'diwali'), 2026, 'Ujjain'),
+          p.dateFor(festivals.firstWhere((f) => f.id == 'diwali'), 2026,
+              City.of('Ujjain')),
           isNotNull);
     });
   });
@@ -156,8 +162,8 @@ void main() {
   group('sun times: pre-1920 ΔT branch + sunset', () {
     test('1905 sunrise < sunset (exercises Espenak–Meeus pre-1920 ΔT)', () {
       final old = DateTime.utc(1905, 6, 21);
-      final sr = p.sunrise(old, 'London');
-      final ss = p.sunset(old, 'London');
+      final sr = p.sunrise(old, City.of('London'));
+      final ss = p.sunset(old, City.of('London'));
       expect(sr.isBefore(ss), isTrue);
     });
   });
@@ -170,7 +176,10 @@ void main() {
     test('a Seattle centerDisc correction day uses the table value', () {
       // dayIndex 9506 = 1926-01-11; centerDisc table says T28 (Meeus would be 27).
       expect(
-          pc.tithiOnDate(DateTime.utc(1926, 1, 11), 'Seattle').tithiNumber, 28);
+          pc
+              .tithiOnDate(DateTime.utc(1926, 1, 11), City.of('Seattle'))
+              .tithiNumber,
+          28);
     });
 
     test(
@@ -182,7 +191,7 @@ void main() {
       // epoch+index so the dayIndex is exact.
       final day1165 = DateTime.utc(1900, 1, 1).add(const Duration(days: 1165));
       final t = pc.tithiAtInstant(
-          day1165.add(const Duration(hours: 20)), 'Seattle',
+          day1165.add(const Duration(hours: 20)), City.of('Seattle'),
           offset: pstOffset);
       expect(t.tithiNumber, inInclusiveRange(1, 30));
     });
@@ -199,7 +208,7 @@ void main() {
       // 13:00 UTC = 05:00 PST (<  06:30 -> sunrise tithi - 1).
       for (final hours in [20, 13]) {
         final info = p.tithiAtInstant(
-            day1165.add(Duration(hours: hours)), 'Seattle',
+            day1165.add(Duration(hours: hours)), City.of('Seattle'),
             offset: pstOffset);
         expect(info.tithiNumber, inInclusiveRange(1, 30));
       }
@@ -208,13 +217,14 @@ void main() {
     test('tithiSegments snap branch + TithiSegment.toString', () {
       final ws = day1165.add(const Duration(hours: 8)); // local midnight (UTC)
       final we = ws.add(const Duration(days: 1));
-      final segs = p.tithiSegments(ws, we, 'Seattle', offset: pstOffset);
+      final segs =
+          p.tithiSegments(ws, we, City.of('Seattle'), offset: pstOffset);
       expect(segs, isNotEmpty);
       expect(segs.first.toString(), contains('→'));
     });
 
     test('TithiInfo.toString returns the display name', () {
-      final info = p.tithiOnDate(day1165, 'Seattle');
+      final info = p.tithiOnDate(day1165, City.of('Seattle'));
       expect(info.toString(), info.displayName);
       expect(info.toString(), isNotEmpty);
     });
