@@ -13,6 +13,11 @@ class FestivalDate {
   final DateTime?
       muhurtaStart; // UTC start of muhurta window (null for sunrise rule)
   final DateTime? muhurtaEnd; // UTC end of muhurta window
+  /// The actual lunar month this occurrence falls in. For non-recurring
+  /// festivals this equals [festival.month]; for recurring festivals it is the
+  /// month resolved from the occurrence date via tithiOnDate.
+  final LunarMonth month;
+  final bool isAdhika;
 
   FestivalDate({
     required this.festival,
@@ -21,7 +26,14 @@ class FestivalDate {
     required this.tithiEnd,
     this.muhurtaStart,
     this.muhurtaEnd,
+    required this.month,
+    this.isAdhika = false,
   });
+
+  /// Shorthand accessors mirroring [FestivalDef] for convenience.
+  String get name => festival.name;
+  int get tithiNumber => festival.tithiNumber;
+  tithi_core.Paksha get paksha => festival.paksha;
 }
 
 /// Find the correct festival date for a given year and city, applying muhurta rules.
@@ -79,6 +91,7 @@ FestivalDate? findFestivalDate(
     tithiEnd: tithiEnd,
     muhurtaStart: muhurtaStart,
     muhurtaEnd: muhurtaEnd,
+    month: fest.month,
   );
 }
 
@@ -229,11 +242,14 @@ List<FestivalDate> findRecurringDates(
           _findTithiTransition(lastSeen, loc, target, true, convention);
       final tithiEnd =
           _findTithiTransition(lastSeen, loc, target, false, convention);
+      final dayTithi = calc.tithiOnDate(lastSeen, city);
       results.add(FestivalDate(
           festival: fest,
           date: lastSeen,
           tithiStart: tithiStart,
-          tithiEnd: tithiEnd));
+          tithiEnd: tithiEnd,
+          month: dayTithi.month,
+          isAdhika: dayTithi.isAdhika));
       lastSeen = null;
     }
   }
@@ -243,11 +259,14 @@ List<FestivalDate> findRecurringDates(
         _findTithiTransition(lastSeen, loc, target, true, convention);
     final tithiEnd =
         _findTithiTransition(lastSeen, loc, target, false, convention);
+    final dayTithi = calc.tithiOnDate(lastSeen, city);
     results.add(FestivalDate(
         festival: fest,
         date: lastSeen,
         tithiStart: tithiStart,
-        tithiEnd: tithiEnd));
+        tithiEnd: tithiEnd,
+        month: dayTithi.month,
+        isAdhika: dayTithi.isAdhika));
   }
   return results;
 }

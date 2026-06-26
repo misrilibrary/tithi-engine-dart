@@ -1,3 +1,9 @@
+## 4.3.1
+- FestivalDate now carries the actual lunar month of the occurrence (computed via
+  tithiOnDate), not the placeholder month from the FestivalDef. Fixes recurring
+  festivals (Ekadashi, Purnima, Amavasya, etc.) always showing "Chaitra".
+- Added convenience getters: name, tithiNumber, paksha on FestivalDate.
+
 # Changelog
 
 ## 4.3.0

@@ -12,16 +12,16 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 - **Festival dates** — muhurta-accurate (nishita, madhyahna, pradosh rules)
 - **Month resolution** — moment-based adhika/kshaya detection, Purnimant & Amant systems
 - **Date finding** — tithi → Gregorian date in any year
-- **230 cities** — per-city correction tables verified against Swiss Ephemeris
+- **230 cities** — per-city correction tables verified against JPL Swiss Ephemeris (`.se1`)
 - **Sunrise convention** — upper-limb "first ray" (default) or centre-of-disc "half disk visible", both Swiss-corrected
 - **Pure Dart** — no dependencies, works in Flutter, server, CLI, and web (WASM)
-- **200-year accuracy** — validated 1900–2100 against Drik Panchang
+- **200-year accuracy** — exhaustively validated 1900–2100 (33.77M city-days, 14/14 compute points 🟢)
 
 ## Installation
 
 ```yaml
 dependencies:
-  tithi_engine: ^4.2.0
+  tithi_engine: ^4.3.0
 ```
 
 ## Quick Start
@@ -78,7 +78,12 @@ Combine packs: `Panchang([registerIndia, registerEurope])`.
 
 `Panchang` is the single entry point. Value types (`TithiInfo`, `TithiSegment`,
 `LunarMonth`, `MonthSystem`, `Paksha`, `SunriseConvention`, `FestivalDef`, `MuhurtaRule`,
-`festivals`, `FestivalDate`, `City`, `CityLocation`) are exported; the engine internals are not.
+`festivals`, `FestivalDate`, `City`, `CityLocation`, `Location`, `LocationSource`) are
+exported; the engine internals are not.
+
+`FestivalDate` carries `month` (actual `LunarMonth` of the occurrence) and `isAdhika`,
+computed from `tithiOnDate` at the occurrence date — so recurring festivals show the
+correct month (not the definition's placeholder).
 
 The time-aware API is **UTC-instant based**: you pass true UTC instants and, where
 a civil day matters, the DST-aware offset in effect (the engine does no timezone
@@ -185,13 +190,23 @@ table sets are independent and the upper-limb path is untouched.
 
 ## Accuracy
 
+Source of truth: **JPL Swiss Ephemeris (`.se1`)**, exhaustively verified 1900–2100,
+all 230 cities, both conventions (upper limb / centre of disc), both month systems.
+
 | Metric | Value |
 |--------|-------|
-| Tithi vs Swiss Ephemeris (upper limb) | 0 mismatches (230 cities × 73,049 days, 1900–2100) |
-| Tithi vs Swiss Ephemeris (centre of disc) | 0 mismatches (230 cities × 73,414 days = 16,885,220 city-days, 1900–2100) |
-| Month boundaries (Purnimant) | 100% (200 years, verified cities) |
+| Day-tithi vs `.se1` (tithiOnDate) | **0 mismatches** (33.77M city-days: 230 cities × 73,414 days × 2 conventions) |
+| Transition instants vs `.se1` | **0 >30 s** (all 74,582 transitions, global correction applied) |
+| Sunrise/sunset vs `.se1` | **0 >60 s**, max 15.7 s (33.77M, both conventions) |
+| Lunar month + adhika vs `.se1` | **0 mismatches** (all 2,486 new moons, both systems) |
+| `getDates` (tithi→date, reverse + forward) | **0 mismatches** (16.9M, kshaya/vriddhi-aware) |
+| `tithiAtInstant` (birth-time) | **0 whole-day-shift days**; 0.0145% near-transition residual ≤30 s |
 | Festival dates vs Drik Panchang | 22/22 (2025–2026) |
-| Test coverage | 567 tests, ~87% core line coverage |
+| Test coverage | 586 tests |
+
+All 14 compute points are 🟢 at the minute-level accuracy bar. The only residual
+is sub-minute (≤30 s near-transition slivers, provably below display resolution).
+Full benchmark: [`ACCURACY_BENCHMARK.md`](ACCURACY_BENCHMARK.md).
 
 ## Cross-Platform
 
@@ -199,7 +214,7 @@ This is the Dart implementation of [tithi-engine](https://github.com/misrilibrar
 
 The two packages **version independently** — each version string is a semver compatibility contract for *that* ecosystem. What stays locked in step is the **astronomy engine revision** (the correctness-critical part) and the feature parity tracked below.
 
-- **Engine revision:** `r2` — VSOP87 Sun + Meeus Moon in Terrestrial Time (Espenak–Meeus ΔT), nutation cancelled in the Moon–Sun elongation. Dart `2.1.0+` ⟷ Java `1.1.0+`. Verified: correction tables byte-identical across both, 0 mismatches over 230 cities × 73,414 days.
+- **Engine revision:** `r3` — VSOP87 Sun + Meeus Moon in Terrestrial Time (Espenak–Meeus ΔT), nutation cancelled in the Moon–Sun elongation, **global tithi-transition correction** (16,266 delta-encoded entries vs JPL `.se1`), **iterative sunrise/sunset** (3-iter refinement, latitude-robust). Per-city correction tables regenerated against `.se1`. Dart `4.3.0+` ⟷ Java _(pending)_. Verified: 0 mismatches over 230 cities × 73,414 days × 2 conventions (33.77M city-days).
 
 | Capability | Dart (tithi_engine) | Java (tithi-engine) |
 |---|---|---|
@@ -212,13 +227,19 @@ The two packages **version independently** — each version string is a semver c
 | Coordinate input (`Location` / `Panchang.at`, 0.1° cell reuse) | `4.0.0+` | `3.0.0+` |
 | Sunrise / sunset (`sunrise` / `sunset`, Meeus) | `4.1.0+` | `3.1.0+` |
 | Sunrise-convention toggle (`SunriseConvention`, centerDisc Swiss tables) | `4.2.0+` | _(pending)_ |
+| Engine rev `r3`: global transition correction + iterative sunrise (JPL `.se1` parity) | `4.3.0+` | _(pending)_ |
+| `FestivalDate.month` actual month (not def placeholder) for recurring festivals | `4.3.1+` | _(pending)_ |
 
 > **API generation:** Dart `3.x` and Java `2.x` are the same (UTC-instant)
 > API generation. Dart `4.0.0` ⟷ Java `3.0.0` add strict city resolution
 > (unknown cities now throw — a behavior break) and coordinate input
 > (`Location` / `Panchang.at`); Dart `4.1.0` ⟷ Java `3.1.0` add sunrise/sunset.
 > Dart `4.2.0` adds the sunrise-convention toggle (upper-limb default / centerDisc
-> half-disk, Swiss-corrected); the Java counterpart is pending.
+> half-disk, Swiss-corrected). Dart `4.3.0` upgrades to engine revision `r3`:
+> **JPL `.se1` parity** via global transition correction + iterative sunrise
+> (a data+precision improvement — the public API is unchanged from 4.2.0).
+> Dart `4.3.1` adds `FestivalDate.month` (actual month of occurrence for recurring
+> festivals). Java counterparts for 4.2+ are pending.
 > The version numbers differ only because each follows its own ecosystem's semver.
 
 ## License
