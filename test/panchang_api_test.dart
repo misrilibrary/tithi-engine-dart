@@ -9,25 +9,26 @@ import 'package:tithi_engine/tithi_engine.dart';
 import 'package:tithi_engine/data/all.dart';
 import 'package:tithi_engine/src/regions/registry.dart';
 import 'package:tithi_engine/src/lunar_month.dart' show getLunarMonth;
+import 'package:tithi_engine/src/astronomy.dart' show lookupCityLocation;
 
 void main() {
   setUpAll(registerAllCities);
 
-  group('Panchang.getDate vs getDates', () {
+  group('Panchang.findDate vs findDates', () {
     final p = Panchang([registerAllCities]);
 
-    test('getDate returns the first of getDates (non-empty case)', () {
+    test('findDate returns the first of findDates (non-empty case)', () {
       const month = LunarMonth.chaitra;
-      final all = p.getDates(month, Paksha.shukla, 5, 2026, 'Ujjain');
-      final one = p.getDate(month, Paksha.shukla, 5, 2026, 'Ujjain');
+      final all = p.findDates(month, Tithi.shukla(5), 2026, 'Ujjain');
+      final one = p.findDate(month, Tithi.shukla(5), 2026, 'Ujjain');
       expect(all, isNotEmpty);
       expect(one, isNotNull);
       expect(one, all.first);
     });
 
-    test('resolved getDate actually lands on the requested tithi', () {
+    test('resolved findDate actually lands on the requested tithi', () {
       final d =
-          p.getDate(LunarMonth.kartika, Paksha.shukla, 15, 2026, 'Ujjain');
+          p.findDate(LunarMonth.kartika, Tithi.shukla(15), 2026, 'Ujjain');
       expect(d, isNotNull);
       final info = p.tithiOnDate(d!, 'Ujjain');
       expect(info.tithiInPaksha, 15);
@@ -40,6 +41,7 @@ void main() {
 
     test('finds an occurrence on/after `from` matching the spec', () {
       final from = DateTime.utc(2026, 1, 1);
+      // ignore: deprecated_member_use_from_same_package
       final next =
           p.findNext(LunarMonth.magha, Paksha.shukla, 5, 'Ujjain', from: from);
       expect(next, isNotNull);
@@ -93,7 +95,7 @@ void main() {
   group('Panchang.tithiAtInstant (time-of-day, offset path)', () {
     final p = Panchang([registerAllCities]);
     final offset =
-        Duration(minutes: (getLocationForCity('Delhi').utcOffset * 60).round());
+        Duration(minutes: (lookupCityLocation('Delhi').utcOffset * 60).round());
     // Delhi wall-clock hour → true UTC instant (Shape 2).
     DateTime instant(int h) => DateTime.utc(2026, 5, 11, h).subtract(offset);
 

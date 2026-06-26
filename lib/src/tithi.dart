@@ -7,7 +7,13 @@
 enum Paksha { shukla, krishna }
 
 /// Tithi names within a paksha (1-15).
-const tithiNames = [
+@Deprecated('Use getTithiName(int) (handles the paksha-dependent 15th: Purnima '
+    'vs Amavasya). Will be removed in 5.0.0.')
+const tithiNames = _tithiNames;
+
+// Private backing list so internal callers (getTithiName) don't trip the
+// same-package deprecation lint. Public [tithiNames] is the deprecated alias.
+const _tithiNames = [
   'Pratipada', // 1
   'Dwitiya', // 2
   'Tritiya', // 3
@@ -42,9 +48,79 @@ String getTithiName(int tithiNumber) {
   if (tithiNumber == 15) return 'Purnima';
   if (tithiNumber == 30) return 'Amavasya';
   final index = ((tithiNumber - 1) % 15);
-  return tithiNames[index];
+  return _tithiNames[index];
 }
 
 /// Get tithi position within paksha (1-15).
 int tithiInPaksha(int tithiNumber) =>
     tithiNumber <= 15 ? tithiNumber : tithiNumber - 15;
+
+/// A tithi as a value: a lunar day identified by its [paksha] and position.
+///
+/// Carries both encodings — the absolute [number] (1–30) and the paksha-relative
+/// [dayInPaksha] (1–15) — and owns the paksha-dependent [name] (the 15th is
+/// Purnima in shukla, Amavasya in krishna), so callers never reimplement that
+/// rule.
+///
+/// ```dart
+/// Tithi.shukla(8);     // Shukla Ashtami
+/// Tithi.krishna(11);   // Krishna Ekadashi
+/// Tithi.ofNumber(23);  // == Tithi.krishna(8)
+/// ```
+class Tithi {
+  /// Fortnight (waxing/waning).
+  final Paksha paksha;
+
+  /// Position within the paksha, 1–15.
+  final int dayInPaksha;
+
+  const Tithi._(this.paksha, this.dayInPaksha);
+
+  /// Shukla-paksha (waxing) tithi at [dayInPaksha] (1–15; 15 = Purnima).
+  factory Tithi.shukla(int dayInPaksha) {
+    _check(dayInPaksha);
+    return Tithi._(Paksha.shukla, dayInPaksha);
+  }
+
+  /// Krishna-paksha (waning) tithi at [dayInPaksha] (1–15; 15 = Amavasya).
+  factory Tithi.krishna(int dayInPaksha) {
+    _check(dayInPaksha);
+    return Tithi._(Paksha.krishna, dayInPaksha);
+  }
+
+  /// From an absolute tithi number (1–30).
+  factory Tithi.ofNumber(int number) {
+    if (number < 1 || number > 30) {
+      throw ArgumentError.value(number, 'number', 'tithi number must be 1–30');
+    }
+    return number <= 15
+        ? Tithi._(Paksha.shukla, number)
+        : Tithi._(Paksha.krishna, number - 15);
+  }
+
+  static void _check(int d) {
+    if (d < 1 || d > 15) {
+      throw ArgumentError.value(d, 'dayInPaksha', 'must be 1–15');
+    }
+  }
+
+  /// Absolute tithi number, 1–30.
+  int get number => paksha == Paksha.shukla ? dayInPaksha : dayInPaksha + 15;
+
+  /// Paksha-aware name (15 → Purnima for shukla, Amavasya for krishna).
+  String get name => getTithiName(number);
+
+  @override
+  bool operator ==(Object other) =>
+      other is Tithi &&
+      other.paksha == paksha &&
+      other.dayInPaksha == dayInPaksha;
+
+  @override
+  int get hashCode => Object.hash(paksha, dayInPaksha);
+
+  @override
+  String toString() =>
+      '${paksha == Paksha.shukla ? "Shukla" : "Krishna"} $name '
+      '(${paksha == Paksha.shukla ? "S" : "K"}.$dayInPaksha)';
+}

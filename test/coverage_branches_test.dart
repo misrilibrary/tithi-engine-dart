@@ -2,6 +2,7 @@ import 'package:test/test.dart';
 import 'package:tithi_engine/tithi_engine.dart';
 import 'package:tithi_engine/data/all.dart';
 import 'package:tithi_engine/data/all_center.dart';
+import 'package:tithi_engine/src/astronomy.dart' show lookupCityLocation;
 
 // Branch/line coverage tests for under-covered public surface: the PanchangAt
 // bound view, tithiSegments, recurringDates/findNext, getDates, muhurta windows,
@@ -35,17 +36,23 @@ void main() {
       expect(at.tithiSegments(s, e, offset: pstOffset).length,
           p.tithiSegments(s, e, 'Seattle', offset: pstOffset).length);
     });
-    test('getDate / getDates / findNext / dateFor / recurringDates match', () {
-      expect(at.getDate(LunarMonth.bhadrapada, Paksha.krishna, 8, 2026),
-          p.getDate(LunarMonth.bhadrapada, Paksha.krishna, 8, 2026, 'Seattle'));
+    test('findDate / findDates / findNext / dateFor / recurringDates match',
+        () {
+      expect(at.findDate(LunarMonth.bhadrapada, Tithi.krishna(8), 2026),
+          p.findDate(LunarMonth.bhadrapada, Tithi.krishna(8), 2026, 'Seattle'));
       expect(
-          at.getDates(LunarMonth.bhadrapada, Paksha.krishna, 8, 2026).length,
+          at.findDates(LunarMonth.bhadrapada, Tithi.krishna(8), 2026).length,
           p
-              .getDates(
-                  LunarMonth.bhadrapada, Paksha.krishna, 8, 2026, 'Seattle')
+              .findDates(
+                  LunarMonth.bhadrapada, Tithi.krishna(8), 2026, 'Seattle')
               .length);
-      expect(at.findNext(LunarMonth.chaitra, Paksha.shukla, 1, from: d),
-          p.findNext(LunarMonth.chaitra, Paksha.shukla, 1, 'Seattle', from: d));
+      // findNext is deprecated (typed variant lands in 5.0); still exercised.
+      // ignore: deprecated_member_use_from_same_package
+      final atNext = at.findNext(LunarMonth.chaitra, Paksha.shukla, 1, from: d);
+      // ignore: deprecated_member_use_from_same_package
+      final pNext =
+          p.findNext(LunarMonth.chaitra, Paksha.shukla, 1, 'Seattle', from: d);
+      expect(atNext, pNext);
       final diwali = festivals.firstWhere((f) => f.id == 'diwali');
       expect(at.dateFor(diwali, 2026)?.date,
           p.dateFor(diwali, 2026, 'Seattle')?.date);
@@ -71,7 +78,7 @@ void main() {
       expect(remote.tithiOnDate(d).tithiNumber, inInclusiveRange(1, 30));
     });
     test('a point inside a city cell is cityCorrected', () {
-      final ny = getLocationForCity('New York');
+      final ny = lookupCityLocation('New York');
       expect(p.at(Location.at(ny.latitude, ny.longitude)).source,
           LocationSource.cityCorrected);
     });
@@ -110,14 +117,15 @@ void main() {
       final from = DateTime.utc(2026, 1, 1);
       // Bhadrapada Krishna 8 (Janmashtami) reliably occurs each year, so the
       // 400-day forward scan resolves it (exercises findNext's success path).
+      // ignore: deprecated_member_use_from_same_package
       final n = p.findNext(LunarMonth.bhadrapada, Paksha.krishna, 8, 'Ujjain',
           from: from);
       expect(n, isNotNull);
       expect(n!.isBefore(from), isFalse);
     });
-    test('getDates returns at least one date for a normal tithi', () {
+    test('findDates returns at least one date for a normal tithi', () {
       final dates =
-          p.getDates(LunarMonth.kartika, Paksha.krishna, 15, 2026, 'Ujjain');
+          p.findDates(LunarMonth.kartika, Tithi.krishna(15), 2026, 'Ujjain');
       expect(dates, isNotEmpty);
     });
   });

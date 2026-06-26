@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:tithi_engine/tithi_engine.dart';
+import 'package:tithi_engine/src/astronomy.dart' show lookupCityLocation;
 import 'package:tithi_engine/data/all.dart';
 
 void main() {
@@ -17,7 +18,7 @@ void main() {
   });
 
   test('coords on a city cell give the same sun times as the named city', () {
-    final ny = getLocationForCity('New York');
+    final ny = lookupCityLocation('New York');
     expect(p.at(Location.at(ny.latitude, ny.longitude)).sunrise(d),
         p.sunrise(d, 'New York'));
     expect(p.at(Location.at(ny.latitude, ny.longitude)).sunset(d),

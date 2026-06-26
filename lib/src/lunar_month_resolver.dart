@@ -75,7 +75,7 @@ class LunarMonthResolver {
         dt.isBefore(scanEnd);
         dt = dt.add(const Duration(days: 1))) {
       final sunrise =
-          computeSunrise(dt, getLocationForCity(city), convention: convention);
+          computeSunrise(dt, lookupCityLocation(city), convention: convention);
       final sunLong = toSidereal(sunLongitude(sunrise), sunrise);
       final moonLong = toSidereal(moonLongitude(sunrise), sunrise);
       final tithiNum = calculateTithi(moonLong, sunLong);

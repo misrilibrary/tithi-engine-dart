@@ -34,14 +34,14 @@ void main() {
     print('  ${seg.tithi.tithiName} from ${seg.startUtc} to ${seg.endUtc}');
   }
 
-  // ─── getDate / getDates: tithi spec → Gregorian date(s) ────────────────
-  final date = panchang.getDate(
-      LunarMonth.bhadrapada, Paksha.krishna, 8, 2026, 'Seattle');
-  print('\ngetDate (Janmashtami 2026 Seattle): $date');
+  // ─── findDate / findDates: tithi spec → Gregorian date(s) ──────────────
+  final date = panchang.findDate(
+      LunarMonth.bhadrapada, Tithi.krishna(8), 2026, 'Seattle');
+  print('\nfindDate (Janmashtami 2026 Seattle): $date');
 
   final dates =
-      panchang.getDates(LunarMonth.jyeshtha, Paksha.shukla, 11, 2026, 'Ujjain');
-  print('getDates (Jyeshtha Shukla Ekadashi 2026): $dates');
+      panchang.findDates(LunarMonth.jyeshtha, Tithi.shukla(11), 2026, 'Ujjain');
+  print('findDates (Jyeshtha Shukla Ekadashi 2026): $dates');
 
   // ─── dateFor: named festival → date with muhurta rules ─────────────────
   final shivaratri = panchang.dateFor(
@@ -68,6 +68,8 @@ void main() {
   print('  ...');
 
   // ─── findNext: next occurrence of a tithi from today ────────────────────
+  // (findNext is deprecated in 4.4; a typed findNext(Tithi) lands in 5.0.)
+  // ignore: deprecated_member_use
   final next =
       panchang.findNext(LunarMonth.kartika, Paksha.krishna, 15, 'Seattle');
   print('\nfindNext (Kartika Amavasya from today): $next');

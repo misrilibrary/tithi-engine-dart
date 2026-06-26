@@ -428,34 +428,44 @@ DateTime computeSunset(DateTime date, CityLocation loc,
 /// Throws [ArgumentError] if the city is not supported — the engine never
 /// silently substitutes a different location, because a wrong location yields
 /// wrong sunrise-based tithis and festival dates. Use [resolveCityName] (returns
-/// `null`) or [supportedCities] to validate input first.
-CityLocation getLocationForCity(String city) {
+/// `null`) or [City.isSupported] to validate input first.
+///
+/// Package-internal twin of the deprecated [getLocationForCity]; internal
+/// callers use this so they don't trip the same-package deprecation lint.
+CityLocation lookupCityLocation(String city) {
   final name = resolveCityName(city);
-  if (name != null) return supportedCities[name]!;
+  if (name != null) return cityRegistry[name]!;
   final adhoc = adHocLocation(city);
   if (adhoc != null) return adhoc;
   throw ArgumentError.value(
     city,
     'city',
-    'Unsupported city. Pick the nearest city in `supportedCities` and use that, '
-        'or request it at https://github.com/misrilibrary/tithi-engine-dart/issues',
+    'Unsupported city. Pick the nearest supported city (see City.values) and '
+        'use that, or request it at '
+        'https://github.com/misrilibrary/tithi-engine-dart/issues',
   );
 }
+
+/// Get location for a [city] (case/space-insensitive, or `"City, Region"`).
+///
+/// Throws [ArgumentError] if the city is not supported.
+@Deprecated('Use Panchang.at(Location.city(name)). Will be removed in 5.0.0.')
+CityLocation getLocationForCity(String city) => lookupCityLocation(city);
 
 /// Sunrise at the default reference city (used when no city is specified).
 DateTime defaultSunrise(DateTime date,
         {SunriseConvention convention = SunriseConvention.upperLimb}) =>
-    computeSunrise(date, getLocationForCity(defaultCity),
+    computeSunrise(date, lookupCityLocation(defaultCity),
         convention: convention);
 
 /// Get sunrise function for a city.
 SunriseFn getSunriseFnForCity(String city,
     {SunriseConvention convention = SunriseConvention.upperLimb}) {
-  final loc = getLocationForCity(city);
+  final loc = lookupCityLocation(city);
   return (date) => computeSunrise(date, loc, convention: convention);
 }
 
 /// Legacy compatibility: get sunrise params-style offset for a city.
 double getUtcOffsetForCity(String city) {
-  return getLocationForCity(city).utcOffset;
+  return lookupCityLocation(city).utcOffset;
 }

@@ -1,6 +1,7 @@
 import 'package:test/test.dart';
 import 'package:tithi_engine/data/all.dart';
 import 'package:tithi_engine/src/astronomy.dart';
+import 'package:tithi_engine/src/cities.dart' show cityRegistry;
 import 'package:tithi_engine/src/lunar_month.dart';
 import 'package:tithi_engine/src/lunar_month_resolver.dart';
 import 'package:tithi_engine/src/regions/registry.dart';
@@ -23,7 +24,7 @@ void main() {
       for (final d in [DateTime.utc(2025, 6, 21), DateTime.utc(2025, 12, 21)]) {
         test('$city sunrise lands on the right local day (${d.month}/${d.day})',
             () {
-          final loc = getLocationForCity(city);
+          final loc = lookupCityLocation(city);
           final sr = computeSunrise(d, loc);
           // Convert UTC instant to the city's local clock time.
           final local = sr.add(Duration(minutes: (loc.utcOffset * 60).round()));
@@ -80,7 +81,7 @@ void main() {
   });
 
   group('Every supported city has its own correction table', () {
-    for (final city in supportedCities.keys) {
+    for (final city in cityRegistry.keys) {
       test('$city is covered', () {
         // Full coverage policy: no city should silently fall back to raw Meeus.
         expect(getTithiCorrections(city), isNotEmpty,

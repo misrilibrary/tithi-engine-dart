@@ -85,8 +85,8 @@ void main() {
           if (a.tithiNumber != b.tithiNumber) continue; // not vriddhi
           if (a.tithiNumber == 15 || a.tithiNumber == 30) continue; // boundary
           if (a.month != b.month) continue; // same month
-          final dates =
-              p.getDates(a.month, a.paksha, a.tithiInPaksha, year, 'Ujjain');
+          final dates = p.findDates(
+              a.month, Tithi.ofNumber(a.tithiNumber), year, 'Ujjain');
           expect(dates, contains(seq.dates[i + 1]),
               reason:
                   'vriddhi ${a.displayName} ($year): finder should return the '
@@ -111,14 +111,12 @@ void main() {
           }
           if (seq.info[i].month != seq.info[i + 1].month) continue;
           final skipped = before + 1; // the kshaya tithi
-          final paksha = skipped <= 15 ? Paksha.shukla : Paksha.krishna;
-          final inPaksha = skipped <= 15 ? skipped : skipped - 15;
           // The skipped tithi never appears at sunrise on the bounding days.
           expect(before, isNot(skipped));
           expect(after, isNot(skipped));
           // Finder maps it to the prior day (where `before` was at sunrise).
-          final dates =
-              p.getDates(seq.info[i].month, paksha, inPaksha, year, 'Ujjain');
+          final dates = p.findDates(
+              seq.info[i].month, Tithi.ofNumber(skipped), year, 'Ujjain');
           expect(dates, isNotEmpty,
               reason: 'kshaya tithi should still resolve to a date');
           expect(dates, contains(seq.dates[i]),

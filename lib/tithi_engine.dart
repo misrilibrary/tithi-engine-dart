@@ -26,12 +26,12 @@ export 'src/panchang.dart' show Panchang, PanchangAt;
 export 'src/tithi_calculator.dart' show TithiInfo, TithiSegment;
 export 'src/location.dart' show Location, LocationSource;
 export 'src/lunar_month.dart' show LunarMonth, MonthSystem;
-export 'src/tithi.dart' show Paksha, tithiNames;
+export 'src/tithi.dart' show Paksha, tithiNames, getTithiName, Tithi;
 export 'src/festival_def.dart' show FestivalDef, MuhurtaRule, festivals;
 export 'src/festival_finder.dart' show FestivalDate;
 
 // ── City registry / location data ────────────────────────────────────────
-export 'src/cities.dart' show City;
+export 'src/cities.dart' show City, resolveCityName;
 export 'src/astronomy.dart'
     show
         CityLocation,

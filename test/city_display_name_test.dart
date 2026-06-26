@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:tithi_engine/tithi_engine.dart';
+import 'package:tithi_engine/src/cities.dart' show cityRegistry;
 
 void main() {
   group('City.displayName (selective)', () {
@@ -45,7 +46,7 @@ void main() {
   group('region data model', () {
     test('region is dense: only the 4 self-qualifying cities lack one', () {
       final noRegion =
-          supportedCities.entries.where((e) => e.value.region == null);
+          cityRegistry.entries.where((e) => e.value.region == null);
       expect(noRegion.map((e) => e.key).toSet(),
           {'Washington DC', 'Singapore', 'Hong Kong', 'Bahrain'});
     });
@@ -59,8 +60,8 @@ void main() {
     });
 
     test('region does not affect coordinates', () {
-      expect(supportedCities['Redmond']!.latitude, closeTo(47.7, 0.01));
-      expect(supportedCities['Redmond']!.longitude, closeTo(-122.1, 0.01));
+      expect(cityRegistry['Redmond']!.latitude, closeTo(47.7, 0.01));
+      expect(cityRegistry['Redmond']!.longitude, closeTo(-122.1, 0.01));
     });
   });
 }

@@ -1,5 +1,5 @@
 import 'astronomy.dart'
-    show computeSunrise, computeSunset, getLocationForCity, SunriseConvention;
+    show computeSunrise, computeSunset, lookupCityLocation, SunriseConvention;
 import 'festival_def.dart';
 import 'festival_finder.dart';
 import 'location.dart';
@@ -81,6 +81,33 @@ class Panchang {
 
   /// Tithi spec → first matching Gregorian date in the given year.
   /// Returns `null` if no match found (e.g., kshaya tithi in a given year).
+  DateTime? findDate(
+    LunarMonth month,
+    tithi_core.Tithi tithi,
+    int year,
+    String city, {
+    bool isAdhika = false,
+  }) {
+    final dates = _findDatesImpl(
+        month, tithi.paksha, tithi.dayInPaksha, year, city,
+        isAdhika: isAdhika);
+    return dates.isEmpty ? null : dates.first;
+  }
+
+  /// Tithi spec → all matching Gregorian dates in the given year (adhika-aware).
+  List<DateTime> findDates(
+    LunarMonth month,
+    tithi_core.Tithi tithi,
+    int year,
+    String city, {
+    bool isAdhika = false,
+  }) =>
+      _findDatesImpl(month, tithi.paksha, tithi.dayInPaksha, year, city,
+          isAdhika: isAdhika);
+
+  /// Tithi spec → first matching Gregorian date in the given year.
+  /// Returns `null` if no match found (e.g., kshaya tithi in a given year).
+  @Deprecated('Use findDate with a Tithi. Will be removed in 5.0.0.')
   DateTime? getDate(
     LunarMonth month,
     tithi_core.Paksha paksha,
@@ -89,13 +116,27 @@ class Panchang {
     String city, {
     bool isAdhika = false,
   }) {
-    final dates =
-        getDates(month, paksha, tithiInPaksha, year, city, isAdhika: isAdhika);
+    final dates = _findDatesImpl(month, paksha, tithiInPaksha, year, city,
+        isAdhika: isAdhika);
     return dates.isEmpty ? null : dates.first;
   }
 
   /// Tithi spec → all matching Gregorian dates in the given year (adhika-aware).
+  @Deprecated('Use findDates with a Tithi. Will be removed in 5.0.0.')
   List<DateTime> getDates(
+    LunarMonth month,
+    tithi_core.Paksha paksha,
+    int tithiInPaksha,
+    int year,
+    String city, {
+    bool isAdhika = false,
+  }) =>
+      _findDatesImpl(month, paksha, tithiInPaksha, year, city,
+          isAdhika: isAdhika);
+
+  /// Shared find-in-year logic (paksha + position), used by both the typed
+  /// [findDate]/[findDates] and the deprecated [getDate]/[getDates].
+  List<DateTime> _findDatesImpl(
     LunarMonth month,
     tithi_core.Paksha paksha,
     int tithiInPaksha,
@@ -133,7 +174,19 @@ class Panchang {
   }
 
   /// Find the next occurrence of a tithi from a given date.
+  @Deprecated('The typed findNext(Tithi) arrives in 5.0. '
+      'Will change signature in 5.0.0.')
   DateTime? findNext(
+    LunarMonth month,
+    tithi_core.Paksha paksha,
+    int tithiInPaksha,
+    String city, {
+    DateTime? from,
+  }) =>
+      _findNextImpl(month, paksha, tithiInPaksha, city, from: from);
+
+  /// Shared next-occurrence logic, used by [findNext] (and its bound view).
+  DateTime? _findNextImpl(
     LunarMonth month,
     tithi_core.Paksha paksha,
     int tithiInPaksha,
@@ -164,11 +217,11 @@ class Panchang {
   /// [city] is not supported. At extreme latitudes on a no-sunrise day the value
   /// is a clamped approximation.
   DateTime sunrise(DateTime date, String city) =>
-      computeSunrise(date, getLocationForCity(city), convention: convention);
+      computeSunrise(date, lookupCityLocation(city), convention: convention);
 
   /// Sunset as a UTC instant for [date] at [city]. See [sunrise].
   DateTime sunset(DateTime date, String city) =>
-      computeSunset(date, getLocationForCity(city), convention: convention);
+      computeSunset(date, lookupCityLocation(city), convention: convention);
 
   /// Bind this Panchang to a [Location] (a registered city or raw coordinates),
   /// returning a view whose methods drop the `city` argument.
@@ -205,16 +258,32 @@ class PanchangAt {
           {required Duration offset}) =>
       _p.tithiSegments(windowStartUtc, windowEndUtc, _loc.key, offset: offset);
 
+  /// See [Panchang.findDate].
+  DateTime? findDate(LunarMonth month, tithi_core.Tithi tithi, int year,
+          {bool isAdhika = false}) =>
+      _p.findDate(month, tithi, year, _loc.key, isAdhika: isAdhika);
+
+  /// See [Panchang.findDates].
+  List<DateTime> findDates(LunarMonth month, tithi_core.Tithi tithi, int year,
+          {bool isAdhika = false}) =>
+      _p.findDates(month, tithi, year, _loc.key, isAdhika: isAdhika);
+
   /// See [Panchang.getDate].
-  DateTime? getDate(LunarMonth month, tithi_core.Paksha paksha,
-          int tithiInPaksha, int year, {bool isAdhika = false}) =>
-      _p.getDate(month, paksha, tithiInPaksha, year, _loc.key,
-          isAdhika: isAdhika);
+  @Deprecated('Use findDate with a Tithi. Will be removed in 5.0.0.')
+  DateTime? getDate(
+      LunarMonth month, tithi_core.Paksha paksha, int tithiInPaksha, int year,
+      {bool isAdhika = false}) {
+    final dates = _p._findDatesImpl(
+        month, paksha, tithiInPaksha, year, _loc.key,
+        isAdhika: isAdhika);
+    return dates.isEmpty ? null : dates.first;
+  }
 
   /// See [Panchang.getDates].
+  @Deprecated('Use findDates with a Tithi. Will be removed in 5.0.0.')
   List<DateTime> getDates(LunarMonth month, tithi_core.Paksha paksha,
           int tithiInPaksha, int year, {bool isAdhika = false}) =>
-      _p.getDates(month, paksha, tithiInPaksha, year, _loc.key,
+      _p._findDatesImpl(month, paksha, tithiInPaksha, year, _loc.key,
           isAdhika: isAdhika);
 
   /// See [Panchang.dateFor].
@@ -226,10 +295,12 @@ class PanchangAt {
       _p.recurringDates(festival, year, _loc.key);
 
   /// See [Panchang.findNext].
+  @Deprecated('The typed findNext(Tithi) arrives in 5.0. '
+      'Will change signature in 5.0.0.')
   DateTime? findNext(
           LunarMonth month, tithi_core.Paksha paksha, int tithiInPaksha,
           {DateTime? from}) =>
-      _p.findNext(month, paksha, tithiInPaksha, _loc.key, from: from);
+      _p._findNextImpl(month, paksha, tithiInPaksha, _loc.key, from: from);
 
   /// See [Panchang.sunrise].
   DateTime sunrise(DateTime date) => _p.sunrise(date, _loc.key);

@@ -1,5 +1,6 @@
 import 'package:test/test.dart';
 import 'package:tithi_engine/tithi_engine.dart';
+import 'package:tithi_engine/src/astronomy.dart' show lookupCityLocation;
 import 'package:tithi_engine/data/all.dart';
 
 void main() {
@@ -8,7 +9,7 @@ void main() {
   final date = DateTime.utc(2026, 1, 3);
 
   test('coordinates on a city cell == Location.city (Swiss-corrected)', () {
-    final s = getLocationForCity('Seattle');
+    final s = lookupCityLocation('Seattle');
     final byCity = p.at(Location.city('Seattle')).tithiOnDate(date);
     // exact stored coords, and a small offset that stays in the same 0.1° cell
     for (final pt in [
@@ -23,7 +24,7 @@ void main() {
   });
 
   test('coordinate matching a stored city reproduces the name result', () {
-    final ny = getLocationForCity('New York');
+    final ny = lookupCityLocation('New York');
     final byCoord =
         p.at(Location.at(ny.latitude, ny.longitude)).tithiOnDate(date);
     final byName = p.tithiOnDate(date, 'New York');
@@ -40,8 +41,8 @@ void main() {
   });
 
   test('Allahabad/Prayagraj alias resolve to the same corrected cell', () {
-    final a = getLocationForCity('Allahabad');
-    final pr = getLocationForCity('Prayagraj');
+    final a = lookupCityLocation('Allahabad');
+    final pr = lookupCityLocation('Prayagraj');
     expect(pr.latitude, a.latitude);
     expect(pr.longitude, a.longitude);
     expect(Location.at(a.latitude, a.longitude).source,

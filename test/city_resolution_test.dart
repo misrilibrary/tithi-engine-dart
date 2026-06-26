@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:tithi_engine/tithi_engine.dart';
-import 'package:tithi_engine/src/cities.dart' show resolveCityName;
+import 'package:tithi_engine/src/astronomy.dart' show lookupCityLocation;
 import 'package:tithi_engine/data/all.dart';
 
 void main() {
@@ -30,9 +30,9 @@ void main() {
   });
 
   test('coords + corrections agree across spellings of a known city', () {
-    final ny = getLocationForCity('New York');
-    expect(getLocationForCity('New York, NY').latitude, ny.latitude);
-    expect(getLocationForCity('new york').longitude, ny.longitude);
+    final ny = lookupCityLocation('New York');
+    expect(lookupCityLocation('New York, NY').latitude, ny.latitude);
+    expect(lookupCityLocation('new york').longitude, ny.longitude);
 
     final p = Panchang([registerAllCities]);
     final a = p.tithiOnDate(DateTime.utc(2026, 1, 3), 'New York').tithiNumber;
@@ -44,8 +44,8 @@ void main() {
   });
 
   test('unsupported city -> throws ArgumentError (no silent substitution)', () {
-    expect(() => getLocationForCity('Nonexistent City'), throwsArgumentError);
-    expect(() => getLocationForCity('Vancouver, WA'), throwsArgumentError);
+    expect(() => lookupCityLocation('Nonexistent City'), throwsArgumentError);
+    expect(() => lookupCityLocation('Vancouver, WA'), throwsArgumentError);
     expect(
         () => Panchang([registerAllCities])
             .tithiOnDate(DateTime.utc(2026, 1, 3), 'Nonexistent City'),

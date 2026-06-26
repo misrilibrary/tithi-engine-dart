@@ -9,12 +9,11 @@ void main() {
   setUpAll(registerAllCities);
   final panchang = Panchang([registerAllCities], system: MonthSystem.purnimant);
 
-  // Find via the public facade: split the absolute tithi number (1-30) into
-  // paksha + position, then call Panchang.getDates for the default city.
+  // Find via the public facade: build a Tithi from the absolute number (1-30),
+  // then call Panchang.findDates for the default city.
   List<DateTime> find(int tithiNumber, LunarMonth month, int year) {
-    final paksha = tithiNumber <= 15 ? Paksha.shukla : Paksha.krishna;
-    final inPaksha = tithiNumber <= 15 ? tithiNumber : tithiNumber - 15;
-    return panchang.getDates(month, paksha, inPaksha, year, defaultCity);
+    return panchang.findDates(
+        month, Tithi.ofNumber(tithiNumber), year, defaultCity);
   }
 
   group('Kshaya at 30→1 wraparound (Shukla Pratipada)', () {

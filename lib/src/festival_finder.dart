@@ -6,7 +6,7 @@ import 'tithi_calculator.dart';
 
 /// Result of finding a festival date, including muhurta window and tithi span.
 class FestivalDate {
-  final FestivalDef festival;
+  final FestivalDef _festival;
   final DateTime date;
   final DateTime tithiStart; // UTC moment tithi begins
   final DateTime tithiEnd; // UTC moment tithi ends
@@ -14,13 +14,13 @@ class FestivalDate {
       muhurtaStart; // UTC start of muhurta window (null for sunrise rule)
   final DateTime? muhurtaEnd; // UTC end of muhurta window
   /// The actual lunar month this occurrence falls in. For non-recurring
-  /// festivals this equals [festival.month]; for recurring festivals it is the
-  /// month resolved from the occurrence date via tithiOnDate.
+  /// festivals this equals [FestivalDef.month]; for recurring festivals it is
+  /// the month resolved from the occurrence date via tithiOnDate.
   final LunarMonth month;
   final bool isAdhika;
 
   FestivalDate({
-    required this.festival,
+    required FestivalDef festival,
     required this.date,
     required this.tithiStart,
     required this.tithiEnd,
@@ -28,12 +28,34 @@ class FestivalDate {
     this.muhurtaEnd,
     required this.month,
     this.isAdhika = false,
-  });
+  }) : _festival = festival;
 
-  /// Shorthand accessors mirroring [FestivalDef] for convenience.
-  String get name => festival.name;
-  int get tithiNumber => festival.tithiNumber;
-  tithi_core.Paksha get paksha => festival.paksha;
+  /// The originating festival definition.
+  @Deprecated('Access fields directly on FestivalDate (name, month, '
+      'tithiNumber, paksha, tithiInPaksha, muhurta, recurring, isAdhika). '
+      'Will be removed in 5.0.0.')
+  FestivalDef get festival => _festival;
+
+  /// Stable festival identifier (see [FestivalDef.id]).
+  String get id => _festival.id;
+
+  /// Festival display name.
+  String get name => _festival.name;
+
+  /// Absolute tithi number (1–30).
+  int get tithiNumber => _festival.tithiNumber;
+
+  /// Fortnight (shukla/krishna).
+  tithi_core.Paksha get paksha => _festival.paksha;
+
+  /// Position within the paksha (1–15).
+  int get tithiInPaksha => _festival.tithiInPaksha;
+
+  /// Observance rule used to pick the day.
+  MuhurtaRule get muhurta => _festival.muhurta;
+
+  /// Whether this festival recurs every lunar month.
+  bool get recurring => _festival.recurring;
 }
 
 /// Find the correct festival date for a given year and city, applying muhurta rules.
@@ -57,7 +79,7 @@ FestivalDate? findFestivalDate(
   final dates = findCalc.findInYear(info, year, celebrationCity: city);
   if (dates.isEmpty) return null;
 
-  final loc = getLocationForCity(city);
+  final loc = lookupCityLocation(city);
   var d = dates.first;
 
   // Apply muhurta rule: check if D-1 has the target tithi at muhurta time
@@ -221,19 +243,20 @@ int _tithiAt(DateTime utcTime) {
 List<FestivalDate> findRecurringDates(
     FestivalDef fest, int year, String city, TithiCalculator calc) {
   final convention = calc.convention;
-  final loc = getLocationForCity(city);
+  final loc = lookupCityLocation(city);
   final results = <FestivalDate>[];
   final target = fest.tithiNumber;
 
-  // Scan the year day by day, find each occurrence using "last day at sunrise" rule
-  final sunriseFn = getSunriseFnForCity(city, convention: convention);
+  // Scan the year day by day, find each occurrence using the "last day at
+  // sunrise" rule. Use the CORRECTED day-tithi (same source as tithiOnDate and
+  // the 4.3.0 getDates fix), NOT raw Meeus, so masik festival dates are right
+  // on correction days (high-latitude especially).
   DateTime? lastSeen;
 
   for (var d = DateTime.utc(year, 1, 1);
       d.year == year || (d.year == year + 1 && d.month == 1 && d.day == 1);
       d = d.add(const Duration(days: 1))) {
-    final sr = sunriseFn(d);
-    final t = _tithiAt(sr);
+    final t = calc.tithiOnDate(d, city).tithiNumber;
     if (t == target) {
       lastSeen = d;
     } else if (lastSeen != null) {

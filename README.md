@@ -21,7 +21,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^4.3.0
+  tithi_engine: ^4.4.0
 ```
 
 ## Quick Start
@@ -89,14 +89,23 @@ The time-aware API is **UTC-instant based**: you pass true UTC instants and, whe
 a civil day matters, the DST-aware offset in effect (the engine does no timezone
 resolution — resolve the offset yourself, e.g. via `package:timezone`).
 
+> **New in 4.4.0:** typed value types `Tithi` (`Tithi.shukla(8)`, `Tithi.krishna(11)`,
+> `Tithi.ofNumber(23)`; `.number`/`.name` own the Purnima/Amavasya rule) and `City`
+> (`City(name, {region})`, `City.isSupported`, `resolveCityName`). New typed
+> `findDate`/`findDates` take a `Tithi`. The legacy `getDate`/`getDates`,
+> `findNext` (primitive form), `tithiNames`, `supportedCities`, `CityLocation`,
+> `getLocationForCity`, and `FestivalDate.festival` are **deprecated** (removed in
+> 5.0, where methods take `City`/`Tithi`).
+
 | Method | Description |
 |--------|-------------|
 | `Panchang(data, {system, convention})` | Construct with city-data registrars (`data` required); `convention` selects the sunrise definition (default `upperLimb`) |
 | `panchang.tithiOnDate(date, city)` | Sunrise tithi of the panchang day (display/observance) |
 | `panchang.tithiAtInstant(utcInstant, city, {offset})` | Tithi at an exact UTC moment (birth-time) |
 | `panchang.tithiSegments(windowStartUtc, windowEndUtc, city, {offset})` | Every tithi segment in a UTC window (N transitions → N+1 segments) |
-| `panchang.getDate(month, paksha, tithi, year, city)` | Tithi spec → Gregorian date |
-| `panchang.getDates(month, paksha, tithi, year, city)` | Tithi spec → all dates (adhika-aware) |
+| `panchang.findDate(month, Tithi, year, city)` | Tithi spec → Gregorian date (typed; **preferred**) |
+| `panchang.findDates(month, Tithi, year, city)` | Tithi spec → all dates, adhika-aware (typed; **preferred**) |
+| `panchang.getDate(...)` / `getDates(...)` | _Deprecated (5.0): use `findDate`/`findDates` with a `Tithi`_ |
 | `panchang.dateFor(festival, year, city)` | Festival → date with muhurta rules |
 | `panchang.recurringDates(festival, year, city)` | Recurring festival → all occurrences in the year |
 | `panchang.findNext(month, paksha, tithi, city)` | Next occurrence from today |
@@ -229,6 +238,7 @@ The two packages **version independently** — each version string is a semver c
 | Sunrise-convention toggle (`SunriseConvention`, centerDisc Swiss tables) | `4.2.0+` | _(pending)_ |
 | Engine rev `r3`: global transition correction + iterative sunrise (JPL `.se1` parity) | `4.3.0+` | _(pending)_ |
 | `FestivalDate.month` actual month (not def placeholder) for recurring festivals | `4.3.1+` | _(pending)_ |
+| `Tithi` + `City` value types, typed `findDate`/`findDates`, `getTithiName`/`resolveCityName` exports (legacy surface deprecated) | `4.4.0+` | _(pending)_ |
 
 > **API generation:** Dart `3.x` and Java `2.x` are the same (UTC-instant)
 > API generation. Dart `4.0.0` ⟷ Java `3.0.0` add strict city resolution

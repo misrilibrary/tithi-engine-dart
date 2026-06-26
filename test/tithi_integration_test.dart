@@ -227,7 +227,7 @@ void main() {
 
   group('Sunrise sanity', () {
     test('Ujjain equinox/solstice ranges', () {
-      final loc = getLocationForCity('Ujjain');
+      final loc = lookupCityLocation('Ujjain');
       final checks = [
         [DateTime.utc(2026, 3, 20), 385, 400],
         [DateTime.utc(2026, 6, 21), 335, 350],
@@ -244,7 +244,7 @@ void main() {
     });
     test('Tokyo sunrise day-carry (eastern city, UTC sunrise < 0 in winter)',
         () {
-      final loc = getLocationForCity('Tokyo');
+      final loc = lookupCityLocation('Tokyo');
       // Tokyo sunrise is on the PREVIOUS UTC day (e.g. Jun 21 04:26 JST = Jun 20 19:26 UTC).
       // The day-carry bug (h%24) would put it on the wrong local day.
       for (final dt in [

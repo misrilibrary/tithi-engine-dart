@@ -2,7 +2,7 @@ import 'astronomy.dart' show CityLocation;
 
 /// The single default reference city used wherever no city is specified
 /// (month/tithi resolution, sunrise, UI defaults). Change this one value to
-/// swap the app-wide default. Must exist in [supportedCities].
+/// swap the app-wide default. Must be a supported city (see [City.values]).
 const defaultCity = 'Ujjain';
 
 /// Priority cities shown at the top of dropdowns (above all groups).
@@ -26,7 +26,7 @@ const pinnedCities = [
 /// All supported cities for tithi calculation.
 /// To add a city: add an entry here, then generate its correction table
 /// (tools/benchmark/bin/gen_city_corrections.dart) and run test/gen_registry.dart.
-const supportedCities = <String, CityLocation>{
+const cityRegistry = <String, CityLocation>{
   // ─── India ───
   'Delhi': CityLocation(28.6, 77.2, 5.5, region: 'India'),
   'Mumbai': CityLocation(19.1, 72.9, 5.5, region: 'India'),
@@ -305,6 +305,11 @@ const supportedCities = <String, CityLocation>{
   'Redmond': CityLocation(47.7, -122.1, -8.0, region: 'WA'),
 };
 
+/// Deprecated public alias for the internal [cityRegistry] map.
+@Deprecated('Use City.values / City.isSupported / resolveCityName. '
+    'Will be removed in 5.0.0.')
+const supportedCities = cityRegistry;
+
 /// India cities (UTC +5.5) for grouping.
 const _indiaCities = {
   // Metros / tier-1
@@ -359,15 +364,15 @@ const _usaCities = {
 /// Each group (except priority) is alphabetically sorted.
 /// Null entries are divider markers between groups.
 List<String?> get orderedCityList {
-  final india = supportedCities.keys
+  final india = cityRegistry.keys
       .where((c) => _indiaCities.contains(c) && !pinnedCities.contains(c))
       .toList()
     ..sort();
-  final usa = supportedCities.keys
+  final usa = cityRegistry.keys
       .where((c) => _usaCities.contains(c) && !pinnedCities.contains(c))
       .toList()
     ..sort();
-  final rest = supportedCities.keys
+  final rest = cityRegistry.keys
       .where((c) =>
           !_indiaCities.contains(c) &&
           !_usaCities.contains(c) &&
@@ -385,9 +390,25 @@ List<String?> get orderedCityList {
   ];
 }
 
-/// Convenience constants for commonly used city names.
-/// All cities in [supportedCities] can also be used as plain strings.
-abstract class City {
+/// A supported city: a canonical [name] plus an optional [region]/country
+/// qualifier (e.g. `City('Redmond', region: 'WA')`).
+///
+/// `City` is both a value type and a namespace of convenience constants. The
+/// `City.*` members (e.g. [City.ujjain]) remain plain [String]s in 4.x so they
+/// keep working wherever a `String city` is expected; constructing a `City`
+/// instance gives a canonical [key]/[toString] the engine's string-keyed methods
+/// already accept. (At 5.0 the constants and method params flip to `City`.)
+class City {
+  /// Canonical city name (e.g. `'Seattle'`).
+  final String name;
+
+  /// Optional region/country qualifier (e.g. `'WA'`); `null` for self-qualifying
+  /// cities. Display-only — it does not affect any calculation.
+  final String? region;
+
+  /// Construct a city value from a canonical [name] and optional [region].
+  const City(this.name, {this.region});
+
   static const ujjain = 'Ujjain';
   static const srinagar = 'Srinagar';
   static const delhi = 'Delhi';
@@ -411,7 +432,11 @@ abstract class City {
   static const sydney = 'Sydney';
 
   /// All supported city names.
-  static List<String> get values => supportedCities.keys.toList();
+  static List<String> get values => cityRegistry.keys.toList();
+
+  /// Whether [name] resolves to a supported city (any reasonable spelling or the
+  /// `"City, Region"` qualified form). See [resolveCityName].
+  static bool isSupported(String name) => resolveCityName(name) != null;
 
   /// City names whose bare form is commonly confused with another well-known
   /// place; only these receive a qualifier from [displayName].
@@ -438,7 +463,7 @@ abstract class City {
   /// UI. For always-qualified labels (pickers/search), use [qualifiedName].
   static String displayName(String city) {
     if (!_ambiguous.contains(city)) return city;
-    final region = supportedCities[city]?.region;
+    final region = cityRegistry[city]?.region;
     return region == null ? city : '$city, $region';
   }
 
@@ -448,9 +473,24 @@ abstract class City {
   /// Returns the bare name for self-qualifying cities (e.g. `'Singapore'`) and
   /// unknown names. [displayName] is the selective subset of this.
   static String qualifiedName(String city) {
-    final region = supportedCities[city]?.region;
+    final region = cityRegistry[city]?.region;
     return region == null ? city : '$city, $region';
   }
+
+  /// Canonical key for engine lookup: the bare [name], or `'name, region'` when
+  /// a [region] is set. This is the string the engine's `String city` methods
+  /// accept.
+  String get key => region == null ? name : '$name, $region';
+
+  @override
+  String toString() => key;
+
+  @override
+  bool operator ==(Object other) =>
+      other is City && other.name == name && other.region == region;
+
+  @override
+  int get hashCode => Object.hash(name, region);
 }
 
 // ── City-name resolution ──────────────────────────────────────────────────
@@ -460,10 +500,17 @@ abstract class City {
 // and correction lookups route through this, so they can never disagree.
 String _canonCity(String s) => s.toLowerCase().replaceAll(RegExp(r'\s+'), '');
 
+/// Bare canonical keys that map to more than one distinct canonical city.
+/// Empty today (zero collisions); populated defensively when [_cityResolveMap]
+/// is built so a future colliding name fails fast instead of silently aliasing.
+final Set<String> _ambiguousBareKeys = {};
+
 final Map<String, String> _cityResolveMap = () {
   final m = <String, String>{};
-  supportedCities.forEach((name, loc) {
-    m[_canonCity(name)] = name;
+  cityRegistry.forEach((name, loc) {
+    final bare = _canonCity(name);
+    if (m.containsKey(bare) && m[bare] != name) _ambiguousBareKeys.add(bare);
+    m[bare] = name;
     if (loc.region != null) m[_canonCity('$name, ${loc.region}')] = name;
   });
   return m;
@@ -476,7 +523,18 @@ final Map<String, String> _cityResolveMap = () {
 /// for that name) and the `"City, Region"` qualified form (a specific
 /// city‑region). There is intentionally **no** region‑stripping fuzzy match, so
 /// `"Vancouver, WA"` never silently resolves to `"Vancouver, BC"`.
-String? resolveCityName(String city) => _cityResolveMap[_canonCity(city)];
+///
+/// Throws [ArgumentError] if [city] is a bare name shared by two distinct
+/// canonical cities (qualify it with a region instead). No such collision
+/// exists today, so this never triggers in practice.
+String? resolveCityName(String city) {
+  final canon = _canonCity(city);
+  if (_ambiguousBareKeys.contains(canon)) {
+    throw ArgumentError.value(
+        city, 'city', 'ambiguous city; qualify with region');
+  }
+  return _cityResolveMap[canon];
+}
 
 // ── Coordinate (0.1°) cell index + ad-hoc locations ───────────────────────
 // The canonical spatial key is the 0.1° cell (cities are stored at 1 decimal,
@@ -489,7 +547,7 @@ String _cellKey(double lat, double lng) =>
 
 final Map<String, String> _cellToCity = () {
   final m = <String, String>{};
-  supportedCities.forEach((name, loc) {
+  cityRegistry.forEach((name, loc) {
     m.putIfAbsent(_cellKey(loc.latitude, loc.longitude), () => name);
   });
   return m;

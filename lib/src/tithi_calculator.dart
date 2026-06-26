@@ -142,7 +142,7 @@ class TithiCalculator {
   TithiInfo tithiOnDate(DateTime date, String city) {
     final civilDate = DateTime.utc(date.year, date.month, date.day);
     final dayIndex = civilDate.difference(_epoch).inDays;
-    final loc = getLocationForCity(city);
+    final loc = lookupCityLocation(city);
     final tithiNum = getTithiCorrections(city, convention)[dayIndex] ??
         _meeusTithiAt(computeSunrise(date, loc, convention: convention));
     return _buildInfo(tithiNum, civilDate, city);
@@ -238,7 +238,7 @@ class TithiCalculator {
       system: monthSystem,
       isAdhika: info.isAdhika,
       sunriseFn: (dt) =>
-          computeSunrise(dt, getLocationForCity(city), convention: convention),
+          computeSunrise(dt, lookupCityLocation(city), convention: convention),
     );
   }
 
@@ -255,7 +255,7 @@ class TithiCalculator {
       from: from,
       system: monthSystem,
       sunriseFn: (dt) =>
-          computeSunrise(dt, getLocationForCity(city), convention: convention),
+          computeSunrise(dt, lookupCityLocation(city), convention: convention),
     );
   }
 

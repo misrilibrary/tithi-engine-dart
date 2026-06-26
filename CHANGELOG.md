@@ -1,3 +1,36 @@
+## 4.4.0
+
+Additive, non-breaking release that introduces typed value types and replacement
+APIs, and deprecates the symbols they replace (all deprecated symbols are removed
+in 5.0.0).
+
+- **Fixed:** `recurringDates` (masik festivals) used raw Meeus tithi instead of the
+  corrected day-tithi, causing off-by-one dates on correction days (high-latitude
+  especially) — the same class as the 4.3.0 `getDates` fix, which had missed
+  `findRecurringDates`. Now uses the corrected `tithiOnDate`. Verified vs `.se1`-proven
+  tithiOnDate across all 230 cities × 2000–2030 (0 mismatches; `findNext` was clean).
+
+**Added:**
+- `Tithi` value type — `Tithi.shukla(n)`, `Tithi.krishna(n)`, `Tithi.ofNumber(1–30)`;
+  getters `number`, `paksha`, `dayInPaksha`, `name` (owns the paksha-dependent
+  Purnima/Amavasya naming rule).
+- `City` value type — concrete `const City(name, {region})` coexisting with the
+  existing `City.*` string constants; plus `City.isSupported(String)`.
+- Typed `findDate(month, Tithi, year, city)` / `findDates(...)` on `Panchang` and
+  `PanchangAt` (the `city` argument stays `String` this release).
+- Exported `getTithiName(int 1–30)` and `resolveCityName(String) → String?`.
+- `FestivalDate` direct getters: `id`, `tithiInPaksha`, `muhurta`, `recurring`
+  (so `.festival` is never needed).
+- Fail-fast guard for a genuinely ambiguous bare city name (no collisions today).
+
+**Deprecated (removed in 5.0.0):**
+- `FestivalDate.festival` → access fields directly on `FestivalDate`.
+- `tithiNames` → `getTithiName(int)`.
+- `supportedCities` → `City.values` + `City.isSupported` / `resolveCityName`.
+- `getLocationForCity` → `Panchang.at(Location.city(name))`.
+- `getDate` / `getDates` → `findDate` / `findDates` (typed `Tithi`).
+- `findNext` → typed `findNext(Tithi)` arrives in 5.0.
+
 ## 4.3.1
 - FestivalDate now carries the actual lunar month of the occurrence (computed via
   tithiOnDate), not the placeholder month from the FestivalDef. Fixes recurring
