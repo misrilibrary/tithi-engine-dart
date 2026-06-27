@@ -1,3 +1,17 @@
+## 5.1.0
+
+- **Added 15 US cities**, each with Swiss-Ephemeris-corrected tables for both sunrise
+  conventions (upper-limb + center-disc), verified 0 mismatches vs `.se1` across
+  1900–2100:
+  - Kentucky: **Louisville**, **Lexington**
+  - South Carolina: **Columbia**, **Charleston**, **Greenville**
+  - Ohio: **Cleveland**
+  - New Jersey: **Edison**, **Jersey City**
+  - Virginia: **Ashburn**, **Fairfax**
+  - Maryland: **Rockville**  · Connecticut: **Stamford**
+  - Texas: **San Antonio**  · Wisconsin: **Milwaukee**  · New York: **Buffalo**
+  Registry now 245 cities.
+
 ## 5.0.0
 
 **BREAKING** — the cutover release that completes the 4.4.0 API evolution. All

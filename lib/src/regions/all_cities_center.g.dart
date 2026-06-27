@@ -19,6 +19,7 @@ import 'amman/corrections_center.dart' as amman;
 import 'amritsar/corrections_center.dart' as amritsar;
 import 'amsterdam/corrections_center.dart' as amsterdam;
 import 'ankara/corrections_center.dart' as ankara;
+import 'ashburn/corrections_center.dart' as ashburn;
 import 'athens/corrections_center.dart' as athens;
 import 'atlanta/corrections_center.dart' as atlanta;
 import 'auckland/corrections_center.dart' as auckland;
@@ -43,16 +44,20 @@ import 'brussels/corrections_center.dart' as brussels;
 import 'bucharest/corrections_center.dart' as bucharest;
 import 'budapest/corrections_center.dart' as budapest;
 import 'buenosaires/corrections_center.dart' as buenosaires;
+import 'buffalo/corrections_center.dart' as buffalo;
 import 'cairo/corrections_center.dart' as cairo;
 import 'calgary/corrections_center.dart' as calgary;
 import 'canberra/corrections_center.dart' as canberra;
 import 'capetown/corrections_center.dart' as capetown;
 import 'chandigarh/corrections_center.dart' as chandigarh;
+import 'charleston/corrections_center.dart' as charleston;
 import 'charlotte/corrections_center.dart' as charlotte;
 import 'chennai/corrections_center.dart' as chennai;
 import 'chicago/corrections_center.dart' as chicago;
+import 'cleveland/corrections_center.dart' as cleveland;
 import 'coimbatore/corrections_center.dart' as coimbatore;
 import 'colombo/corrections_center.dart' as colombo;
+import 'columbia/corrections_center.dart' as columbia;
 import 'columbus/corrections_center.dart' as columbus;
 import 'copenhagen/corrections_center.dart' as copenhagen;
 import 'dallas/corrections_center.dart' as dallas;
@@ -69,7 +74,9 @@ import 'dublin/corrections_center.dart' as dublin;
 import 'durban/corrections_center.dart' as durban;
 import 'dwarka/corrections_center.dart' as dwarka;
 import 'edinburgh/corrections_center.dart' as edinburgh;
+import 'edison/corrections_center.dart' as edison;
 import 'edmonton/corrections_center.dart' as edmonton;
+import 'fairfax/corrections_center.dart' as fairfax;
 import 'faridabad/corrections_center.dart' as faridabad;
 import 'fremont/corrections_center.dart' as fremont;
 import 'georgetown/corrections_center.dart' as georgetown;
@@ -77,6 +84,7 @@ import 'ghaziabad/corrections_center.dart' as ghaziabad;
 import 'glasgow/corrections_center.dart' as glasgow;
 import 'gorakhpur/corrections_center.dart' as gorakhpur;
 import 'gothenburg/corrections_center.dart' as gothenburg;
+import 'greenville/corrections_center.dart' as greenville;
 import 'gurgaon/corrections_center.dart' as gurgaon;
 import 'guwahati/corrections_center.dart' as guwahati;
 import 'gwalior/corrections_center.dart' as gwalior;
@@ -100,6 +108,7 @@ import 'jakarta/corrections_center.dart' as jakarta;
 import 'jalandhar/corrections_center.dart' as jalandhar;
 import 'jammu/corrections_center.dart' as jammu;
 import 'jeddah/corrections_center.dart' as jeddah;
+import 'jerseycity/corrections_center.dart' as jerseycity;
 import 'jodhpur/corrections_center.dart' as jodhpur;
 import 'johannesburg/corrections_center.dart' as johannesburg;
 import 'kampala/corrections_center.dart' as kampala;
@@ -120,10 +129,12 @@ import 'lagos/corrections_center.dart' as lagos;
 import 'lahore/corrections_center.dart' as lahore;
 import 'lasvegas/corrections_center.dart' as lasvegas;
 import 'leicester/corrections_center.dart' as leicester;
+import 'lexington/corrections_center.dart' as lexington;
 import 'lima/corrections_center.dart' as lima;
 import 'lisbon/corrections_center.dart' as lisbon;
 import 'london/corrections_center.dart' as london;
 import 'losangeles/corrections_center.dart' as losangeles;
+import 'louisville/corrections_center.dart' as louisville;
 import 'lucknow/corrections_center.dart' as lucknow;
 import 'ludhiana/corrections_center.dart' as ludhiana;
 import 'lyon/corrections_center.dart' as lyon;
@@ -139,6 +150,7 @@ import 'melbourne/corrections_center.dart' as melbourne;
 import 'mexicocity/corrections_center.dart' as mexicocity;
 import 'miami/corrections_center.dart' as miami;
 import 'milan/corrections_center.dart' as milan;
+import 'milwaukee/corrections_center.dart' as milwaukee;
 import 'minneapolis/corrections_center.dart' as minneapolis;
 import 'mississauga/corrections_center.dart' as mississauga;
 import 'mombasa/corrections_center.dart' as mombasa;
@@ -186,11 +198,13 @@ import 'regina/corrections_center.dart' as regina;
 import 'riodejaneiro/corrections_center.dart' as riodejaneiro;
 import 'rishikesh/corrections_center.dart' as rishikesh;
 import 'riyadh/corrections_center.dart' as riyadh;
+import 'rockville/corrections_center.dart' as rockville;
 import 'rome/corrections_center.dart' as rome;
 import 'rotterdam/corrections_center.dart' as rotterdam;
 import 'sacramento/corrections_center.dart' as sacramento;
 import 'salem/corrections_center.dart' as salem;
 import 'saltlakecity/corrections_center.dart' as saltlakecity;
+import 'sanantonio/corrections_center.dart' as sanantonio;
 import 'sandiego/corrections_center.dart' as sandiego;
 import 'sanfrancisco/corrections_center.dart' as sanfrancisco;
 import 'sanjose/corrections_center.dart' as sanjose;
@@ -203,6 +217,7 @@ import 'singapore/corrections_center.dart' as singapore;
 import 'sofia/corrections_center.dart' as sofia;
 import 'sopaulo/corrections_center.dart' as sopaulo;
 import 'srinagar/corrections_center.dart' as srinagar;
+import 'stamford/corrections_center.dart' as stamford;
 import 'stlouis/corrections_center.dart' as stlouis;
 import 'stockholm/corrections_center.dart' as stockholm;
 import 'surat/corrections_center.dart' as surat;
@@ -238,7 +253,7 @@ import 'yangon/corrections_center.dart' as yangon;
 import 'zagreb/corrections_center.dart' as zagreb;
 import 'zurich/corrections_center.dart' as zurich;
 
-/// Register centerDisc tables for all 230 cities.
+/// Register centerDisc tables for all 245 cities.
 bool _registered = false;
 void registerAllCitiesCenterDisc() {
   if (_registered) return; // idempotent
@@ -278,6 +293,9 @@ void registerAllCitiesCenterDisc() {
       convention: SunriseConvention.centerDisc);
   registerCity('Ankara',
       tithi: ankara.ankaraTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
+  registerCity('Ashburn',
+      tithi: ashburn.ashburnTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('Athens',
       tithi: athens.athensTithiCorrectionsCenter,
@@ -351,6 +369,9 @@ void registerAllCitiesCenterDisc() {
   registerCity('Buenos Aires',
       tithi: buenosaires.buenosairesTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
+  registerCity('Buffalo',
+      tithi: buffalo.buffaloTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
   registerCity('Cairo',
       tithi: cairo.cairoTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
@@ -366,6 +387,9 @@ void registerAllCitiesCenterDisc() {
   registerCity('Chandigarh',
       tithi: chandigarh.chandigarhTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
+  registerCity('Charleston',
+      tithi: charleston.charlestonTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
   registerCity('Charlotte',
       tithi: charlotte.charlotteTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
@@ -375,11 +399,17 @@ void registerAllCitiesCenterDisc() {
   registerCity('Chicago',
       tithi: chicago.chicagoTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
+  registerCity('Cleveland',
+      tithi: cleveland.clevelandTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
   registerCity('Coimbatore',
       tithi: coimbatore.coimbatoreTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('Colombo',
       tithi: colombo.colomboTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
+  registerCity('Columbia',
+      tithi: columbia.columbiaTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('Columbus',
       tithi: columbus.columbusTithiCorrectionsCenter,
@@ -429,8 +459,14 @@ void registerAllCitiesCenterDisc() {
   registerCity('Edinburgh',
       tithi: edinburgh.edinburghTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
+  registerCity('Edison',
+      tithi: edison.edisonTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
   registerCity('Edmonton',
       tithi: edmonton.edmontonTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
+  registerCity('Fairfax',
+      tithi: fairfax.fairfaxTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('Faridabad',
       tithi: faridabad.faridabadTithiCorrectionsCenter,
@@ -452,6 +488,9 @@ void registerAllCitiesCenterDisc() {
       convention: SunriseConvention.centerDisc);
   registerCity('Gothenburg',
       tithi: gothenburg.gothenburgTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
+  registerCity('Greenville',
+      tithi: greenville.greenvilleTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('Gurgaon',
       tithi: gurgaon.gurgaonTithiCorrectionsCenter,
@@ -522,6 +561,9 @@ void registerAllCitiesCenterDisc() {
   registerCity('Jeddah',
       tithi: jeddah.jeddahTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
+  registerCity('Jersey City',
+      tithi: jerseycity.jerseycityTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
   registerCity('Jodhpur',
       tithi: jodhpur.jodhpurTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
@@ -582,6 +624,9 @@ void registerAllCitiesCenterDisc() {
   registerCity('Leicester',
       tithi: leicester.leicesterTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
+  registerCity('Lexington',
+      tithi: lexington.lexingtonTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
   registerCity('Lima',
       tithi: lima.limaTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
@@ -593,6 +638,9 @@ void registerAllCitiesCenterDisc() {
       convention: SunriseConvention.centerDisc);
   registerCity('Los Angeles',
       tithi: losangeles.losangelesTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
+  registerCity('Louisville',
+      tithi: louisville.louisvilleTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('Lucknow',
       tithi: lucknow.lucknowTithiCorrectionsCenter,
@@ -638,6 +686,9 @@ void registerAllCitiesCenterDisc() {
       convention: SunriseConvention.centerDisc);
   registerCity('Milan',
       tithi: milan.milanTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
+  registerCity('Milwaukee',
+      tithi: milwaukee.milwaukeeTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('Minneapolis',
       tithi: minneapolis.minneapolisTithiCorrectionsCenter,
@@ -780,6 +831,9 @@ void registerAllCitiesCenterDisc() {
   registerCity('Riyadh',
       tithi: riyadh.riyadhTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
+  registerCity('Rockville',
+      tithi: rockville.rockvilleTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
   registerCity('Rome',
       tithi: rome.romeTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
@@ -794,6 +848,9 @@ void registerAllCitiesCenterDisc() {
       convention: SunriseConvention.centerDisc);
   registerCity('Salt Lake City',
       tithi: saltlakecity.saltlakecityTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
+  registerCity('San Antonio',
+      tithi: sanantonio.sanantonioTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('San Diego',
       tithi: sandiego.sandiegoTithiCorrectionsCenter,
@@ -830,6 +887,9 @@ void registerAllCitiesCenterDisc() {
       convention: SunriseConvention.centerDisc);
   registerCity('Srinagar',
       tithi: srinagar.srinagarTithiCorrectionsCenter,
+      convention: SunriseConvention.centerDisc);
+  registerCity('Stamford',
+      tithi: stamford.stamfordTithiCorrectionsCenter,
       convention: SunriseConvention.centerDisc);
   registerCity('St. Louis',
       tithi: stlouis.stlouisTithiCorrectionsCenter,

@@ -209,6 +209,23 @@ const cityRegistry = <String, CityLocation>{
   'Salt Lake City': CityLocation(40.8, -111.9, -7.0, region: 'UT'),
   'Nashville': CityLocation(36.2, -86.8, -6.0, region: 'TN'),
   'Charlotte': CityLocation(35.2, -80.8, -5.0, region: 'NC'),
+  // ─── USA (Kentucky / South Carolina / Ohio) ───
+  'Louisville': CityLocation(38.2, -85.8, -5.0, region: 'KY'),
+  'Lexington': CityLocation(38.0, -84.5, -5.0, region: 'KY'),
+  'Columbia': CityLocation(34.0, -81.0, -5.0, region: 'SC'),
+  'Charleston': CityLocation(32.8, -79.9, -5.0, region: 'SC'),
+  'Greenville': CityLocation(34.9, -82.4, -5.0, region: 'SC'),
+  'Cleveland': CityLocation(41.5, -81.7, -5.0, region: 'OH'),
+  // ─── USA (NJ / VA / MD / CT / TX / WI / NY metros) ───
+  'Edison': CityLocation(40.5, -74.4, -5.0, region: 'NJ'),
+  'Jersey City': CityLocation(40.7, -74.1, -5.0, region: 'NJ'),
+  'Ashburn': CityLocation(39.0, -77.5, -5.0, region: 'VA'),
+  'Fairfax': CityLocation(38.8, -77.3, -5.0, region: 'VA'),
+  'Rockville': CityLocation(39.1, -77.2, -5.0, region: 'MD'),
+  'Stamford': CityLocation(41.1, -73.5, -5.0, region: 'CT'),
+  'San Antonio': CityLocation(29.4, -98.5, -6.0, region: 'TX'),
+  'Milwaukee': CityLocation(43.0, -87.9, -6.0, region: 'WI'),
+  'Buffalo': CityLocation(42.9, -78.9, -5.0, region: 'NY'),
 
   // ─── Middle East (additional) ───
   'Abu Dhabi': CityLocation(24.5, 54.4, 4.0, region: 'UAE'),

@@ -12,10 +12,10 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 - **Festival dates** — muhurta-accurate (nishita, madhyahna, pradosh rules)
 - **Month resolution** — moment-based adhika/kshaya detection, Purnimant & Amant systems
 - **Date finding** — tithi → Gregorian date in any year
-- **230 cities** — per-city correction tables verified against JPL Swiss Ephemeris (`.se1`)
+- **245 cities** — per-city correction tables verified against JPL Swiss Ephemeris (`.se1`)
 - **Sunrise convention** — upper-limb "first ray" (default) or centre-of-disc "half disk visible", both Swiss-corrected
 - **Pure Dart** — no dependencies, works in Flutter, server, CLI, and web (WASM)
-- **200-year accuracy** — exhaustively validated 1900–2100 (33.77M city-days, 14/14 compute points 🟢)
+- **200-year accuracy** — exhaustively validated 1900–2100 (35.97M city-days, 14/14 compute points 🟢)
 
 ## Installation
 
@@ -61,16 +61,16 @@ print('Janmashtami 2026 Seattle: $date');
 > **There is no zero-arg `Panchang()`.** The constructor requires a list of
 > data-pack registrars, so you can't accidentally run with no city data. Choosing
 > which packs to import is also what lets the tree-shaker drop unused cities (an
-> India-only consumer links ~30 cities, not 230). Registrars are idempotent, so
+> India-only consumer links ~30 cities, not 245). Registrars are idempotent, so
 > constructing repeatedly is cheap.
 
 ## Data packs
 
 | Import | Pass to constructor | Links |
 |--------|---------------------|-------|
-| `package:tithi_engine/data/all.dart` | `Panchang([registerAllCities])` | all 230 cities |
+| `package:tithi_engine/data/all.dart` | `Panchang([registerAllCities])` | all 245 cities |
 | `package:tithi_engine/data/india.dart` | `Panchang([registerIndia])` | India (30 cities) |
-| `package:tithi_engine/data/all_center.dart` | `Panchang([registerAllCities, registerAllCitiesCenterDisc], convention: SunriseConvention.centerDisc)` | centerDisc tables for all 230 cities (opt-in) |
+| `package:tithi_engine/data/all_center.dart` | `Panchang([registerAllCities, registerAllCitiesCenterDisc], convention: SunriseConvention.centerDisc)` | centerDisc tables for all 245 cities (opt-in) |
 
 Combine packs: `Panchang([registerIndia, registerEurope])`.
 
@@ -200,7 +200,7 @@ final pc = Panchang([registerAllCities, registerAllCitiesCenterDisc],
 ```
 
 Both conventions are **Swiss-corrected** when their data pack is registered
-(0 mismatches over 230 cities × 73,414 days). The convention threads through
+(0 mismatches over 245 cities × 73,414 days). The convention threads through
 `tithiOnDate`, `tithiAtInstant`, `tithiSegments`, month boundaries, festival
 muhurtas, and `sunrise`/`sunset`. If you register `centerDisc` but want the
 default behavior, just construct without the `convention` argument — the two
@@ -268,18 +268,18 @@ construct a `City` only at the boundary.
 ## Accuracy
 
 Source of truth: **JPL Swiss Ephemeris (`.se1`)**, exhaustively verified 1900–2100,
-all 230 cities, both conventions (upper limb / centre of disc), both month systems.
+all 245 cities, both conventions (upper limb / centre of disc), both month systems.
 
 | Metric | Value |
 |--------|-------|
-| Day-tithi vs `.se1` (tithiOnDate) | **0 mismatches** (33.77M city-days: 230 cities × 73,414 days × 2 conventions) |
+| Day-tithi vs `.se1` (tithiOnDate) | **0 mismatches** (35.97M city-days: 245 cities × 73,414 days × 2 conventions) |
 | Transition instants vs `.se1` | **0 >30 s** (all 74,582 transitions, global correction applied) |
-| Sunrise/sunset vs `.se1` | **0 >60 s**, max 15.7 s (33.77M, both conventions) |
+| Sunrise/sunset vs `.se1` | **0 >60 s**, max 15.7 s (35.97M, both conventions) |
 | Lunar month + adhika vs `.se1` | **0 mismatches** (all 2,486 new moons, both systems) |
 | `getDates` (tithi→date, reverse + forward) | **0 mismatches** (16.9M, kshaya/vriddhi-aware) |
 | `tithiAtInstant` (birth-time) | **0 whole-day-shift days**; 0.0145% near-transition residual ≤30 s |
 | Festival dates vs Drik Panchang | 22/22 (2025–2026) |
-| Test coverage | 586 tests |
+| Test coverage | 601 tests |
 
 All 14 compute points are 🟢 at the minute-level accuracy bar. The only residual
 is sub-minute (≤30 s near-transition slivers, provably below display resolution).
@@ -322,12 +322,12 @@ This is the Dart implementation of [tithi-engine](https://github.com/misrilibrar
 
 The two packages **version independently** — each version string is a semver compatibility contract for *that* ecosystem. What stays locked in step is the **astronomy engine revision** (the correctness-critical part) and the feature parity tracked below.
 
-- **Engine revision:** `r3` — VSOP87 Sun + Meeus Moon in Terrestrial Time (Espenak–Meeus ΔT), nutation cancelled in the Moon–Sun elongation, **global tithi-transition correction** (16,266 delta-encoded entries vs JPL `.se1`), **iterative sunrise/sunset** (3-iter refinement, latitude-robust). Per-city correction tables regenerated against `.se1`. Dart `4.3.0+` ⟷ Java _(pending)_. Verified: 0 mismatches over 230 cities × 73,414 days × 2 conventions (33.77M city-days).
+- **Engine revision:** `r3` — VSOP87 Sun + Meeus Moon in Terrestrial Time (Espenak–Meeus ΔT), nutation cancelled in the Moon–Sun elongation, **global tithi-transition correction** (16,266 delta-encoded entries vs JPL `.se1`), **iterative sunrise/sunset** (3-iter refinement, latitude-robust). Per-city correction tables regenerated against `.se1`. Dart `4.3.0+` ⟷ Java _(pending)_. Verified: 0 mismatches over 245 cities × 73,414 days × 2 conventions (35.97M city-days).
 
 | Capability | Dart (tithi_engine) | Java (tithi-engine) |
 |---|---|---|
 | Astronomy engine rev `r2` (VSOP87/TT) | `2.1.0+` | `1.1.0+` |
-| 230 cities, Swiss-verified tables | `2.1.0+` | `1.1.0+` |
+| 245 cities, Swiss-verified tables | `2.1.0+` | `1.1.0+` |
 | City display-name disambiguation (`region` / `qualifiedName` / `displayName`) | `2.2.0+` | `2.0.0+` |
 | Time-aware API (`tithiOnDate` / `tithiAtInstant` / `tithiSegments`) | `3.0.0+` | `2.0.0+` |
 | `recurringDates` / `findNext` / `TithiInfo.fromStored` | `2.0.0+` | `2.0.0+` |

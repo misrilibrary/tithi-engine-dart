@@ -1,7 +1,7 @@
 # tithi_engine — Accuracy Benchmark vs JPL Swiss Ephemeris
 
 Source of truth: **JPL Swiss Ephemeris `.se1` files** (`seFlgSwiEph`), Lahiri ayanamsha.
-Range **1900–2100**, all **230 cities**, both sunrise conventions (upperLimb / centerDisc)
+Range **1900–2100**, all **245 cities**, both sunrise conventions (upperLimb / centerDisc)
 and both month systems (Purnimant / Amant).
 
 **Accuracy bar: minute-level** (panchang display + birth-time to the minute).
@@ -12,9 +12,9 @@ and both month systems (Purnimant / Amant).
 |---|---|---|---|---|
 | 1 | Tithi number | 🟢 | **Exhaustive** | all 74,582 transitions 1900–2100 (global) |
 | 2 | Transition instants | 🟢 | **Exhaustive** | all 74,582 transitions; 0 exceed 30 s vs `.se1` |
-| 3 | tithiOnDate (day tithi) | 🟢 | **Exhaustive** | 33.77M city-days (230 cities × 73,414 days × 2 conv) |
-| 4 | Sunrise | 🟢 | **Exhaustive** | 33.77M; 0 exceed 60 s, max 15.7 s |
-| 5 | Sunset | 🟢 | **Exhaustive** | 33.77M; 0 exceed 60 s, max 12.6 s |
+| 3 | tithiOnDate (day tithi) | 🟢 | **Exhaustive** | 35.97M city-days (245 cities × 73,414 days × 2 conv) |
+| 4 | Sunrise | 🟢 | **Exhaustive** | 35.97M; 0 exceed 60 s, max 15.7 s |
+| 5 | Sunset | 🟢 | **Exhaustive** | 35.97M; 0 exceed 60 s, max 12.6 s |
 | 6 | Segment boundaries | 🟢 | Derived | deterministic from transitions (row 2) |
 | 7 | Segment labels | 🟢 | **Exhaustive** | all cities × 1900–2100, both conventions; 0 whole-day shifts¹ |
 | 8 | tithiAtInstant (birth-time) | 🟢 | **Exhaustive** | 135M instants (3-hourly grid); 0 whole-day-shift days¹ |
@@ -30,7 +30,7 @@ and both month systems (Purnimant / Amant).
 
 ## Coverage backlog (verification gaps to close over time)
 
-The 14 markers verify the engine's astronomy for the **230 named cities, 1900–2100**. Known gaps:
+The 14 markers verify the engine's astronomy for the **245 named cities, 1900–2100**. Known gaps:
 
 - **findNext / recurringDates** — share finder logic with `getDates` (marker 14) but aren't independently swept; a recurring-festival bug once hid here. *Add a dedicated round-trip sweep.*
 - **Polar / extreme-latitude no-rise/no-set days** — handling is a clamped approximation; not verified vs `.se1` at high latitudes around solstices.
