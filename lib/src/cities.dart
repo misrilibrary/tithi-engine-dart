@@ -10,25 +10,9 @@ const defaultCity = City._('Ujjain', 'India');
 /// the public default is [defaultCity] (a [City]).
 const defaultCityName = 'Ujjain';
 
-/// Priority cities shown at the top of dropdowns (above all groups).
-const pinnedCities = [
-  'Amsterdam',
-  'Boston',
-  'Dallas',
-  'Delhi',
-  'Dubai',
-  'Jammu',
-  'London',
-  'Mumbai',
-  'Muscat',
-  'Noida',
-  'Pune',
-  'Seattle',
-  'Srinagar',
-  'Ujjain',
-];
-
-/// All supported cities for tithi calculation.
+/// All supported cities for tithi calculation. Internal storage — NOT part of
+/// the public API. The public city surface is [City] / [City.values] /
+/// [resolveCityName]; this map lives under `src/` and may change without notice.
 /// To add a city: add an entry here, then generate its correction table
 /// (tools/benchmark/bin/gen_city_corrections.dart) and run test/gen_registry.dart.
 const cityRegistry = <String, CityLocation>{
@@ -326,86 +310,6 @@ const cityRegistry = <String, CityLocation>{
   'Ankara': CityLocation(39.9, 32.9, 3.0, region: 'Turkey'),
   'Redmond': CityLocation(47.7, -122.1, -8.0, region: 'WA'),
 };
-
-/// India cities (UTC +5.5) for grouping.
-const _indiaCities = {
-  // Metros / tier-1
-  'Delhi', 'Mumbai', 'Kolkata', 'Chennai', 'Srinagar', 'Bangalore', 'Hyderabad',
-  'Pune', 'Ahmedabad', 'Jaipur', 'Lucknow', 'Chandigarh', 'Jammu', 'Indore',
-  'Ujjain',
-  'Bhopal', 'Nagpur', 'Patna', 'Kochi', 'Guwahati', 'Varanasi', 'Amritsar',
-  'Dehradun', 'Thiruvananthapuram', 'Coimbatore', 'Visakhapatnam', 'Mangalore',
-  'Mysore', 'Noida', 'Gurgaon',
-  // Tier-2
-  'Agra', 'Allahabad', 'Aurangabad', 'Bhubaneswar', 'Faridabad', 'Ghaziabad',
-  'Gorakhpur', 'Gwalior', 'Hubli', 'Jabalpur', 'Jalandhar', 'Jodhpur', 'Kanpur',
-  'Kota', 'Ludhiana', 'Madurai', 'Meerut', 'Nashik', 'Raipur', 'Rajkot',
-  'Ranchi',
-  'Salem', 'Surat', 'Thane', 'Tiruchirappalli', 'Tirupati', 'Udaipur',
-  'Vadodara',
-  'Vijayawada', 'Warangal',
-  // Pilgrimage
-  'Mussoorie', 'Rishikesh', 'Haridwar', 'Mathura', 'Vrindavan', 'Ayodhya',
-  'Prayagraj', 'Dwarka', 'Shirdi',
-};
-
-/// US cities for grouping.
-const _usaCities = {
-  'Seattle',
-  'Kirkland',
-  'San Francisco',
-  'Fremont',
-  'San Jose',
-  'Los Angeles',
-  'Dallas',
-  'Austin',
-  'Houston',
-  'Boston',
-  'New York',
-  'Chicago',
-  'Atlanta',
-  'Orlando',
-  'Denver',
-  'Phoenix',
-  'Washington DC',
-  'Miami',
-  'Portland',
-  'Minneapolis',
-  'Detroit',
-  'Philadelphia',
-  'San Diego',
-  'Raleigh',
-};
-
-/// Returns ordered city names: priority → India → US → rest of world.
-/// Each group (except priority) is alphabetically sorted.
-/// Null entries are divider markers between groups.
-List<String?> get orderedCityList {
-  final india = cityRegistry.keys
-      .where((c) => _indiaCities.contains(c) && !pinnedCities.contains(c))
-      .toList()
-    ..sort();
-  final usa = cityRegistry.keys
-      .where((c) => _usaCities.contains(c) && !pinnedCities.contains(c))
-      .toList()
-    ..sort();
-  final rest = cityRegistry.keys
-      .where((c) =>
-          !_indiaCities.contains(c) &&
-          !_usaCities.contains(c) &&
-          !pinnedCities.contains(c))
-      .toList()
-    ..sort();
-  return [
-    ...pinnedCities,
-    null, // divider
-    ...india,
-    null, // divider
-    ...usa,
-    null, // divider
-    ...rest,
-  ];
-}
 
 /// A supported city: a canonical [name] plus an optional [region]/country
 /// qualifier. Construct via [City.of] / [City.tryOf] (validated against the

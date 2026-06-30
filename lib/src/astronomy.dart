@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'cities.dart';
-export 'cities.dart' show pinnedCities, orderedCityList, defaultCity;
+export 'cities.dart' show defaultCity;
 
 /// Meeus astronomical algorithms for Sun and Moon ecliptic longitude.
 /// Reference: Jean Meeus, "Astronomical Algorithms", 2nd Edition.
@@ -339,7 +339,9 @@ double moonLongitude(DateTime dt) {
 /// Function type for computing sunrise as UTC DateTime for a given date.
 typedef SunriseFn = DateTime Function(DateTime date);
 
-/// City location for sunrise calculation.
+/// City location for sunrise calculation. Internal — NOT part of the public
+/// API; lives under `src/` and may change without notice. Callers specify
+/// places via [Location] / [City]; the engine resolves coordinates internally.
 class CityLocation {
   final double latitude; // degrees (positive = North)
   final double longitude; // degrees (positive = East)

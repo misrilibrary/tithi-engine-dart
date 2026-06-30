@@ -1,3 +1,13 @@
+## 5.1.1
+
+- **Internal cleanup (no public-API change).** Removed the unreachable `src/`-only
+  `pinnedCities` and `orderedCityList` (city pinning/ordering is consumer UI
+  policy, never exported through the barrel) and the dead `astronomy.dart`
+  re-export that referenced them (`defaultCity` is unaffected). Marked the
+  internal `CityLocation` and `cityRegistry` as not-public-API in their doc
+  comments. No symbol reachable via `package:tithi_engine/tithi_engine.dart`
+  changed — hence a patch, not a breaking release.
+
 ## 5.1.0
 
 - **Added 15 US cities**, each with Swiss-Ephemeris-corrected tables for both sunrise
