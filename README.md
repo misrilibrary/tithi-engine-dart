@@ -322,7 +322,7 @@ This is the Dart implementation of [tithi-engine](https://github.com/misrilibrar
 
 The two packages **version independently** — each version string is a semver compatibility contract for *that* ecosystem. What stays locked in step is the **astronomy engine revision** (the correctness-critical part) and the feature parity tracked below.
 
-- **Engine revision:** `r3` — VSOP87 Sun + Meeus Moon in Terrestrial Time (Espenak–Meeus ΔT), nutation cancelled in the Moon–Sun elongation, **global tithi-transition correction** (16,266 delta-encoded entries vs JPL `.se1`), **iterative sunrise/sunset** (3-iter refinement, latitude-robust). Per-city correction tables regenerated against `.se1`. Dart `4.3.0+` ⟷ Java _(pending)_. Verified: 0 mismatches over 245 cities × 73,414 days × 2 conventions (35.97M city-days).
+- **Engine revision:** `r3` — VSOP87 Sun + Meeus Moon in Terrestrial Time (Espenak–Meeus ΔT), nutation cancelled in the Moon–Sun elongation, **global tithi-transition correction** (16,266 delta-encoded entries vs JPL `.se1`), **iterative sunrise/sunset** (3-iter refinement, latitude-robust). Per-city correction tables regenerated against `.se1`. Dart `4.3.0+` ⟷ Java `4.0.0` (r3 **code + DATA** — center-disc tables + the global transition-correction list transcoded from Dart `5.1.x`; byte-identical: 0 mismatches over 245 cities × 73,414 days × 2 conventions). Verified: 0 mismatches over 245 cities × 73,414 days × 2 conventions (35.97M city-days).
 
 | Capability | Dart (tithi_engine) | Java (tithi-engine) |
 |---|---|---|
@@ -334,10 +334,11 @@ The two packages **version independently** — each version string is a semver c
 | Strict city resolution (`resolveCityName`, fail-fast on unknown, `"City, Region"` form) | `4.0.0+` | `3.0.0+` |
 | Coordinate input (`Location` / `Panchang.at`, 0.1° cell reuse) | `4.0.0+` | `3.0.0+` |
 | Sunrise / sunset (`sunrise` / `sunset`, Meeus) | `4.1.0+` | `3.1.0+` |
-| Sunrise-convention toggle (`SunriseConvention`, centerDisc Swiss tables) | `4.2.0+` | _(pending)_ |
-| Engine rev `r3`: global transition correction + iterative sunrise (JPL `.se1` parity) | `4.3.0+` | _(pending)_ |
-| `FestivalDate.month` actual month (not def placeholder) for recurring festivals | `4.3.1+` | _(pending)_ |
-| `Tithi` + `City` value types, typed `findDate`/`findDates`, `getTithiName`/`resolveCityName` exports (legacy surface deprecated) | `4.4.0+` | _(pending)_ |
+| Sunrise-convention toggle (`SunriseConvention`, centerDisc Swiss tables) | `4.2.0+` | `4.0.0` |
+| Engine rev `r3`: global transition correction + iterative sunrise (JPL `.se1` parity) | `4.3.0+` | `4.0.0` |
+| `FestivalDate.month` actual month (not def placeholder) for recurring festivals | `4.3.1+` | `4.0.0` |
+| `Tithi` + `City` value types, typed `findDate`/`findDates`, `getTithiName`/`resolveCityName` exports (legacy surface deprecated) | `4.4.0+` | `4.0.0` |
+| Engine `r3` **DATA** (center-disc tables + global transition-correction list) | `4.2.0+`/`4.3.0+` | `4.0.0+` |
 
 > **API generation:** Dart `3.x` and Java `2.x` are the same (UTC-instant)
 > API generation. Dart `4.0.0` ⟷ Java `3.0.0` add strict city resolution
@@ -348,7 +349,12 @@ The two packages **version independently** — each version string is a semver c
 > **JPL `.se1` parity** via global transition correction + iterative sunrise
 > (a data+precision improvement — the public API is unchanged from 4.2.0).
 > Dart `4.3.1` adds `FestivalDate.month` (actual month of occurrence for recurring
-> festivals). Java counterparts for 4.2+ are pending.
+> festivals). All of these ship in Java `4.0.0` — `SunriseConvention`, iterative
+> sunrise, the transition-correction consumption **and** its DATA,
+> `FestivalDate.month`, the typed `Tithi`/`City` API, and the breaking cutover
+> (⟷ Dart `5.0.0`/`5.1.1`). Java `4.0.0` reaches full `.se1` parity for both
+> conventions (center-disc tables and the global transition-correction list
+> transcoded verbatim from the Dart `5.1.x` data).
 > The version numbers differ only because each follows its own ecosystem's semver.
 
 ## License
