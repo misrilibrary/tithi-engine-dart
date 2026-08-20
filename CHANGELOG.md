@@ -1,3 +1,16 @@
+## 5.2.0
+
+- **Fixed observance rule for `janmashtami_kashmiri` (Zarma Satam).** Changed
+  `muhurta` from `MuhurtaRule.nishita` to `MuhurtaRule.sunrise`. The festival is
+  now assigned to whichever day holds Krishna Saptami (tithi 7) at sunrise,
+  matching the regular Kashmiri Pandit jantri convention, instead of checking
+  for the tithi at midnight. This shifts the computed date for some
+  year/city combinations (e.g. 2026, Seattle: Sep 2 → Sep 3) and means
+  `FestivalDate.muhurtaStart`/`muhurtaEnd` are now `null` for this festival
+  (no muhurta window is reported for `sunrise`-rule festivals). Not a breaking
+  API change — only the returned `date`/`muhurtaStart`/`muhurtaEnd` values for
+  this specific festival id are affected.
+
 ## 5.1.1
 
 - **Internal cleanup (no public-API change).** Removed the unreachable `src/`-only

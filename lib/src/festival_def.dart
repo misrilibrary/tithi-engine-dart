@@ -98,7 +98,7 @@ const festivals = <FestivalDef>[
       month: LunarMonth.bhadrapada,
       paksha: Paksha.krishna,
       tithiInPaksha: 7,
-      muhurta: MuhurtaRule.nishita,
+      muhurta: MuhurtaRule.sunrise,
       tradition: FestivalTradition.kashmiri),
   FestivalDef(
       id: 'janmashtami_smarta',
