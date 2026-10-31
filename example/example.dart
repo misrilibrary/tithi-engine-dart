@@ -44,30 +44,6 @@ void main() {
       LunarMonth.jyeshtha, Tithi.shukla(11), 2026, City.ujjain);
   print('findDates (Jyeshtha Shukla Ekadashi 2026): $dates');
 
-  // ─── dateFor: named festival → date with muhurta rules ─────────────────
-  final shivaratri = panchang.dateFor(
-      festivals.firstWhere((f) => f.id == 'maha_shivaratri'), 2026, City.delhi);
-  if (shivaratri != null) {
-    print('\ndateFor (Maha Shivaratri 2026 Delhi):');
-    print('  date=${shivaratri.date}, month=${shivaratri.month.displayName}');
-    print('  tithi: ${shivaratri.tithiStart} → ${shivaratri.tithiEnd}');
-    if (shivaratri.muhurtaStart != null) {
-      print('  muhurta: ${shivaratri.muhurtaStart} → ${shivaratri.muhurtaEnd}');
-    }
-  }
-
-  // ─── recurringDates: a recurring festival → all occurrences in a year ───
-  final ekadashi = festivals.firstWhere((f) => f.id == 'masik_shukla_ekadashi');
-  final ekadashiDates = panchang.recurringDates(ekadashi, 2026, City.ujjain);
-  print(
-      '\nrecurringDates (Shukla Ekadashi 2026, ${ekadashiDates.length} occurrences):');
-  for (final fd in ekadashiDates.take(3)) {
-    // FestivalDate.month is the ACTUAL month of the occurrence (not Chaitra!)
-    print('  ${fd.date} → ${fd.month.displayName} Shukla Ekadashi'
-        '${fd.isAdhika ? " (Adhika)" : ""}');
-  }
-  print('  ...');
-
   // ─── findNext: next occurrence of a tithi from today ────────────────────
   final next =
       panchang.findNext(LunarMonth.kartika, Tithi.krishna(15), City.seattle);

@@ -56,7 +56,7 @@ List<TithiMatch> findTithiRaw({
       final sunLong = toSidereal(sunLongitude(sr), sr);
       final moonLong = toSidereal(moonLongitude(sr), sr);
       // Use the CORRECTED day-tithi (same table tithiOnDate uses), not raw
-      // Meeus — otherwise getDates/festival dates disagree with tithiOnDate on
+      // Meeus — otherwise getDates disagree with tithiOnDate on
       // correction days (off by a day, frequent at high latitude).
       final currentTithi = getTithiCorrections(resolver.city,
               resolver.convention)[dt.difference(_finderEpoch).inDays] ??

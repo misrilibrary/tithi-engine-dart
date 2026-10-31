@@ -8,7 +8,7 @@ Thank you for considering contributing! Here's how to get started.
 git clone https://github.com/misrilibrary/tithi-engine-dart.git
 cd tithi-engine-dart
 dart pub get
-dart test        # run all 536 tests
+dart test        # run all 589 tests
 dart analyze     # zero issues expected
 dart format .    # auto-format
 ```
@@ -23,10 +23,6 @@ dart format .    # auto-format
 ## Adding a City
 
 Add coordinates to `lib/src/cities.dart` in the `cityRegistry` map, then generate a correction table using the benchmark tool and add it under `lib/src/regions/<city>/`. Finally regenerate `lib/src/regions/all_cities.g.dart` (so `registerAllCities()` includes the new city) — and add it to the relevant region pack under `lib/data/` if you maintain one.
-
-## Adding a Festival
-
-Add a `FestivalDef` to `lib/src/festival_def.dart` with the appropriate muhurta rule.
 
 ## Code Style
 

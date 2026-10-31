@@ -1,8 +1,6 @@
 import 'astronomy.dart'
     show computeSunrise, computeSunset, lookupCityLocation, SunriseConvention;
 import 'cities.dart' show City;
-import 'festival_def.dart';
-import 'festival_finder.dart';
 import 'location.dart';
 import 'tithi.dart' as tithi_core;
 import 'tithi_calculator.dart';
@@ -20,7 +18,7 @@ class Panchang {
   final MonthSystem monthSystem;
 
   /// The sunrise/sunset convention this Panchang uses for every sun-time-derived
-  /// calculation (tithi-at-sunrise, month boundaries, festival muhurtas,
+  /// calculation (tithi-at-sunrise, month boundaries,
   /// [sunrise]/[sunset]). Defaults to [SunriseConvention.upperLimb] — omit it
   /// and the engine behaves exactly as it always has.
   final SunriseConvention convention;
@@ -54,7 +52,7 @@ class Panchang {
   ///
   /// Only [date]'s calendar fields select the day; time-of-day is ignored and no
   /// offset is needed (sunrise is astronomical). Use this for "the tithi of the
-  /// day" — calendars, festival display, day observance.
+  /// day" — calendars, day observance.
   TithiInfo tithiOnDate(DateTime date, City city) =>
       _calc.tithiOnDate(date, city.name);
 
@@ -131,18 +129,6 @@ class Panchang {
       displayName: '',
     );
     return _calc.findInYear(info, year, celebrationCity: city);
-  }
-
-  /// Festival → date with muhurta rules applied for the given year and city.
-  /// Returns `null` if the festival doesn't occur in the given year.
-  FestivalDate? dateFor(FestivalDef festival, int year, City city) {
-    return findFestivalDate(festival, year, city.name, _calc);
-  }
-
-  /// Recurring festival (e.g. monthly Ekadashi/Purnima) → all occurrences in
-  /// the given year and city, each with its tithi span.
-  List<FestivalDate> recurringDates(FestivalDef festival, int year, City city) {
-    return findRecurringDates(festival, year, city.name, _calc);
   }
 
   /// Find the next occurrence of [tithi] in [month] at [city], on or after
@@ -246,14 +232,6 @@ class PanchangAt {
           {bool isAdhika = false}) =>
       _p._findDatesImpl(month, tithi.paksha, tithi.dayInPaksha, year, _loc.key,
           isAdhika: isAdhika);
-
-  /// See [Panchang.dateFor].
-  FestivalDate? dateFor(FestivalDef festival, int year) =>
-      findFestivalDate(festival, year, _loc.key, _p._calc);
-
-  /// See [Panchang.recurringDates].
-  List<FestivalDate> recurringDates(FestivalDef festival, int year) =>
-      findRecurringDates(festival, year, _loc.key, _p._calc);
 
   /// See [Panchang.findNext].
   DateTime? findNext(LunarMonth month, tithi_core.Tithi tithi,

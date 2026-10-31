@@ -1,8 +1,6 @@
 import 'package:test/test.dart';
 import 'package:tithi_engine/data/all.dart';
 import 'package:tithi_engine/src/tithi_calculator.dart';
-import 'package:tithi_engine/src/festival_def.dart';
-import 'package:tithi_engine/src/festival_finder.dart';
 import 'package:tithi_engine/src/astronomy.dart';
 
 /// Integration test matrix — exercises all workflows across cities × systems.
@@ -144,26 +142,6 @@ void main() {
         final info = calcP.tithiOnDate(dt, city);
         expect(info.month, expectedMonth);
       });
-    }
-  });
-
-  group('Festival dates (muhurta-aware, both systems)', () {
-    final truth = {
-      'maha_shivaratri': {2025: '2025-02-26', 2026: '2026-02-15'},
-      'ram_navami': {2025: '2025-04-06', 2026: '2026-03-26'},
-      'janmashtami_smarta': {2025: '2025-08-15', 2026: '2026-09-04'},
-      'diwali': {2025: '2025-10-20', 2026: '2026-11-08'}
-    };
-    for (final fest in festivals.where((f) => truth.containsKey(f.id))) {
-      for (final year in [2025, 2026]) {
-        test('${fest.name} $year', () {
-          final rP = findFestivalDate(fest, year, 'Ujjain', calcP);
-          final rA = findFestivalDate(fest, year, 'Ujjain', calcA);
-          final expected = truth[fest.id]![year]!;
-          expect(rP?.date.toIso8601String().substring(0, 10), expected);
-          expect(rA?.date.toIso8601String().substring(0, 10), expected);
-        });
-      }
     }
   });
 

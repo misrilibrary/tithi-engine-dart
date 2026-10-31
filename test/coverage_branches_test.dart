@@ -5,7 +5,7 @@ import 'package:tithi_engine/data/all_center.dart';
 import 'package:tithi_engine/src/astronomy.dart' show lookupCityLocation;
 
 // Branch/line coverage tests for under-covered public surface: the PanchangAt
-// bound view, tithiSegments, recurringDates/findNext, getDates, muhurta windows,
+// bound view, tithiSegments, findNext, getDates,
 // sunset + pre-1920 ΔT, and the centerDisc-registered registry path + the
 // tithiAtInstant Meeus-fallback branch. (Each test file runs in its own isolate,
 // so registering the centerDisc pack here does not leak into other files.)
@@ -39,8 +39,7 @@ void main() {
       expect(at.tithiSegments(s, e, offset: pstOffset).length,
           p.tithiSegments(s, e, City.of('Seattle'), offset: pstOffset).length);
     });
-    test('findDate / findDates / findNext / dateFor / recurringDates match',
-        () {
+    test('findDate / findDates / findNext match', () {
       expect(
           at.findDate(LunarMonth.bhadrapada, Tithi.krishna(8), 2026),
           p.findDate(LunarMonth.bhadrapada, Tithi.krishna(8), 2026,
@@ -56,20 +55,6 @@ void main() {
           LunarMonth.chaitra, Tithi.shukla(1), City.of('Seattle'),
           from: d);
       expect(atNext, pNext);
-      final diwali = festivals.firstWhere((f) => f.id == 'diwali');
-      expect(at.dateFor(diwali, 2026)?.date,
-          p.dateFor(diwali, 2026, City.of('Seattle'))?.date);
-      expect(
-          at
-              .recurringDates(
-                  festivals.firstWhere((f) => f.id == 'masik_purnima'), 2026)
-              .length,
-          p
-              .recurringDates(
-                  festivals.firstWhere((f) => f.id == 'masik_purnima'),
-                  2026,
-                  City.of('Seattle'))
-              .length);
     });
   });
 
@@ -108,17 +93,7 @@ void main() {
     }
   });
 
-  group('recurringDates / findNext / getDates', () {
-    test('masik_purnima recurs ~monthly, always Purnima (T15)', () {
-      final r = p.recurringDates(
-          festivals.firstWhere((f) => f.id == 'masik_purnima'),
-          2026,
-          City.of('Ujjain'));
-      expect(r.length, inInclusiveRange(12, 13));
-      for (final fd in r) {
-        expect(fd.tithiStart.isBefore(fd.tithiEnd), isTrue);
-      }
-    });
+  group('findNext / getDates', () {
     test('findNext returns a date at/after the from date', () {
       final from = DateTime.utc(2026, 1, 1);
       // Bhadrapada Krishna 8 (Janmashtami) reliably occurs each year, so the
@@ -133,29 +108,6 @@ void main() {
       final dates = p.findDates(
           LunarMonth.kartika, Tithi.krishna(15), 2026, City.of('Ujjain'));
       expect(dates, isNotEmpty);
-    });
-  });
-
-  group('dateFor muhurta windows (non-sunrise rules)', () {
-    test('nishita (Maha Shivaratri) yields a muhurta window', () {
-      final fd = p.dateFor(
-          festivals.firstWhere((f) => f.id == 'maha_shivaratri'),
-          2026,
-          City.of('Ujjain'));
-      expect(fd, isNotNull);
-      expect(fd!.muhurtaStart, isNotNull);
-      expect(fd.muhurtaEnd, isNotNull);
-      expect(fd.muhurtaStart!.isBefore(fd.muhurtaEnd!), isTrue);
-    });
-    test('madhyahna (Ram Navami) and pradosh (Diwali) resolve', () {
-      expect(
-          p.dateFor(festivals.firstWhere((f) => f.id == 'ram_navami'), 2026,
-              City.of('Ujjain')),
-          isNotNull);
-      expect(
-          p.dateFor(festivals.firstWhere((f) => f.id == 'diwali'), 2026,
-              City.of('Ujjain')),
-          isNotNull);
     });
   });
 

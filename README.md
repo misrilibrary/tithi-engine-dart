@@ -4,12 +4,11 @@
 [![pub package](https://img.shields.io/pub/v/tithi_engine.svg)](https://pub.dev/packages/tithi_engine)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Computes accurate tithis, lunar months, and festival dates for any city worldwide.
+A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Computes accurate tithis and lunar months for any city worldwide.
 
 ## Features
 
 - **Tithi calculation** — date → tithi number, name, paksha, lunar month
-- **Festival dates** — muhurta-accurate (nishita, madhyahna, pradosh rules)
 - **Month resolution** — moment-based adhika/kshaya detection, Purnimant & Amant systems
 - **Date finding** — tithi → Gregorian date in any year
 - **245 cities** — per-city correction tables verified against JPL Swiss Ephemeris (`.se1`)
@@ -21,7 +20,7 @@ A pure Dart library for Hindu lunar calendar (tithi/panchang) calculations. Comp
 
 ```yaml
 dependencies:
-  tithi_engine: ^5.0.0
+  tithi_engine: ^6.0.0
 ```
 
 ## Quick Start
@@ -46,11 +45,6 @@ final cdt = const Duration(hours: -5);
 final birthUtc = DateTime.utc(2006, 5, 30, 20, 0).subtract(cdt); // 8 PM CDT → UTC
 final birthTithi = panchang.tithiAtInstant(birthUtc, City.of('Austin'), offset: cdt);
 print(birthTithi.displayName);
-
-// Festival date
-final shivaratri = panchang.dateFor(
-  festivals.firstWhere((f) => f.name == 'Maha Shivaratri'), 2026, City.ujjain);
-print('Maha Shivaratri 2026: ${shivaratri?.date}');
 
 // Tithi → Date (typed: pass a Tithi and a City)
 final date = panchang.findDate(
@@ -77,13 +71,8 @@ Combine packs: `Panchang([registerIndia, registerEurope])`.
 ## API
 
 `Panchang` is the single entry point. Value types (`TithiInfo`, `TithiSegment`,
-`LunarMonth`, `MonthSystem`, `Paksha`, `Tithi`, `SunriseConvention`, `FestivalDef`,
-`MuhurtaRule`, `festivals`, `FestivalDate`, `City`, `Location`, `LocationSource`) are
-exported; the engine internals are not.
-
-`FestivalDate` carries `month` (actual `LunarMonth` of the occurrence) and `isAdhika`,
-computed from `tithiOnDate` at the occurrence date — so recurring festivals show the
-correct month (not the definition's placeholder).
+`LunarMonth`, `MonthSystem`, `Paksha`, `Tithi`, `SunriseConvention`, `City`,
+`Location`, `LocationSource`) are exported; the engine internals are not.
 
 The time-aware API is **UTC-instant based**: you pass true UTC instants and, where
 a civil day matters, the DST-aware offset in effect (the engine does no timezone
@@ -110,8 +99,6 @@ resolution — resolve the offset yourself, e.g. via `package:timezone`).
 | `panchang.tithiSegments(windowStartUtc, windowEndUtc, city, {offset})` | Every tithi segment in a UTC window (N transitions → N+1 segments) |
 | `panchang.findDate(month, Tithi, year, city)` | Tithi spec → Gregorian date |
 | `panchang.findDates(month, Tithi, year, city)` | Tithi spec → all dates, adhika-aware |
-| `panchang.dateFor(festival, year, city)` | Festival → date with muhurta rules |
-| `panchang.recurringDates(festival, year, city)` | Recurring festival → all occurrences in the year |
 | `panchang.findNext(month, Tithi, city, {from})` | Next occurrence of a tithi on/after `from` (defaults to now) |
 | `panchang.at(location)` | Bind to a `Location` (city name or raw `lat/lng`) → `PanchangAt` (same methods, no `city` arg) |
 | `panchang.sunrise(date, city)` / `sunset(date, city)` | Sunrise/sunset UTC `DateTime` (Meeus, ~1 min; no per-city correction) |
@@ -170,7 +157,7 @@ panchang.at(Location.city('Seattle')).tithiOnDate(DateTime.utc(2026, 2, 15));
 
 `PanchangAt` exposes the same read methods as `Panchang` minus the `city` argument
 (`tithiOnDate`, `tithiAtInstant`, `tithiSegments`, `findDate`/`findDates`, `findNext`,
-`dateFor`, `recurringDates`, `sunrise`/`sunset`). Cities are stored at ~0.1° (~11 km),
+`sunrise`/`sunset`). Cities are stored at ~0.1° (~11 km),
 so any point within a city's cell is treated as that city.
 
 > **Recommendation:** prefer `Location.city(name)` (or a coordinate that lands in a
@@ -201,10 +188,35 @@ final pc = Panchang([registerAllCities, registerAllCitiesCenterDisc],
 
 Both conventions are **Swiss-corrected** when their data pack is registered
 (0 mismatches over 245 cities × 73,414 days). The convention threads through
-`tithiOnDate`, `tithiAtInstant`, `tithiSegments`, month boundaries, festival
-muhurtas, and `sunrise`/`sunset`. If you register `centerDisc` but want the
+`tithiOnDate`, `tithiAtInstant`, `tithiSegments`, month boundaries, and
+`sunrise`/`sunset`. If you register `centerDisc` but want the
 default behavior, just construct without the `convention` argument — the two
 table sets are independent and the upper-limb path is untouched.
+
+## Migrating to 6.0: festivals removed
+
+6.0.0 removes festival support (`FestivalDef`, `MuhurtaRule`, `festivals`,
+`FestivalDate`, `Panchang.dateFor`, `Panchang.recurringDates`, and their
+`PanchangAt` views) entirely. This package is now a pure tithi/panchang
+astronomy engine — accurate sunrise-tithi, lunar-month, and date-finding
+calculations only.
+
+**Why:** festival-date assignment carries far more tradition-specific nuance
+than a single `muhurta` enum (`sunrise`/`nishita`/`madhyahna`/`pradosh`) can
+represent — regional calendars (Smarta vs. Vaishnava vs. Kashmiri), adhika/kshaya
+edge cases, and sampradaya-specific tie-breaking rules all affect which day a
+festival lands on. The built-in `festivals` list got some of these wrong for
+certain traditions/regions, and fixing them correctly means modeling rules this
+package was never scoped to own. Tithi/lunar-month calculation has a single
+astronomical answer; festival-date assignment does not. Pin `tithi_engine
+^5.2.0` if you still need the removed festival API — it is not coming back
+under a flag.
+
+**If you used festival dates:** you'll need to vendor your own `FestivalDef`-style
+table (id, month, paksha, tithiInPaksha, muhurta rule) outside this package and
+drive it off `Panchang.tithiOnDate`/`tithiSegments`/`findDate`/`findDates` — the
+same primitives `findFestivalDate`/`findRecurringDates` used internally, now
+just not bundled.
 
 ## Migrating from 4.x to 5.0
 
@@ -225,7 +237,6 @@ city/tithi API fully typed. The calculations are **unchanged** (byte-identical t
 | `supportedCities.containsKey(c)` / `City.isSupported(c)` | `City.tryOf(c) != null` |
 | `CityLocation` | removed — coordinates via `Location`, offsets via your own tz layer |
 | `getLocationForCity(c)` | `Panchang.at(Location.city(c))`; the engine no longer exposes city geo/offset data |
-| `FestivalDate.festival` | direct getters: `result.month`, `.name`, `.tithiNumber`, `.paksha`, `.tithiInPaksha`, `.muhurta`, `.recurring` |
 
 **Every city-keyed method now takes a `City`, and tithi specs take a `Tithi`:**
 
@@ -278,8 +289,7 @@ all 245 cities, both conventions (upper limb / centre of disc), both month syste
 | Lunar month + adhika vs `.se1` | **0 mismatches** (all 2,486 new moons, both systems) |
 | `getDates` (tithi→date, reverse + forward) | **0 mismatches** (16.9M, kshaya/vriddhi-aware) |
 | `tithiAtInstant` (birth-time) | **0 whole-day-shift days**; 0.0145% near-transition residual ≤30 s |
-| Festival dates vs Drik Panchang | 22/22 (2025–2026) |
-| Test coverage | 601 tests |
+| Test coverage | 589 tests |
 
 All 14 compute points are 🟢 at the minute-level accuracy bar. The only residual
 is sub-minute (≤30 s near-transition slivers, provably below display resolution).
@@ -301,20 +311,13 @@ relative cost, not a spec.
 | `tithiAtInstant` | 80.8 | 77.3 | 76.5 |
 | `findDate` | 220 | 222 | 223 |
 | `findDates` | 224 | 220 | 219 |
-| `dateFor` (festival + muhurta) | 276 | 281 | 274 |
 | `findNext` | 802 | 763 | 774 |
-| `recurringDates` (full year) | 1646 | 1907 | 1895 |
 
 **The 5.0 typed-API migration adds no measurable latency** — every column matches
 4.4 within run-to-run noise (the compute is identical; only the surface types
 changed). The typed value types are effectively free: `City.of(name)` ~0.4 µs and
 `Tithi.shukla(n)` ~0.02 µs, below the noise floor of every operation above and a
 one-time cost when a `City` is reused.
-
-The one intentional difference is `recurringDates`, ~15% slower in 4.4/5.0 than
-4.3 — since 4.4 its year scan uses the Swiss-corrected day tithi (the
-masik-festival accuracy fix) instead of raw astronomy, a deliberate
-accuracy-for-latency trade carried unchanged into 5.0.
 
 ## Cross-Platform
 
@@ -336,7 +339,6 @@ The two packages **version independently** — each version string is a semver c
 | Sunrise / sunset (`sunrise` / `sunset`, Meeus) | `4.1.0+` | `3.1.0+` |
 | Sunrise-convention toggle (`SunriseConvention`, centerDisc Swiss tables) | `4.2.0+` | `4.0.0` |
 | Engine rev `r3`: global transition correction + iterative sunrise (JPL `.se1` parity) | `4.3.0+` | `4.0.0` |
-| `FestivalDate.month` actual month (not def placeholder) for recurring festivals | `4.3.1+` | `4.0.0` |
 | `Tithi` + `City` value types, typed `findDate`/`findDates`, `getTithiName`/`resolveCityName` exports (legacy surface deprecated) | `4.4.0+` | `4.0.0` |
 | Engine `r3` **DATA** (center-disc tables + global transition-correction list) | `4.2.0+`/`4.3.0+` | `4.0.0+` |
 
@@ -348,10 +350,9 @@ The two packages **version independently** — each version string is a semver c
 > half-disk, Swiss-corrected). Dart `4.3.0` upgrades to engine revision `r3`:
 > **JPL `.se1` parity** via global transition correction + iterative sunrise
 > (a data+precision improvement — the public API is unchanged from 4.2.0).
-> Dart `4.3.1` adds `FestivalDate.month` (actual month of occurrence for recurring
-> festivals). All of these ship in Java `4.0.0` — `SunriseConvention`, iterative
+> All of these ship in Java `4.0.0` — `SunriseConvention`, iterative
 > sunrise, the transition-correction consumption **and** its DATA,
-> `FestivalDate.month`, the typed `Tithi`/`City` API, and the breaking cutover
+> the typed `Tithi`/`City` API, and the breaking cutover
 > (⟷ Dart `5.0.0`/`5.1.1`). Java `4.0.0` reaches full `.se1` parity for both
 > conventions (center-disc tables and the global transition-correction list
 > transcoded verbatim from the Dart `5.1.x` data).

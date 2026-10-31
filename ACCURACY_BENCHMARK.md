@@ -32,9 +32,8 @@ and both month systems (Purnimant / Amant).
 
 The 14 markers verify the engine's astronomy for the **245 named cities, 1900–2100**. Known gaps:
 
-- **findNext / recurringDates** — share finder logic with `getDates` (marker 14) but aren't independently swept; a recurring-festival bug once hid here. *Add a dedicated round-trip sweep.*
+- **findNext** — shares finder logic with `getDates` (marker 14) but isn't independently swept. *Add a dedicated round-trip sweep.*
 - **Polar / extreme-latitude no-rise/no-set days** — handling is a clamped approximation; not verified vs `.se1` at high latitudes around solstices.
-- **Muhurta window times** (nishita/madhyahna/pradosh) — festival *dates* are 22/22 vs Drik (sampled); the window *times* are only spot-checked.
 - **Historical civil offsets (pre-~1945)** — the engine frames civil days with a fixed modern offset; regions used different offsets historically (LMT, WWII). Narrow but affects real old DOBs near midnight.
 - **Out-of-range dates** — behavior outside 1900–2100 is undefined (e.g. ancient/sentinel dates render IANA Local Mean Time). Document the supported range.
 - **App IANA timezone/wall-clock layer** — out of scope for the engine benchmark (app-side; covered by app unit tests).
@@ -59,7 +58,7 @@ transition correction for all 74,582 transitions (~+50 KB). Deferred.
   corrected-elongation tithi at its midpoint, independent of the sunrise anchor.
   Verified: whole-day-shift days → 0.
 - **getDates (4.3.0).** `findTithiRaw`/`findNextOccurrence` now match on the corrected
-  day-tithi (not raw Meeus); festival dates exhaustively verified (16.9M), 0 mismatches.
+  day-tithi (not raw Meeus); exhaustively verified (16.9M), 0 mismatches.
 - **Offset/DST (4.3.0).** Verified across every supported offset type with DST pairs in
   both hemispheres (30/30 on sunrise, sunset, tithiOnDate, midnight-boundary
   tithiAtInstant, and segment labels).

@@ -1,3 +1,29 @@
+## 6.0.0
+
+**BREAKING** — festival support removed. This package is now a pure
+tithi/panchang astronomy engine: accurate sunrise-tithi, lunar-month, and
+date-finding calculations only.
+
+- **Removed:** `FestivalDef`, `MuhurtaRule`, `festivals`, `FestivalDate`,
+  `Panchang.dateFor`, `Panchang.recurringDates`, and the matching
+  `PanchangAt.dateFor`/`PanchangAt.recurringDates` views. `lib/src/festival_def.dart`
+  and `lib/src/festival_finder.dart` are gone.
+- **Why:** festival-date assignment carries far more tradition-specific nuance
+  than a single `muhurta` enum (`sunrise`/`nishita`/`madhyahna`/`pradosh`) can
+  represent — regional calendars (Smarta vs. Vaishnava vs. Kashmiri), adhika/kshaya
+  edge cases, and sampradaya-specific tie-breaking rules all affect which day a
+  festival lands on. The bundled `festivals` list got some of these wrong for
+  certain traditions/regions. Tithi/lunar-month calculation has a single
+  astronomical answer; festival-date assignment does not, and modeling it
+  correctly is out of scope for this package going forward.
+- **Not a flag, not deprecated-then-removed:** this is a direct removal. Pin
+  `tithi_engine: ^5.2.0` if you still need `dateFor`/`recurringDates`/`festivals`.
+- Everything else — `tithiOnDate`, `tithiAtInstant`, `tithiSegments`, `findDate`,
+  `findDates`, `findNext`, `sunrise`/`sunset`, `Panchang.at`, both sunrise
+  conventions, all 245 cities — is **unchanged**: same astronomy, same accuracy
+  (35.97M city-days, 0 mismatches vs `.se1`), same API for everything that isn't
+  a festival. See "Migrating to 6.0" in the README.
+
 ## 5.2.0
 
 - **Fixed observance rule for `janmashtami_kashmiri` (Zarma Satam).** Changed

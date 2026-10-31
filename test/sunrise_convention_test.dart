@@ -38,12 +38,6 @@ void main() {
             explicitUpper.tithiOnDate(d, city).displayName);
       });
     }
-
-    test('festival date unchanged when convention omitted (Diwali 2026)', () {
-      final diwali = festivals.firstWhere((f) => f.id == 'diwali');
-      expect(implicit.dateFor(diwali, 2026, City.of('Ujjain'))?.date,
-          explicitUpper.dateFor(diwali, 2026, City.of('Ujjain'))?.date);
-    });
   });
 
   group('centerDisc convention shifts sun times in the right direction', () {
